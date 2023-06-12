@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Administration;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -18,9 +17,10 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
         'email',
         'password',
+        'personne_type',
+        'personne_id',
     ];
 
     /**
@@ -41,4 +41,16 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+
+    public function personne()
+    {
+        if ($this->personne_type == 'Administrateur'){
+            return Administrateur::find($this->personne_id);
+        }
+        if ($this->personne_type == 'Etudiant'){
+            return Etudiant::find($this->personne_id);
+        }
+
+    }
 }
