@@ -7,7 +7,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form method="POST" action="{{ route('admin.editeurs.store') }}">
+            <form method="POST" action="{{ route('admin.editeurs.store') }}" enctype="multipart/form-data">
                 @csrf
                 <div class="modal-body">
                     <div class="row">
@@ -19,6 +19,10 @@
                                             <span class="text-danger">*</span>
                                         </label>
                                         <input type="text" name="nom" class="form-control" placeholder="Python Institute" required="">
+                                    </div>
+                                    <div class="col-12 col-md-6 mb-3">
+                                        <label class="form-label">Logo</label>
+                                        <input type="file" name="logo" class="form-control">
                                     </div>
                                 </div>
                             </div>

@@ -35,6 +35,8 @@
     <link type="text/css" href="{{asset('assets/css/app.css')}}" rel="stylesheet">
     <link type="text/css" href="{{asset('assets/css/app.rtl.css')}}" rel="stylesheet">
 
+    @yield('css')
+
 </head>
 
 <body class="layout-navbar-mini-fixed-bottom">
@@ -58,6 +60,11 @@
         <!-- // END Layout Content -->
     </div>
     <!-- // END Page Layout -->
+
+    <!-- Modal Layout -->
+    @yield('modal')
+    <!-- END Modal Layout -->
+
 
     <!-- jQuery -->
     <script src="{{asset('assets/vendor/jquery.min.js')}}"></script>
@@ -113,6 +120,8 @@
     <!-- List.js -->
     <script src="{{asset('assets/vendor/list.min.js')}}"></script>
     <script src="{{asset('assets/js/list.js')}}"></script>
+`
+    @yield('script')
 
 
 </body>

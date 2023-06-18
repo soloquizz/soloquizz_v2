@@ -69,12 +69,22 @@
                         <td class="name">{{$certification->editeur->nom}}</td>
                         <td class="name">{{$certification->niveau->nom}}</td>
                         <td class="name">
-                            <a href="{{route('admin.certifications.show', $certification->id)}}">
-                                <i class="fa fa-eye text-info mr-1" title="Mofification"></i>
-                            </a>
-                            <a href="{{route('admin.certifications.edit', $certification->id)}}">
-                                <i class="fa fa-edit text-warning mr-1" title="Mofification"></i>
-                            </a>
+                            <div class="row">
+                                <div class="col-2">
+                                    <form method="POST" id="showForm" action="{{ route('admin.certifications.questions.search') }}">
+                                        @csrf
+                                        <input type="hidden" name="certification_id" value="{{$certification->id}}">
+                                        <a href="#" onclick="submitShow()">
+                                            <i class="fa fa-eye text-info mr-1" title="Mofification"></i>
+                                        </a>
+                                    </form>
+                                </div>
+                                <div class="col-2">
+                                    <a href="{{route('admin.certifications.edit', $certification->id)}}">
+                                        <i class="fa fa-edit text-warning mr-1" title="Mofification"></i>
+                                    </a>
+                                </div>
+                            </div>
                         </td>
                     </tr>
                 @endforeach
@@ -90,7 +100,16 @@
 @endsection
 
 <!-- Modal -->
-@include('template.administration.certifications.create')
-
+@section('modal')
+    @include('template.administration.certifications.create')
+@endsection
 <!-- Modal -->
 
+@section('script')
+    <script>
+        function submitShow()
+        {
+            $('#showForm').submit();
+        }
+    </script>
+@endsection

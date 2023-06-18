@@ -15,7 +15,7 @@ class CreateOptionsTable extends Migration
     {
         Schema::create('options', function (Blueprint $table) {
             $table->id();
-            $table->text('contenu');
+            $table->longText('contenu');
             $table->boolean('correcte');
             $table->timestamps();
             $table->softDeletes();

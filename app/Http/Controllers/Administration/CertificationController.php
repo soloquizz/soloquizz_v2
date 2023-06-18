@@ -8,6 +8,7 @@ use App\Repositories\Administration\CertificationRepository;
 use App\Http\Controllers\AppBaseController;
 use App\Repositories\Administration\EditeurRepository;
 use App\Repositories\Administration\NiveauRepository;
+use App\Repositories\Administration\QuestionRepository;
 use Illuminate\Http\Request;
 use Flash;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -19,12 +20,14 @@ class CertificationController extends AppBaseController
     private $certificationRepository;
     private $niveauRepository;
     private $editeurRepository;
+    private $questionRepository;
 
-    public function __construct(CertificationRepository $certificationRepo, NiveauRepository $niveauRepo, EditeurRepository $editeurRepo)
+    public function __construct(CertificationRepository $certificationRepo, NiveauRepository $niveauRepo, EditeurRepository $editeurRepo, QuestionRepository $questionRepo)
     {
         $this->certificationRepository = $certificationRepo;
         $this->niveauRepository = $niveauRepo;
         $this->editeurRepository = $editeurRepo;
+        $this->questionRepository = $questionRepo;
     }
 
     /**
@@ -79,9 +82,9 @@ class CertificationController extends AppBaseController
      *
      * @return
      */
-    public function show($id)
+    public function show($id, Request $request)
     {
-        $certification = $this->certificationRepository->find($id);
+        /*$certification = $this->certificationRepository->find($id);
 
         if (empty($certification)) {
             Alert::error('Error','Certification not found');
@@ -89,7 +92,17 @@ class CertificationController extends AppBaseController
             return redirect(route('admin.certifications.index'));
         }
 
-        return view('template.administration.certifications.show')->with('certification', $certification);
+        $textSearch = $request->search;
+
+        if(isset($textSearch)){
+            $questions =$this->certificationRepository->search($certification->id,$textSearch,2);
+        }else{
+            $questions = $this->certificationRepository->questions($certification->id,2);
+        }
+
+        $rank = $questions->firstItem();
+
+        return view('template.administration.certifications.show',compact('questions','certification','rank','textSearch'));*/
     }
 
     /**
@@ -165,4 +178,44 @@ class CertificationController extends AppBaseController
 
         return redirect(route('administration.certifications.index'));*/
     }
+
+
+    //END CRUD
+
+    public function searchQuestions(Request $request)
+    {
+        $textSearch = $request->search;
+        $certif_id = $request->certification_id;
+        return redirect(route('admin.certifications.questions.display', ['search' => $textSearch,'certification_id'=>$certif_id]));
+    }
+
+    public function questionsDisplay(Request $request)
+    {
+        $id = $request->certification_id;
+
+        $certification = $this->certificationRepository->find($id);
+
+        if (empty($certification)) {
+            Alert::error('Error','Certification not found');
+
+            return redirect(route('admin.certifications.index'));
+        }
+
+        $textSearch = $request->search;
+
+
+        if(isset($textSearch)){
+            $questions =$this->certificationRepository->search($certification->id,$textSearch,2);
+        }else{
+            $questions = $this->certificationRepository->questions($certification->id,2);
+        }
+
+
+        $questions->appends($_GET)->links();
+        $rank = $questions->firstItem();
+
+        return view('template.administration.certifications.show',compact('questions','certification','rank','textSearch'));
+    }
+
+
 }

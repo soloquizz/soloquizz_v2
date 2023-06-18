@@ -32,6 +32,17 @@ Route::name('admin.')->prefix('admin')/*->middleware(['cas.auth', 'check.permiss
     Route::resource('classes', App\Http\Controllers\Administration\ClasseController::class);
 
     Route::resource('certifications', App\Http\Controllers\Administration\CertificationController::class);
+    Route::get('certifications-questions-display', [App\Http\Controllers\Administration\CertificationController::class,'questionsDisplay'])->name('certifications.questions.display');
+    Route::post('certifications-questions-search', [App\Http\Controllers\Administration\CertificationController::class,'searchQuestions'])->name('certifications.questions.search');
+
+    Route::resource('questions', App\Http\Controllers\Administration\QuestionController::class);
+    Route::get('questions-edit-custom', [App\Http\Controllers\Administration\QuestionController::class,'editCustom'])->name('questions.edit.custom');
+
+
+    Route::post('questions-search', [App\Http\Controllers\Administration\QuestionController::class,'search'])->name('questions.search');
+
+    Route::resource('options', App\Http\Controllers\Administration\OptionController::class);
+    Route::get('options-edit-custom', [App\Http\Controllers\Administration\OptionController::class,'editCustom'])->name('options.edit.custom');
 
     Route::post('users-update', [App\Http\Controllers\Administration\UserController::class,'update'])->name('users.update');
 });

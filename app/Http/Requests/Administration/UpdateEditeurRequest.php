@@ -24,7 +24,7 @@ class UpdateEditeurRequest extends FormRequest
      */
     public function rules()
     {
-        $rules = Editeur::$rules;
+        $rules = Editeur::$rulesUpdate;
         
         return $rules;
     }

@@ -20,8 +20,11 @@ Route::name('etudiant.')->prefix('etudiant')/*->middleware(['cas.auth', 'check.p
     //Cours
     Route::get('/cours',[App\Http\Controllers\Etudiant\EtudiantController::class,'cours'])->name('cours');
 
+    //Certification
+    Route::get('/certifications',[App\Http\Controllers\Etudiant\CertificationController::class,'index'])->name('certifications');
+
     //Dumps
-    Route::get('/dumps',[App\Http\Controllers\Etudiant\DumpController::class,'dumps'])->name('dumps');
+    Route::get('/dumps/{certification_id}',[App\Http\Controllers\Etudiant\DumpController::class,'dumps'])->name('dumps');
     Route::get('/dumps-resultat',[App\Http\Controllers\Etudiant\DumpController::class,'resultat'])->name('dumps.resultat');
     Route::get('/dumps-info',[App\Http\Controllers\Etudiant\DumpController::class,'info'])->name('dumps.info');
 

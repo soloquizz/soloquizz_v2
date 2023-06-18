@@ -84,4 +84,12 @@ class Certification extends Model
     {
         return $this->belongsTo(\App\Models\Administration\Niveau::class, 'niveau_id');
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     **/
+    public function questions()
+    {
+        return $this->hasMany(\App\Models\Administration\Question::class, 'certification_id');
+    }
 }

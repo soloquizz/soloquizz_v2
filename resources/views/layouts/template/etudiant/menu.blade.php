@@ -25,8 +25,8 @@
                     <li class="nav-item {{ Request::is('etudiant/examen*') ? 'active' : '' }}">
                         <a href="#" class="nav-link">Examens</a>
                     </li>
-                    <li class="nav-item {{ Request::is('etudiant/dumps*') ? 'active' : '' }}">
-                        <a href="{{route('etudiant.dumps')}}" class="nav-link">Certifications</a>
+                    <li class="nav-item {{ Request::is('etudiant/certifications*') ? 'active' : '' }}">
+                        <a href="{{route('etudiant.certifications')}}" class="nav-link">Certifications</a>
                     </li>
                     <li class="nav-item {{ Request::is('etudiant/discussions*') ? 'active' : '' }}">
                         <a href="#" class="nav-link">Forums</a>

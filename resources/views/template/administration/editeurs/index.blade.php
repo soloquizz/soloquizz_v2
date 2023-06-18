@@ -54,6 +54,7 @@
             <table class="table">
                 <thead>
                     <tr>
+                        <th>Image</th>
                         <th>Nom de l'éditeur</th>
                         <th>Action</th>
                     </tr>
@@ -61,6 +62,7 @@
                 <tbody class="list">
                 @foreach($editeurs as $editeur)
                     <tr>
+                        <td class="name"><img src="{{$editeur->image()}}" style="height: 64px; width: 64px;"></td>
                         <td class="name">{{$editeur->nom}}</td>
                         <td class="name">
                             <a href="{{route('admin.editeurs.edit', $editeur->id)}}">

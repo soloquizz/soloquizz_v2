@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  *
  * @property \Illuminate\Database\Eloquent\Collection $certifications
  * @property string $nom
+ * @property string $logo
  */
 class Editeur extends Model
 {
@@ -31,7 +32,8 @@ class Editeur extends Model
 
 
     public $fillable = [
-        'nom'
+        'nom',
+        'logo'
     ];
 
     /**
@@ -41,7 +43,8 @@ class Editeur extends Model
      */
     protected $casts = [
         'id' => 'integer',
-        'nom' => 'string'
+        'nom' => 'string',
+        'logo' => 'string',
     ];
 
     /**
@@ -50,11 +53,22 @@ class Editeur extends Model
      * @var array
      */
     public static $rules = [
-        'nom' => 'required|string|max:255',
+        'nom' => 'required|string|unique:editeurs|max:255',
+        'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         'created_at' => 'nullable',
         'updated_at' => 'nullable',
         'deleted_at' => 'nullable'
     ];
+
+     public static $rulesUpdate = [
+        'nom' => 'required|string|max:255',
+        'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        'created_at' => 'nullable',
+        'updated_at' => 'nullable',
+        'deleted_at' => 'nullable'
+    ];
+
+
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
@@ -62,5 +76,10 @@ class Editeur extends Model
     public function certifications()
     {
         return $this->hasMany(\App\Models\Administration\Certification::class, 'editeur_id');
+    }
+
+    public function image()
+    {
+        return asset("storage/logo_editeur/" . $this->logo);
     }
 }

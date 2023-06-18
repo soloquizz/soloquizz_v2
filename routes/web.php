@@ -21,3 +21,8 @@ Route::get('/', function () {
 
 @include('etudiant.php');
 @include('admin.php');
+
+
+Route::group(['prefix' => 'administration'], function () {
+    Route::resource('etudiants', App\Http\Controllers\Administration\EtudiantController::class, ["as" => 'administration']);
+});

@@ -18,7 +18,7 @@
                         </div>
                     </li>
                     <li class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle {{ Request::is(['admin/editeurs*','admin/certifications*']) ? 'active' : '' }}" data-toggle="dropdown">Certifications</a>
+                        <a href="#" class="nav-link dropdown-toggle {{ Request::is(['admin/editeurs*','admin/certifications*','admin/questions*','admin/options*']) ? 'active' : '' }}" data-toggle="dropdown">Certifications</a>
                         <div class="dropdown-menu">
                             <a class="dropdown-item {{ Request::is(['admin/editeurs*']) ? 'active' : '' }}" href="{{route('admin.editeurs.index')}}">Éditeur</a>
                             <a class="dropdown-item {{ Request::is(['admin/certifications*']) ? 'active' : '' }}" href="{{route('admin.certifications.index')}}">Certifications</a>

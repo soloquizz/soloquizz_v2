@@ -4,8 +4,8 @@
             <div class="col-lg-4">
                 <div class="border-1 border-left-3 border-left-accent rounded text-70 text-center mb-lg-0">
                     <div class="card-body">
-                        Éditeurs
-                        <p class="lead text-body mb-0"><strong>10</strong></p>
+                        Étudiants
+                        <p class="lead text-body mb-0"><strong>{{getNbreEtudiants()}}</strong></p>
                     </div>
                 </div>
             </div>
@@ -13,15 +13,15 @@
                 <div class="border rounded text-70 text-center mb-lg-0">
                     <div class="card-body">
                         Certifications
-                        <p class="lead text-body mb-0"><strong>12</strong></p>
+                        <p class="lead text-body mb-0"><strong>{{getNbreCertifications()}}</strong></p>
                     </div>
                 </div>
             </div>
             <div class="col-lg-4">
                 <div class="border rounded text-70 text-center mb-lg-0">
                     <div class="card-body">
-                        Questions
-                        <p class="lead text-body mb-0"><strong>230</strong></p>
+                        Classe
+                        <p class="lead text-body mb-0"><strong>{{getNbreClasses()}}</strong></p>
                     </div>
                 </div>
             </div>

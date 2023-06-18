@@ -8,6 +8,7 @@ use App\Repositories\Administration\EditeurRepository;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
 use Flash;
+use Illuminate\Support\Facades\Storage;
 use RealRashid\SweetAlert\Facades\Alert;
 use Response;
 
@@ -43,7 +44,7 @@ class EditeurController extends AppBaseController
      */
     public function create()
     {
-        return view('administration.editeurs.create');
+        //return view('administration.editeurs.create');
     }
 
     /**
@@ -57,11 +58,19 @@ class EditeurController extends AppBaseController
     {
         $input = $request->all();
 
+        $logo = $request->logo;
+
+        $fileName = $input['nom'] . '.' . $logo->getClientOriginalExtension();
+        Storage::delete('logo_editeur/' . $fileName);
+        $logo->storeAs('logo_editeur', $fileName);
+
+        $input['logo'] = $fileName;
+
         $editeur = $this->editeurRepository->create($input);
 
         Alert::success('Succés','Editeur saved successfully.');
 
-        return redirect(route('administration.editeurs.index'));
+        return redirect(route('admin.editeurs.index'));
     }
 
     /**
@@ -122,11 +131,24 @@ class EditeurController extends AppBaseController
             return redirect(route('administration.editeurs.index'));
         }
 
-        $editeur = $this->editeurRepository->update($request->all(), $id);
+        $input = $request->all();
+
+
+        $logo = $request->logo;
+
+        if (isset($logo)){
+            $fileName = $input['nom'] . '.' . $logo->getClientOriginalExtension();
+            Storage::delete('public/logo_editeur/' . $editeur->logo);
+            $logo->storeAs('public/logo_editeur', $fileName);
+            $input['logo'] = $fileName;
+        }
+
+
+        $editeur = $this->editeurRepository->update($input, $id);
 
         Alert::success('Succés','Editeur updated successfully.');
 
-        return redirect(route('administration.editeurs.index'));
+        return redirect(route('admin.editeurs.index'));
     }
 
     /**
