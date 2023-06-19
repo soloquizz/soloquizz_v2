@@ -25,6 +25,7 @@ Route::name('etudiant.')->prefix('etudiant')/*->middleware(['cas.auth', 'check.p
 
     //Dumps
     Route::get('/dumps/{certification_id}',[App\Http\Controllers\Etudiant\DumpController::class,'dumps'])->name('dumps');
+    Route::get('/dumps-take/{certification_id}',[App\Http\Controllers\Etudiant\DumpController::class,'dumps_take'])->name('dumps.take');
     Route::get('/dumps-resultat',[App\Http\Controllers\Etudiant\DumpController::class,'resultat'])->name('dumps.resultat');
     Route::get('/dumps-info',[App\Http\Controllers\Etudiant\DumpController::class,'info'])->name('dumps.info');
 

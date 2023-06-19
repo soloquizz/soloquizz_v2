@@ -88,7 +88,6 @@
     <!-- App Settings (safe to remove) -->
     <script src="{{asset('assets/js/app-settings.js')}}"></script>
 
-
     <!-- Global Settings -->
     <script src="{{asset('assets/js/settings.js')}}"></script>
 
@@ -104,6 +103,8 @@
 
     <!-- Chart.js Samples -->
     <script src="{{asset('assets/js/page.student-dashboard.js')}}"></script>
+
+    @yield('script')
 
 </body>
 

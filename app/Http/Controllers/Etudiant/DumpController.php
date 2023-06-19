@@ -20,6 +20,18 @@ class DumpController extends Controller
         return view('template.etudiant.dumps.index',compact('certification'));
     }
 
+
+    public function dumps_take($certification_id)
+    {
+        $certification = Certification::find($certification_id);
+        if (empty($certification)){
+            Alert::error('Error','Certification not Found');
+            return redirect()->back();
+        }
+        $duree = $certification->questions->sum('duree');
+        return view('template.etudiant.dumps.dump_take',compact('certification','duree'));
+    }
+
     public function info()
     {
         return view('template.etudiant.dumps.dump_info');

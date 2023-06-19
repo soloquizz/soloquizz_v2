@@ -7,9 +7,9 @@
             <div class="mdk-box__content">
                 <div class="py-64pt text-center text-sm-left">
                     <div class="container d-flex flex-column justify-content-center align-items-center">
-                        <p class="lead text-white-50 measure-lead-max mb-0">Une fois démarré l'évaluation ne s'arrête plus</p>
+                        <p class="lead text-white-50 measure-lead-max mb-0">text avertissement</p>
                         <h1 class="text-white mb-24pt">{{$certification->titre}}</h1>
-                        <a href="#" class="btn btn-outline-white">Nouveau entrainement</a>
+                        <a href="{{route('etudiant.dumps.take',$certification->id)}}" class="btn btn-outline-white">Nouveau entrainement</a>
                     </div>
                 </div>
             </div>
