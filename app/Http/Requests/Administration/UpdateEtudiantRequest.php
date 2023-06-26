@@ -24,7 +24,7 @@ class UpdateEtudiantRequest extends FormRequest
      */
     public function rules()
     {
-        $rules = Etudiant::$rules;
+        $rules = Etudiant::$rulesUpdate;
         
         return $rules;
     }

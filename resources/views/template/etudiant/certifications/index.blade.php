@@ -1,5 +1,8 @@
 @extends('layouts.template.etudiant.master')
 
+@section('title')
+    Liste des certifications
+@endsection
 
 @section('content_page')
 

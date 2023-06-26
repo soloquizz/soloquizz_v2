@@ -4,20 +4,37 @@ namespace App\Http\Controllers\Administration;
 
 use App\Http\Requests\Administration\CreateEtudiantRequest;
 use App\Http\Requests\Administration\UpdateEtudiantRequest;
+use App\Imports\EtudiantImport;
+use App\Models\Administration\Inscription;
+use App\Repositories\Administration\AnneeScolaireRepository;
+use App\Repositories\Administration\ClasseRepository;
 use App\Repositories\Administration\EtudiantRepository;
 use App\Http\Controllers\AppBaseController;
+use App\Repositories\Administration\UserRepository;
 use Illuminate\Http\Request;
 use Flash;
+use Maatwebsite\Excel\Facades\Excel;
+use RealRashid\SweetAlert\Facades\Alert;
 use Response;
 
 class EtudiantController extends AppBaseController
 {
     /** @var EtudiantRepository $etudiantRepository*/
     private $etudiantRepository;
+    private $userRepository;
+    private $anneeScolaireRepository;
+    private $classeRepository;
 
-    public function __construct(EtudiantRepository $etudiantRepo)
+    public function __construct(EtudiantRepository $etudiantRepo,
+                                UserRepository $userRepo,
+                                AnneeScolaireRepository $anneeScolaireRepo,
+                                ClasseRepository $classeRepo
+    )
     {
         $this->etudiantRepository = $etudiantRepo;
+        $this->userRepository = $userRepo;
+        $this->anneeScolaireRepository = $anneeScolaireRepo;
+        $this->classeRepository = $classeRepo;
     }
 
     /**
@@ -25,24 +42,26 @@ class EtudiantController extends AppBaseController
      *
      * @param Request $request
      *
-     * @return Response
+     * @return
      */
     public function index(Request $request)
     {
         $etudiants = $this->etudiantRepository->all();
 
-        return view('administration.etudiants.index')
-            ->with('etudiants', $etudiants);
+        $annee_scolaires = $this->anneeScolaireRepository->all();
+        $classes = $this->classeRepository->all();
+
+        return view('template.administration.etudiants.index',compact('annee_scolaires','classes','etudiants'));
     }
 
     /**
      * Show the form for creating a new Etudiant.
      *
-     * @return Response
+     * @return
      */
     public function create()
     {
-        return view('administration.etudiants.create');
+        //return view('administration.etudiants.create');
     }
 
     /**
@@ -50,7 +69,7 @@ class EtudiantController extends AppBaseController
      *
      * @param CreateEtudiantRequest $request
      *
-     * @return Response
+     * @return
      */
     public function store(CreateEtudiantRequest $request)
     {
@@ -58,9 +77,23 @@ class EtudiantController extends AppBaseController
 
         $etudiant = $this->etudiantRepository->create($input);
 
-        Flash::success('Etudiant saved successfully.');
+        if (isset($input['email'])){
+            $userData['email'] = $input['email'];
+            $userData['password'] = bcrypt('Password0');
+            $userData['personne_type'] = 'Etudiant';
+            $userData['personne_id'] = $etudiant->id;
+            $this->userRepository->create($userData);
+        }
 
-        return redirect(route('administration.etudiants.index'));
+        //Add Inscription
+        $inscriptionData['classe_id'] = $input['classe_id'];
+        $inscriptionData['annee_scolaire_id'] = $input['annee_scolaire_id'];
+        $inscriptionData['etudiant_id'] = $etudiant->id;
+        Inscription::create($inscriptionData);
+
+        Alert::success('Succés','Etudiant saved successfully.');
+
+        return redirect(route('admin.etudiants.index'));
     }
 
     /**
@@ -68,19 +101,24 @@ class EtudiantController extends AppBaseController
      *
      * @param int $id
      *
-     * @return Response
+     * @return
      */
     public function show($id)
     {
         $etudiant = $this->etudiantRepository->find($id);
 
         if (empty($etudiant)) {
-            Flash::error('Etudiant not found');
+            Alert::error('Error','Etudiant not found');
 
             return redirect(route('administration.etudiants.index'));
         }
 
-        return view('administration.etudiants.show')->with('etudiant', $etudiant);
+        $annee_scolaires = $this->anneeScolaireRepository->all()->filter(function ($annee_scolaire){
+            return $annee_scolaire->actif;
+        });
+        $classes = $this->classeRepository->all();
+
+        return view('template.administration.etudiants.show',compact('etudiant','annee_scolaires','classes'));
     }
 
     /**
@@ -88,19 +126,19 @@ class EtudiantController extends AppBaseController
      *
      * @param int $id
      *
-     * @return Response
+     * @return
      */
     public function edit($id)
     {
         $etudiant = $this->etudiantRepository->find($id);
 
         if (empty($etudiant)) {
-            Flash::error('Etudiant not found');
+            Alert::error('Succés','Etudiant not found');
 
-            return redirect(route('administration.etudiants.index'));
+            return redirect(route('admin.etudiants.index'));
         }
 
-        return view('administration.etudiants.edit')->with('etudiant', $etudiant);
+        return view('template.administration.etudiants.edit')->with('etudiant', $etudiant);
     }
 
     /**
@@ -109,23 +147,33 @@ class EtudiantController extends AppBaseController
      * @param int $id
      * @param UpdateEtudiantRequest $request
      *
-     * @return Response
+     * @return
      */
     public function update($id, UpdateEtudiantRequest $request)
     {
         $etudiant = $this->etudiantRepository->find($id);
 
+        $input = $request->all();
+
         if (empty($etudiant)) {
-            Flash::error('Etudiant not found');
+            Alert::error('Error','Etudiant not found');
 
             return redirect(route('administration.etudiants.index'));
         }
 
-        $etudiant = $this->etudiantRepository->update($request->all(), $id);
+        $etudiant = $this->etudiantRepository->update($input, $id);
 
-        Flash::success('Etudiant updated successfully.');
+        //Update user
+        $user = $etudiant->user();
 
-        return redirect(route('administration.etudiants.index'));
+        if (isset($input['email'])){
+            $userData['email'] = $input['email'];
+            $this->userRepository->update($userData,$user->id);
+        }
+
+        Alert::success('Succés','Etudiant updated successfully.');
+
+        return redirect(route('admin.etudiants.index'));
     }
 
     /**
@@ -135,7 +183,7 @@ class EtudiantController extends AppBaseController
      *
      * @throws \Exception
      *
-     * @return Response
+     * @return
      */
     public function destroy($id)
     {
@@ -153,4 +201,60 @@ class EtudiantController extends AppBaseController
 
         return redirect(route('administration.etudiants.index'));
     }
+
+
+    public function addInscription(Request $request)
+    {
+        $input = $request->all();
+        Inscription::create($input);
+        Alert::success('Succés','Inscription saved successfully.');
+        return redirect()->back();
+    }
+
+    public function editInscription($id_inscription)
+    {
+        $inscription = Inscription::find($id_inscription);
+        if (empty($inscription)){
+            Alert::error('Error','Inscription not found.');
+            return redirect()->back();
+        }
+
+        $annee_scolaires = $this->anneeScolaireRepository->all()->filter(function ($annee_scolaire){
+            return $annee_scolaire->actif;
+        });
+        $classes = $this->classeRepository->all();
+        $etudiant = $inscription->etudiant;
+
+        return view('template.administration.etudiants.edit_inscription',compact('annee_scolaires','classes','inscription','etudiant'));
+    }
+
+    public function updateInscription(Request $request)
+    {
+        $input = $request->all();
+        $inscription = Inscription::find($input['inscription_id']);
+
+        if (empty($inscription))
+        {
+            Alert::error('Error','Inscription not found');
+            return redirect()->back();
+        }
+
+        $inscription->update($input);
+        Alert::success('Succés','Inscription mise à jour avec succés');
+        return redirect(route('admin.etudiants.show',$input['etudiant_id']));
+
+    }
+
+    public function import(Request $request)
+    {
+        /*$request->validate(
+            [
+                'fichier' => 'required|file|mimes:xlsx,xls,csv|max:1000'
+            ]
+        );
+        $input = $request->all();
+        Excel::import($import = new EtudiantImport($input),$request->fichier);*/
+    }
+
+
 }

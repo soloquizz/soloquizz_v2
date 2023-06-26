@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::name('admin.')->prefix('admin')/*->middleware(['cas.auth', 'check.permission'])*/->group(function () {
+Route::name('admin.')->prefix('admin')->middleware(['auth'])->group(function () {
     Route::get('/',[App\Http\Controllers\Administration\HomeController::class,'index'])->name('index');
 
     Route::resource('administrateurs', App\Http\Controllers\Administration\AdministrateurController::class);
@@ -31,6 +31,14 @@ Route::name('admin.')->prefix('admin')/*->middleware(['cas.auth', 'check.permiss
 
     Route::resource('classes', App\Http\Controllers\Administration\ClasseController::class);
 
+    Route::resource('etudiants', App\Http\Controllers\Administration\EtudiantController::class);
+    Route::get('etudiants-edit-inscription/{inscription_id}',[App\Http\Controllers\Administration\EtudiantController::class,'editInscription'])->name('etudiants.edit_inscription');
+
+    Route::post('etudiants-add-inscription',[App\Http\Controllers\Administration\EtudiantController::class,'addInscription'])->name('etudiants.add_inscription');
+    Route::post('etudiants-update-inscription',[App\Http\Controllers\Administration\EtudiantController::class,'updateInscription'])->name('etudiants.update_inscription');
+
+    Route::resource('anneeScolaires', App\Http\Controllers\Administration\AnneeScolaireController::class);
+
     Route::resource('certifications', App\Http\Controllers\Administration\CertificationController::class);
     Route::get('certifications-questions-display', [App\Http\Controllers\Administration\CertificationController::class,'questionsDisplay'])->name('certifications.questions.display');
     Route::post('certifications-questions-search', [App\Http\Controllers\Administration\CertificationController::class,'searchQuestions'])->name('certifications.questions.search');
@@ -45,4 +53,5 @@ Route::name('admin.')->prefix('admin')/*->middleware(['cas.auth', 'check.permiss
     Route::get('options-edit-custom', [App\Http\Controllers\Administration\OptionController::class,'editCustom'])->name('options.edit.custom');
 
     Route::post('users-update', [App\Http\Controllers\Administration\UserController::class,'update'])->name('users.update');
+
 });

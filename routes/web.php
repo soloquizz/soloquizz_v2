@@ -13,16 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Auth::routes();
 
+Route::get('/', [App\Http\Controllers\IndexController::class,'index'])->name('welcome');
 
-Route::get('/', function () {
-    return view('template.index');
-});
-
+@include('auth.php');
 @include('etudiant.php');
 @include('admin.php');
-
-
-Route::group(['prefix' => 'administration'], function () {
-    Route::resource('etudiants', App\Http\Controllers\Administration\EtudiantController::class, ["as" => 'administration']);
-});

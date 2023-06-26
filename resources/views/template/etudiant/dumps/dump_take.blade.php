@@ -65,12 +65,12 @@
                     <ul class="nav navbar-nav flex align-items-sm-center">
                         <li class="nav-item navbar-list__item">
                             <i class="fa fa-question mr-2"></i>
-                            {{$certification->questions->count()}} questions
+                            {{$questions->count()}} questions
                         </li>
                         <li class="nav-item text-danger navbar-list__item">
                             <i class="material-icons text-muted icon--left">schedule</i>
                             <div id="duree">
-                                {{$duree}}
+                                {{$duree}} &nbsp;
                             </div>
                              minutes
                         </li>
@@ -83,39 +83,46 @@
                         <div class="progress-bar progress-bar-striped progress-bar-animated"  aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                 </div>
-                @foreach($certification->questions as $question)
-                    <div class="tab mt-3">
-                        <div class=" row">
-                            <div class="col-lg-8">
-                                <div id="firstquestion">
-                                    <div class="d-flex align-items-center page-num-container mb-16pt">
-                                        <div class="page-num">{{$loop->iteration}}</div>
-                                        <h4>Question {{$loop->iteration}} sur {{$loop->count}} </h4>
-                                    </div>
-                                    <span>{{$question->point}} points</span>
-                                    <p class="">{!! $question->contenu !!}</p>
-                                </div>
-                            </div>
-                            <div class="col-lg-4">
-                                <div id="firstreponse">
-                                    <h4>Option de réponse:</h4>
-                                    @foreach($question->options as $option)
-                                        <div class="ml-2">
-                                            <input id="customCheck01" type="checkbox" class="custom-control-input">
-                                            <label for="customCheck01" class="custom-control-label">{!! $option->contenu !!}</label>
+                <form method="POST" id="dumpForm" action="{{ route('etudiant.dumps.store') }}">
+                    @csrf
+                    <input type="hidden" name="dump_id" value="{{$dump->id}}">
+                    <input type="hidden" name="certification_id" value="{{$certification->id}}">
+                    <input type="hidden" name="dump_user_id" value="{{$dumpUser->id}}">
+                    @foreach($questions as $question)
+                        <div class="tab mt-3">
+                            <div class=" row">
+                                <div class="col-lg-8">
+                                    <div id="firstquestion">
+                                        <div class="d-flex align-items-center page-num-container mb-16pt">
+                                            <div class="page-num">{{$loop->iteration}}</div>
+                                            <h4>Question {{$loop->iteration}} sur {{$loop->count}} </h4>
                                         </div>
-                                    @endforeach
+                                        <span>{{$question->point}} points</span>
+                                        <p class="">{!! $question->contenu !!}</p>
+                                    </div>
+                                    <input type="hidden" name="questions[]" value="{{$question->id}}">
                                 </div>
-                            </div>
-                            <div style="overflow:auto;">
-                                <div style="float:right;">
-                                    <button type="button" class="btn btn-outline-secondary w-100 w-sm-auto mb-8pt mb-sm-0 mr-sm-16pt" id="prevBtn" onclick="nextPrev(-1)">Précédente</button>
-                                    <button type="button" class="btn-next btn btn-accent w-100 w-sm-auto" id="nextBtn" onclick="nextPrev(1)"></button>
+                                <div class="col-lg-4">
+                                    <div id="firstreponse">
+                                        <h4>Option de réponse:</h4>
+                                        @foreach($question->options as $option)
+                                            <div class="ml-2">
+                                                <input id="customCheck{{$option->id}}" value="{{$option->id}}" name="reponses{{$question->id}}[]" type="checkbox" class="custom-control-input">
+                                                <label for="customCheck{{$option->id}}" class="custom-control-label">{!! $option->contenu !!}</label>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                </div>
+                                <div style="overflow:auto;">
+                                    <div style="float:right;">
+                                        <button type="button" class="btn btn-outline-secondary w-100 w-sm-auto mb-8pt mb-sm-0 mr-sm-16pt" id="prevBtn" onclick="nextPrev(-1)">Précédente</button>
+                                        <button type="button" class="btn-next btn btn-accent w-100 w-sm-auto" id="nextBtn" onclick="nextPrev(1)"></button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                @endforeach
+                    @endforeach
+                </form>
             </div>
         </div>
         <!-- Layout Content -->
@@ -258,7 +265,7 @@
                 //...the form gets submitted:
                 var resttime=(document.getElementById("clock").textContent);
                 $("#temps").val(resttime);
-                document.getElementById("regForm").submit();
+                document.getElementById("dumpForm").submit();
                 return false;
             }
             // Otherwise, display the correct tab:

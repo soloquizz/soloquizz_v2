@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
@@ -37,4 +38,45 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+
+
+    public function showLoginForm()
+    {
+        return view('template.auth.login');
+    }
+
+    public function validateLogin(Request $request)
+    {
+        $request->validate([
+            $this->username() => 'required|string',
+            'password' => 'required|string',
+        ]);
+    }
+
+    public function login(Request $request)
+    {
+        if ($this->attemptLogin($request)) {
+            if ($request->hasSession()) {
+                $request->session()->put('auth.password_confirmed_at', time());
+            }
+
+            $user = auth()->user();
+
+            if ($user->personne_type == 'Administrateur')
+            {
+                return redirect(route('admin.index'));
+            }
+            if ($user->personne_type == 'Etudiant')
+            {
+                return redirect(route('etudiant.index'));
+            }
+
+        }
+        else{
+            $this->incrementLoginAttempts($request);
+
+            return $this->sendFailedLoginResponse($request);
+        }
+    }
+
 }

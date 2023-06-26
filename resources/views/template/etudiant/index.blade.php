@@ -1,5 +1,9 @@
 @extends('layouts.template.etudiant.master')
 
+@section('title')
+    Tableau de Bord
+@endsection
+
 @section('content_page')
 
 <div class="mdk-header-layout__content page-content">
@@ -16,7 +20,8 @@
 
     <!-- Section Pages Layout -->
 
-    <div class="container page__container">
+    {{--
+        <div class="container page__container">
         <div class="page-section">
             <div class="card border-left-4 border-left-accent card-sm mb-lg-32pt">
                 <div class="card-body pl-16pt">
@@ -801,6 +806,8 @@
 
         </div>
     </div>
+    --}}
+
 
     <!-- END Section Pages Layout -->
 

@@ -16,7 +16,13 @@ class CreateDumpUsersTable extends Migration
         Schema::create('dump_users', function (Blueprint $table) {
             $table->id();
             $table->foreignId('etudiant_id')->nullable()->constrained('etudiants');
+            $table->foreignId('dump_id')->constrained('dumps');
             $table->foreignId('user_id')->constrained('users');
+            $table->foreignId('certification_id')->constrained('certifications');
+            $table->boolean('etat');
+            $table->integer('score')->nullable();
+            $table->integer('question_true')->nullable();
+            $table->integer('question_false')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

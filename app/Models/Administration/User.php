@@ -53,4 +53,14 @@ class User extends Authenticatable
         }
 
     }
+
+    public function etudiant()
+    {
+        return Etudiant::find($this->personne_id);
+    }
+
+    public function getFullName()
+    {
+        return $this->personne()->prenom.' '.$this->personne()->nom;
+    }
 }

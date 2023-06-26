@@ -12,13 +12,13 @@
             <!-- Main Navigation -->
             <ul class="nav navbar-nav ml-auto flex-nowrap" style="white-space: nowrap;">
                 <li class="ml-16pt nav-item">
-                    <a href="/login" class="nav-link">
+                    <a href="{{route('auth.index')}}" class="nav-link">
                         <i class="material-icons">lock_open</i>
                         <span class="sr-only">Login</span>
                     </a>
                 </li>
                 <li class="d-none d-sm-flex nav-item">
-                    <a href="/inscription" class="btn btn-primary">S'inscrire</a>
+                    <a href="#" class="btn btn-primary">S'inscrire</a>
                 </li>
             </ul>
             <!-- // END Main Navigation -->

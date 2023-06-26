@@ -67,8 +67,23 @@ class Etudiant extends Model
         'numero_carte' => 'required|string|max:255',
         'prenom' => 'required|string|max:255',
         'nom' => 'required|string|max:255',
+        'telephone' => 'required|string|unique:etudiants|max:255',
+        'email_personnel' => 'nullable|string|unique:etudiants|max:255',
+        'email' => 'required|string|unique:users|max:255',
+        'classe_id' => 'required|integer|max:255',
+        'annee_scolaire_id' => 'required|integer|max:255',
+        'created_at' => 'nullable',
+        'updated_at' => 'nullable',
+        'deleted_at' => 'nullable'
+    ];
+
+    public static $rulesUpdate = [
+        'numero_carte' => 'required|string|max:255',
+        'prenom' => 'required|string|max:255',
+        'nom' => 'required|string|max:255',
         'telephone' => 'required|string|max:255',
         'email_personnel' => 'nullable|string|max:255',
+        'email' => 'required|string|max:255',
         'created_at' => 'nullable',
         'updated_at' => 'nullable',
         'deleted_at' => 'nullable'
@@ -97,4 +112,19 @@ class Etudiant extends Model
     {
         return $this->hasMany(\App\Models\Administration\Inscription::class, 'etudiant_id');
     }
+
+    public function user()
+    {
+        return User::where('personne_id',$this->id)->where('personne_type','Etudiant')->first();
+    }
+
+    public function classe()
+    {
+        $inscriptions = $this->inscriptions->filter(function ($inscription){
+            return $inscription->etat == 'En cours';
+        });
+
+        return $inscriptions->last()->classe;
+    }
+
 }

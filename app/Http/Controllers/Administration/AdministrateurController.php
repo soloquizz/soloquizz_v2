@@ -73,7 +73,7 @@ class AdministrateurController extends AppBaseController
 
         Alert::success('Administrateur saved successfully.');
 
-        return redirect(route('administration.administrateurs.index'));
+        return redirect(route('admin.administrateurs.index'));
     }
 
     /**
@@ -90,7 +90,7 @@ class AdministrateurController extends AppBaseController
         if (empty($administrateur)) {
             Alert::error('Administrateur not found');
 
-            return redirect(route('administration.administrateurs.index'));
+            return redirect(route('admin.administrateurs.index'));
         }
 
         return view('template.administration.administrateurs.show')->with('administrateur', $administrateur);
@@ -110,7 +110,7 @@ class AdministrateurController extends AppBaseController
         if (empty($administrateur)) {
             Alert::error('Administrateur not found');
 
-            return redirect(route('administration.administrateurs.index'));
+            return redirect(route('admin.administrateurs.index'));
         }
 
         return view('template.administration.administrateurs.edit',compact('administrateur'));
@@ -132,14 +132,14 @@ class AdministrateurController extends AppBaseController
         if (empty($administrateur)) {
             Alert::error('Administrateur not found');
 
-            return redirect(route('administration.administrateurs.index'));
+            return redirect(route('admin.administrateurs.index'));
         }
 
         $administrateur = $this->administrateurRepository->update($request->all(), $id);
 
         Alert::success('Administrateur updated successfully.');
 
-        return redirect(route('administration.administrateurs.index'));
+        return redirect(route('admin.administrateurs.index'));
     }
 
     /**
@@ -158,13 +158,13 @@ class AdministrateurController extends AppBaseController
         if (empty($administrateur)) {
             Alert::error('Administrateur not found');
 
-            return redirect(route('administration.administrateurs.index'));
+            return redirect(route('admin.administrateurs.index'));
         }
 
         $this->administrateurRepository->delete($id);
 
         Alert::success('Administrateur deleted successfully.');
 
-        return redirect(route('administration.administrateurs.index'));
+        return redirect(route('admin.administrateurs.index'));
     }
 }

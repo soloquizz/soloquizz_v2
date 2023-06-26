@@ -1,5 +1,9 @@
 @extends('layouts.template.administration.master')
 
+@section('title')
+    Tableau de Bord
+@endsection
+
 @section('content_page')
 
 <div class="mdk-header-layout__content page-content">

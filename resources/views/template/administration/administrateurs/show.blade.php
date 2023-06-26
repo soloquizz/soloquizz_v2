@@ -1,8 +1,11 @@
 @extends('layouts.template.administration.master')
 
+@section('title')
+    Détail d'un administrateur
+@endsection
+
+
 @section('content_page')
-
-
 
     <div class="mdk-header-layout__content page-content">
 

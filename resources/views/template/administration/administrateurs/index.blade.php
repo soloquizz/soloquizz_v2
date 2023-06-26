@@ -1,5 +1,9 @@
 @extends('layouts.template.administration.master')
 
+@section('title')
+    Liste des administrateurs
+@endsection
+
 @section('content_page')
 
 <div class="mdk-header-layout__content page-content">
@@ -31,7 +35,7 @@
 
                 <!-- Nombre d'éléments -->
                 <div class="col-sm-4">
-                    <h3 class="content-header-title">Nombre d'administrateurs 12</h3>
+                    <h3 class="content-header-title">Nombre d'administrateurs {{$administrateurs->count()}}</h3>
                 </div>
 
                 <!-- Buuton -->

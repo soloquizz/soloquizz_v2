@@ -92,4 +92,16 @@ class Certification extends Model
     {
         return $this->hasMany(\App\Models\Administration\Question::class, 'certification_id');
     }
+
+    public function dumps()
+    {
+        return $this->hasMany(\App\Models\Administration\Dump::class, 'certification_id');
+    }
+
+    public function dumpUsers()
+    {
+        return $this->hasMany(\App\Models\Administration\DumpUser::class, 'certification_id');
+    }
+
+
 }

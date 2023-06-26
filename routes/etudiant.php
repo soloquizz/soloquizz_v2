@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::name('etudiant.')->prefix('etudiant')/*->middleware(['cas.auth', 'check.permission'])*/->group(function () {
+Route::name('etudiant.')->prefix('etudiant')->middleware(['auth'])->group(function () {
     Route::get('/',[App\Http\Controllers\Etudiant\EtudiantController::class,'index'])->name('index');
 
     //Cours
@@ -26,8 +26,10 @@ Route::name('etudiant.')->prefix('etudiant')/*->middleware(['cas.auth', 'check.p
     //Dumps
     Route::get('/dumps/{certification_id}',[App\Http\Controllers\Etudiant\DumpController::class,'dumps'])->name('dumps');
     Route::get('/dumps-take/{certification_id}',[App\Http\Controllers\Etudiant\DumpController::class,'dumps_take'])->name('dumps.take');
-    Route::get('/dumps-resultat',[App\Http\Controllers\Etudiant\DumpController::class,'resultat'])->name('dumps.resultat');
+    Route::get('/dumps-resultat/{dump_user_id}',[App\Http\Controllers\Etudiant\DumpController::class,'resultat'])->name('dumps.resultat');
     Route::get('/dumps-info',[App\Http\Controllers\Etudiant\DumpController::class,'info'])->name('dumps.info');
+
+    Route::post('/dumps-store',[App\Http\Controllers\Etudiant\DumpController::class,'store'])->name('dumps.store');
 
     //Discussions
     Route::get('/discussions',[App\Http\Controllers\Etudiant\EtudiantController::class,'discussions'])->name('discussions');

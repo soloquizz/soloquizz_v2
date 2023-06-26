@@ -1,5 +1,9 @@
 @extends('layouts.template.administration.master')
 
+@section('title')
+    Modification administrateur
+@endsection
+
 @section('content_page')
 
     <div class="mdk-header-layout__content page-content">
@@ -66,8 +70,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-warning" data-dismiss="modal">Annuler</button>
-                    <button type="submit" class="btn btn-success">Enregistrer</button>
+                    <button type="submit" class="btn btn-outline-primary">Enregistrer</button>
                 </div>
             {!! Form::close() !!}
         </div>

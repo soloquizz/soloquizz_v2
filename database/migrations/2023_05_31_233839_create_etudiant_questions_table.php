@@ -20,6 +20,7 @@ class CreateEtudiantQuestionsTable extends Migration
             $table->foreignId('question_id')->constrained('questions');
             $table->foreignId('dump_id')->constrained('dumps');
             $table->foreignId('option_id')->constrained('options');
+            $table->foreignId('dump_user_id')->constrained('dump_users');
             $table->boolean('trouve');
             $table->timestamps();
             $table->softDeletes();

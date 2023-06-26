@@ -7,18 +7,18 @@
             <div class="container page__container">
                 <nav class="nav navbar-nav">
                     <div class="nav-item navbar-list__item">
-                        <a href="student-take-course.html" class="nav-link"><i class="material-icons icon--left">keyboard_backspace</i> Back to Course</a>
+                        <a href="{{route('etudiant.dumps',$certification->id)}}" class="nav-link"><i class="material-icons icon--left">keyboard_backspace</i>Retour aux entrainements</a>
                     </div>
                     <div class="nav-item navbar-list__item">
                         <div class="d-flex align-items-center flex-nowrap">
                             <div class="mr-16pt">
-                                <a href="student-take-course.html"><img src="{{asset('assets/images/paths/angular_64x64.png')}}" width="40" alt="Angular" class="rounded"></a>
+                                <a href="{{route('etudiant.dumps',$certification->id)}}"><img src="{{$certification->editeur->image()}}" width="40" alt="Angular" class="rounded"></a>
                             </div>
                             <div class="flex">
-                                <a href="student-take-course.html" class="card-title text-body mb-0">Angular Fundamentals</a>
+                                <a href="{{route('etudiant.dumps',$certification->id)}}" class="card-title text-body mb-0">{{$certification->titre}}</a>
                                 <p class="lh-1 d-flex align-items-center mb-0">
-                                    <span class="text-50 small font-weight-bold mr-8pt">Elijah Murray</span>
-                                    <span class="text-50 small">Software Engineer and Developer</span>
+                                    <span class="text-50 small font-weight-bold mr-8pt">{{auth()->user()->getFullName()}}</span>
+                                    <span class="text-50 small">{{auth()->user()->etudiant()->classe()->nom}}</span>
                                 </p>
                             </div>
                         </div>
@@ -30,14 +30,14 @@
             <div class="mdk-box__content">
                 <div class="py-64pt text-center text-sm-left">
                     <div class="container d-flex flex-column justify-content-center align-items-center">
-                        <p class="lead text-white-50 measure-lead-max mb-0">Submited on 02 Jan 2019</p>
-                        <h1 class="text-white mb-24pt">Your Score: 350</h1>
-                        <a href="student-take-quiz.html" class="btn btn-outline-white">Restart quiz</a>
+                        <p class="lead text-white-50 measure-lead-max mb-0">Fait le {{date('d-m-Y à H:i:s', strtotime($dump_user->created_at)) }}</p>
+                        <h1 class="text-white mb-24pt">Votre Score: {{$dump_user->score}}/{{$dump->score}}</h1>
+                        <a href="{{route('etudiant.dumps.take',$certification->id)}}" class="btn btn-outline-white">Nouveau entrainement</a>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="navbar navbar-expand-sm navbar-light navbar-submenu navbar-list p-0 m-0 align-items-center">
+        <!--div class="navbar navbar-expand-sm navbar-light navbar-submenu navbar-list p-0 m-0 align-items-center">
             <div class="container page__container">
                 <ul class="nav navbar-nav flex align-items-sm-center">
                     <li class="nav-item navbar-list__item">350/450 Score</li>
@@ -51,28 +51,46 @@
                     </li>
                 </ul>
             </div>
-        </div>
+        </div-->
         <div class="container page__container">
             <div class="border-left-2 page-section pl-32pt">
-                <div class="d-flex align-items-center page-num-container mb-16pt">
-                    <div class="page-num">2</div>
-                    <h4>Question 2 of 5</h4>
-                </div>
-                <p class="text-70 mb-32pt mb-lg-48pt">An angular 2 project written in typescript is* transpiled to javascript duri*ng the build process. Which of the following additional features are provided to the developer while programming on typescript over javascript?</p>
-                <ul class="list-quiz mb-32pt mb-lg-64pt">
-                    <li class="list-quiz-item">
-                        <span class="list-quiz-badge">A</span>
-                        <span class="list-quiz-text">Ability to use newer syntax and offers reliability</span>
-                    </li>
-                    <li class="list-quiz-item active">
-                        <span class="list-quiz-badge list-quiz-badge-success"><i class="material-icons">check</i></span>
-                        <span class="list-quiz-text">Compatibility</span>
-                    </li>
-                    <li class="list-quiz-item">
-                        <span class="list-quiz-badge list-quiz-badge-error">C</span>
-                        <span class="list-quiz-text">Usage of missing features</span>
-                    </li>
-                </ul>
+                @foreach($dump_user->dumpuserQuestions as $dumpuserQuestion)
+                    <div class="d-flex align-items-center page-num-container mb-16pt">
+                        <div class="page-num {{$dumpuserQuestion->trouve ? 'bg-success' : 'bg-danger'}} ">{{$loop->iteration}}</div>
+                        <h4>Question {{$loop->iteration}} sur {{$loop->count}}</h4>
+                    </div>
+                    <p class="text-70 mb-32pt mb-lg-48pt">{!! $dumpuserQuestion->question->contenu !!}</p>
+                    <ul class="list-quiz mb-32pt mb-lg-64pt">
+                        @foreach($dumpuserQuestion->question->options as $option)
+                            @php
+                                $choiceOptions = $dumpuserQuestion->etudiantQuestions->pluck('option_id');
+                            @endphp
+                            @if(in_array($option->id,$choiceOptions->toArray()))
+                                <li class="list-quiz-item">
+                                    <div class="row">
+                                        <div class="col-1">
+                                            <span class="list-quiz-badge {{$option->correcte ? 'list-quiz-badge-success' : 'list-quiz-badge-error'}}"><i class="fa {{$option->correcte ? 'fa-check' : 'fa-times'}}"></i></span>
+                                        </div>
+                                        <div class="col-11">
+                                            <span class="list-quiz-text">{!! $option->contenu !!}</span>
+                                        </div>
+                                    </div>
+                                </li>
+                            @else
+                                <li class="list-quiz-item">
+                                    <div class="row">
+                                        <div class="col-1">
+                                            <span class="list-quiz-badge">A</span>
+                                        </div>
+                                        <div class="col-11">
+                                            <span class="list-quiz-text">{!! $option->contenu !!}</span>
+                                        </div>
+                                    </div>
+                                </li>
+                            @endif
+                        @endforeach
+                    </ul>
+                @endforeach
             </div>
         </div>
     </div>

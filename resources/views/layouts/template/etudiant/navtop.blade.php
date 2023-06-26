@@ -33,21 +33,16 @@
                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
                         <img width="32" height="32" class="rounded-circle" src="{{asset('assets/images/people/50/user.png')}}" alt="student" />
                     </a>
-                    <!--div class="dropdown-menu dropdown-menu-right">
-
-                        <div class="dropdown-header"><strong>Student</strong></div>
-                        <a class="dropdown-item active" href="student-dashboard.html">Dashboard</a>
-                        <a class="dropdown-item" href="student-my-courses.html">My Courses</a>
-                        <a class="dropdown-item" href="student-quiz-results.html">Quiz Results</a>
-                        <div class="dropdown-divider"></div>
-                        <div class="dropdown-header"><strong>Account</strong></div>
-                        <a class="dropdown-item" href="student-edit-account.html">Edit Account</a>
-                        <a class="dropdown-item" href="student-billing.html">Billing</a>
-                        <a class="dropdown-item" href="student-billing-history.html">Payments</a>
-                        <a class="dropdown-item" href="login.html">Logout</a>
-
-
-                    </div-->
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <a class="dropdown-item active" href="#"><i class="fa fa-user"></i>&nbsp;&nbsp;{{auth()->user()->getFullName()}}</a>
+                        <a class="dropdown-item" href="" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                            <i class="fa fa-power-off"></i>&nbsp;&nbsp;
+                            Déconnexion
+                        </a>
+                    </div>
+                    <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
+                        @csrf
+                    </form>
                 </div>
 
 
