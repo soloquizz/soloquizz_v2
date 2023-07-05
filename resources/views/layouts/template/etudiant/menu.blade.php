@@ -14,16 +14,10 @@
                         <a href="{{route('etudiant.index')}}" class="nav-link">Tableau de Bord</a>
                     </li>
                     <li class="nav-item {{ Request::is('etudiant/cours*') ? 'active' : '' }}">
-                        <a href="#" class="nav-link">Cours</a>
+                        <a href="{{route('etudiant.cours')}}" class="nav-link">Cours</a>
                     </li>
                     <li class="nav-item {{ Request::is('etudiant/devoir*') ? 'active' : '' }}">
-                        <a href="#" class="nav-link">Exercices</a>
-                    </li>
-                    <li class="nav-item {{ Request::is('etudiant/devoir*') ? 'active' : '' }}">
-                        <a href="#" class="nav-link">Devoirs</a>
-                    </li>
-                    <li class="nav-item {{ Request::is('etudiant/examen*') ? 'active' : '' }}">
-                        <a href="#" class="nav-link">Examens</a>
+                        <a href="#" class="nav-link">Evaluations</a>
                     </li>
                     <li class="nav-item {{ Request::is('etudiant/certifications*') ? 'active' : '' }}">
                         <a href="{{route('etudiant.certifications')}}" class="nav-link">Certifications</a>

@@ -70,6 +70,9 @@
                             <a href="{{route('admin.classes.edit', $classe->id)}}">
                                 <i class="fa fa-edit text-warning mr-1" title="Mofification"></i>
                             </a>
+                            <a href="{{route('admin.classes.show', $classe->id)}}">
+                                <i class="fa fa-eye text-info mr-1" title="Détail Classe"></i>
+                            </a>
                         </td>
                     </tr>
                 @endforeach

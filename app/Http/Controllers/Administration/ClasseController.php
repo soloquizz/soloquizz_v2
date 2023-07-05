@@ -93,7 +93,7 @@ class ClasseController extends AppBaseController
             return redirect(route('administration.classes.index'));
         }
 
-        return view('administration.classes.show')->with('classe', $classe);
+        return view('template.administration.classes.show')->with('classe', $classe);
     }
 
     /**

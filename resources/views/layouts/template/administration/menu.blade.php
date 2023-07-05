@@ -30,6 +30,7 @@
                             <a class="dropdown-item {{ Request::is(['admin/domaines*']) ? 'active' : '' }}" href="{{route('admin.domaines.index')}}">Domaines</a>
                             <a class="dropdown-item {{ Request::is(['admin/parcours*']) ? 'active' : '' }}" href="{{route('admin.parcours.index')}}">Parcours</a>
                             <a class="dropdown-item {{ Request::is(['admin/niveaux*']) ? 'active' : '' }}" href="{{route('admin.niveaux.index')}}">Niveaux</a>
+                            <a class="dropdown-item {{ Request::is(['admin/semestres*']) ? 'active' : '' }}" href="{{route('admin.semestres.index')}}">Semestres</a>
                             <a class="dropdown-item {{ Request::is(['admin/anneeScolaires*']) ? 'active' : '' }}" href="{{route('admin.anneeScolaires.index')}}">Année Scolaires</a>
                         </div>
                     </li>

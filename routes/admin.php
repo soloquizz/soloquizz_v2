@@ -31,6 +31,8 @@ Route::name('admin.')->prefix('admin')->middleware(['auth'])->group(function () 
 
     Route::resource('classes', App\Http\Controllers\Administration\ClasseController::class);
 
+    Route::resource('semestres', App\Http\Controllers\Administration\SemestreController::class);
+
     Route::resource('etudiants', App\Http\Controllers\Administration\EtudiantController::class);
     Route::get('etudiants-edit-inscription/{inscription_id}',[App\Http\Controllers\Administration\EtudiantController::class,'editInscription'])->name('etudiants.edit_inscription');
 

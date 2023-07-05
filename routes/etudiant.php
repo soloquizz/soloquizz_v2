@@ -18,7 +18,8 @@ Route::name('etudiant.')->prefix('etudiant')->middleware(['auth'])->group(functi
     Route::get('/',[App\Http\Controllers\Etudiant\EtudiantController::class,'index'])->name('index');
 
     //Cours
-    Route::get('/cours',[App\Http\Controllers\Etudiant\EtudiantController::class,'cours'])->name('cours');
+    Route::get('/cours',[App\Http\Controllers\Etudiant\CourController::class,'index'])->name('cours');
+    Route::get('/cours-show/{cours_id}',[App\Http\Controllers\Etudiant\CourController::class,'show'])->name('cours.show');
 
     //Certification
     Route::get('/certifications',[App\Http\Controllers\Etudiant\CertificationController::class,'index'])->name('certifications');
