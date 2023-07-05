@@ -26,7 +26,6 @@ Homestead.json
 .phpunit.result.cache
 storage/app/public
 composer.lock
-storage
 app/Http/Middleware/CASLocalAuth.php
 
 .idea
