@@ -70,6 +70,6 @@ class User extends Authenticatable
 
     public function getFullName()
     {
-        return $this->personne()?->prenom.' '.$this->personne()?->nom;
+        return $this->personne()->prenom.' '.$this->personne()->nom;
     }
 }
