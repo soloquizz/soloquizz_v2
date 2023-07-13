@@ -31,7 +31,9 @@
 
                 <!-- Nombre d'éléments -->
                 <div class="col-sm-4">
-                    <h3 class="content-header-title">Nombre de certifications {{$certifications->count()}}</h3>
+                    <h3 class="content-header-title">Nombre de certifications
+                        <div class="badge badge-glow badge-pill badge-info">{{$certifications->count()}}</div>
+                    </h3>
                 </div>
 
                 <!-- Bouton -->

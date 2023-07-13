@@ -38,7 +38,7 @@ return [
     'digits_between'       => 'Le champ :attribute doit contenir entre :min et :max chiffres.',
     'dimensions'           => "La taille de l'image :attribute n'est pas conforme.",
     'distinct'             => 'Le champ :attribute a une valeur en double.',
-    'email'                => 'Le champ :attribute doit être une adresse email valide.',
+    'emails'                => 'Le champ :attribute doit être une adresse emails valide.',
     'exists'               => 'Le champ :attribute sélectionné est invalide.',
     'file'                 => 'Le champ :attribute doit être un fichier.',
     'filled'               => 'Le champ :attribute doit avoir une valeur.',
@@ -139,14 +139,14 @@ return [
     |
     | The following language lines are used to swap attribute place-holders
     | with something more reader friendly such as E-Mail Address instead
-    | of "email". This simply helps us make messages a little cleaner.
+    | of "emails". This simply helps us make messages a little cleaner.
     |
     */
 
     'attributes' => [
         'name'                  => 'nom',
         'username'              => "nom d'utilisateur",
-        'email'                 => 'adresse email',
+        'emails'                 => 'adresse emails',
         'first_name'            => 'prénom',
         'last_name'             => 'nom',
         'password'              => 'mot de passe',

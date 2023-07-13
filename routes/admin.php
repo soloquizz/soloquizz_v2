@@ -33,6 +33,12 @@ Route::name('admin.')->prefix('admin')->middleware(['auth'])->group(function () 
 
     Route::resource('semestres', App\Http\Controllers\Administration\SemestreController::class);
 
+    Route::resource('cours', App\Http\Controllers\Administration\CoursController::class);
+
+    Route::post('cours-enseignant-store',[App\Http\Controllers\Administration\CoursController::class,'enseignant_store'])->name('cours.enseignant_store');
+
+    Route::resource('enseignants', App\Http\Controllers\Administration\EnseignantController::class);
+
     Route::resource('etudiants', App\Http\Controllers\Administration\EtudiantController::class);
     Route::get('etudiants-edit-inscription/{inscription_id}',[App\Http\Controllers\Administration\EtudiantController::class,'editInscription'])->name('etudiants.edit_inscription');
 

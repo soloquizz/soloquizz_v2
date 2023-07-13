@@ -71,12 +71,22 @@ class LoginController extends Controller
                 return redirect(route('etudiant.index'));
             }
 
+            if ($user->personne_type == 'Enseignant')
+            {
+                return redirect(route('enseignant.index'));
+            }
+
         }
         else{
             $this->incrementLoginAttempts($request);
 
             return $this->sendFailedLoginResponse($request);
         }
+    }
+
+    public function username()
+    {
+        return 'email';
     }
 
 }

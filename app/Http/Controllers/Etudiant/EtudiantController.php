@@ -9,7 +9,8 @@ class EtudiantController extends Controller
 {
     public function index()
     {
-        return view('template.etudiant.index');
+        return redirect(route('etudiant.cours'));
+        //return view('template.etudiant.index');
     }
 
     public function cours()

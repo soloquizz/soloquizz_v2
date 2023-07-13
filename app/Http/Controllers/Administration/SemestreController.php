@@ -8,6 +8,7 @@ use App\Repositories\Administration\SemestreRepository;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
 use Flash;
+use RealRashid\SweetAlert\Facades\Alert;
 use Response;
 
 class SemestreController extends AppBaseController
@@ -25,20 +26,19 @@ class SemestreController extends AppBaseController
      *
      * @param Request $request
      *
-     * @return Response
+     * @return
      */
     public function index(Request $request)
     {
         $semestres = $this->semestreRepository->all();
 
-        return view('administration.semestres.index')
-            ->with('semestres', $semestres);
+        return view('template.administration.semestres.index',compact('semestres'));
     }
 
     /**
      * Show the form for creating a new Semestre.
      *
-     * @return Response
+     * @return
      */
     public function create()
     {
@@ -50,7 +50,7 @@ class SemestreController extends AppBaseController
      *
      * @param CreateSemestreRequest $request
      *
-     * @return Response
+     * @return
      */
     public function store(CreateSemestreRequest $request)
     {
@@ -58,9 +58,9 @@ class SemestreController extends AppBaseController
 
         $semestre = $this->semestreRepository->create($input);
 
-        Flash::success('Semestre saved successfully.');
+        Alert::success('Succés','Semestre saved successfully.');
 
-        return redirect(route('administration.semestres.index'));
+        return redirect(route('admin.semestres.index'));
     }
 
     /**
@@ -68,11 +68,11 @@ class SemestreController extends AppBaseController
      *
      * @param int $id
      *
-     * @return Response
+     * @return
      */
     public function show($id)
     {
-        $semestre = $this->semestreRepository->find($id);
+        /*$semestre = $this->semestreRepository->find($id);
 
         if (empty($semestre)) {
             Flash::error('Semestre not found');
@@ -80,7 +80,7 @@ class SemestreController extends AppBaseController
             return redirect(route('administration.semestres.index'));
         }
 
-        return view('administration.semestres.show')->with('semestre', $semestre);
+        return view('administration.semestres.show')->with('semestre', $semestre);*/
     }
 
     /**
@@ -88,19 +88,19 @@ class SemestreController extends AppBaseController
      *
      * @param int $id
      *
-     * @return Response
+     * @return
      */
     public function edit($id)
     {
         $semestre = $this->semestreRepository->find($id);
 
         if (empty($semestre)) {
-            Flash::error('Semestre not found');
+            Alert::error('Error','Semestre not found');
 
             return redirect(route('administration.semestres.index'));
         }
 
-        return view('administration.semestres.edit')->with('semestre', $semestre);
+        return view('template.administration.semestres.edit',compact('semestre'));
     }
 
     /**
@@ -109,23 +109,23 @@ class SemestreController extends AppBaseController
      * @param int $id
      * @param UpdateSemestreRequest $request
      *
-     * @return Response
+     * @return
      */
     public function update($id, UpdateSemestreRequest $request)
     {
         $semestre = $this->semestreRepository->find($id);
 
         if (empty($semestre)) {
-            Flash::error('Semestre not found');
+            Alert::error('Error','Semestre not found');
 
             return redirect(route('administration.semestres.index'));
         }
 
         $semestre = $this->semestreRepository->update($request->all(), $id);
 
-        Flash::success('Semestre updated successfully.');
+        Alert::success('Sucés','Semestre updated successfully.');
 
-        return redirect(route('administration.semestres.index'));
+        return redirect(route('admin.semestres.index'));
     }
 
     /**
@@ -135,22 +135,22 @@ class SemestreController extends AppBaseController
      *
      * @throws \Exception
      *
-     * @return Response
+     * @return
      */
     public function destroy($id)
     {
         $semestre = $this->semestreRepository->find($id);
 
         if (empty($semestre)) {
-            Flash::error('Semestre not found');
+            Alert::error('Error','Semestre not found');
 
             return redirect(route('administration.semestres.index'));
         }
 
         $this->semestreRepository->delete($id);
 
-        Flash::success('Semestre deleted successfully.');
+        Alert::success('Succès','Semestre deleted successfully.');
 
-        return redirect(route('administration.semestres.index'));
+        return redirect(route('admin.semestres.index'));
     }
 }

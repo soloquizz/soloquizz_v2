@@ -52,6 +52,10 @@ class User extends Authenticatable
             return Etudiant::find($this->personne_id);
         }
 
+        if ($this->personne_type == 'Enseignant'){
+            return Enseignant::find($this->personne_id);
+        }
+
     }
 
     public function etudiant()
@@ -59,8 +63,13 @@ class User extends Authenticatable
         return Etudiant::find($this->personne_id);
     }
 
+    public function enseignant()
+    {
+        return Enseignant::find($this->personne_id);
+    }
+
     public function getFullName()
     {
-        return $this->personne()->prenom.' '.$this->personne()->nom;
+        return $this->personne()?->prenom.' '.$this->personne()?->nom;
     }
 }

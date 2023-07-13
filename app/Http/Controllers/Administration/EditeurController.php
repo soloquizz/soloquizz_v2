@@ -61,8 +61,8 @@ class EditeurController extends AppBaseController
         $logo = $request->logo;
 
         $fileName = $input['nom'] . '.' . $logo->getClientOriginalExtension();
-        Storage::delete('logo_editeur/' . $fileName);
-        $logo->storeAs('logo_editeur', $fileName);
+        Storage::delete('public/logo_editeur/' . $fileName);
+        $logo->storeAs('public/logo_editeur', $fileName);
 
         $input['logo'] = $fileName;
 

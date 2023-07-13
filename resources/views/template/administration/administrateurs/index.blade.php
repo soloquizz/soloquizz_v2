@@ -35,7 +35,9 @@
 
                 <!-- Nombre d'éléments -->
                 <div class="col-sm-4">
-                    <h3 class="content-header-title">Nombre d'administrateurs {{$administrateurs->count()}}</h3>
+                    <h4 class="content-header-title">Nombre d'administrateurs
+                        <div class="badge badge-glow badge-pill badge-info">{{$administrateurs->count()}}</div>
+                    </h4>
                 </div>
 
                 <!-- Buuton -->
@@ -98,8 +100,10 @@
 </div>
 @endsection
 
-<!-- Modal -->
-@include('template.administration.administrateurs.create')
+@section('modal')
+    <!-- Modal -->
+    @include('template.administration.administrateurs.create')
+    <!-- Modal -->
+@endsection
 
-<!-- Modal -->
 

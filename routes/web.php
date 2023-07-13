@@ -16,7 +16,9 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 
 Route::get('/', [App\Http\Controllers\IndexController::class,'index'])->name('welcome');
+Route::get('/test-smtp', [App\Http\Controllers\IndexController::class,'testSmtp']);
 
 @include('auth.php');
 @include('etudiant.php');
 @include('admin.php');
+@include('enseignant.php');

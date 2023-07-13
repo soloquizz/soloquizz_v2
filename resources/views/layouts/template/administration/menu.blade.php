@@ -8,13 +8,14 @@
             <div class="navbar-collapse__content pb-16pt pb-sm-0">
                 <ul class="nav navbar-nav">
                     <li class="nav-item {{ Request::is('admin') ? 'active' : '' }}">
-                        <a href="{{route('admin.index')}}" class="nav-link">Tableau de Bord</a>
+                        <a href="#" class="nav-link">Tableau de Bord</a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle {{ Request::is(['admin/administrateurs*','admin/etudiants*']) ? 'active' : '' }}" data-toggle="dropdown">Utilisateurs</a>
+                        <a href="#" class="nav-link dropdown-toggle {{ Request::is(['admin/administrateurs*','admin/etudiants*','admin/enseignants*']) ? 'active' : '' }}" data-toggle="dropdown">Utilisateurs</a>
                         <div class="dropdown-menu">
                             <a class="dropdown-item {{ Request::is(['admin/administrateurs*']) ? 'active' : '' }}" href="{{route('admin.administrateurs.index')}}">Administrateurs</a>
                             <a class="dropdown-item {{ Request::is(['admin/etudiants*']) ? 'active' : '' }}" href="{{route('admin.etudiants.index')}}">Étudiants</a>
+                            <a class="dropdown-item {{ Request::is(['admin/enseignants*']) ? 'active' : '' }}" href="{{route('admin.enseignants.index')}}">Enseignants</a>
                         </div>
                     </li>
                     <li class="nav-item dropdown">
@@ -25,7 +26,7 @@
                         </div>
                     </li>
                     <li class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle {{ Request::is(['admin/parcours*','admin/niveaux*','admin/domaines*','admin/anneeScolaires*']) ? 'active' : '' }}" data-toggle="dropdown">Paramétres</a>
+                        <a href="#" class="nav-link dropdown-toggle {{ Request::is(['admin/parcours*','admin/niveaux*','admin/domaines*','admin/anneeScolaires*','admin/semestres*']) ? 'active' : '' }}" data-toggle="dropdown">Paramétres</a>
                         <div class="dropdown-menu">
                             <a class="dropdown-item {{ Request::is(['admin/domaines*']) ? 'active' : '' }}" href="{{route('admin.domaines.index')}}">Domaines</a>
                             <a class="dropdown-item {{ Request::is(['admin/parcours*']) ? 'active' : '' }}" href="{{route('admin.parcours.index')}}">Parcours</a>
