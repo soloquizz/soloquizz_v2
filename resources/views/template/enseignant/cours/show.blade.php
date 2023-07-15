@@ -59,11 +59,11 @@
                                                         <div class="d-flex align-items-center">
                                                             <div class="rounded mr-16pt z-0 o-hidden">
                                                                 <div class="overlay">
-                                                            <span class="overlay__content overlay__content-transparent">
-                                                            <span class="overlay__action d-flex flex-column text-center lh-1">
-                                                                <small class="h6 small text-white mb-0" style="font-weight: 500;">80%</small>
-                                                            </span>
-                                                        </span>
+                                                                    <span class="overlay__content overlay__content-transparent">
+                                                                    <span class="overlay__action d-flex flex-column text-center lh-1">
+                                                                        <small class="h6 small text-white mb-0" style="font-weight: 500;">80%</small>
+                                                                    </span>
+                                                                    </span>
                                                                 </div>
                                                             </div>
                                                             <div class="flex">
@@ -74,32 +74,27 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <a href="path.html" class="ml-4pt btn btn-link text-secondary">Contenus</a>
+                                                    <a href="#" class="ml-4pt btn btn-link text-secondary">Terminée</a>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="popoverContainer d-none">
-                                            <div class="card-header">
-                                                <a href="" class="fa-pull-right"><i class="fa fa-edit text-info text-70"></i></a>
-                                            </div>
                                             <div class="row">
-                                                <div class="col-6">
-                                                    <h6>Ressource</h6>
-                                                    <a href="">
-                                                        <img height="40" src="{{asset('assets/images/icon/icone_pdf.png')}}">
-                                                        <a class="text-primary" href="">Support</a>
-                                                    </a>
-                                                </div>
-                                                <div class="col-6">
+                                                <div class="col-12">
                                                     <h6>Exercices</h6>
-                                                    <a class="text-primary" href="">18 questions</a>
-                                                    <div class="text-muted d-flex lh-1">12/20</div>
+                                                    <ul class="list-unstyled collapse show" id="toc-content-1">
+                                                        <li class="accordion__menu-link">
+                                                            <span class="material-icons icon-16pt icon--left text-body">check_circle</span>
+                                                            <a class="flex" href="student-take-lesson.html">Introduction</a>
+                                                            <span class="text-muted">8m 42s</span>
+                                                        </li>
+                                                    </ul>
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-12">
                                                     <span class="h6">Lien cours en ligne</span>
-                                                    <a class="text-primary" target="_blank" href="https://meet.google.com/iek-quua-yiy">https://meet.google.com/iek-quua-yiy</a>
+                                                    <a class="text-primary" target="_blank" href="{{$seance->lien}}">{{$seance->lien}}</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -109,66 +104,44 @@
                         </div>
                         <div class="tab-pane " id="ressources">
                             <div class="row">
-                                <div class="col-3">
-                                    <div class="card text-center">
-                                        <a href="">
-                                            <img height="100" src="{{asset('assets/images/icon/icone_pdf.png')}}">
-                                        </a>
-                                        <div class="card-footer">
-                                            <a href="student-billing-invoice.html">Introduction à la <i class="icon--right material-icons">file_download</i></a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-3">
-                                    <div class="card text-center">
-                                        <a href="">
-                                            <img height="100" src="{{asset('assets/images/icon/word_icone.png')}}">
-                                        </a>
-                                        <div class="card-footer">
-                                            Les bases de Java <i class="icon--right material-icons">file_download</i>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-3">
-                                    <div class="card text-center">
-                                        <a href="">
-                                            <img height="100" src="{{asset('assets/images/icon/video_icone.png')}}">
-                                        </a>
-                                        <div class="card-footer">
-                                            Les bases de Java <i class="icon--right material-icons">file_download</i>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-3">
-                                    <div class="card text-center">
-                                        <a href="">
-                                            <img height="100" src="{{asset('assets/images/icon/video_icone.png')}}">
-                                        </a>
-                                        <div class="card-footer">
-                                            Les bases de Java <i class="icon--right material-icons">file_download</i>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-3">
-                                    <div class="card text-center">
-                                        <a href="">
-                                            <img height="100" src="{{asset('assets/images/icon/video_icone.png')}}">
-                                        </a>
-                                        <div class="card-footer">
-                                            Les bases de Java <i class="icon--right material-icons">file_download</i>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-3">
-                                    <div class="card text-center">
-                                        <a href="">
-                                            <img height="100" src="{{asset('assets/images/icon/video_icone.png')}}">
-                                        </a>
-                                        <div class="card-footer">
-                                            Les bases de Java <i class="icon--right material-icons">file_download</i>
-                                        </div>
-                                    </div>
-                                </div>
+                                @foreach($cours->supports as $support)
+                                    @foreach($support->getMedia('supports') as $media)
+                                        @if(Str::endsWith($media->getFullUrl(), '.pdf'))
+                                            <div class="col-3">
+                                                <div class="card text-center">
+                                                    <a href="{{$media->getFullUrl()}}">
+                                                        <img height="100" src="{{asset('assets/images/icon/icone_pdf.png')}}">
+                                                    </a>
+                                                    <div class="card-footer">
+                                                        <a title="{{$support->file_name}}" target="_blank" href="{{$media->getFullUrl()}}">{{mb_strimwidth($support->file_name, 0, 15, "...")}} <i class="icon--right material-icons">file_download</i></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @elseif(Str::endsWith($media->getFullUrl(), '.docx'))
+                                            <div class="col-3">
+                                                <div class="card text-center">
+                                                    <a href="{{$media->getFullUrl()}}">
+                                                        <img height="100" src="{{asset('assets/images/icon/word_icone.png')}}">
+                                                    </a>
+                                                    <div class="card-footer">
+                                                        <a title="{{$support->file_name}}" target="_blank" href="{{$media->getFullUrl()}}">{{mb_strimwidth($support->file_name, 0, 15, "...")}} <i class="icon--right material-icons">file_download</i></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @else
+                                            <div class="col-3">
+                                                <div class="card text-center">
+                                                    <a href="{{$media->getFullUrl()}}">
+                                                        <img height="100" src="{{asset('assets/images/icon/video_icone.png')}}">
+                                                    </a>
+                                                    <div class="card-footer">
+                                                        <a title="{{$support->file_name}}" target="_blank" href="{{$media->getFullUrl()}}">{{mb_strimwidth($support->file_name, 0, 15, "...")}} <i class="icon--right material-icons">file_download</i></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @endif
+                                    @endforeach
+                                @endforeach
                             </div>
                         </div>
                         <div class="tab-pane" id="td">

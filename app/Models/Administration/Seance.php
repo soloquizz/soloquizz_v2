@@ -44,6 +44,7 @@ class Seance extends Model
         'heure_debut',
         'heure_fin',
         'duree',
+        'lien',
         'cours_id',
         'enseignant_id'
     ];
@@ -59,6 +60,7 @@ class Seance extends Model
         'date' => 'date',
         'heure_debut' => 'string',
         'heure_fin' => 'string',
+        'lien' => 'string',
         'duree' => 'integer',
         'cours_id' => 'integer',
         'enseignant_id' => 'integer'

@@ -26,13 +26,11 @@ use Spatie\MediaLibrary\InteractsWithMedia;
  * @property integer $classe_id
  * @property integer $semestre_id
  */
-class Cours extends Model implements HasMedia
+class Cours extends Model
 {
     use SoftDeletes;
 
     use HasFactory;
-
-    use InteractsWithMedia;
 
     public $table = 'cours';
     
@@ -146,5 +144,14 @@ class Cours extends Model implements HasMedia
     public function enseignant()
     {
         return $this->belongsTo(\App\Models\Administration\Enseignant::class, 'enseignant_id');
+    }
+
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     **/
+    public function supports()
+    {
+        return $this->hasMany(\App\Models\Administration\Support::class, 'cours_id');
     }
 }

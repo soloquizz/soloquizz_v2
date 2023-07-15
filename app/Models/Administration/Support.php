@@ -5,6 +5,8 @@ namespace App\Models\Administration;
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
 /**
  * Class Support
@@ -15,9 +17,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  * @property string $file_name
  * @property integer $cours_id
  */
-class Support extends Model
+class Support extends Model implements HasMedia
 {
     use SoftDeletes;
+
+    use InteractsWithMedia;
 
     use HasFactory;
 
@@ -33,7 +37,9 @@ class Support extends Model
 
     public $fillable = [
         'file_name',
-        'cours_id'
+        'cours_id',
+        'enseignant_id',
+        'seance_id'
     ];
 
     /**

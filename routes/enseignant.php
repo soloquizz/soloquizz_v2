@@ -20,6 +20,7 @@ Route::name('enseignant.')->prefix('enseignant')->middleware(['auth'])->group(fu
     //Cours
     Route::get('/cours',[App\Http\Controllers\Enseignant\CoursController::class,'index'])->name('cours');
     Route::get('/cours-show/{cours_id}',[App\Http\Controllers\Enseignant\CoursController::class,'show'])->name('cours.show');
+    Route::post('cours-store-support',[App\Http\Controllers\Enseignant\CoursController::class,'storeSupport'])->name('cours.store.support');
 
 
     //Séances

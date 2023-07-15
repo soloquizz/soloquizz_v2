@@ -50,6 +50,12 @@
                                         </label>
                                         <input type="number" name="duree" required class="form-control">
                                     </div>
+                                    <div class="col-12 col-md-6 mb-3">
+                                        <label class="form-label">Lien
+                                            <span class="text-danger">*</span>
+                                        </label>
+                                        <input type="text" name="lien" required class="form-control">
+                                    </div>
                                 </div>
                             </div>
                         </div>
