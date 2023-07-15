@@ -87,6 +87,6 @@ class Niveau extends Model
      **/
     public function classes()
     {
-        return $this->hasMany(\App\Models\Administration\Class::class, 'niveau_id');
+        return $this->hasMany(\App\Models\Administration\Classe::class, 'niveau_id');
     }
 }

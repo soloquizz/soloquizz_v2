@@ -31,7 +31,9 @@
 
                 <!-- Nombre d'éléments -->
                 <div class="col-sm-4">
-                    <h3 class="content-header-title">Nombre de domaines {{$domaines->count()}}</h3>
+                    <h4 class="content-header-title">Nombre de domaines
+                        <div class="badge badge-glow badge-pill badge-info">{{$domaines->count()}}</div>
+                    </h4>
                 </div>
 
                 <!-- Bouton -->
@@ -80,8 +82,8 @@
 </div>
 @endsection
 
-<!-- Modal -->
-@include('template.administration.domaines.create')
-
-<!-- Modal -->
-
+@section('modal')
+    <!-- Modal -->
+    @include('template.administration.domaines.create')
+    <!-- Modal -->
+@endsection

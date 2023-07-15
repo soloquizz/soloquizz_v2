@@ -62,7 +62,7 @@ class Parcours extends Model
      **/
     public function classes()
     {
-        return $this->hasMany(\App\Models\Administration\Class::class, 'parcour_id');
+        return $this->hasMany(\App\Models\Administration\Classe::class, 'parcour_id');
     }
 
     /**

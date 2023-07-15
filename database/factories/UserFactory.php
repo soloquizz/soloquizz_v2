@@ -22,7 +22,7 @@ class UserFactory extends Factory
     public function definition()
     {
         return [
-            'email' => $this->faker->word,
+            'emails' => $this->faker->word,
         'email_verified_at' => $this->faker->date('Y-m-d H:i:s'),
         'password' => $this->faker->word,
         'user_type' => $this->faker->word,

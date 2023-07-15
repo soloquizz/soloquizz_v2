@@ -31,7 +31,9 @@
 
                 <!-- Nombre d'éléments -->
                 <div class="col-sm-4">
-                    <h3 class="content-header-title">Nombre d'editeurs {{$editeurs->count()}}</h3>
+                    <h4 class="content-header-title">Nombre d'editeurs
+                        <div class="badge badge-glow badge-pill badge-info">{{$editeurs->count()}}</div>
+                    </h4>
                 </div>
 
                 <!-- Bouton -->
@@ -82,8 +84,8 @@
 </div>
 @endsection
 
-<!-- Modal -->
-@include('template.administration.editeurs.create')
-
-<!-- Modal -->
-
+@section('modal')
+    <!-- Modal -->
+    @include('template.administration.editeurs.create')
+    <!-- Modal -->
+@endsection

@@ -20,9 +20,9 @@
             <div class="page-section">
                 <div class="page-heading">
                     <span class="mr-16pt">
-                        <img src="{{$editeur->image()}}" width="40" alt="Angular Fundamentals" class="rounded">
+                        <img src="{{$cours->image()}}" width="40" alt="Angular Fundamentals" class="rounded">
                     </span>
-                    <h4>Développement Web</h4>
+                    <h4>{{$cours->nom}}</h4>
                 </div>
                 <div class="container card bg-white page__container page-section">
                     <ul class="nav nav-tabs nav-tabs-card">
@@ -42,54 +42,61 @@
                     <div class="card-body tab-content">
                         <div class="tab-pane active" id="seances">
                             <div class="row">
-                                <div class="col-sm-6">
-                                    <div class="card card-path js-overlay stack stack--1 " data-toggle="popover" data-trigger="click">
-                                        <div class="card-body">
-                                            <div class="d-flex align-items-center">
-                                                <div class="flex">
-                                                    <div class="d-flex align-items-center">
-                                                        <div class="rounded mr-16pt z-0 o-hidden">
-                                                            <div class="overlay">
+                                @foreach($cours->seances as $seance)
+                                    <div class="col-sm-6">
+                                        <div class="card card-path js-overlay stack stack--1 " data-toggle="popover" data-trigger="click">
+                                            <div class="card-body">
+                                                <div class="d-flex align-items-center">
+                                                    <div class="flex">
+                                                        <div class="d-flex align-items-center">
+                                                            <div class="rounded mr-16pt z-0 o-hidden">
+                                                                <div class="overlay">
                                                             <span class="overlay__content overlay__content-transparent">
                                                             <span class="overlay__action d-flex flex-column text-center lh-1">
                                                                 <small class="h6 small text-white mb-0" style="font-weight: 500;">80%</small>
                                                             </span>
                                                         </span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="flex">
+                                                                <div class="card-title text-body mb-0">{{$seance->titre}}</div>
+                                                                <div class="text-muted d-flex lh-1">
+                                                                    {{date('d-m-Y', strtotime($seance->date)) }} entre {{$seance->heure_debut}} - {{$seance->heure_fin}}
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                        <div class="flex">
-                                                            <div class="card-title text-body mb-0">Les bases de la programmation en JAVA</div>
-                                                            <div class="text-muted d-flex lh-1">24-06-2023 à 10h-12h</div>
-                                                        </div>
                                                     </div>
+                                                    <a href="path.html" class="ml-4pt btn btn-link text-secondary">Contenus</a>
                                                 </div>
-                                                <a href="path.html" class="ml-4pt btn btn-link text-secondary">Ressources</a>
+                                            </div>
+                                        </div>
+                                        <div class="popoverContainer d-none">
+                                            <div class="card-header">
+                                                <a href="" class="fa-pull-right"><i class="fa fa-edit text-info text-70"></i></a>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <h6>Ressource</h6>
+                                                    <a href="">
+                                                        <img height="40" src="{{asset('assets/images/icon/icone_pdf.png')}}">
+                                                        <a class="text-primary" href="">Support</a>
+                                                    </a>
+                                                </div>
+                                                <div class="col-6">
+                                                    <h6>Exercices</h6>
+                                                    <a class="text-primary" href="">18 questions</a>
+                                                    <div class="text-muted d-flex lh-1">12/20</div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <span class="h6">Lien cours en ligne</span>
+                                                    <a class="text-primary" target="_blank" href="https://meet.google.com/iek-quua-yiy">https://meet.google.com/iek-quua-yiy</a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="popoverContainer d-none">
-                                        <div class="row">
-                                            <div class="col-6">
-                                                <h6>Ressource</h6>
-                                                <a href="">
-                                                    <img height="40" src="{{asset('assets/images/icon/icone_pdf.png')}}">
-                                                    <a class="text-primary" href="">Support</a>
-                                                </a>
-                                            </div>
-                                            <div class="col-6">
-                                                <h6>Exercices</h6>
-                                                <a class="text-primary" href="">18 questions</a>
-                                                <div class="text-muted d-flex lh-1">12/20</div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-12">
-                                                <span class="h6">Lien cours en ligne</span>
-                                                <a class="text-primary" target="_blank" href="https://meet.google.com/iek-quua-yiy">https://meet.google.com/iek-quua-yiy</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                @endforeach
                             </div>
                         </div>
                         <div class="tab-pane " id="ressources">
