@@ -31,7 +31,9 @@
 
                 <!-- Nombre d'éléments -->
                 <div class="col-sm-4">
-                    <h3 class="content-header-title">Nombre de parcours {{$parcours->count()}}</h3>
+                    <h4 class="content-header-title">Nombre de parcours
+                        <div class="badge badge-glow badge-pill badge-info">{{$parcours->count()}}</div>
+                    </h4>
                 </div>
 
                 <!-- Bouton -->
@@ -80,8 +82,8 @@
 </div>
 @endsection
 
-<!-- Modal -->
-@include('template.administration.parcours.create')
-
-<!-- Modal -->
-
+@section('modal')
+    <!-- Modal -->
+    @include('template.administration.parcours.create')
+    <!-- Modal -->
+@endsection

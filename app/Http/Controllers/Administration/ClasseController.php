@@ -4,11 +4,14 @@ namespace App\Http\Controllers\Administration;
 
 use App\Http\Requests\Administration\CreateClasseRequest;
 use App\Http\Requests\Administration\UpdateClasseRequest;
+use App\Repositories\Administration\AnneeScolaireRepository;
 use App\Repositories\Administration\ClasseRepository;
 use App\Http\Controllers\AppBaseController;
 use App\Repositories\Administration\DomaineRepository;
+use App\Repositories\Administration\EnseignantRepository;
 use App\Repositories\Administration\NiveauRepository;
 use App\Repositories\Administration\ParcoursRepository;
+use App\Repositories\Administration\SemestreRepository;
 use Illuminate\Http\Request;
 use Flash;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -21,13 +24,17 @@ class ClasseController extends AppBaseController
     private $niveauRepository;
     private $parcourRepository;
     private $domaineRepository;
+    private $semestrerepository;
 
-    public function __construct(ClasseRepository $classeRepo, NiveauRepository $niveauRepo, ParcoursRepository $parcourRepo, DomaineRepository $domaineRepo)
+    public function __construct(ClasseRepository $classeRepo, NiveauRepository $niveauRepo, ParcoursRepository $parcourRepo, DomaineRepository $domaineRepo,
+                                SemestreRepository $semestrerepo
+    )
     {
         $this->classeRepository = $classeRepo;
         $this->niveauRepository = $niveauRepo;
         $this->parcourRepository = $parcourRepo;
         $this->domaineRepository = $domaineRepo;
+        $this->semestrerepository = $semestrerepo;
     }
 
     /**
@@ -93,7 +100,9 @@ class ClasseController extends AppBaseController
             return redirect(route('administration.classes.index'));
         }
 
-        return view('template.administration.classes.show')->with('classe', $classe);
+        $semestres = $this->semestrerepository->all();
+
+        return view('template.administration.classes.show',compact('semestres','classe'));
     }
 
     /**

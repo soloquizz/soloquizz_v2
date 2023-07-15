@@ -19,6 +19,8 @@ class CreateEvaluationsTable extends Migration
             $table->enum('type',['Devoir','Examen']);
             $table->integer('note_max');
             $table->date('date');
+            $table->date('heure');
+            $table->string('duree');
             $table->boolean('etat');
             $table->timestamps();
             $table->softDeletes();

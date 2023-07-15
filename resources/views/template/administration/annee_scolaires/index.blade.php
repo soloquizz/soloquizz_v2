@@ -31,7 +31,9 @@
 
                 <!-- Nombre d'éléments -->
                 <div class="col-sm-4">
-                    <h3 class="content-header-title">Nombre d'années universitaires {{$anneeScolaires->count()}}</h3>
+                    <h4 class="content-header-title">Nombre d'années universitaires
+                        <div class="badge badge-glow badge-pill badge-info">{{$anneeScolaires->count()}}</div>
+                    </h4>
                 </div>
 
                 <!-- Bouton -->
@@ -90,8 +92,8 @@
 </div>
 @endsection
 
-<!-- Modal -->
-@include('template.administration.annee_scolaires.create')
-
-<!-- Modal -->
-
+@section('modal')
+    <!-- Modal -->
+    @include('template.administration.annee_scolaires.create')
+    <!-- Modal -->
+@endsection

@@ -61,6 +61,6 @@ class Domaine extends Model
      **/
     public function classes()
     {
-        return $this->hasMany(\App\Models\Administration\Class::class, 'domaine_id');
+        return $this->hasMany(\App\Models\Administration\Classe::class, 'domaine_id');
     }
 }

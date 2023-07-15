@@ -7,7 +7,7 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <!-- Navbar Brand -->
-            <a href="{{ url('/etudiant') }}" class="navbar-brand">
+            <a href="{{ route('admin.index') }}" class="navbar-brand">
                 <img class="navbar-brand-icon mr-0 mr-md-8pt" src="{{asset('/assets/images/logo/Soloquizz.png')}}" width="150" alt="Tutorio">
                 <span class="d-none d-md-block"></span>
             </a>
