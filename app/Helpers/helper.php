@@ -2,6 +2,7 @@
 
 use \App\Models\Administration\Etudiant;
 use \App\Models\Administration\Certification;
+use \App\Models\Administration\Classe;
 
 if (!function_exists('getNbreEtudiants')) {
     function getNbreEtudiants()
@@ -20,7 +21,7 @@ if (!function_exists('getNbreCertifications')) {
 if (!function_exists('getNbreClasses')) {
     function getNbreClasses()
     {
-        return Certification::count();
+        return Classe::count();
     }
 }
 

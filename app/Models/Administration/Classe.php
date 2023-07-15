@@ -102,4 +102,9 @@ class Classe extends Model
     {
         return $this->hasMany(\App\Models\Administration\Inscription::class, 'classe_id');
     }
+
+    public function cours()
+    {
+        return $this->hasMany(\App\Models\Administration\Cours::class, 'classe_id');
+    }
 }

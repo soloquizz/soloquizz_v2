@@ -16,8 +16,9 @@ class CreateSeancesTable extends Migration
         Schema::create('seances', function (Blueprint $table) {
             $table->id();
             $table->string('titre');
-            $table->date('date_debut');
-            $table->date('date_fin');
+            $table->date('date');
+            $table->string('heure_debut');
+            $table->string('heure_fin');
             $table->integer('duree');
             $table->timestamps();
             $table->softDeletes();

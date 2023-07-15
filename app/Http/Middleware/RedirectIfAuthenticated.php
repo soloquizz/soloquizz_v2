@@ -23,10 +23,32 @@ class RedirectIfAuthenticated
 
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->check()) {
-                return redirect(RouteServiceProvider::HOME);
+                return redirect($this->getHome());
             }
         }
 
         return $next($request);
     }
+
+    private function getHome():String
+    {
+        $user = auth()->user();
+
+        if ($user->personne_type == 'Administrateur')
+        {
+            return '/admin';
+        }
+        if ($user->personne_type == 'Etudiant')
+        {
+            return '/etudiant';
+        }
+
+        if ($user->personne_type == 'Enseignant')
+        {
+            return '/enseignant';
+        }
+
+        return '';
+    }
+
 }

@@ -52,11 +52,20 @@ class User extends Authenticatable
             return Etudiant::find($this->personne_id);
         }
 
+        if ($this->personne_type == 'Enseignant'){
+            return Enseignant::find($this->personne_id);
+        }
+
     }
 
     public function etudiant()
     {
         return Etudiant::find($this->personne_id);
+    }
+
+    public function enseignant()
+    {
+        return Enseignant::find($this->personne_id);
     }
 
     public function getFullName()

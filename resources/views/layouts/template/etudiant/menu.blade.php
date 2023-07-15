@@ -11,7 +11,7 @@
                 <ul class="nav navbar-nav">
 
                     <li class="nav-item {{ Request::is('etudiant') ? 'active' : '' }}">
-                        <a href="{{route('etudiant.index')}}" class="nav-link">Tableau de Bord</a>
+                        <a href="#" class="nav-link">Tableau de Bord</a>
                     </li>
                     <li class="nav-item {{ Request::is('etudiant/cours*') ? 'active' : '' }}">
                         <a href="{{route('etudiant.cours')}}" class="nav-link">Cours</a>
