@@ -47,15 +47,8 @@ class DumpController extends Controller
             $duree = $dump->duree;
         }
         else{
-            $questions = $certification->questions->filter(function ($question){
-                $etudiant_questions = EtudiantQuestion::where('question_id',$question->id)->get();
-                foreach ($etudiant_questions as $etudiant_question){
-                    if ($etudiant_question->trouve)
-                        return false;
-                }
-                return true;
-            });
-
+            $etudiant_questions_true = DumpUserQuestion::where('user_id',$user->id)->where('trouve',1)->pluck('question_id')->toArray();
+            $questions = $certification->questions->whereNotIn('id',$etudiant_questions_true);
             if($questions->count() > $certification->nbre_qa){
                 $questions = $questions->random($certification->nbre_qa);
             }
@@ -103,7 +96,8 @@ class DumpController extends Controller
         $dump_user = DumpUser::find($dump_user_id);
         $dump = $dump_user->dump;
         $certification = $dump->certification;
-        return view('template.etudiant.dumps.dump_resultat',compact('dump_user','dump','certification'));
+        $dumpUsers = $certification->dumpUsers;
+        return view('template.etudiant.dumps.dump_resultat',compact('dump_user','dump','certification','dumpUsers'));
     }
 
     public function store(Request $request)
