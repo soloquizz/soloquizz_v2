@@ -2,6 +2,10 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\CheckAdmin;
+use App\Http\Middleware\CheckCurrentDump;
+use App\Http\Middleware\CheckEnseignant;
+use App\Http\Middleware\CheckEtudiant;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -63,5 +67,10 @@ class Kernel extends HttpKernel
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+        //Custom MiddleWare
+        'check.current.dump'=> CheckCurrentDump::class,
+        'check.admin'=> CheckAdmin::class,
+        'check.etudiant'=> CheckEtudiant::class,
+        'check.enseignant'=> CheckEnseignant::class,
     ];
 }

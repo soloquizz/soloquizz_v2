@@ -21,14 +21,42 @@
             <div class="container page__container">
                 @if($dumpUsers->count()>0)
                     <ul class="nav navbar-nav flex align-items-sm-center">
-                        <li class="nav-item navbar-list__item">{{$dumpUsers->sum('score')}}/{{$certification->dumps->sum('score')}} Score</li>
-                        <li class="nav-item text-danger navbar-list__item">
-                            <i class="material-icons text-muted icon--left">assessment</i>
-                            {{ intval(($dumpUsers->sum('score')/$certification->dumps->sum('score'))*100)}}% Intermediaire
-                        </li>
+                        <li class="nav-item navbar-list__item">{{$dumpUsers->sum('score')}}/{{$certification->questions->sum('point')}} Score</li>
+
+                        @if($certification->dumps->sum('score')>0)
+                            @php
+                                $percent = intval(($dumpUsers->sum('score')/$certification->questions->sum('point'))*100);
+                            @endphp
+                            @if($percent<25)
+                                <li class="nav-item text-danger navbar-list__item">
+                                    <i class="material-icons text-muted icon--left">assessment</i>
+                                    {{ $percent}}% &nbsp;
+                                    Débutant
+                                </li>
+                            @elseif($percent>24 && $percent<50)
+                                <li class="nav-item text-warning navbar-list__item">
+                                    <i class="material-icons text-muted icon--left">assessment</i>
+                                    {{ $percent}}% &nbsp;
+                                    Intermédiaire
+                                </li>
+                            @elseif($percent>49 && $percent<75)
+                                <li class="nav-item text-info navbar-list__item">
+                                    <i class="material-icons text-muted icon--left">assessment</i>
+                                    {{ $percent}}% &nbsp;
+                                    Avancé
+                                </li>
+                            @elseif($percent>74 && $percent<=100)
+                                <li class="nav-item text-success navbar-list__item">
+                                    <i class="material-icons text-muted icon--left">assessment</i>
+                                    {{ $percent}}% &nbsp;
+                                    Expert
+                                </li>
+                            @endif
+                        @endif
+
                         <li class="nav-item navbar-list__item">
                             <i class="fa fa-question mr-2"></i>
-                            {{$dumpUsers->sum('question_true') + $dumpUsers->sum('question_false')}}/{{$certification->questions->count()}} questions traitées
+                            {{$dumpUsers->sum('question_true') + $dumpUsers->sum('question_false')}} questions traitées
                         </li>
                         <li class="nav-item navbar-list__item">
                             <i class="fa fa-check text-success mr-2"></i>

@@ -43,6 +43,8 @@
 
 <body id="fullscreen-container" class="layout-navbar-mini-fixed-bottom">
 
+    @include('sweetalert::alert')
+
     <!-- Page Layout -->
     <div class="mdk-header-layout bg-white js-mdk-header-layout" style="min-height: 100vh; flex-grow: 1;">
 
@@ -197,7 +199,7 @@
                         .parent().addClass('disabled');
                     var resttime=(document.getElementById("clock").textContent);
                     $("#temps").val(resttime);
-                    document.getElementById("regForm").submit();
+                    document.getElementById("dumpForm").submit();
 
                 });
 
@@ -227,6 +229,26 @@
         }
 
         // END gestion Full Screen
+
+        /*BEGIN  Envoyer les donner aprés quitter le plein écran*/
+            if (document.addEventListener)
+            {
+                document.addEventListener('fullscreenchange', exitHandler, false);
+                document.addEventListener('mozfullscreenchange', exitHandler, false);
+                document.addEventListener('MSFullscreenChange', exitHandler, false);
+                document.addEventListener('webkitfullscreenchange', exitHandler, false);
+            }
+
+            function exitHandler()
+            {
+                if (!document.webkitIsFullScreen && !document.mozFullScreen && !document.msFullscreenElement)
+                {
+                    var resttime=(document.getElementById("clock").textContent);
+                    $("#temps").val(resttime);
+                    document.getElementById("dumpForm").submit();
+                }
+            }
+        /* END Envoyer les donner aprés quitter le plein écran*/
 
 
         /*BEGIN  Gestion Form MultiStep*/
@@ -275,7 +297,7 @@
         function abandonner() {
             var resttime=(document.getElementById("clock").textContent);
             $("#temps").val(resttime);
-            document.getElementById("regForm").submit();
+            document.getElementById("dumpForm").submit();
             return false;
         }
 
