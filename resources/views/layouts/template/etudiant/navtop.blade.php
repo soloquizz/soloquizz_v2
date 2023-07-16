@@ -10,7 +10,7 @@
             </button>
 
             <!-- Navbar Brand -->
-            <a href="{{ url('etudiant.index') }}" class="navbar-brand">
+            <a href="{{ route('etudiant.index') }}" class="navbar-brand">
                 <img class="navbar-brand-icon mr-0 mr-md-8pt" src="{{asset('/assets/images/logo/Soloquizz.png')}}" width="150" alt="Tutorio">
                 <span class="d-none d-md-block"></span>
             </a>

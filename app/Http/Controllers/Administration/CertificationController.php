@@ -218,4 +218,23 @@ class CertificationController extends AppBaseController
     }
 
 
+    public function defineNbreQa(Request $request)
+    {
+        $input = $request->all();
+
+        $certification = $this->certificationRepository->find($input['certification_id']);
+
+        if ($certification->questions->count() < $input['nbre_qa'] ){
+            Alert::error('Error','Le nombre maximal de question par dump doit être inférieur à '.$certification->nbre_qa.' le nombre total de question');
+            return redirect()->back();
+        }
+
+        $this->certificationRepository->update($input, $input['certification_id']);
+
+        Alert::success('Succés','Nombre de question maximal définie avec succés');
+
+        return redirect(route('admin.certifications.questions.display', ['search' => '','certification_id'=>$input['certification_id']]));
+    }
+
+
 }

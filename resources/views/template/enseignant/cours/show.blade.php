@@ -74,7 +74,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <a href="#" class="ml-4pt btn btn-link text-secondary">Terminée</a>
+                                                    <a href="#" class="ml-4pt btn btn-link text-secondary">Voir plus</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -83,11 +83,11 @@
                                                 <div class="col-12">
                                                     <h6>Exercices</h6>
                                                     <ul class="list-unstyled collapse show" id="toc-content-1">
-                                                        <li class="accordion__menu-link">
+                                                        <!--li class="accordion__menu-link">
                                                             <span class="material-icons icon-16pt icon--left text-body">check_circle</span>
-                                                            <a class="flex" href="student-take-lesson.html">Introduction</a>
+                                                            <a class="flex" href="#">Introduction</a>
                                                             <span class="text-muted">8m 42s</span>
-                                                        </li>
+                                                        </li-->
                                                     </ul>
                                                 </div>
                                             </div>
@@ -145,10 +145,10 @@
                             </div>
                         </div>
                         <div class="tab-pane" id="td">
-                            Compte td
+                            Espace des TD
                         </div>
                         <div class="tab-pane" id="evaluations">
-                            Compte
+                            Espace des Évaluations
                         </div>
                     </div>
                 </div>

@@ -38,42 +38,56 @@ class DumpController extends Controller
             return redirect()->back();
         }
 
-        $questions = $certification->questions->filter(function ($question){
-            $etudiant_questions = EtudiantQuestion::where('question_id',$question->id)->get();
-            foreach ($etudiant_questions as $etudiant_question){
-                if ($etudiant_question->trouve)
-                    return false;
+        //Vérifier s'il existe un dump non effectué
+        $user = auth()->user();
+        $dumpUser = DumpUser::where('user_id',$user->id)->where('etat',0)->first();
+        if (!empty($dumpUser)){
+            $dump = $dumpUser->dump;
+            $questions = $dump->questions;
+            $duree = $dump->duree;
+        }
+        else{
+            $questions = $certification->questions->filter(function ($question){
+                $etudiant_questions = EtudiantQuestion::where('question_id',$question->id)->get();
+                foreach ($etudiant_questions as $etudiant_question){
+                    if ($etudiant_question->trouve)
+                        return false;
+                }
+                return true;
+            });
+
+            if($questions->count() > $certification->nbre_qa){
+                $questions = $questions->random($certification->nbre_qa);
             }
-            return true;
-        })->random(4);
-        $duree = $questions->sum('duree');
-        $score = $questions->sum('point');
-        $nbreDump = Dump::count()+1;
 
-        $dumpData['titre'] = 'Entrainement '.$nbreDump;
-        $dumpData['duree'] = $duree;
-        $dumpData['score'] = $score;
-        $dumpData['certification_id'] = $certification->id;
+            //Paramètre du dump
+            $duree = $questions->sum('duree');
+            $score = $questions->sum('point');
+            $nbreDump = DumpUser::where('user_id',$user->id)->get()->count()+1;
 
-        $dump = Dump::create($dumpData);
+            $dumpData['titre'] = 'Entrainement '.$nbreDump;
+            $dumpData['duree'] = $duree;
+            $dumpData['score'] = $score;
+            $dumpData['certification_id'] = $certification->id;
 
-        foreach ($questions as $question)
-        {
-            DumpQuestion::create([
-                'question_id' => $question->id,
-                'dump_id' => $dump->id
+            $dump = Dump::create($dumpData);
+
+            foreach ($questions as $question)
+            {
+                DumpQuestion::create([
+                    'question_id' => $question->id,
+                    'dump_id' => $dump->id
+                ]);
+            }
+
+            $dumpUser = DumpUser::create([
+                'dump_id' => $dump->id,
+                'user_id' => $user->id,
+                'etudiant_id' => $user->etudiant()->id,
+                'certification_id' => $certification->id,
+                'etat' => 0,
             ]);
         }
-
-        $user = auth()->user();
-
-        $dumpUser = DumpUser::create([
-            'dump_id' => $dump->id,
-            'user_id' => $user->id,
-            'etudiant_id' => $user->etudiant()->id,
-            'certification_id' => $certification->id,
-            'etat' => 0,
-        ]);
 
         return view('template.etudiant.dumps.dump_take',
             compact('certification','duree','questions','dump','dumpUser'));
@@ -120,13 +134,28 @@ class DumpController extends Controller
             })->pluck('id')->toArray();
 
             $etudiantQuestionData['question_id'] = $question_id;
-            $reponses = $input['reponses'.$question_id];
 
-            $diffArray = array_diff($correct_options_id,$reponses);
-
-            if (count($diffArray)>0){
+            //Si la question n'est pas traitée
+            if (isset($input['reponses'.$question_id])){
+                $reponses = $input['reponses'.$question_id];
+            }
+            else{
                 $questionTrue = false;
             }
+
+
+            //Si les réponses choisies sont différentes aux bonne réponses
+            if (isset($reponses)){
+                $diffArray = array_diff($correct_options_id,$reponses);
+                if (count($diffArray)>0){
+                    $questionTrue = false;
+                }
+            }
+            else{
+                $questionTrue = false;
+            }
+
+
 
             $dump_user_question['user_id'] = $user->id;
             $dump_user_question['certification_id'] = $input['certification_id'];
@@ -135,20 +164,23 @@ class DumpController extends Controller
             $dump_user_question['dump_user_id'] = $input['dump_user_id'];
             $dumpUserQuestion = DumpUserQuestion::create($dump_user_question);
 
-            foreach ($reponses as $reponse)
-            {
-                $etudiantQuestionData['option_id'] = $reponse;
-                $etudiantQuestionData['dump_user_question_id'] = $dumpUserQuestion->id;
-                $option = Option::find($reponse);
-                if ($option->correcte)
+            //On vérifie s'il a traité la question
+            if (isset($reponses)){
+                foreach ($reponses as $reponse)
                 {
-                    $etudiantQuestionData['trouve'] = 1;
+                    $etudiantQuestionData['option_id'] = $reponse;
+                    $etudiantQuestionData['dump_user_question_id'] = $dumpUserQuestion->id;
+                    $option = Option::find($reponse);
+                    if ($option->correcte)
+                    {
+                        $etudiantQuestionData['trouve'] = 1;
+                    }
+                    else{
+                        $etudiantQuestionData['trouve'] = 0;
+                        $questionTrue = false;
+                    }
+                    EtudiantQuestion::create($etudiantQuestionData);
                 }
-                else{
-                    $etudiantQuestionData['trouve'] = 0;
-                    $questionTrue = false;
-                }
-                EtudiantQuestion::create($etudiantQuestionData);
             }
 
             if ($questionTrue){

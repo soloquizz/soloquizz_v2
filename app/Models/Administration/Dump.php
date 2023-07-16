@@ -96,4 +96,9 @@ class Dump extends Model
     {
         return $this->belongsTo(\App\Models\Administration\Certification::class, 'certification_id');
     }
+
+    public function questions()
+    {
+        return $this->belongsToMany(Question::class, 'dump_questions');
+    }
 }
