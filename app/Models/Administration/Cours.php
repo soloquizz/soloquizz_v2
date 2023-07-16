@@ -49,7 +49,8 @@ class Cours extends Model
         'etat',
         'classe_id',
         'semestre_id',
-        'enseignant_id'
+        'enseignant_id',
+        'nbre_qa'
     ];
 
     /**
@@ -66,6 +67,7 @@ class Cours extends Model
         'classe_id' => 'integer',
         'semestre_id' => 'integer',
         'enseignant_id' => 'integer',
+        'nbre_qa' => 'integer',
     ];
 
     /**

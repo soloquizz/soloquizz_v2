@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::name('admin.')->prefix('admin')->middleware(['auth'])->group(function () {
+Route::name('admin.')->prefix('admin')->middleware(['auth','check.admin'])->group(function () {
     Route::get('/',[App\Http\Controllers\Administration\HomeController::class,'index'])->name('index');
 
     Route::resource('administrateurs', App\Http\Controllers\Administration\AdministrateurController::class);
@@ -50,6 +50,7 @@ Route::name('admin.')->prefix('admin')->middleware(['auth'])->group(function () 
     Route::resource('certifications', App\Http\Controllers\Administration\CertificationController::class);
     Route::get('certifications-questions-display', [App\Http\Controllers\Administration\CertificationController::class,'questionsDisplay'])->name('certifications.questions.display');
     Route::post('certifications-questions-search', [App\Http\Controllers\Administration\CertificationController::class,'searchQuestions'])->name('certifications.questions.search');
+    Route::post('certifications-define-nbqa', [App\Http\Controllers\Administration\CertificationController::class,'defineNbreQa'])->name('certifications.define_nbreqa');
 
     Route::resource('questions', App\Http\Controllers\Administration\QuestionController::class);
     Route::get('questions-edit-custom', [App\Http\Controllers\Administration\QuestionController::class,'editCustom'])->name('questions.edit.custom');
