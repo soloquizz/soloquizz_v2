@@ -30,10 +30,26 @@
         </div>
         <div class="container card bg-white page__container page-section mt-5">
             <div class="card-header">
+                <div class="row mb-5">
+                    <div class="col-sm-6">
+                        <h4 class="content-header-title">
+                            Nombre de questions total
+                            <div class="badge badge-glow badge-pill badge-info">{{$certification->questions->count()}}</div>
+                        </h4>
+                    </div>
+                    <div class="col-sm-6">
+                        <h4 class="content-header-title">
+                            Nombre maximal de questions par dump
+                            <a href="#" class="text-70" data-toggle="modal" data-target="#addNbQa">
+                                <div class="badge badge-glow badge-pill badge-info">{{$certification->nbre_qa}}</div>
+                            </a>
+                        </h4>
+                    </div>
+                </div>
                 <div class="row">
                     <!-- Title -->
                     <div class="col-sm-4">
-                        <h3 class="content-header-title">{{$certification->titre}}</h3>
+                        <h4 class="content-header-title">{{mb_strimwidth($certification->titre, 0, 30, "...")}}</h4>
                     </div>
 
                     <!-- Search -->
@@ -47,7 +63,7 @@
                     </form>
 
                     <!-- Bouton -->
-                    <div class="col-sm-3 text-right">
+                    <div class="col-sm-4 text-right">
                         <a href="#" class="btn btn-outline-primary" data-toggle="modal" data-target="#addQuestion">Nouvelle question</a>
                     </div>
                 </div>
@@ -118,6 +134,7 @@
 @section('modal')
     @include('template.administration.questions.create')
     @include('template.administration.options.create')
+    @include('template.administration.certifications.nb_qa_create')
 @endsection
 
 @section('script')

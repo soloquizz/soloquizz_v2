@@ -40,6 +40,8 @@
 <body class="layout-navbar-mini-fixed-bottom">
     @include('layouts.template.preload')
 
+    @include('sweetalert::alert')
+
     <!-- Page Layout -->
     <div class="mdk-header-layout js-mdk-header-layout">
 
