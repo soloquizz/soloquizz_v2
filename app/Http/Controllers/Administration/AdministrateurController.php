@@ -74,7 +74,7 @@ class AdministrateurController extends AppBaseController
             $user = $this->userRepository->create($userData);
         }
 
-        $compteData['email'] = $generatePassword;
+        $compteData['email'] = $input['email'];
         $compteData['password'] = $generatePassword;
 
         //Envoie des crédentials par mail

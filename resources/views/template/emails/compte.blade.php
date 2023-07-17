@@ -51,13 +51,13 @@
                                         <img src="{{asset('/assets/images/logo/Soloquizz.png')}}" alt="branding logo">
                                     </div>
                                 </div>
-                                <h6 class="card-subtitle line-on-side text-muted text-center font-small-3 pt-2">
+                                <div class="card-body">
                                     <span>Informations Compte Soloquizz</span>
                                     <ul>
                                         <li><strong>Email :</strong> : {{$compte_data['email']}}</li>
                                         <li><strong>Mot de passe:</strong> : {{$compte_data['password']}}</li>
                                     </ul>
-                                </h6>
+                                </div>
                             </div>
                         </div>
                     </div>
