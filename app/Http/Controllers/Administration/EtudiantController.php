@@ -95,7 +95,7 @@ class EtudiantController extends AppBaseController
         Inscription::create($inscriptionData);
 
         $compteData['email'] =$input['email'];
-        $compteData['password'] = $user->password;
+        $compteData['password'] = $generatePassword;
 
         //Envoie des crédentials par mail
         Mail::to($user)->send(new CompteInfos($compteData));
