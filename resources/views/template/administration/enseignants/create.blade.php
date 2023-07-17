@@ -43,8 +43,10 @@
                                 </div>
                                 <div class="form-row">
                                     <div class="col-12 col-md-6 mb-3">
-                                        <label class="form-label">Email Institutionnel</label>
-                                        <input type="text" name="email" class="form-control" placeholder="prenom1.nom@cat.edu.sn">
+                                        <label class="form-label">Email Institutionnel
+                                            <span class="text-danger">*</span>
+                                        </label>
+                                        <input type="text" name="email" class="form-control" placeholder="prenom1.nom@cat.edu.sn" required>
                                     </div>
                                     <div class="col-12 col-md-6 mb-3">
                                         <label class="form-label">Email Personnel</label>

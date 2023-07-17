@@ -17,9 +17,9 @@
                         <span class="sr-only">Login</span>
                     </a>
                 </li>
-                <!--li class="d-none d-sm-flex nav-item">
-                    <a href="#" class="btn btn-primary">S'inscrire</a>
-                </li-->
+                <li class="d-none d-sm-flex nav-item">
+                    <a href="{{route('auth.register')}}" class="btn btn-primary">S'enregistrer</a>
+                </li>
             </ul>
             <!-- // END Main Navigation -->
         </div>

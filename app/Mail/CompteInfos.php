@@ -16,9 +16,12 @@ class CompteInfos extends Mailable
      *
      * @return void
      */
-    public function __construct()
+
+    public $compte_data;
+
+    public function __construct(array $compte_data)
     {
-        //
+        $this->compte_data = $compte_data;
     }
 
     /**
@@ -28,6 +31,7 @@ class CompteInfos extends Mailable
      */
     public function build()
     {
-        return $this->subject('Information de connexion sur la plateforme soloquizz')->view('template.emails.compte');
+        return $this->subject('Information de connexion sur la plateforme Soloquizz')->view('template.emails.compte')
+            ->with('compte_data', $this->compte_data);
     }
 }

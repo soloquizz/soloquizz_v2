@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::name('enseignant.')->prefix('enseignant')->middleware(['auth','check.enseignant'])->group(function () {
+Route::name('enseignant.')->prefix('enseignant')->middleware(['auth','check.actif.compte','check.enseignant','check.change.password'])->group(function () {
     Route::get('/',[App\Http\Controllers\Enseignant\EnseignantController::class,'index'])->name('index');
 
     //Cours
@@ -25,5 +25,12 @@ Route::name('enseignant.')->prefix('enseignant')->middleware(['auth','check.ense
 
     //Séances
     Route::post('/seances-store',[App\Http\Controllers\Enseignant\SeanceController::class,'store'])->name('seances.store');
+
+});
+
+Route::name('enseignant.')->prefix('enseignant')->middleware(['auth','check.actif.compte','check.enseignant'])->group(function () {
+    //Change Password
+    Route::get('password-change-show', [App\Http\Controllers\Enseignant\EnseignantController::class,'showPasswordChange'])->name('password.change.show');
+    Route::post('password-change-store', [App\Http\Controllers\Enseignant\EnseignantController::class,'storePasswordChange'])->name('password.change.store');
 
 });

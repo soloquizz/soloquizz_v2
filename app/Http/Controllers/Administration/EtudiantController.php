@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Administration;
 use App\Http\Requests\Administration\CreateEtudiantRequest;
 use App\Http\Requests\Administration\UpdateEtudiantRequest;
 use App\Imports\EtudiantImport;
+use App\Mail\CompteInfos;
 use App\Models\Administration\Inscription;
 use App\Repositories\Administration\AnneeScolaireRepository;
 use App\Repositories\Administration\ClasseRepository;
@@ -16,6 +17,7 @@ use Flash;
 use Maatwebsite\Excel\Facades\Excel;
 use RealRashid\SweetAlert\Facades\Alert;
 use Response;
+use Illuminate\Support\Facades\Mail;
 
 class EtudiantController extends AppBaseController
 {
@@ -79,10 +81,11 @@ class EtudiantController extends AppBaseController
 
         if (isset($input['email'])){
             $userData['email'] = $input['email'];
-            $userData['password'] = bcrypt('Password0');
+            $generatePassword = substr(uniqid(),5);
+            $userData['password'] = bcrypt($generatePassword);
             $userData['personne_type'] = 'Etudiant';
             $userData['personne_id'] = $etudiant->id;
-            $this->userRepository->create($userData);
+            $user = $this->userRepository->create($userData);
         }
 
         //Add Inscription
@@ -90,6 +93,12 @@ class EtudiantController extends AppBaseController
         $inscriptionData['annee_scolaire_id'] = $input['annee_scolaire_id'];
         $inscriptionData['etudiant_id'] = $etudiant->id;
         Inscription::create($inscriptionData);
+
+        $compteData['email'] =$input['email'];
+        $compteData['password'] = $generatePassword;
+
+        //Envoie des crédentials par mail
+        Mail::to($user)->send(new CompteInfos($compteData));
 
         Alert::success('Succés','Etudiant saved successfully.');
 
