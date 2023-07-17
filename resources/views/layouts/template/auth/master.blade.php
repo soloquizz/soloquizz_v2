@@ -38,6 +38,8 @@
 
     @include('layouts.template.preload')
 
+    @include('sweetalert::alert')
+
     <!-- Header Layout -->
     <div class="mdk-header-layout js-mdk-header-layout">
 
