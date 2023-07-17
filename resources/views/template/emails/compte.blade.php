@@ -48,7 +48,7 @@
                             <div class="card-header border-0">
                                 <div class="card-title text-center">
                                     <div class="p-1">
-                                        <img src="{{asset('/assets/images/logo/Soloquizz.png')}}" alt="branding logo">
+                                        <img height="50" src="{{asset('/assets/images/logo/Soloquizz.png')}}" alt="branding logo">
                                     </div>
                                 </div>
                                 <div class="card-body">
