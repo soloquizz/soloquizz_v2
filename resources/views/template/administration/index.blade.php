@@ -7,9 +7,7 @@
 @section('content_page')
 
 <div class="mdk-header-layout__content page-content">
-
     <!-- Header Layout -->
-
     @include('layouts.template.administration.header')
 
     <!-- END Layout -->

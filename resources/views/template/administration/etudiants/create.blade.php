@@ -44,8 +44,10 @@
                                 <div class="form-row">
                                     <div class="col-12 col-md-6 mb-3">
                                         <label class="form-label">Email Institutionnel
+                                            <span class="text-danger">*</span>
                                         </label>
-                                        <input type="text" name="email" class="form-control" placeholder="prenom1.nom@cat.edu.sn">
+                                        <input type="text" name="email" class="form-control" placeholder="prenom1.nom@cat.edu.sn" required>
+
                                     </div>
                                     <div class="col-12 col-md-6 mb-3">
                                         <label class="form-label">Email Personnel
@@ -56,8 +58,9 @@
                                 <div class="form-row">
                                     <div class="col-12 col-md-6 mb-3">
                                         <label class="form-label">Classes
+                                            <span class="text-danger">*</span>
                                         </label>
-                                        <select required class="form-control" name="classe_id">
+                                        <select required class="form-control" name="classe_id" required>
                                             <option>Choisir une classe</option>
                                             @foreach($classes as $classe)
                                                 <option value="{{$classe->id}}">{{$classe->nom}}</option>
@@ -66,8 +69,9 @@
                                     </div>
                                     <div class="col-12 col-md-6 mb-3">
                                         <label class="form-label">Années Scolaires
+                                            <span class="text-danger">*</span>
                                         </label>
-                                        <select required class="form-control" name="annee_scolaire_id">
+                                        <select required class="form-control" name="annee_scolaire_id" required>
                                             <option>Choisir une année universitaire</option>
                                             @foreach($annee_scolaires as $annee_scolaire)
                                                 <option value="{{$annee_scolaire->id}}">{{$annee_scolaire->code}}</option>
