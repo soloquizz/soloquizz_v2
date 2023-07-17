@@ -4,11 +4,13 @@ namespace App\Http\Controllers\Administration;
 
 use App\Http\Requests\Administration\CreateAdministrateurRequest;
 use App\Http\Requests\Administration\UpdateAdministrateurRequest;
+use App\Mail\CompteInfos;
 use App\Repositories\Administration\AdministrateurRepository;
 use App\Http\Controllers\AppBaseController;
 use App\Repositories\Administration\UserRepository;
 use Illuminate\Http\Request;
 use Flash;
+use Illuminate\Support\Facades\Mail;
 use RealRashid\SweetAlert\Facades\Alert;
 use Response;
 
@@ -65,11 +67,18 @@ class AdministrateurController extends AppBaseController
 
         if (isset($input['email'])){
             $userData['email'] = $input['email'];
-            $userData['password'] = bcrypt('Password0');
+            $generatePassword = substr(uniqid(),5);
+            $userData['password'] = bcrypt($generatePassword);
             $userData['personne_type'] = 'Administrateur';
             $userData['personne_id'] = $administrateur->id;
-            $this->userRepository->create($userData);
+            $user = $this->userRepository->create($userData);
         }
+
+        $compteData['email'] = $generatePassword;
+        $compteData['password'] = $generatePassword;
+
+        //Envoie des crédentials par mail
+        Mail::to($user)->send(new CompteInfos($compteData));
 
         Alert::success('Administrateur saved successfully.');
 

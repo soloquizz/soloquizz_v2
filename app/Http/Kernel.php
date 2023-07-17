@@ -2,10 +2,12 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\CheckActifCompte;
 use App\Http\Middleware\CheckAdmin;
 use App\Http\Middleware\CheckCurrentDump;
 use App\Http\Middleware\CheckEnseignant;
 use App\Http\Middleware\CheckEtudiant;
+use App\Http\Middleware\PasswordChange;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -72,5 +74,7 @@ class Kernel extends HttpKernel
         'check.admin'=> CheckAdmin::class,
         'check.etudiant'=> CheckEtudiant::class,
         'check.enseignant'=> CheckEnseignant::class,
+        'check.actif.compte'=> CheckActifCompte::class,
+        'check.change.password'=> PasswordChange::class,
     ];
 }

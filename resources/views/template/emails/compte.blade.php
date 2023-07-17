@@ -11,7 +11,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
-    <title>UVS|GIR - @yield('title')</title>
+    <title>Soloquizz - Compte</title>
 
     <link
             href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i%7CMuli:300,400,500,700"
@@ -45,7 +45,20 @@
                 <div class="col-12 d-flex align-items-center justify-content-center">
                     <div class="col-md-8 col-12 box-shadow-2 p-0">
                         <div class="card border-grey border-lighten-3 m-0">
-                            Tester Mail
+                            <div class="card-header border-0">
+                                <div class="card-title text-center">
+                                    <div class="p-1">
+                                        <img src="{{asset('/assets/images/logo/Soloquizz.png')}}" alt="branding logo">
+                                    </div>
+                                </div>
+                                <h6 class="card-subtitle line-on-side text-muted text-center font-small-3 pt-2">
+                                    <span>Informations Compte Soloquizz</span>
+                                    <ul>
+                                        <li><strong>Email :</strong> : {{$compte_data['email']}}</li>
+                                        <li><strong>Mot de passe:</strong> : {{$compte_data['password']}}</li>
+                                    </ul>
+                                </h6>
+                            </div>
                         </div>
                     </div>
                 </div>

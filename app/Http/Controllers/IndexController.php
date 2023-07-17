@@ -18,6 +18,6 @@ class IndexController extends Controller
     public function testSmtp()
     {
         $user = User::find(4);
-        Mail::to($user)->send(new CompteInfos());
+        //Mail::to($user)->send(new CompteInfos());
     }
 }

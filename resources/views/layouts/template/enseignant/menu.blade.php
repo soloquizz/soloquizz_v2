@@ -28,7 +28,7 @@
                 </ul>
                 <ul class="nav navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a href="#" class="nav-link">Profile</a>
+                        <a href="{{route('enseignant.password.change.show')}}" class="nav-link {{ Request::is(['enseignant/password-change-show*']) ? 'active' : '' }}">Profile</a>
                     </li>
                 </ul>
             </div>
