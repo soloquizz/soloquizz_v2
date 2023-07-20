@@ -94,6 +94,9 @@ class EtudiantController extends AppBaseController
         $inscriptionData['etudiant_id'] = $etudiant->id;
         Inscription::create($inscriptionData);
 
+        $compteData['prenom'] = $input['prenom'];
+        $compteData['nom'] = $input['nom'];
+        $compteData['profile'] = 'Étudiant';
         $compteData['email'] =$input['email'];
         $compteData['password'] = $generatePassword;
 
