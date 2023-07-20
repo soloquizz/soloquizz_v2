@@ -134,6 +134,9 @@ class RegisterController extends Controller
         $inscriptionData['etudiant_id'] = $etudiant->id;
         Inscription::create($inscriptionData);
 
+        $compteData['prenom'] = $input['prenom'];
+        $compteData['nom'] = $input['nom'];
+        $compteData['profile'] = 'Étudiant';
         $compteData['email'] = $user->email;
         $compteData['password'] = $generatePassword;
 
