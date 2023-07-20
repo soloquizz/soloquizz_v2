@@ -54,7 +54,7 @@
                                     <p>Cher/chère {{$compte_data['prenom']}} {{$compte_data['nom']}}</p>
                                     <p>Nous sommes ravis de vous accueillir sur SoloQuizz, ci-dessous, nous vous fournissons vos informations de connexion pour accéder à votre compte SoloQuizz:</p>
                                     <ul>
-                                        <li><strong>Lien :</strong> {{env('APP_URL')}}</li>
+                                        <li><strong>Lien :</strong> <a href="{{env('APP_URL')}}">{{env('APP_URL')}}</a>  </li>
                                         <li><strong>Profile :</strong> {{$compte_data['profile']}}</li>
                                         <li><strong>Email :</strong> {{$compte_data['email']}}</li>
                                         <li><strong>Mot de passe :</strong> {{$compte_data['password']}}</li>
