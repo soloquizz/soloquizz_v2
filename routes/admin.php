@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::name('admin.')->prefix('admin')->middleware(['auth','check.admin'])->group(function () {
+Route::name('admin.')->prefix('admin')->middleware(['auth','check.actif.compte','check.admin','check.change.password'])->group(function () {
     Route::get('/',[App\Http\Controllers\Administration\HomeController::class,'index'])->name('index');
 
     Route::resource('administrateurs', App\Http\Controllers\Administration\AdministrateurController::class);
@@ -62,5 +62,12 @@ Route::name('admin.')->prefix('admin')->middleware(['auth','check.admin'])->grou
     Route::get('options-edit-custom', [App\Http\Controllers\Administration\OptionController::class,'editCustom'])->name('options.edit.custom');
 
     Route::post('users-update', [App\Http\Controllers\Administration\UserController::class,'update'])->name('users.update');
+
+});
+Route::name('admin.')->prefix('admin')->middleware(['auth','check.actif.compte','check.admin'])->group(function () {
+
+    //Change Password
+    Route::get('password-change-show', [App\Http\Controllers\Administration\HomeController::class,'showPasswordChange'])->name('password.change.show');
+    Route::post('password-change-store', [App\Http\Controllers\Administration\HomeController::class,'storePasswordChange'])->name('password.change.store');
 
 });
