@@ -73,6 +73,9 @@ class EnseignantController extends AppBaseController
             $user = $this->userRepository->create($userData);
         }
 
+        $compteData['prenom'] = $input['prenom'];
+        $compteData['nom'] = $input['nom'];
+        $compteData['profile'] = 'Enseignant';
         $compteData['email'] = $input['email'];
         $compteData['password'] = $generatePassword;
 

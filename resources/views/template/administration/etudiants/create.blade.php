@@ -18,7 +18,7 @@
                                         <label class="form-label">Numéro Carte
                                             <span class="text-danger">*</span>
                                         </label>
-                                        <input type="text" name="numero_carte" class="form-control" placeholder="matricule" required="">
+                                        <input type="text" name="numero_carte" class="form-control" placeholder="202209KL9J" required="">
                                     </div>
                                     <div class="col-12 col-md-6 mb-3">
                                         <label class="form-label">Prénom
