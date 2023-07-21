@@ -1,5 +1,11 @@
 @extends('layouts.template.enseignant.master')
 
+@section('css')
+    <!-- Quill Theme -->
+    <link type="text/css" href="{{asset('assets/css/quill.css')}}" rel="stylesheet">
+    <link type="text/css" href="{{asset('assets/css/quill.rtl.css')}}" rel="stylesheet">
+@endsection
+
 @section('content_page')
 
     <div class="mdk-header-layout__content page-content">
@@ -13,11 +19,12 @@
         <!-- Menu Layout -->
         @include('layouts.template.enseignant.menu')
         <!-- END Menu Layout -->
-
+         
         <!-- Section Pages Layout -->
 
         <div class="row mt-3 justify-content-center">
             @include('adminlte-templates::common.errors')
+
         </div>
 
         <div class="container page__container">
@@ -26,7 +33,9 @@
                     <span class="mr-16pt">
                         <img src="{{$cours->image()}}" width="40" alt="Angular Fundamentals" class="rounded">
                     </span>
+                    <input type="hidden" value="{{$cours->id}}" id="cours_id">
                     <h4>{{$cours->nom}}</h4>
+
                 </div>
                 <div class="container card bg-white page__container page-section">
                     <ul class="nav nav-tabs nav-tabs-card">
@@ -37,14 +46,23 @@
                             <a class="nav-link" href="#ressources" onclick="switchTabRessources()" data-toggle="tab">Ressources</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#td" onclick="switchTabTd()" data-toggle="tab">Exercices</a>
+                            <a class="nav-link" href="#questions" onclick="switchTabQuestions()" data-toggle="tab">Questions</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#td" onclick="switchTabExercices()" data-toggle="tab">Exercices</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#evaluations" onclick="switchTabEvaluations()" data-toggle="tab">Évaluations</a>
                         </li>
+                        
                         <div class="fa-pull-right mb-3">
+
                             <a href="#" class="btnTab btn btn-outline-primary" id="btnSeance" style="margin-left: 225%!important; width: 170px!important;" data-toggle="modal" data-target="#addSeance">Nouvelle séance</a>
                             <a href="#" class="btnTab btn btn-outline-primary mb-3" id="btnRessource" style="margin-left: 215%!important; width: 180px!important;" data-toggle="modal" data-target="#addRessource">Nouvelle ressource</a>
+                            <a href="#" class="btnTab btn btn-outline-primary mb-3" id="btnQuestion" style="margin-left: 215%!important; width: 180px!important;" data-toggle="modal" data-target="#addQuestionCours">Nouvelle question</a>
+                            <a href="#" class="btnTab btn btn-outline-primary mb-3" id="btnExercice" style="margin-left: 215%!important; width: 180px!important;" data-toggle="modal" data-target="#addExercice">Nouvel exercice</a>
+
+                           
                         </div>
                     </ul>
                     <div class="card-body tab-content">
@@ -144,12 +162,120 @@
                                 @endforeach
                             </div>
                         </div>
+                        <!--ESPACE QUESTION-->
+                        <div class="tab-pane" id="questions">
+                            <div class="card-body">
+                                <ul style="list-style-type: none;">
+                                    @foreach($questions as $question)
+                                        <li class="mb-5">
+                                            <div class="row">
+                                               <div class="col-2"><h6>Question {{ $rank++ }}</h6></div>
+                                                <div class="col-2">
+                                                    @if(isset($_GET['page']))
+                                                    <a href="{{route('admin.questions.edit.custom', ['question_id'=>$question->id,'page'=>$_GET['page']])}}">
+                                                        <i class="fa fa-edit text-warning mr-1" title="Mofification de la question"></i>
+                                                    </a>
+                                                    @else
+                                                        <a href="{{route('admin.questions.edit.custom', ['question_id'=>$question->id,'page'=>1])}}">
+                                                            <i class="fa fa-edit text-warning mr-1" title="Mofification de la question"></i>
+                                                        </a>
+                                                    @endif
+                                                </div>
+                                            </div>
+                                            {!! $question->contenu !!}
+                                           <!-- <h6>
+                                                Options de réponse &nbsp;
+                                                <a href="#" data-toggle="modal" data-target="#addOption">
+                                                    <i class="fa fa-plus-circle text-primary mr-1" onclick="changeIdquestion({{$question->id}})" title="Ajouter une option de réponse"></i>
+                                                </a>
+                                            </h6>
+                                            {{--@foreach($question->options as $option)
+                                                <div class="row">
+                                                    @if($option->correcte)
+                                                        <i class="fa fa-check text-success mr-1" title="Mofification de la question"></i>
+                                                    @else
+                                                        <i class="fa fa-times text-danger mr-1" title="Mofification de la question"></i>
+                                                    @endif
+                                                    {!! $option->contenu !!}
+                                                    @if(isset($_GET['page']))
+                                                        <a href="{{route('admin.options.edit.custom', ['otion_id'=>$option->id,'page'=>$_GET['page']])}}">
+                                                            <i class="fa fa-edit text-warning mr-1" title="Mofification de l'option"></i>
+                                                        </a>
+                                                    @else
+                                                        <a href="{{route('admin.options.edit.custom', ['otion_id'=>$option->id,'page'=>1])}}">
+                                                            <i class="fa fa-edit text-warning mr-1" title="Mofification de l'option"></i>
+                                                        </a>
+                                                    @endif
+                                                </div>
+                                            @endforeach---}}
+                                            -->
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                            <div class="card-footer">
+                                <nav aria-label="Page navigation example">
+                                    {{$questions->links()}}
+                                </nav>
+                            </div>
+
+                        </div>
+                        <!--ESPACE TD-->
                         <div class="tab-pane" id="td">
-                            Espace des TD
+                            <div class="row">
+                                @foreach($cours->exercices as $exo)
+                                    <div class="col-sm-6">
+                                        <div class="card card-path js-overlay stack stack--1 " data-toggle="popover" data-trigger="click">
+                                            <div class="card-body">
+                                                <div class="d-flex align-items-center">
+                                                    <div class="flex">
+                                                        <div class="d-flex align-items-center">
+                                                            <div class="rounded mr-16pt z-0 o-hidden">
+                                                                <div class="overlay">
+                                                                    <span class="overlay__content overlay__content-transparent">
+                                                                    <span class="overlay__action d-flex flex-column text-center lh-1">
+                                                                        <small class="h6 small text-white mb-0" style="font-weight: 500;">80%</small>
+                                                                    </span>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="flex">
+                                                                <div class="card-title text-body mb-0">{{$exo->titre}}</div>
+                                                                <div class="text-muted d-flex lh-1">
+                                                                   Note {{$exo->note_max}} - Durée {{$exo->duree}} 
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <a href="#" class="ml-4pt btn btn-link text-secondary">Voir plus</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="popoverContainer d-none">
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <a class="text-primary" target="_blank" href="{{route('enseignant.cours.show.td',$cours)}}">
+                                                    Ajouter des questions
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    
+                                                    <a class="text-primary" target="_blank" href="{{route('enseignant.cours.show.td.question',$cours)}}">
+                                                        <span class="h6">Consulter</span>
+                                                    </a>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
                         </div>
                         <div class="tab-pane" id="evaluations">
                             Espace des Évaluations
                         </div>
+                       
                     </div>
                 </div>
             </div>
@@ -164,12 +290,17 @@
 @section('modal')
     @include('template.enseignant.seances.create')
     @include('template.enseignant.ressources.create')
+    @include('template.enseignant.questionCours.create')
+    @include('template.enseignant.exercices.create')
 @endsection
 
 
 @section('script')
+    <script src="{{asset('assets/vendor/quill.min.js')}}"></script>
+    <script src="{{asset('assets/vendor/image-resize.min.js')}}"></script>
+    <script src="{{asset('assets/js/quill.js')}}"></script>
     <script>
-
+      //switch selon les boutons appuyés
         $('document').ready(function (){
             $('.btnTab').hide();
             switchTabSeance();
@@ -186,5 +317,88 @@
             $('.btnTab').hide();
             $('#btnRessource').show();
         }
+
+        function switchTabQuestions()
+        {
+            $('.btnTab').hide();
+            $('#btnQuestion').show();
+        }
+
+        function switchTabExercices()
+        {
+            $('.btnTab').hide();
+            $('#btnExercice').show();
+        }
+
+        //Quill 
+        var quillQuestion = new Quill('#editorQuestion', {
+            theme: 'snow',
+            modules: {
+                imageResize: {
+                    displaySize: true
+                },
+                toolbar: [
+                    [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+                    ['bold', 'italic', 'underline', 'strike'],
+                    [{ 'color': [] }, { 'background': [] }],
+                    [{ 'align': [] }],
+                    ['link', 'image'],
+                    [{"list": "ordered"}, {"list": "bullet"}],
+                    ['clean']
+                ]
+            }
+        });
+
+        var quillOption = new Quill('#editorOption', {
+            theme: 'snow',
+            modules: {
+                imageResize: {
+                    displaySize: true
+                },
+                toolbar: [
+                    [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+                    ['bold', 'italic', 'underline', 'strike'],
+                    [{ 'color': [] }, { 'background': [] }],
+                    [{ 'align': [] }],
+                    ['link', 'image'],
+                    [{"list": "ordered"}, {"list": "bullet"}],
+                    ['clean']
+                ]
+            }
+        });
+
+
+        $("#storeQuestionForm").on("submit",function() {
+            $("#hiddenAreaQuestion").val($("#editorQuestion").html());
+        });
+
+        $("#storeOptionForm").on("submit",function() {
+            $("#hiddenAreaOption").val($("#editorOption").html());
+        });
+
+        function changeIdquestion(idQuestion){
+            $("#idQuestion").val(idQuestion);
+        }
+       
+        //pagination 
+    /* $(document).on('click','.pagination a', function(e){
+       
+    e.preventDefault();
+      let page = $(this).attr('href').split('page=')[1]
+      record(page)
+    });
+
+   function record(page){
+        var id=$("#cours_id").val();
+        console.log(id);
+        $.ajax({
+            url:"/enseignant/cours-show/"+id+"?page="+page,
+            success:function(res){
+                console.log(res)
+                $('.tab-pane').html(res);
+            }
+        })
+    }*/
     </script>
 @endsection
+

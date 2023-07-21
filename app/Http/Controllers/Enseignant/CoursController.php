@@ -5,11 +5,24 @@ namespace App\Http\Controllers\Enseignant;
 use App\Http\Controllers\Controller;
 use App\Models\Administration\Cours;
 use App\Models\Administration\Support;
+use App\Models\Enseignant\QuestionCours;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
+use App\Repositories\Enseignant\QuestionCoursRepository;
+use App\Repositories\Administration\CoursRepository;
 
 class CoursController extends Controller
 {
+     /** @var QuestionCoursRepository $questionCoursRepository*/
+     private $questionCoursRepository;
+     private $coursRepository;
+ 
+     public function __construct(QuestionCoursRepository $questionRepo, CoursRepository $coursRepo)
+     {
+         $this->questionCoursRepository = $questionRepo;
+         $this->coursRepository = $coursRepo;
+     }
+ 
     public function index()
     {
         $enseignant =  auth()->user()->enseignant();
@@ -21,12 +34,29 @@ class CoursController extends Controller
         return view('template.enseignant.cours.index',compact('cours','enseignant','classes'));
     }
 
-    public function show($cours_id)
+    public function searchQuestions(Request $request)
+    {
+        $textSearch = $request->search;
+        $cours_id = $request->cours_id;
+        return redirect(route('template.enseignant.cours.show', ['search' => $textSearch,'cours_id'=>$cours_id]));
+    }
+
+    public function show($cours_id,Request $request)
     {
         $cours = Cours::find($cours_id);
         $support = $cours->supports->first();
         //dd($support->getMedia('supports'));
-        return view('template.enseignant.cours.show',compact('cours'));
+        
+        $textSearch = $request->search;
+
+        if(isset($textSearch)){
+            $questions =$this->coursRepository->search($cours_id,$textSearch,2);
+        }else{
+            $questions = $this->coursRepository->questionsCours($cours_id,2);
+        }
+        $questions->appends($_GET)->links();
+        $rank = $questions->firstItem();
+        return view('template.enseignant.cours.show',compact('cours','questions','rank'));
     }
 
     public function storeSupport(Request $request)
