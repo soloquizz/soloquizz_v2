@@ -42,9 +42,10 @@ class ExerciceController extends Controller
 
         $exo = Exercice::create($input);
 
-        Alert::success('Succés','Séance ajouté avec succés');
+        Alert::success('Succés','Exercice ajouté avec succés');
 
         return redirect(route('enseignant.cours.show',$exo->cours_id));
+
     }
     
     public function show($id){
