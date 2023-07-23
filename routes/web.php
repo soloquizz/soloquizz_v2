@@ -14,6 +14,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 Auth::routes();
+/*Route::get('/index2',function(){
+    return view('template.index2');
+});*/
+
 
 Route::get('/', [App\Http\Controllers\IndexController::class,'index'])->name('welcome');
 Route::get('/test-smtp', [App\Http\Controllers\IndexController::class,'testSmtp']);

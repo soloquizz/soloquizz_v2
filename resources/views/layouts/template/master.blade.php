@@ -8,6 +8,10 @@
     <title>
         @yield('title')
     </title>
+     <!-- Favicons -->
+    <link href="welcome_assets/img/favicon.png" rel="icon">
+    <link href="welcome_assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
 
     <!-- Prevent the demo from appearing in search engines -->
     <meta name="robots" content="noindex">
