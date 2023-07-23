@@ -22,3 +22,4 @@ Route::get('/test-smtp', [App\Http\Controllers\IndexController::class,'testSmtp'
 @include('etudiant.php');
 @include('admin.php');
 @include('enseignant.php');
+//init plan aida_dev branch

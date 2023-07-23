@@ -3,6 +3,7 @@
 namespace App\Repositories\Administration;
 
 use App\Models\Administration\Cours;
+use App\Models\Enseignant\QuestionCours;
 use App\Repositories\BaseRepository;
 
 /**
@@ -41,4 +42,21 @@ class CoursRepository extends BaseRepository
     {
         return Cours::class;
     }
+
+    public function questionsCours($cours_id,$paginate_number)
+    {
+        return QuestionCours::where('cours_id',$cours_id)->paginate($paginate_number);
+    }
+
+    public function search($cours_id,$textSearch, int $perPage)
+    {
+        $query = QuestionCours::where('cours_id',$cours_id)->Where('contenu', 'like', '%' . $textSearch . '%');
+
+        return $query->paginate($perPage);
+    }
+
+     public function getLastPage($cours_id,int $perPage)
+     {
+         return QuestionCours::where('cours_id',$cours_id)->paginate($perPage)->lastPage();
+     }
 }
