@@ -73,7 +73,7 @@ class QuestionCours extends Model
      **/
     public function cours()
     {
-        return $this->belongsTo(\App\Models\Enseignant\Cour::class, 'cours_id');
+        return $this->belongsTo(\App\Models\Administration\Cours::class, 'cours_id');
     }
 
     /**
