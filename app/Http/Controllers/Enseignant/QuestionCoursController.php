@@ -51,9 +51,11 @@ class QuestionCoursController extends Controller
 
     }
 
-    public function editCustom(Request $request,$question_id)
+
+    public function editCustom(Request $request)
     {
         $page = $request->page;
+        $question_id = $request->question_id;
         $questionCours = $this->questionCoursRepository->find($question_id);
 
         if (empty($questionCours)) {
@@ -66,7 +68,14 @@ class QuestionCoursController extends Controller
     }
 
     public function update(Request $request,$id){
-        $question_id=QuestionCours::find($id);
+        $question = QuestionCours::find($id);
+
+        if (empty($question))
+        {
+            Alert::error('Error','Question non trouvé');
+            return redirect()->back();
+        }
+
         $request->validate([
             'contenu' => 'required|string',
             'qcm' => 'required|boolean',
@@ -81,9 +90,9 @@ class QuestionCoursController extends Controller
         $input['contenu'] = str_replace('true','false',$input['contenu']);
 
         $input['contenu'] = str_replace('input type="text"','input type="hidden"',$input['contenu']);
-        dd($input);
-        $question = $this->questionCoursRepository->update($input,$question_id);
-        
+
+        $question = $this->questionCoursRepository->update($input,$id);
+
 
         $lastPage = $this->coursRepository->getLastPage($input['cours_id'],2);
         
