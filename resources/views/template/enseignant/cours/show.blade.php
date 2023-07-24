@@ -172,11 +172,11 @@
                                                <div class="col-2"><h6>Question {{ $rank++ }}</h6></div>
                                                 <div class="col-2">
                                                     @if(isset($_GET['page']))
-                                                    <a href="{{route('admin.questions.edit.custom', ['question_id'=>$question->id,'page'=>$_GET['page']])}}">
+                                                    <a href="{{route('enseignant.questionCours.edit.custom', [$question->id,'page'=>$_GET['page']])}}">
                                                         <i class="fa fa-edit text-warning mr-1" title="Mofification de la question"></i>
                                                     </a>
                                                     @else
-                                                        <a href="{{route('admin.questions.edit.custom', ['question_id'=>$question->id,'page'=>1])}}">
+                                                        <a href="{{route('enseignant.questionCours.edit.custom', ['question_id'=>$question->id,'page'=>1])}}">
                                                             <i class="fa fa-edit text-warning mr-1" title="Mofification de la question"></i>
                                                         </a>
                                                     @endif

@@ -42,4 +42,9 @@ class QuestionCoursRepository extends BaseRepository
     {
         return QuestionCours::where('cours_id',$cours_id)->paginate($paginate_number);
     }
+
+    public function update($input, $id)
+    {
+    //dd($input);
+    }
 }

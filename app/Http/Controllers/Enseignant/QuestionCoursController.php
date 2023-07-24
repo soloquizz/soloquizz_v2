@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Enseignant;
 
 use App\Http\Controllers\Controller;
+use App\Models\Administration\Cours;
 use App\Models\Enseignant\QuestionCours;
 use Illuminate\Http\Request;
 use App\Repositories\Enseignant\QuestionCoursRepository;
@@ -49,4 +50,49 @@ class QuestionCoursController extends Controller
         return redirect(route('enseignant.cours.show', ['page' => $lastPage,'search' => '','cours_id'=>$input['cours_id']]));
 
     }
+
+    public function editCustom(Request $request,$question_id)
+    {
+        $page = $request->page;
+        $questionCours = $this->questionCoursRepository->find($question_id);
+
+        if (empty($questionCours)) {
+            Alert::error('Question intouvable');
+
+            return redirect(route('enseignant.cours.show'));
+        }
+
+        return view('template.enseignant.questionCours.edit',compact('page','questionCours'));
+    }
+
+    public function update(Request $request,$id){
+        $question_id=QuestionCours::find($id);
+        $request->validate([
+            'contenu' => 'required|string',
+            'qcm' => 'required|boolean',
+            'created_at' => 'nullable',
+            'updated_at' => 'nullable',
+            'deleted_at' => 'nullable',
+            'cours_id' => 'required'
+        ]);
+        $input = $request->all();
+      
+
+        $input['contenu'] = str_replace('true','false',$input['contenu']);
+
+        $input['contenu'] = str_replace('input type="text"','input type="hidden"',$input['contenu']);
+        dd($input);
+        $question = $this->questionCoursRepository->update($input,$question_id);
+        
+
+        $lastPage = $this->coursRepository->getLastPage($input['cours_id'],2);
+        
+        Alert::success('Succés','Question modifiée avec succés');
+
+        //return redirect(route('enseignant.cours.show',$questionCours->cours_id));
+
+        return redirect(route('enseignant.cours.show', ['page' => $lastPage,'search' => '','cours_id'=>$input['cours_id']]));
+
+    }
+
 }

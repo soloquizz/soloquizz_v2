@@ -28,7 +28,8 @@ Route::name('enseignant.')->prefix('enseignant')->middleware(['auth','check.acti
 
     //QuestionsCours
     Route::post('/questions-store',[App\Http\Controllers\Enseignant\QuestionCoursController::class,'store'])->name('questionCours.store');
-    //Route::get('questions-edit-custom', [App\Http\Controllers\Administration\QuestionController::class,'editCustom'])->name('questions.edit.custom');
+    Route::get('/questionCours-edit-custom/{id}', [App\Http\Controllers\Enseignant\QuestionCoursController::class,'editCustom'])->name('questionCours.edit.custom');
+    Route::post('/question-update/{id}',[App\Http\Controllers\Enseignant\QuestionCoursController::class,'update'])->name('questionCours.update');
     
     //Exercices
     Route::post('/td-store',[App\Http\Controllers\Enseignant\ExerciceController::class,'store'])->name('exercice.store');
