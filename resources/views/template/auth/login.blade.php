@@ -9,10 +9,10 @@
                 <div class="flex mb-32pt mb-md-0">
                     <h1 class="text-white mb-0">Connexion</h1>
                 </div>
-                <!--a href="#" class="btn btn-outline-white flex-column">
+                <a href="{{route('auth.register')}}" class="btn btn-outline-white flex-column">
                     Vous n'avez pas encore de compte
                     <span class="btn__secondary-text">Créez-en maintenant!</span>
-                </a-->
+                </a>
             </div>
         </div>
         <div class="bg-white pt-32pt pt-sm-64pt pb-32pt">
@@ -20,7 +20,7 @@
                 @include('adminlte-templates::common.errors')
             </div>
             <div class="container page__container">
-                <form action="#" method="post" class="col-md-5 p-0 mx-auto">
+                <form action="{{ route('auth.login') }}" method="post" class="col-md-5 p-0 mx-auto">
                     @csrf
                     <div class="form-group">
                         <label for="email">Email:</label>

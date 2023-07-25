@@ -81,13 +81,15 @@ class RegisterController extends Controller
 
     public function showRegister()
     {
-        $classes = Classe::all()->filter(function ($classe){
+        Alert::warning('Avertissement','Les registrations sont momentanément suspendues');
+        return redirect()->back();
+        /*$classes = Classe::all()->filter(function ($classe){
             return $classe->niveau->annee <= 2;
         });
         $annee_scolaire = AnneeScolaire::all()->filter(function ($annee_scolaire){
             return $annee_scolaire->actif;
         })->first();
-        return view('template.auth.register',compact('classes','annee_scolaire'));
+        return view('template.auth.register',compact('classes','annee_scolaire'));*/
     }
 
     public function registerStore(Request $request)
