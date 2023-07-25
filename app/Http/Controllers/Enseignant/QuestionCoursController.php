@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Enseignant;
 
 use App\Http\Controllers\Controller;
-use App\Models\Administration\Cours;
 use App\Models\Enseignant\QuestionCours;
 use Illuminate\Http\Request;
 use App\Repositories\Enseignant\QuestionCoursRepository;

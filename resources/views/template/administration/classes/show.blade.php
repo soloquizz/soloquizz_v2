@@ -35,7 +35,8 @@
                 </ul>
                 <div class="card-body tab-content">
                     <div class="tab-pane active" id="cours">
-                        <a href="#" class="btn btn-outline-primary" style="margin-left: 85%!important;" data-toggle="modal" data-target="#addCours">Nouveau cours</a>
+                        <a href="#" class="btn btn-outline-primary" style="margin-left: 85%!important;"
+                           data-toggle="modal" data-target="#addCours">Nouveau cours</a>
                         <div class="row">
                             <!-- Wrapper -->
                             <div class="table-responsive" data-toggle="lists" data-lists-values='["name"]'>
@@ -43,7 +44,8 @@
                                 <!-- Search -->
                                 <div class="search-form search-form--light mb-3 col-sm-4">
                                     <input type="text" class="form-control search" placeholder="Rechercher">
-                                    <button class="btn" type="button" role="button"><i class="material-icons">search</i></button>
+                                    <button class="btn" type="button" role="button"><i class="material-icons">search</i>
+                                    </button>
                                 </div>
 
                                 <!-- Table -->
@@ -59,37 +61,40 @@
                                     </tr>
                                     </thead>
                                     <tbody class="list">
-                                        @foreach($classe->cours as $cour)
-                                            <tr>
-                                                <td class="name"><img src="{{$cour->image()}}" height="60" alt="course"></td>
-                                                <td class="name">{{$cour->nom}}</td>
-                                                <td class="name">
-                                                    @if(isset($cour->enseignant))
-                                                        {{$cour->enseignant?->matricule}} {{$cour->enseignant?->prenom}} {{$cour->enseignant?->nom}}
-                                                    @else
-                                                        <span class="text-danger">
+                                    @foreach($classe->cours as $cour)
+                                        <tr>
+                                            <td class="name"><img src="{{$cour->image()}}" height="60" alt="course">
+                                            </td>
+                                            <td class="name">{{$cour->nom}}</td>
+                                            <td class="name">
+                                                @if(isset($cour->enseignant))
+                                                    {{$cour->enseignant?->matricule}} {{$cour->enseignant?->prenom}} {{$cour->enseignant?->nom}}
+                                                @else
+                                                    <span class="text-danger">
                                                              Non affecté
                                                         </span>
-                                                    @endif
-                                                </td>
-                                                <td class="name">{{$cour->semestre->nom}}</td>
-                                                <td class="name">
-                                                    @if($cour->etat)
-                                                        <span class="text-success">Cours actif</span>
-                                                    @else
-                                                        <span class="text-danger">Cours inactif</span>
-                                                    @endif
-                                                </td>
-                                                <td class="name">
-                                                    <a class="fa-pull-right" href="{{route('admin.cours.edit', $cour->id)}}">
-                                                        <i class="fa fa-edit text-warning mr-1" title="Mofification"></i>
-                                                    </a>
-                                                    <a class="fa-pull-right" href="{{route('admin.cours.show', $cour->id)}}">
-                                                        <i class="fa fa-eye text-info mr-1" title="Détail Cours"></i>
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                        @endforeach
+                                                @endif
+                                            </td>
+                                            <td class="name">{{$cour->semestre->nom}}</td>
+                                            <td class="name">
+                                                @if($cour->etat)
+                                                    <span class="text-success">Cours actif</span>
+                                                @else
+                                                    <span class="text-danger">Cours inactif</span>
+                                                @endif
+                                            </td>
+                                            <td class="name">
+                                                <a class="fa-pull-right"
+                                                   href="{{route('admin.cours.edit', $cour->id)}}">
+                                                    <i class="fa fa-edit text-warning mr-1" title="Mofification"></i>
+                                                </a>
+                                                <a class="fa-pull-right"
+                                                   href="{{route('admin.cours.show', $cour->id)}}">
+                                                    <i class="fa fa-eye text-info mr-1" title="Détail Cours"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    @endforeach
                                     </tbody>
                                 </table>
                             </div>

@@ -8,7 +8,7 @@
     <title>
         @yield('title')
     </title>
-     <!-- Favicons -->
+    <!-- Favicons -->
     <link href="welcome_assets/img/favicon.png" rel="icon">
     <link href="welcome_assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
@@ -41,54 +41,54 @@
 </head>
 
 <body class="layout-navbar-mini-fixed-bottom">
-    @include('layouts.template.preload')
+@include('layouts.template.preload')
 
-    <!-- Header Layout -->
-    <div class="mdk-header-layout js-mdk-header-layout">
-        @include('layouts.template.navtop')
-        <!-- Header Layout Content -->
-        <div class="mdk-header-layout__content page-content ">
-            @include('layouts.template.header_layout')
-            @include('layouts.template.bande_layout')
+<!-- Header Layout -->
+<div class="mdk-header-layout js-mdk-header-layout">
+    @include('layouts.template.navtop')
+    <!-- Header Layout Content -->
+    <div class="mdk-header-layout__content page-content ">
+        @include('layouts.template.header_layout')
+        @include('layouts.template.bande_layout')
 
-            @yield('content')
+        @yield('content')
 
-            @include('layouts.template.footer')
-        </div>
-        <!-- // END Header Layout Content -->
+        @include('layouts.template.footer2')
     </div>
-    <!-- // END Header Layout -->
+    <!-- // END Header Layout Content -->
+</div>
+<!-- // END Header Layout -->
 
-    <!-- jQuery -->
-    <script src="{{asset('assets/vendor/jquery.min.js')}}"></script>
+<!-- jQuery -->
+<script src="{{asset('assets/vendor/jquery.min.js')}}"></script>
 
-    <!-- Bootstrap -->
-    <script src="{{asset('assets/vendor/popper.min.js')}}"></script>
-    <script src="{{asset('assets/vendor/bootstrap.min.js')}}"></script>
+<!-- Bootstrap -->
+<script src="{{asset('assets/vendor/popper.min.js')}}"></script>
+<script src="{{asset('assets/vendor/bootstrap.min.js')}}"></script>
 
-    <!-- Perfect Scrollbar -->
-    <script src="{{asset('assets/vendor/perfect-scrollbar.min.js')}}"></script>
+<!-- Perfect Scrollbar -->
+<script src="{{asset('assets/vendor/perfect-scrollbar.min.js')}}"></script>
 
-    <!-- DOM Factory -->
-    <script src="{{asset('assets/vendor/dom-factory.js')}}"></script>
+<!-- DOM Factory -->
+<script src="{{asset('assets/vendor/dom-factory.js')}}"></script>
 
-    <!-- MDK -->
-    <script src="{{asset('assets/vendor/material-design-kit.js')}}"></script>
+<!-- MDK -->
+<script src="{{asset('assets/vendor/material-design-kit.js')}}"></script>
 
-    <!-- Fix Footer -->
-    <script src="{{asset('assets/vendor/fix-footer.js')}}"></script>
+<!-- Fix Footer -->
+<script src="{{asset('assets/vendor/fix-footer.js')}}"></script>
 
-    <!-- Chart.js -->
-    <script src="{{asset('assets/vendor/Chart.min.js')}}"></script>
+<!-- Chart.js -->
+<script src="{{asset('assets/vendor/Chart.min.js')}}"></script>
 
-    <!-- App JS -->
-    <script src="{{asset('assets/js/app.js')}}"></script>
+<!-- App JS -->
+<script src="{{asset('assets/js/app.js')}}"></script>
 
-    <!-- Highlight.js -->
-    <script src="{{asset('assets/js/hljs.js')}}"></script>
+<!-- Highlight.js -->
+<script src="{{asset('assets/js/hljs.js')}}"></script>
 
-    <!-- App Settings (safe to remove) -->
-    <script src="{{asset('assets/js/app-settings.js')}}"></script>
+<!-- App Settings (safe to remove) -->
+<script src="{{asset('assets/js/app-settings.js')}}"></script>
 
 </body>
 

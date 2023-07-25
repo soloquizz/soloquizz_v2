@@ -19,7 +19,7 @@
         <!-- Menu Layout -->
         @include('layouts.template.enseignant.menu')
         <!-- END Menu Layout -->
-         
+
         <!-- Section Pages Layout -->
 
         <div class="row mt-3 justify-content-center">
@@ -49,20 +49,29 @@
                             <a class="nav-link" href="#questions" onclick="switchTabQuestions()" data-toggle="tab">Questions</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#td" onclick="switchTabExercices()" data-toggle="tab">Exercices</a>
+                            <a class="nav-link" href="#td" onclick="switchTabExercices()"
+                               data-toggle="tab">Exercices</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#evaluations" onclick="switchTabEvaluations()" data-toggle="tab">Évaluations</a>
                         </li>
-                        
+
                         <div class="fa-pull-right mb-3">
 
-                            <a href="#" class="btnTab btn btn-outline-primary" id="btnSeance" style="margin-left: 225%!important; width: 170px!important;" data-toggle="modal" data-target="#addSeance">Nouvelle séance</a>
-                            <a href="#" class="btnTab btn btn-outline-primary mb-3" id="btnRessource" style="margin-left: 215%!important; width: 180px!important;" data-toggle="modal" data-target="#addRessource">Nouvelle ressource</a>
-                            <a href="#" class="btnTab btn btn-outline-primary mb-3" id="btnQuestion" style="margin-left: 215%!important; width: 180px!important;" data-toggle="modal" data-target="#addQuestionCours">Nouvelle question</a>
-                            <a href="#" class="btnTab btn btn-outline-primary mb-3" id="btnExercice" style="margin-left: 215%!important; width: 180px!important;" data-toggle="modal" data-target="#addExercice">Nouvel exercice</a>
+                            <a href="#" class="btnTab btn btn-outline-primary" id="btnSeance"
+                               style="margin-left: 225%!important; width: 170px!important;" data-toggle="modal"
+                               data-target="#addSeance">Nouvelle séance</a>
+                            <a href="#" class="btnTab btn btn-outline-primary mb-3" id="btnRessource"
+                               style="margin-left: 215%!important; width: 180px!important;" data-toggle="modal"
+                               data-target="#addRessource">Nouvelle ressource</a>
+                            <a href="#" class="btnTab btn btn-outline-primary mb-3" id="btnQuestion"
+                               style="margin-left: 215%!important; width: 180px!important;" data-toggle="modal"
+                               data-target="#addQuestionCours">Nouvelle question</a>
+                            <a href="#" class="btnTab btn btn-outline-primary mb-3" id="btnExercice"
+                               style="margin-left: 215%!important; width: 180px!important;" data-toggle="modal"
+                               data-target="#addExercice">Nouvel exercice</a>
 
-                           
+
                         </div>
                     </ul>
                     <div class="card-body tab-content">
@@ -70,7 +79,8 @@
                             <div class="row">
                                 @foreach($cours->seances as $seance)
                                     <div class="col-sm-6">
-                                        <div class="card card-path js-overlay stack stack--1 " data-toggle="popover" data-trigger="click">
+                                        <div class="card card-path js-overlay stack stack--1 " data-toggle="popover"
+                                             data-trigger="click">
                                             <div class="card-body">
                                                 <div class="d-flex align-items-center">
                                                     <div class="flex">
@@ -79,7 +89,8 @@
                                                                 <div class="overlay">
                                                                     <span class="overlay__content overlay__content-transparent">
                                                                     <span class="overlay__action d-flex flex-column text-center lh-1">
-                                                                        <small class="h6 small text-white mb-0" style="font-weight: 500;">80%</small>
+                                                                        <small class="h6 small text-white mb-0"
+                                                                               style="font-weight: 500;">80%</small>
                                                                     </span>
                                                                     </span>
                                                                 </div>
@@ -87,7 +98,9 @@
                                                             <div class="flex">
                                                                 <div class="card-title text-body mb-0">{{$seance->titre}}</div>
                                                                 <div class="text-muted d-flex lh-1">
-                                                                    {{date('d-m-Y', strtotime($seance->date)) }} entre {{$seance->heure_debut}} - {{$seance->heure_fin}}
+                                                                    {{date('d-m-Y', strtotime($seance->date)) }}
+                                                                    entre {{$seance->heure_debut}}
+                                                                    - {{$seance->heure_fin}}
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -112,7 +125,8 @@
                                             <div class="row">
                                                 <div class="col-12">
                                                     <span class="h6">Lien cours en ligne</span>
-                                                    <a class="text-primary" target="_blank" href="{{$seance->lien}}">{{$seance->lien}}</a>
+                                                    <a class="text-primary" target="_blank"
+                                                       href="{{$seance->lien}}">{{$seance->lien}}</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -128,10 +142,13 @@
                                             <div class="col-3">
                                                 <div class="card text-center">
                                                     <a href="{{$media->getFullUrl()}}">
-                                                        <img height="100" src="{{asset('assets/images/icon/icone_pdf.png')}}">
+                                                        <img height="100"
+                                                             src="{{asset('assets/images/icon/icone_pdf.png')}}">
                                                     </a>
                                                     <div class="card-footer">
-                                                        <a title="{{$support->file_name}}" target="_blank" href="{{$media->getFullUrl()}}">{{mb_strimwidth($support->file_name, 0, 15, "...")}} <i class="icon--right material-icons">file_download</i></a>
+                                                        <a title="{{$support->file_name}}" target="_blank"
+                                                           href="{{$media->getFullUrl()}}">{{mb_strimwidth($support->file_name, 0, 15, "...")}}
+                                                            <i class="icon--right material-icons">file_download</i></a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -139,10 +156,13 @@
                                             <div class="col-3">
                                                 <div class="card text-center">
                                                     <a href="{{$media->getFullUrl()}}">
-                                                        <img height="100" src="{{asset('assets/images/icon/word_icone.png')}}">
+                                                        <img height="100"
+                                                             src="{{asset('assets/images/icon/word_icone.png')}}">
                                                     </a>
                                                     <div class="card-footer">
-                                                        <a title="{{$support->file_name}}" target="_blank" href="{{$media->getFullUrl()}}">{{mb_strimwidth($support->file_name, 0, 15, "...")}} <i class="icon--right material-icons">file_download</i></a>
+                                                        <a title="{{$support->file_name}}" target="_blank"
+                                                           href="{{$media->getFullUrl()}}">{{mb_strimwidth($support->file_name, 0, 15, "...")}}
+                                                            <i class="icon--right material-icons">file_download</i></a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -150,10 +170,13 @@
                                             <div class="col-3">
                                                 <div class="card text-center">
                                                     <a href="{{$media->getFullUrl()}}">
-                                                        <img height="100" src="{{asset('assets/images/icon/video_icone.png')}}">
+                                                        <img height="100"
+                                                             src="{{asset('assets/images/icon/video_icone.png')}}">
                                                     </a>
                                                     <div class="card-footer">
-                                                        <a title="{{$support->file_name}}" target="_blank" href="{{$media->getFullUrl()}}">{{mb_strimwidth($support->file_name, 0, 15, "...")}} <i class="icon--right material-icons">file_download</i></a>
+                                                        <a title="{{$support->file_name}}" target="_blank"
+                                                           href="{{$media->getFullUrl()}}">{{mb_strimwidth($support->file_name, 0, 15, "...")}}
+                                                            <i class="icon--right material-icons">file_download</i></a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -169,21 +192,23 @@
                                     @foreach($questions as $question)
                                         <li class="mb-5">
                                             <div class="row">
-                                               <div class="col-2"><h6>Question {{ $rank++ }}</h6></div>
+                                                <div class="col-2"><h6>Question {{ $rank++ }}</h6></div>
                                                 <div class="col-2">
                                                     @if(isset($_GET['page']))
-                                                    <a href="{{route('enseignant.questionCours.edit.custom', ['question_id'=>$question->id,'page'=>$_GET['page']])}}">
-                                                        <i class="fa fa-edit text-warning mr-1" title="Mofification de la question"></i>
-                                                    </a>
+                                                        <a href="{{route('enseignant.questionCours.edit.custom', ['question_id'=>$question->id,'page'=>$_GET['page']])}}">
+                                                            <i class="fa fa-edit text-warning mr-1"
+                                                               title="Mofification de la question"></i>
+                                                        </a>
                                                     @else
                                                         <a href="{{route('enseignant.questionCours.edit.custom', ['question_id'=>$question->id,'page'=>1])}}">
-                                                            <i class="fa fa-edit text-warning mr-1" title="Mofification de la question"></i>
+                                                            <i class="fa fa-edit text-warning mr-1"
+                                                               title="Mofification de la question"></i>
                                                         </a>
                                                     @endif
                                                 </div>
                                             </div>
                                             {!! $question->contenu !!}
-                                           <!-- <h6>
+                                            <!-- <h6>
                                                 Options de réponse &nbsp;
                                                 <a href="#" data-toggle="modal" data-target="#addOption">
                                                     <i class="fa fa-plus-circle text-primary mr-1" onclick="changeIdquestion({{$question->id}})" title="Ajouter une option de réponse"></i>
@@ -225,7 +250,8 @@
                             <div class="row">
                                 @foreach($cours->exercices as $exo)
                                     <div class="col-sm-6">
-                                        <div class="card card-path js-overlay stack stack--1 " data-toggle="popover" data-trigger="click">
+                                        <div class="card card-path js-overlay stack stack--1 " data-toggle="popover"
+                                             data-trigger="click">
                                             <div class="card-body">
                                                 <div class="d-flex align-items-center">
                                                     <div class="flex">
@@ -234,7 +260,8 @@
                                                                 <div class="overlay">
                                                                     <span class="overlay__content overlay__content-transparent">
                                                                     <span class="overlay__action d-flex flex-column text-center lh-1">
-                                                                        <small class="h6 small text-white mb-0" style="font-weight: 500;">80%</small>
+                                                                        <small class="h6 small text-white mb-0"
+                                                                               style="font-weight: 500;">80%</small>
                                                                     </span>
                                                                     </span>
                                                                 </div>
@@ -242,7 +269,7 @@
                                                             <div class="flex">
                                                                 <div class="card-title text-body mb-0">{{$exo->titre}}</div>
                                                                 <div class="text-muted d-flex lh-1">
-                                                                   Note {{$exo->note_max}} - Durée {{$exo->duree}} 
+                                                                    Note {{$exo->note_max}} - Durée {{$exo->duree}}
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -254,18 +281,20 @@
                                         <div class="popoverContainer d-none">
                                             <div class="row">
                                                 <div class="col-12">
-                                                    <a class="text-primary" target="_blank" href="{{route('enseignant.cours.show.td',$cours)}}">
-                                                    Ajouter des questions
+                                                    <a class="text-primary" target="_blank"
+                                                       href="{{route('enseignant.cours.show.td',$cours)}}">
+                                                        Ajouter des questions
                                                     </a>
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-12">
-                                                    
-                                                    <a class="text-primary" target="_blank" href="{{route('enseignant.cours.show.td.question',$cours)}}">
+
+                                                    <a class="text-primary" target="_blank"
+                                                       href="{{route('enseignant.cours.show.td.question',$cours)}}">
                                                         <span class="h6">Consulter</span>
                                                     </a>
-                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -275,7 +304,7 @@
                         <div class="tab-pane" id="evaluations">
                             Espace des Évaluations
                         </div>
-                       
+
                     </div>
                 </div>
             </div>
@@ -300,32 +329,28 @@
     <script src="{{asset('assets/vendor/image-resize.min.js')}}"></script>
     <script src="{{asset('assets/js/quill.js')}}"></script>
     <script>
-      //switch selon les boutons appuyés
-        $('document').ready(function (){
+        //switch selon les boutons appuyés
+        $('document').ready(function () {
             $('.btnTab').hide();
             switchTabSeance();
         })
 
-        function switchTabSeance()
-        {
+        function switchTabSeance() {
             $('.btnTab').hide();
             $('#btnSeance').show();
         }
 
-        function switchTabRessources()
-        {
+        function switchTabRessources() {
             $('.btnTab').hide();
             $('#btnRessource').show();
         }
 
-        function switchTabQuestions()
-        {
+        function switchTabQuestions() {
             $('.btnTab').hide();
             $('#btnQuestion').show();
         }
 
-        function switchTabExercices()
-        {
+        function switchTabExercices() {
             $('.btnTab').hide();
             $('#btnExercice').show();
         }
@@ -338,10 +363,10 @@
                     displaySize: true
                 },
                 toolbar: [
-                    [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+                    [{'header': [1, 2, 3, 4, 5, 6, false]}],
                     ['bold', 'italic', 'underline', 'strike'],
-                    [{ 'color': [] }, { 'background': [] }],
-                    [{ 'align': [] }],
+                    [{'color': []}, {'background': []}],
+                    [{'align': []}],
                     ['link', 'image'],
                     [{"list": "ordered"}, {"list": "bullet"}],
                     ['clean']
@@ -356,10 +381,10 @@
                     displaySize: true
                 },
                 toolbar: [
-                    [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+                    [{'header': [1, 2, 3, 4, 5, 6, false]}],
                     ['bold', 'italic', 'underline', 'strike'],
-                    [{ 'color': [] }, { 'background': [] }],
-                    [{ 'align': [] }],
+                    [{'color': []}, {'background': []}],
+                    [{'align': []}],
                     ['link', 'image'],
                     [{"list": "ordered"}, {"list": "bullet"}],
                     ['clean']
@@ -368,37 +393,37 @@
         });
 
 
-        $("#storeQuestionForm").on("submit",function() {
+        $("#storeQuestionForm").on("submit", function () {
             $("#hiddenAreaQuestion").val($("#editorQuestion").html());
         });
 
-        $("#storeOptionForm").on("submit",function() {
+        $("#storeOptionForm").on("submit", function () {
             $("#hiddenAreaOption").val($("#editorOption").html());
         });
 
-        function changeIdquestion(idQuestion){
+        function changeIdquestion(idQuestion) {
             $("#idQuestion").val(idQuestion);
         }
-       
-        //pagination 
-    /* $(document).on('click','.pagination a', function(e){
-       
-    e.preventDefault();
-      let page = $(this).attr('href').split('page=')[1]
-      record(page)
-    });
 
-   function record(page){
-        var id=$("#cours_id").val();
-        console.log(id);
-        $.ajax({
-            url:"/enseignant/cours-show/"+id+"?page="+page,
-            success:function(res){
-                console.log(res)
-                $('.tab-pane').html(res);
-            }
-        })
-    }*/
+        //pagination 
+        /* $(document).on('click','.pagination a', function(e){
+
+        e.preventDefault();
+          let page = $(this).attr('href').split('page=')[1]
+          record(page)
+        });
+
+       function record(page){
+            var id=$("#cours_id").val();
+            console.log(id);
+            $.ajax({
+                url:"/enseignant/cours-show/"+id+"?page="+page,
+                success:function(res){
+                    console.log(res)
+                    $('.tab-pane').html(res);
+                }
+            })
+        }*/
     </script>
 @endsection
 

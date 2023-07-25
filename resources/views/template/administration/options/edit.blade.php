@@ -50,8 +50,8 @@
                                     @endif
                                 </select>
                                 <textarea name="contenu" style="display:none" id="hiddenAreaOption"></textarea>
-                                <input type="hidden"  name="page" value="{{$page}}">
-                                <input type="hidden"  name="question_id" value="{{$question->id}}">
+                                <input type="hidden" name="page" value="{{$page}}">
+                                <input type="hidden" name="question_id" value="{{$question->id}}">
                                 <input type="hidden" name="certification_id" value="{{$certification->id}}">
                             </div>
                         </div>
@@ -93,10 +93,10 @@
                     displaySize: true
                 },
                 toolbar: [
-                    [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+                    [{'header': [1, 2, 3, 4, 5, 6, false]}],
                     ['bold', 'italic', 'underline', 'strike'],
-                    [{ 'color': [] }, { 'background': [] }],
-                    [{ 'align': [] }],
+                    [{'color': []}, {'background': []}],
+                    [{'align': []}],
                     ['link', 'image'],
                     [{"list": "ordered"}, {"list": "bullet"}],
                     ['clean']
@@ -104,7 +104,7 @@
             }
         });
 
-        $("#storeOptionForm").on("submit",function() {
+        $("#storeOptionForm").on("submit", function () {
             $("#hiddenAreaOption").val($("#editorOption").html());
         });
 

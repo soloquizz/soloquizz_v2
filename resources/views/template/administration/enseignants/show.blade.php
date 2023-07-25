@@ -29,10 +29,12 @@
             <div class="card">
                 <ul class="nav nav-tabs nav-tabs-card row">
                     <li class="nav-item col-3">
-                        <a class="nav-link justify-content-center active" href="#infopersonnelles" data-toggle="tab">Informations personnelles</a>
+                        <a class="nav-link justify-content-center active" href="#infopersonnelles" data-toggle="tab">Informations
+                            personnelles</a>
                     </li>
                     <li class="nav-item col-3">
-                        <a class="nav-link justify-content-center" href="#compteuser" data-toggle="tab">Compte Utilisateur</a>
+                        <a class="nav-link justify-content-center" href="#compteuser" data-toggle="tab">Compte
+                            Utilisateur</a>
                     </li>
                     <li class="nav-item col-3">
                         <a class="nav-link justify-content-center" href="#roles" data-toggle="tab">Rôles</a>
@@ -51,36 +53,44 @@
                                             <div class="col-12 col-md-6 mb-3">
                                                 <label class="form-label">Matricule
                                                 </label>
-                                                <input type="text" disabled class="form-control" placeholder="matricule" value="{{$enseignant->matricule}}">
+                                                <input type="text" disabled class="form-control" placeholder="matricule"
+                                                       value="{{$enseignant->matricule}}">
                                             </div>
                                             <div class="col-12 col-md-6 mb-3">
                                                 <label class="form-label">Prénom
                                                 </label>
-                                                <input type="text" class="form-control" disabled placeholder="Prénom" value="{{$enseignant->prenom}}">
+                                                <input type="text" class="form-control" disabled placeholder="Prénom"
+                                                       value="{{$enseignant->prenom}}">
                                             </div>
                                         </div>
                                         <div class="form-row">
                                             <div class="col-12 col-md-6 mb-3">
                                                 <label class="form-label">Nom
                                                 </label>
-                                                <input type="text" disabled class="form-control" placeholder="nom" value="{{$enseignant->nom}}">
+                                                <input type="text" disabled class="form-control" placeholder="nom"
+                                                       value="{{$enseignant->nom}}">
                                             </div>
                                             <div class="col-12 col-md-6 mb-3">
-                                                <label class="form-label" >Téléphone
+                                                <label class="form-label">Téléphone
                                                 </label>
-                                                <input type="text" class="form-control" disabled placeholder="Téléphone" value="{{$enseignant->telephone}}">
+                                                <input type="text" class="form-control" disabled placeholder="Téléphone"
+                                                       value="{{$enseignant->telephone}}">
                                             </div>
                                         </div>
                                         <div class="form-row">
                                             <div class="col-12 col-md-6 mb-3">
                                                 <label class="form-label">Email Institutionnel
                                                 </label>
-                                                <input type="text" disabled class="form-control" value="{{$enseignant->user()->email}}" placeholder="Email Institutionnel">
+                                                <input type="text" disabled class="form-control"
+                                                       value="{{$enseignant->user()->email}}"
+                                                       placeholder="Email Institutionnel">
                                             </div>
                                             <div class="col-12 col-md-6 mb-3">
                                                 <label class="form-label">Email Personnel
                                                 </label>
-                                                <input type="text" disabled class="form-control" value="{{$enseignant->email_personnel}}" placeholder="Email Personnel">
+                                                <input type="text" disabled class="form-control"
+                                                       value="{{$enseignant->email_personnel}}"
+                                                       placeholder="Email Personnel">
                                             </div>
                                         </div>
                                     </div>
@@ -100,27 +110,35 @@
                                                     <label class="form-label">Email Institutionnel
                                                         <span class="text-danger">*</span>
                                                     </label>
-                                                    <input type="text" name="email" class="form-control" placeholder="pre" value="{{$enseignant->user()->email}}" required="">
+                                                    <input type="text" name="email" class="form-control"
+                                                           placeholder="pre" value="{{$enseignant->user()->email}}"
+                                                           required="">
                                                 </div>
                                                 <div class="col-12 col-md-6 mb-3">
                                                     <label class="form-label">Password
                                                     </label>
-                                                    <input type="password" name="password" class="form-control"  placeholder="Password">
+                                                    <input type="password" name="password" class="form-control"
+                                                           placeholder="Password">
                                                 </div>
                                             </div>
                                             <div class="form-row">
                                                 <div class="col-12 col-md-6 mb-3">
                                                     <label class="form-label">Password Confirmation
                                                     </label>
-                                                    <input type="password" name="password_confirmed" class="form-control"  placeholder="Password">
-                                                    <input type="hidden" name="user_id" value="{{$enseignant->user()->id}}">
+                                                    <input type="password" name="password_confirmed"
+                                                           class="form-control" placeholder="Password">
+                                                    <input type="hidden" name="user_id"
+                                                           value="{{$enseignant->user()->id}}">
                                                 </div>
                                                 <div class="col-12 col-md-6 mb-3">
                                                     <div class="flex">
-                                                        <label class="form-label" for="subscribe">Activation compte</label><br>
+                                                        <label class="form-label" for="subscribe">Activation
+                                                            compte</label><br>
                                                         <div class="custom-control custom-checkbox-toggle custom-control-inline mr-1">
-                                                            <input checked="" type="checkbox" id="subscribe" class="custom-control-input">
-                                                            <label class="custom-control-label" for="subscribe">Actif</label>
+                                                            <input checked="" type="checkbox" id="subscribe"
+                                                                   class="custom-control-input">
+                                                            <label class="custom-control-label"
+                                                                   for="subscribe">Actif</label>
                                                         </div>
                                                         <label class="form-label mb-0" for="subscribe">Actif</label>
                                                     </div>

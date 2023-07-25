@@ -56,15 +56,18 @@
                     <form class="col-sm-4" method="POST" action="{{ route('admin.certifications.questions.search') }}">
                         @csrf
                         <div class="search-form search-form--light mb-3">
-                            <input type="text" name="search" class="form-control" value="{{$textSearch}}" placeholder="Rechercher une question">
+                            <input type="text" name="search" class="form-control" value="{{$textSearch}}"
+                                   placeholder="Rechercher une question">
                             <input type="hidden" name="certification_id" value="{{$certification->id}}">
-                            <button class="btn" type="submit" role="button"><i class="material-icons">search</i></button>
+                            <button class="btn" type="submit" role="button"><i class="material-icons">search</i>
+                            </button>
                         </div>
                     </form>
 
                     <!-- Bouton -->
                     <div class="col-sm-4 text-right">
-                        <a href="#" class="btn btn-outline-primary" data-toggle="modal" data-target="#addQuestion">Nouvelle question</a>
+                        <a href="#" class="btn btn-outline-primary" data-toggle="modal" data-target="#addQuestion">Nouvelle
+                            question</a>
                     </div>
                 </div>
             </div>
@@ -79,11 +82,13 @@
                                 <div class="col-2">
                                     @if(isset($_GET['page']))
                                         <a href="{{route('admin.questions.edit.custom', ['question_id'=>$question->id,'page'=>$_GET['page']])}}">
-                                            <i class="fa fa-edit text-warning mr-1" title="Mofification de la question"></i>
+                                            <i class="fa fa-edit text-warning mr-1"
+                                               title="Mofification de la question"></i>
                                         </a>
                                     @else
                                         <a href="{{route('admin.questions.edit.custom', ['question_id'=>$question->id,'page'=>1])}}">
-                                            <i class="fa fa-edit text-warning mr-1" title="Mofification de la question"></i>
+                                            <i class="fa fa-edit text-warning mr-1"
+                                               title="Mofification de la question"></i>
                                         </a>
                                     @endif
                                 </div>
@@ -92,24 +97,29 @@
                             <h6>
                                 Options de réponse &nbsp;
                                 <a href="#" data-toggle="modal" data-target="#addOption">
-                                    <i class="fa fa-plus-circle text-primary mr-1" onclick="changeIdquestion({{$question->id}})" title="Ajouter une option de réponse"></i>
+                                    <i class="fa fa-plus-circle text-primary mr-1"
+                                       onclick="changeIdquestion({{$question->id}})"
+                                       title="Ajouter une option de réponse"></i>
                                 </a>
                             </h6>
                             @foreach($question->options as $option)
                                 <div class="row">
                                     @if($option->correcte)
-                                        <i class="fa fa-check text-success mr-1" title="Mofification de la question"></i>
+                                        <i class="fa fa-check text-success mr-1"
+                                           title="Mofification de la question"></i>
                                     @else
                                         <i class="fa fa-times text-danger mr-1" title="Mofification de la question"></i>
                                     @endif
                                     {!! $option->contenu !!}
                                     @if(isset($_GET['page']))
                                         <a href="{{route('admin.options.edit.custom', ['otion_id'=>$option->id,'page'=>$_GET['page']])}}">
-                                            <i class="fa fa-edit text-warning mr-1" title="Mofification de l'option"></i>
+                                            <i class="fa fa-edit text-warning mr-1"
+                                               title="Mofification de l'option"></i>
                                         </a>
                                     @else
                                         <a href="{{route('admin.options.edit.custom', ['otion_id'=>$option->id,'page'=>1])}}">
-                                            <i class="fa fa-edit text-warning mr-1" title="Mofification de l'option"></i>
+                                            <i class="fa fa-edit text-warning mr-1"
+                                               title="Mofification de l'option"></i>
                                         </a>
                                     @endif
                                 </div>
@@ -150,10 +160,10 @@
                     displaySize: true
                 },
                 toolbar: [
-                    [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+                    [{'header': [1, 2, 3, 4, 5, 6, false]}],
                     ['bold', 'italic', 'underline', 'strike'],
-                    [{ 'color': [] }, { 'background': [] }],
-                    [{ 'align': [] }],
+                    [{'color': []}, {'background': []}],
+                    [{'align': []}],
                     ['link', 'image'],
                     [{"list": "ordered"}, {"list": "bullet"}],
                     ['clean']
@@ -168,10 +178,10 @@
                     displaySize: true
                 },
                 toolbar: [
-                    [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+                    [{'header': [1, 2, 3, 4, 5, 6, false]}],
                     ['bold', 'italic', 'underline', 'strike'],
-                    [{ 'color': [] }, { 'background': [] }],
-                    [{ 'align': [] }],
+                    [{'color': []}, {'background': []}],
+                    [{'align': []}],
                     ['link', 'image'],
                     [{"list": "ordered"}, {"list": "bullet"}],
                     ['clean']
@@ -180,15 +190,15 @@
         });
 
 
-        $("#storeQuestionForm").on("submit",function() {
+        $("#storeQuestionForm").on("submit", function () {
             $("#hiddenAreaQuestion").val($("#editorQuestion").html());
         });
 
-        $("#storeOptionForm").on("submit",function() {
+        $("#storeOptionForm").on("submit", function () {
             $("#hiddenAreaOption").val($("#editorOption").html());
         });
 
-        function changeIdquestion(idQuestion){
+        function changeIdquestion(idQuestion) {
             $("#idQuestion").val(idQuestion);
         }
 

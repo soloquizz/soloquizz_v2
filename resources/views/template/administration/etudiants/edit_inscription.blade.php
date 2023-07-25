@@ -46,7 +46,7 @@
                             <input type="text" class="form-control" disabled value="{{$etudiant->nom}}">
                         </div>
                         <div class="col-12 col-md-6 mb-3">
-                            <label class="form-label" >Téléphone
+                            <label class="form-label">Téléphone
                                 <span class="text-danger">*</span>
                             </label>
                             <input type="text" class="form-control" disabled value="{{$etudiant->telephone}}">
@@ -59,7 +59,7 @@
                         </div>
                         <div class="col-12 col-md-6 mb-3">
                             <label class="form-label">Email Personnel</label>
-                            <input type="text"  class="form-control" value="{{$etudiant->email_personnel}}">
+                            <input type="text" class="form-control" value="{{$etudiant->email_personnel}}">
                         </div>
                     </div>
                     <div class="form-row">
@@ -82,16 +82,20 @@
                                 @endforeach
                             </select>
                         </div>
-                        <input type="hidden"  class="form-control" name="etudiant_id" value="{{$etudiant->id}}">
-                        <input type="hidden"  class="form-control" name="inscription_id" value="{{$inscription->id}}">
+                        <input type="hidden" class="form-control" name="etudiant_id" value="{{$etudiant->id}}">
+                        <input type="hidden" class="form-control" name="inscription_id" value="{{$inscription->id}}">
                     </div>
                     <div class="form-row">
                         <label class="form-label">État de l'inscription</label>
                         <select required class="form-control" name="etat">
                             <option>Choisir un état d'inscription</option>
-                            <option value="En cours" {{$inscription->etat == 'En cours' ? 'selected' : ''}}>En cours</option>
-                            <option value="Abandonnée" {{$inscription->etat == 'Abandonnée' ? 'selected' : ''}}>Abandonnée</option>
-                            <option value="Terminée" {{$inscription->etat == 'Terminée' ? 'selected' : ''}}>Terminée</option>
+                            <option value="En cours" {{$inscription->etat == 'En cours' ? 'selected' : ''}}>En cours
+                            </option>
+                            <option value="Abandonnée" {{$inscription->etat == 'Abandonnée' ? 'selected' : ''}}>
+                                Abandonnée
+                            </option>
+                            <option value="Terminée" {{$inscription->etat == 'Terminée' ? 'selected' : ''}}>Terminée
+                            </option>
                         </select>
                     </div>
                 </div>

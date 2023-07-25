@@ -9,10 +9,12 @@
                 <div class="flex mb-32pt mb-md-0">
                     <h1 class="text-white mb-0">Connexion</h1>
                 </div>
-                <a href="{{route('auth.register')}}" class="btn btn-outline-white flex-column">
+                {{--
+                    <a href="{{route('auth.register')}}" class="btn btn-outline-white flex-column">
                     Vous n'avez pas encore de compte
                     <span class="btn__secondary-text">Créez-en maintenant!</span>
-                </a>
+                    </a>
+                 --}}
             </div>
         </div>
         <div class="bg-white pt-32pt pt-sm-64pt pb-32pt">
