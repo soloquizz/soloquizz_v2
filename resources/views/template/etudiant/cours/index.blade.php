@@ -31,11 +31,13 @@
                                     <div class="card">
                                         <div class="card-body d-flex justify-content-center">
                                             <a href="{{route('etudiant.cours.show',$cour->id)}}">
-                                                <img src="{{$cour->image()}}" class="img-fluid" style="height: 150px!important; width: 200px!important; align-content: center!important;">
+                                                <img src="{{$cour->image()}}" class="img-fluid"
+                                                     style="height: 150px!important; width: 200px!important; align-content: center!important;">
                                             </a>
                                         </div>
                                         <div class="card-footer justify-content-center text-center">
-                                            <a class="text-center" href="{{route('etudiant.cours.show',$cour->id)}}">{{$cour->nom}}</a>
+                                            <a class="text-center"
+                                               href="{{route('etudiant.cours.show',$cour->id)}}">{{$cour->nom}}</a>
                                         </div>
                                     </div>
                                 </div>

@@ -27,13 +27,16 @@
             <div class="card-body">
                 <ul class="nav nav-tabs row nav-tabs-card">
                     <li class="nav-item col-4">
-                        <a class="nav-link justify-content-center active" href="#affectation" data-toggle="tab">Affectation cours enseignant</a>
+                        <a class="nav-link justify-content-center active" href="#affectation" data-toggle="tab">Affectation
+                            cours enseignant</a>
                     </li>
                     <li class="nav-item col-4">
-                        <a class="nav-link justify-content-center" href="#activation" data-toggle="tab">Activation cours</a>
+                        <a class="nav-link justify-content-center" href="#activation" data-toggle="tab">Activation
+                            cours</a>
                     </li>
                     <li class="nav-item col-4">
-                        <a class="nav-link justify-content-center" href="#historiques" data-toggle="tab">Historiques Affectations</a>
+                        <a class="nav-link justify-content-center" href="#historiques" data-toggle="tab">Historiques
+                            Affectations</a>
                     </li>
                 </ul>
                 <div class="card-body tab-content">
@@ -85,7 +88,8 @@
                                 <div class="col-3">
                                     {!! Form::model($cours, ['route' => ['admin.cours.update', $cours->id], 'method' => 'patch']) !!}
                                     <div class="custom-control custom-checkbox-toggle custom-control-inline mr-1">
-                                        <button type="submit" title="Actif" class="btn btn-outline-danger">Désactiver</button>
+                                        <button type="submit" title="Actif" class="btn btn-outline-danger">Désactiver
+                                        </button>
                                         <input type="hidden" name="etat" value="0">
                                         <input type="hidden" name="nom" value="{{$cours->nom}}">
                                         <input type="hidden" name="classe_id" value="{{$cours->classe_id}}">
@@ -102,7 +106,8 @@
                                 <div class="col-3">
                                     {!! Form::model($cours, ['route' => ['admin.cours.update', $cours->id], 'method' => 'patch']) !!}
                                     <div class="custom-control custom-checkbox-toggle custom-control-inline mr-1">
-                                        <button type="submit" title="Inactif" class="btn btn-outline-success">Activer</button>
+                                        <button type="submit" title="Inactif" class="btn btn-outline-success">Activer
+                                        </button>
                                         <input type="hidden" name="etat" value="1">
                                         <input type="hidden" name="nom" value="{{$cours->nom}}">
                                         <input type="hidden" name="classe_id" value="{{$cours->classe_id}}">

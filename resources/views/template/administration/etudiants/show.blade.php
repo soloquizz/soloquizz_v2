@@ -41,13 +41,15 @@
                                     <label class="form-label">Numéro Carte
                                         <span class="text-danger">*</span>
                                     </label>
-                                    <input type="text" disabled value="{{$etudiant->numero_carte}}" class="form-control" placeholder="matricule">
+                                    <input type="text" disabled value="{{$etudiant->numero_carte}}" class="form-control"
+                                           placeholder="matricule">
                                 </div>
                                 <div class="col-12 col-md-6 mb-3">
                                     <label class="form-label">Prénom
                                         <span class="text-danger">*</span>
                                     </label>
-                                    <input type="text" class="form-control" disabled value="{{$etudiant->prenom}}" placeholder="Prénom">
+                                    <input type="text" class="form-control" disabled value="{{$etudiant->prenom}}"
+                                           placeholder="Prénom">
                                 </div>
                             </div>
                             <div class="form-row">
@@ -55,31 +57,36 @@
                                     <label class="form-label">Nom
                                         <span class="text-danger">*</span>
                                     </label>
-                                    <input type="text" disabled value="{{$etudiant->nom}}" class="form-control" placeholder="nom">
+                                    <input type="text" disabled value="{{$etudiant->nom}}" class="form-control"
+                                           placeholder="nom">
                                 </div>
                                 <div class="col-12 col-md-6 mb-3">
-                                    <label class="form-label" >Téléphone
+                                    <label class="form-label">Téléphone
                                         <span class="text-danger">*</span>
                                     </label>
-                                    <input type="text" class="form-control" disabled value="{{$etudiant->telephone}}" placeholder="Téléphone">
+                                    <input type="text" class="form-control" disabled value="{{$etudiant->telephone}}"
+                                           placeholder="Téléphone">
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="col-12 col-md-6 mb-3">
                                     <label class="form-label">Email Institutionnel
                                     </label>
-                                    <input type="text" disabled class="form-control" value="{{$etudiant->user()->email}}" placeholder="prenom1.nom@cat.edu.sn">
+                                    <input type="text" disabled class="form-control"
+                                           value="{{$etudiant->user()->email}}" placeholder="prenom1.nom@cat.edu.sn">
                                 </div>
                                 <div class="col-12 col-md-6 mb-3">
                                     <label class="form-label">Email Personnel</label>
-                                    <input type="text" disabled class="form-control" value="{{$etudiant->email_personnel}}" placeholder="Email Personnel">
+                                    <input type="text" disabled class="form-control"
+                                           value="{{$etudiant->email_personnel}}" placeholder="Email Personnel">
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="tab-pane " id="inscriptions">
                         <div class="row fa-pull-right">
-                            <a href="#" class="btn btn-outline-primary" data-toggle="modal" data-target="#addInscription">Nouvelle</a>
+                            <a href="#" class="btn btn-outline-primary" data-toggle="modal"
+                               data-target="#addInscription">Nouvelle</a>
                         </div>
 
                         <!-- Table -->

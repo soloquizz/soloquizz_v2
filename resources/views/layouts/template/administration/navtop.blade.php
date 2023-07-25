@@ -1,14 +1,14 @@
 <!-- Header -->
 <div id="header" class="mdk-header bg-dark js-mdk-header mb-0" data-effects="waterfall blend-background" data-fixed data-condenses>
     <div class="mdk-header__content">
-        <div class="navbar navbar-expand-sm navbar-dark bg-white pr-0 pr-md-16pt" id="default-navbar" data-primary>
+        <div class="navbar navbar-expand-sm navbar-dark bg-dark pr-0 pr-md-16pt" id="default-navbar" data-primary>
             <!-- Navbar toggler -->
             <button class="navbar-toggler navbar-toggler-right d-block d-md-none" type="button" data-toggle="sidebar">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <!-- Navbar Brand -->
             <a href="{{ route('admin.index') }}" class="navbar-brand">
-                <img class="navbar-brand-icon mr-0 mr-md-8pt" src="{{asset('welcome_assets/img/logoSoloquizz2.png')}}" width="200" alt="Tutorio">
+                <img class="navbar-brand-icon mr-0 mr-md-8pt" src="{{asset('/assets/images/logo/Soloquizz.png')}}" width="150" alt="Tutorio">
                 <span class="d-none d-md-block"></span>
             </a>
             {{--
@@ -21,12 +21,12 @@
             --}}
             <!-- Main Navigation -->
             <nav class="nav navbar-nav ml-auto flex-nowrap">
-                <div class="nav-item dropdown d-none d-sm-flex ml-16pt bg-dark">
+                <div class="nav-item dropdown d-none d-sm-flex ml-16pt">
                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
                         <img width="32" height="32" class="rounded-circle" src="{{asset('assets/images/people/50/user.png')}}" alt="student" />
                     </a>
                     <div class="dropdown-menu dropdown-menu-right">
-                        <a class="dropdown-item active" href="#"><i class="fa fa-user bg-white"></i>&nbsp;&nbsp;{{auth()->user()->getFullName()}}</a>
+                        <a class="dropdown-item active" href="#"><i class="fa fa-user"></i>&nbsp;&nbsp;{{auth()->user()->getFullName()}}</a>
                         <a class="dropdown-item" href="" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                             <i class="fa fa-power-off"></i>&nbsp;&nbsp;
                             Déconnexion
