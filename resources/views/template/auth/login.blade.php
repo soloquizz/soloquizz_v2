@@ -20,7 +20,7 @@
                 @include('adminlte-templates::common.errors')
             </div>
             <div class="container page__container">
-                <form action="{{ route('auth.login') }}" method="post" class="col-md-5 p-0 mx-auto">
+                <form action="#" method="post" class="col-md-5 p-0 mx-auto">
                     @csrf
                     <div class="form-group">
                         <label for="email">Email:</label>
