@@ -56,13 +56,13 @@
                                        <label class="form-label">Point
                                            <span class="text-danger">*</span>
                                        </label>
-                                       <input type="text" class="form-control form-control-sm" aria-label=".form-select-sm example" name="point[]">
+                                       <input type="number" name="point[]">
                                    </div>
                                    <div class="p-2 bd-highlight">
                                        <label class="form-label">Durée
                                            <span class="text-danger">*</span>
                                        </label>
-                                       <input type="text" class="form-control form-control-sm" aria-label=".form-select-sm example" name="duree[]">
+                                       <input type="number" name="duree[]">
                                    </div>
                                </div>
                                {!! $question->contenu !!}

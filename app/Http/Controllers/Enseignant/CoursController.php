@@ -45,6 +45,8 @@ class CoursController extends Controller
     {
         $cours = Cours::find($cours_id);
         $support = $cours->supports->first();
+        $classe=$cours->classe;
+        $inscrits=$classe->inscriptions->filter();
         //dd($support->getMedia('supports'));
         
         $textSearch = $request->search;
@@ -56,7 +58,9 @@ class CoursController extends Controller
         }
         $questions->appends($_GET)->links();
         $rank = $questions->firstItem();
-        return view('template.enseignant.cours.show',compact('cours','questions','rank'));
+
+        //selecting all users from classe
+         return view('template.enseignant.cours.show',compact('cours','questions','rank','inscrits'));
     }
 
     public function storeSupport(Request $request)
@@ -82,4 +86,6 @@ class CoursController extends Controller
         return redirect(route('enseignant.cours.show',$input['cours_id']));
 
     }
+
+    
 }

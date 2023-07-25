@@ -1,6 +1,10 @@
 @extends('layouts.template.enseignant.master')
 
 @section('css')
+
+    <!--Datatables-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="//cdn.datatables.net/1.13.5/css/jquery.dataTables.min.css">
     <!-- Quill Theme -->
     <link type="text/css" href="{{asset('assets/css/quill.css')}}" rel="stylesheet">
     <link type="text/css" href="{{asset('assets/css/quill.rtl.css')}}" rel="stylesheet">
@@ -54,6 +58,9 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#evaluations" onclick="switchTabEvaluations()" data-toggle="tab">Évaluations</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#etudiants" onclick="switchTabEtudiants()" data-toggle="tab">Étudiants</a>
                         </li>
 
                         <div class="fa-pull-right mb-3">
@@ -304,6 +311,32 @@
                         <div class="tab-pane" id="evaluations">
                             Espace des Évaluations
                         </div>
+                        <div class="tab-pane" id="etudiants">
+                            <table id="myTable">
+                                <thead>
+                                    <tr>
+                                    <th>Numéro carte</th>
+                                    <th>Nom</th>
+                                    <th>Prénom</th>
+                                    <th>Téléphone</th>
+                                    <th>E-mail Professionnel</th>
+                                    </tr>
+                                    
+                                </thead>
+                                <tbody>
+                                    @foreach($inscrits as $etudiant)
+                                    <tr>
+                                        <td>{{$etudiant->etudiant->numero_carte}}</td>
+                                        <td>{{$etudiant->etudiant->nom}}</td>
+                                        <td>{{$etudiant->etudiant->prenom}}</td>
+                                        <td>{{$etudiant->etudiant->telephone}}</td>
+                                        <td>{{$etudiant->etudiant->email_personnel}}</td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                          
+                        </div>
 
                     </div>
                 </div>
@@ -325,6 +358,8 @@
 
 
 @section('script')
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+    <script src="//cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
     <script src="{{asset('assets/vendor/quill.min.js')}}"></script>
     <script src="{{asset('assets/vendor/image-resize.min.js')}}"></script>
     <script src="{{asset('assets/js/quill.js')}}"></script>
@@ -353,6 +388,9 @@
         function switchTabExercices() {
             $('.btnTab').hide();
             $('#btnExercice').show();
+        }
+        function switchTabEtudiants() {
+            $('.btnTab').hide();
         }
 
         //Quill 
@@ -405,25 +443,12 @@
             $("#idQuestion").val(idQuestion);
         }
 
-        //pagination 
-        /* $(document).on('click','.pagination a', function(e){
+         
+         $(document).ready(function(){
+           $('#myTable').DataTable();
+         })
 
-        e.preventDefault();
-          let page = $(this).attr('href').split('page=')[1]
-          record(page)
-        });
-
-       function record(page){
-            var id=$("#cours_id").val();
-            console.log(id);
-            $.ajax({
-                url:"/enseignant/cours-show/"+id+"?page="+page,
-                success:function(res){
-                    console.log(res)
-                    $('.tab-pane').html(res);
-                }
-            })
-        }*/
+       
     </script>
 @endsection
 

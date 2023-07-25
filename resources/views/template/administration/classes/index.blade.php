@@ -1,5 +1,11 @@
 @extends('layouts.template.administration.master')
 
+@section('css')
+ <!--Datatables-->
+ <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+ <link rel="stylesheet" href="//cdn.datatables.net/1.13.5/css/jquery.dataTables.min.css">
+
+@endsection
 @section('content_page')
 
     <div class="mdk-header-layout__content page-content">
@@ -47,14 +53,9 @@
             <!-- Wrapper -->
             <div class="table-responsive" data-toggle="lists" data-lists-values='["name"]'>
 
-                <!-- Search -->
-                <div class="search-form search-form--light mb-3 col-sm-4">
-                    <input type="text" class="form-control search" placeholder="Rechercher">
-                    <button class="btn" type="button" role="button"><i class="material-icons">search</i></button>
-                </div>
 
                 <!-- Table -->
-                <table class="table">
+                <table id="myTable" class="table">
                     <thead>
                     <tr>
                         <th>Nom</th>
@@ -94,5 +95,17 @@
     <!-- Modal -->
     @include('template.administration.classes.create')
     <!-- Modal -->
+@endsection
+@section('script')
+<script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+<script src="//cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
+    <script>
+         $(document).ready(function(){
+           $('#myTable').DataTable();
+         });
+        function submitShow() {
+            $('#showForm').submit();
+        }
+    </script>
 @endsection
 
