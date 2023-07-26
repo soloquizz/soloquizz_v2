@@ -31,16 +31,9 @@
                             <input type="email" class="form-control" id="email1" name="email" aria-describedby="emailHelp" required placeholder="Votre adresse email institutionnel...">
                             <small id="emailHelp" class="form-text text-muted">Your information is safe with us.</small>
                           </div>
-                          <div class="form-group">
-                            <label for="password1">Mot de passe</label>
-                            <input type="password" class="form-control" id="password1" name="password" placeholder="Votre mot de passe ...">
-                            <p class="text-right"><a href="{{route('auth.email')}}" class="small">Mot de passe oublié ?</a></p>
-
-                          </div>
-                         
                         </div>
                         <div class="modal-footer border-top-0 d-flex justify-content-center">
-                            <button class="btn btn-lg btn-outline-primary">Connexion</button>
+                            <button class="btn btn-lg btn-outline-primary">Valider</button>
                         </div>
                     
                 </form>

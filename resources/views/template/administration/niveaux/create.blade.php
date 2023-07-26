@@ -1,4 +1,4 @@
-<div class="modal fade" id="addParcour" tabindex="-1" role="dialog" aria-labelledby="addParcourLabel" aria-hidden="true">
+<div class="modal fade" id="addNiveau" tabindex="-1" role="dialog" aria-labelledby="addParcourLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
