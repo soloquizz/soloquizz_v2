@@ -1,7 +1,6 @@
 @extends('layouts.template.enseignant.master')
 
 @section('css')
-
     <!--Datatables-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="//cdn.datatables.net/1.13.5/css/jquery.dataTables.min.css">
@@ -62,26 +61,19 @@
                         <li class="nav-item">
                             <a class="nav-link" href="#etudiants" onclick="switchTabEtudiants()" data-toggle="tab">Étudiants</a>
                         </li>
-
                         <div class="fa-pull-right mb-3">
-
-                            <a href="#" class="btnTab btn btn-outline-primary" id="btnSeance"
-                               style="margin-left: 225%!important; width: 170px!important;" data-toggle="modal"
-                               data-target="#addSeance">Nouvelle séance</a>
-                            <a href="#" class="btnTab btn btn-outline-primary mb-3" id="btnRessource"
-                               style="margin-left: 215%!important; width: 180px!important;" data-toggle="modal"
-                               data-target="#addRessource">Nouvelle ressource</a>
-                            <a href="#" class="btnTab btn btn-outline-primary mb-3" id="btnQuestion"
-                               style="margin-left: 215%!important; width: 180px!important;" data-toggle="modal"
-                               data-target="#addQuestionCours">Nouvelle question</a>
-                            <a href="#" class="btnTab btn btn-outline-primary mb-3" id="btnExercice"
-                               style="margin-left: 215%!important; width: 180px!important;" data-toggle="modal"
-                               data-target="#addExercice">Nouvel exercice</a>
-
-
+                            <a href="#" class="btnTab btn btn-outline-primary ml-5" id="btnSeance"
+                               data-toggle="modal" data-target="#addSeance">Nouvelle séance</a>
+                            <a href="#" class="btnTab btn btn-outline-primary mb-3 ml-5" id="btnRessource"
+                               data-toggle="modal" data-target="#addRessource">Nouvelle ressource</a>
+                            <a href="#" class="btnTab btn btn-outline-primary mb-3 ml-5" id="btnQuestion"
+                               data-toggle="modal" data-target="#addQuestionCours">Nouvelle question</a>
+                            <a href="#" class="btnTab btn btn-outline-primary mb-3 ml-5" id="btnExercice"
+                               data-toggle="modal" data-target="#addExercice">Nouvel exercice</a>
                         </div>
                     </ul>
                     <div class="card-body tab-content">
+                        <!--ESPACE SEANCES-->
                         <div class="tab-pane active" id="seances">
                             <div class="row">
                                 @foreach($cours->seances as $seance)
@@ -141,6 +133,7 @@
                                 @endforeach
                             </div>
                         </div>
+                        <!--ESPACE RESSOURCES-->
                         <div class="tab-pane " id="ressources">
                             <div class="row">
                                 @foreach($cours->supports as $support)
@@ -214,7 +207,9 @@
                                                     @endif
                                                 </div>
                                             </div>
-                                            {!! $question->contenu !!}
+                                            <div class="row">
+                                                {!! $question->contenu !!}
+                                            </div>
                                             <!-- <h6>
                                                 Options de réponse &nbsp;
                                                 <a href="#" data-toggle="modal" data-target="#addOption">
@@ -252,13 +247,12 @@
                             </div>
 
                         </div>
-                        <!--ESPACE TD-->
+                        <!--ESPACE EXERCICE-->
                         <div class="tab-pane" id="td">
                             <div class="row">
                                 @foreach($cours->exercices as $exo)
                                     <div class="col-sm-6">
-                                        <div class="card card-path js-overlay stack stack--1 " data-toggle="popover"
-                                             data-trigger="click">
+                                        <div class="card card-path js-overlay stack stack--1 " data-toggle="popover" data-trigger="click">
                                             <div class="card-body">
                                                 <div class="d-flex align-items-center">
                                                     <div class="flex">
@@ -267,8 +261,7 @@
                                                                 <div class="overlay">
                                                                     <span class="overlay__content overlay__content-transparent">
                                                                     <span class="overlay__action d-flex flex-column text-center lh-1">
-                                                                        <small class="h6 small text-white mb-0"
-                                                                               style="font-weight: 500;">80%</small>
+                                                                        <small class="h6 small text-white mb-0" style="font-weight: 500;">80%</small>
                                                                     </span>
                                                                     </span>
                                                                 </div>
@@ -276,7 +269,7 @@
                                                             <div class="flex">
                                                                 <div class="card-title text-body mb-0">{{$exo->titre}}</div>
                                                                 <div class="text-muted d-flex lh-1">
-                                                                    Note {{$exo->note_max}} - Durée {{$exo->duree}}
+                                                                    {{$exo->questionExercices->count()}} questions pour {{$exo->duree}} min - {{$exo->note_max}} point(s)
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -288,7 +281,7 @@
                                         <div class="popoverContainer d-none">
                                             <div class="row">
                                                 <div class="col-12">
-                                                    <a class="text-primary" target="_blank"
+                                                    <a class="text-primary"
                                                        href="{{route('enseignant.cours.show.td',$cours)}}">
                                                         Ajouter des questions
                                                     </a>
@@ -296,8 +289,7 @@
                                             </div>
                                             <div class="row">
                                                 <div class="col-12">
-
-                                                    <a class="text-primary" target="_blank"
+                                                    <a class="text-primary"
                                                        href="{{route('enseignant.cours.show.td.question',$cours)}}">
                                                         <span class="h6">Consulter</span>
                                                     </a>
@@ -308,20 +300,21 @@
                                 @endforeach
                             </div>
                         </div>
+                        <!--ESPACE ÉVALUATIONS-->
                         <div class="tab-pane" id="evaluations">
                             Espace des Évaluations
                         </div>
+                        <!--ESPACE ETUDIANTS-->
                         <div class="tab-pane" id="etudiants">
                             <table id="myTable">
                                 <thead>
                                     <tr>
-                                    <th>Numéro carte</th>
-                                    <th>Nom</th>
-                                    <th>Prénom</th>
-                                    <th>Téléphone</th>
-                                    <th>E-mail Professionnel</th>
+                                        <th>Numéro carte</th>
+                                        <th>Nom</th>
+                                        <th>Prénom</th>
+                                        <th>Téléphone</th>
+                                        <th>E-mail Institutionnel</th>
                                     </tr>
-                                    
                                 </thead>
                                 <tbody>
                                     @foreach($inscrits as $etudiant)
@@ -337,7 +330,6 @@
                             </table>
                           
                         </div>
-
                     </div>
                 </div>
             </div>

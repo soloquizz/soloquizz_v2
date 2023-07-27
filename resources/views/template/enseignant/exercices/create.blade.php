@@ -18,36 +18,35 @@
                                     <label class="form-label">Titre
                                         <span class="text-danger">*</span>
                                     </label>
-                                    <input class="form-control form-control-sm" aria-label=".form-select-sm example" name="titre">
+                                    <input class="form-control"  name="titre">
                                  </div>
                                  <div class="col-12 col-md-6 mb-3">
                                     <label class="form-label">Note Maximale
                                         <span class="text-danger">*</span>
                                     </label>
-                                    <input class="form-control form-control-sm" aria-label=".form-select-sm example" name="note_max">
+                                    <input class="form-control"  name="note_max">
                                  </div>
+                            </div>
+                            <div class="form-row">
                                  <div class="col-12 col-md-6 mb-3">
                                     <label class="form-label">Durée
                                         <span class="text-danger">*</span>
                                     </label>
-                                    <input class="form-control form-control-sm" aria-label=".form-select-sm example" name="duree">
+                                    <input class="form-control" name="duree">
                                  </div>
-                                <div class="col-12 col-md-6 mb-3">
-                                    <input type="hidden" name="cours_id" value="{{$cours->id}}">
-                                </div>
                                 <div class="col-12 col-md-6 mb-3">
                                     <label class="form-label">Séance
                                         <span class="text-danger">*</span>
                                     </label>
-                                    <select class="form-control form-control-sm" aria-label=".form-select-sm example" name="seance_id">
+                                    <select class="form-control" aria-label=".form-select-sm example" name="seance_id">
                                         @foreach($cours->seances as $seance)
                                         <option selected>choisir une séance</option>
                                         <option value="{{$seance->id}}">{{$seance->titre}}</option>
                                         @endforeach
-                                    </select>                               
+                                    </select>
                                 </div>
+                                <input type="hidden" name="cours_id" value="{{$cours->id}}">
                             </div>
-                           
                         </div>
                     </div>
                 </div>
