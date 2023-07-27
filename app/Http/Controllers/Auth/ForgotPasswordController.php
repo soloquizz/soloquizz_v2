@@ -4,13 +4,16 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Mail\ForgotPassword;
+use App\Models\Administration\ForgotPassword as AdministrationForgotPassword;
 use App\Models\Administration\User;
-use GuzzleHttp\Psr7\Request;
+use Illuminate\Http\Request;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Mail;
 
 class ForgotPasswordController extends Controller
 {
@@ -27,29 +30,30 @@ class ForgotPasswordController extends Controller
 
     //use SendsPasswordResetEmails;
     public function index(){
-        return view('tempalte.auth.email');
+        return view('template.auth.email');
     }
 
     public function verifyEmail(Request $request){
         $request->validate([
-            'email' => 'required|string|email|max:255|exists:users',
-        ],
-          [
-            'email.exists'=>'l\'email existe déjà'
-          ]);
-
-        $token=Str::random(8);
-        $user=User::where('email','=',$request->email)->first();
-        if(empty($user)){
-            return Alert::error('l\'email n\'existe pas');
-        }
-        $forgotPassWord=PasswordReset::create([
-            'email'=>$user['email'],
-            'token'=>$token
+            'email' => 'required|string|email|exists:users',
         ]);
 
+        $token=Str::random(4);
+        $user=User::where('email',$request->email)->first();
+        if(empty($user)){
+           Alert::error('l\'email n\'existe pas');
+           return redirect(route('auth.forgot.password.email'));
+        }
+        //dd($user->email,$token);
+        
+
+        $forgotPassWord=AdministrationForgotPassword::create([
+            'email' => $user->email,
+            'token' => $token
+        ]);
         $compteData['prenom'] = $user['prenom'];
         $compteData['nom'] = $user['nom'];
+        $compteData['email'] = $user['email'];
         $compteData['token']=$forgotPassWord->token;
 
         //Envoie des crédentials par mail
@@ -57,11 +61,11 @@ class ForgotPasswordController extends Controller
 
         Alert::success('Succés','Un message vous a été envoyé par mail. Veuillez consulter votre boite mail pour poursuivre le processus');
 
-        return redirect(route('auth.forgot.password.email'));
+        return redirect(route('auth.reset.password'));
     }
 
-    public function resetPassword($token){
-        return view('tempalte.auth.new-password',compact('token'));
+    public function resetPassword(){
+        return view('template.auth.new-password');
 
     }
 
@@ -69,22 +73,24 @@ class ForgotPasswordController extends Controller
         $request->validate([
             'email' => 'required|string|email|max:255|exists:users',
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'token'=>'required|string|'
 
         ],
           [
-            'email.exists'=>'l\'email existe déjà'
+            'email.exists'=>'l\'email n\'existe pas'
           ]);
-          $updatePassword=PasswordReset::where([
+          $updatePassword=AdministrationForgotPassword::where([
             'email'=>$request->email,
-            'token'=>$request->token
+            'token'=>$request->token,
+            'statut'=> 0
           ])->first();
-
+       
           if(!$updatePassword){
             return redirect()->to(route("auth.reset.password"))->with("error","invalid");
           }
-          User::where(["email",$request->email])->update(['password' => Hash::make($request->password)]);
-          PasswordReset::where('email',  $request->email)->change('statut', 1);
-          return redirect()->to(route("auth.login"))->with("Succés","Mot de passe réinitialisé avec succés");
+          User::where(["email"=>$updatePassword->email])->update(['password' => Hash::make($request->password)]);
+          AdministrationForgotPassword::where(["email"=>$updatePassword->email, 'token'=>$updatePassword->token])->update(['statut'=>1]);
+          return redirect()->to(route("auth.index"))->with("Succés","Mot de passe réinitialisé avec succés");
         }
 
 }

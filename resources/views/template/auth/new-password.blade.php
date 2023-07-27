@@ -27,10 +27,13 @@
                     
                         <div class="modal-body">
                           <div class="form-group">
-                            <input type="hidden" name="token" value="{{$token}}">
                             <label for="email1">Email address</label>
                             <input type="email" class="form-control" id="email1" name="email" aria-describedby="emailHelp" required placeholder="Votre adresse email institutionnel...">
                             <small id="emailHelp" class="form-text text-muted">Your information is safe with us.</small>
+                          </div>
+                          <div class="form-group">
+                            <label for="email1">Code</label>
+                            <input type="text" class="form-control" id="email1" name="token" aria-describedby="emailHelp" required placeholder="Entrez le code...">
                           </div>
                           <div class="form-group">
                             <label for="password1">Mot de passe</label>
@@ -38,7 +41,7 @@
                           </div>
                           <div class="form-group">
                             <label for="password1">Confirmer Mot de passe</label>
-                            <input type="password" class="form-control" id="password1" name="confirmPassword" placeholder="Confirmer votre mot de passe ...">
+                            <input type="password" class="form-control" id="password1" name="password_confirmation" placeholder="Confirmer votre mot de passe ...">
                           </div>
                          
                         </div>

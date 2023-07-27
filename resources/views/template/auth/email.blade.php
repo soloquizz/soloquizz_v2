@@ -19,7 +19,7 @@
         </div>
         <div class="bg-white pt-32pt pt-sm-64pt pb-32pt">
             <div class="row justify-content-center mt-5">
-                {{--@include('adminlte-templates::common.errors')--}}
+                @include('adminlte-templates::common.errors')
             </div>
             <div class="container page__container">
                 <form action="{{ route('auth.forgot.password.store') }}" method="post" class="col-md-5 p-0 mx-auto">

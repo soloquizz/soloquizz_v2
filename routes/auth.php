@@ -23,8 +23,8 @@ Route::name('auth.')->prefix('auth')/*->middleware(['auth', 'check.permission'])
     //Changement mot de passe
     Route::get('/forgot-password',[App\Http\Controllers\Auth\ForgotPasswordController::class,'index'])->name('forgot.password.email');
     Route::post('/forgot-password',[App\Http\Controllers\Auth\ForgotPasswordController::class,'verifyEmail'])->name('forgot.password.store');
-    Route::get('/reset-password/{token}',[App\Http\Controllers\Auth\ForgotPasswordController::class,'resetPassword'])->name('reset.password');
-    Route::get('/reset-password',[App\Http\Controllers\Auth\ForgotPasswordController::class,'resetPasswordPost'])->name('reset.password.post');
+    Route::get('/reset-password',[App\Http\Controllers\Auth\ForgotPasswordController::class,'resetPassword'])->name('reset.password');
+    Route::post('/reset-password',[App\Http\Controllers\Auth\ForgotPasswordController::class,'resetPasswordPost'])->name('reset.password.post');
 
    
 });

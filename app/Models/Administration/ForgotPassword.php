@@ -24,16 +24,12 @@ class ForgotPassword extends Model
     
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
-
-
-    protected $dates = ['deleted_at'];
-
-
-
+    const deleted_at='';
+    //public $timestamps = false;
     public $fillable = [
         'email',
         'token',
-        'statut'
+       
     ];
 
     /**
@@ -43,8 +39,7 @@ class ForgotPassword extends Model
      */
     protected $casts = [
         'email' => 'string',
-        'token' => 'string',
-        'statut'=> 'boolean'
+        'token' => 'string',        
     ];
 
     /**
@@ -56,8 +51,9 @@ class ForgotPassword extends Model
         'email' => 'required|string|max:191',
         'token' => 'required|string|max:191',
         'created_at' => 'nullable',
+        'created_at' => 'nullable',
+        'deleted_at' => 'nullable',
         'statut'=>'nullable'
     ];
-
     
 }

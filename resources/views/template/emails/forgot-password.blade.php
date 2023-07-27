@@ -52,9 +52,9 @@
                                 </div>
                                 <div class="card-body">
                                     <p>Cher/chère {{$compte_data['prenom']}} {{$compte_data['nom']}}</p>
-                                    <p>Une demande de réinitialisation du mot de passe de votre compte a été effectuée pour votre compte institutionnel <strong>{{$compte_data['email']}}</strong>. Pour poursuivre le processus veuillez cliquer sur le lien suivant:<br>
-                                        <strong>Lien :</strong> <a href="{{route('reset.password')}}">{{route('reset.password',$compte_data['token'])}}</a> <br>
-                                        Si vous n'etes pas à l'origine de cette modification vous pouvez ignorez cette modification veuillez nous contactez sur  <a class="nav-link" href="mailto:contact@soloquizz.com">contact@soloquizz.com</a>
+                                    <p>Une demande de réinitialisation du mot de passe de votre compte a été effectuée pour votre mail institutionnel <strong>{{$compte_data['email']}}</strong>. Pour poursuivre le processus veuillez cliquer sur le lien suivant:<br>
+                                        <strong>Lien :</strong> <a href="{{route('auth.reset.password')}}">{{route('auth.reset.password')}}</a> et renseigner le code:<strong>{{$compte_data['token']}}</strong><br>
+                                        Si vous n'etes pas à l'origine de cette modification veuillez ignorer ce message.
                                     </p>
                                    
                                     <p>Cordialement,<br>L'équipe SoloQuizz</p>
