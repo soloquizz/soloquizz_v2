@@ -22,7 +22,7 @@
                 @include('adminlte-templates::common.errors')
             </div>
             <div class="container page__container">
-                <form action="{{ route('auth.login') }}" method="post" class="col-md-5 p-0 mx-auto">
+                <form action="{{ route('auth.reset.password.post') }}" method="post" class="col-md-5 p-0 mx-auto">
                     @csrf
                     
                         <div class="modal-body">
@@ -32,10 +32,16 @@
                             <small id="emailHelp" class="form-text text-muted">Your information is safe with us.</small>
                           </div>
                           <div class="form-group">
+                            <label for="email1">Code</label>
+                            <input type="text" class="form-control" id="email1" name="token" aria-describedby="emailHelp" required placeholder="Entrez le code...">
+                          </div>
+                          <div class="form-group">
                             <label for="password1">Mot de passe</label>
                             <input type="password" class="form-control" id="password1" name="password" placeholder="Votre mot de passe ...">
-                            <p class="text-right"><a href="{{route('auth.forgot.password.email')}}" class="small">Mot de passe oublié ?</a></p>
-
+                          </div>
+                          <div class="form-group">
+                            <label for="password1">Confirmer Mot de passe</label>
+                            <input type="password" class="form-control" id="password1" name="password_confirmation" placeholder="Confirmer votre mot de passe ...">
                           </div>
                          
                         </div>
