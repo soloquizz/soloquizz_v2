@@ -44,13 +44,13 @@
                         <form method="POST" action="{{route('enseignant.question.exercice.store')}}">
                             @csrf
                             @foreach($questions as $question)
-                                <input type="hidden" name="exercice_id[]" value="{{$exo->id}}">
+                                <input type="hidden" name="exercice_id" value="{{$exo->id}}">
                                 <div class="row ml-3">
                                     <div class="col-2">
                                         <div class="d-flex align-items-center page-num-container mb-16pt">
                                             <div class="page-num">2</div>
                                             <label class="form-label">Question
-                                                <span class="text-danger">*</span>
+                                                <span class="text-danger">*</span> 
                                             </label>
                                             <input type="checkbox" class="form-check" name="question_cours_id[]" value="{{$question->id}}">
                                         </div>

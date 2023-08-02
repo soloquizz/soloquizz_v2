@@ -64,7 +64,7 @@
                         <div class="fa-pull-right mb-3">
                             <a href="#" class="btnTab btn btn-outline-primary ml-5" id="btnSeance"
                                data-toggle="modal" data-target="#addSeance">Nouvelle séance</a>
-                            <a href="#" class="btnTab btn btn-outline-primary mb-3 ml-5" id="btnRessource"
+                            <a href="#" class="btnTab btn btn-outline-primary mb-3 ml-3" id="btnRessource"
                                data-toggle="modal" data-target="#addRessource">Nouvelle ressource</a>
                             <a href="#" class="btnTab btn btn-outline-primary mb-3 ml-5" id="btnQuestion"
                                data-toggle="modal" data-target="#addQuestionCours">Nouvelle question</a>
@@ -210,13 +210,14 @@
                                             <div class="row">
                                                 {!! $question->contenu !!}
                                             </div>
-                                            <!-- <h6>
+                                            {{--@if($question->qcm)--}}
+                                             <h6>
                                                 Options de réponse &nbsp;
                                                 <a href="#" data-toggle="modal" data-target="#addOption">
                                                     <i class="fa fa-plus-circle text-primary mr-1" onclick="changeIdquestion({{$question->id}})" title="Ajouter une option de réponse"></i>
                                                 </a>
                                             </h6>
-                                            {{--@foreach($question->options as $option)
+                                            @foreach($question->optionCours as $option)
                                                 <div class="row">
                                                     @if($option->correcte)
                                                         <i class="fa fa-check text-success mr-1" title="Mofification de la question"></i>
@@ -225,17 +226,18 @@
                                                     @endif
                                                     {!! $option->contenu !!}
                                                     @if(isset($_GET['page']))
-                                                        <a href="{{route('admin.options.edit.custom', ['otion_id'=>$option->id,'page'=>$_GET['page']])}}">
+                                                        <a href="{{route('enseignant.options.cours.edit.custom', ['option_id'=>$option->id,'page'=>$_GET['page']])}}">
                                                             <i class="fa fa-edit text-warning mr-1" title="Mofification de l'option"></i>
                                                         </a>
                                                     @else
-                                                        <a href="{{route('admin.options.edit.custom', ['otion_id'=>$option->id,'page'=>1])}}">
+                                                        <a href="{{route('enseignant.options.cours.edit.custom', ['option_id'=>$option->id,'page'=>1])}}">
                                                             <i class="fa fa-edit text-warning mr-1" title="Mofification de l'option"></i>
                                                         </a>
                                                     @endif
                                                 </div>
-                                            @endforeach---}}
-                                            -->
+                                            @endforeach
+                                            {{--@endif--}}
+                                            
                                         </li>
                                     @endforeach
                                 </ul>
@@ -346,6 +348,7 @@
     @include('template.enseignant.ressources.create')
     @include('template.enseignant.questionCours.create')
     @include('template.enseignant.exercices.create')
+    @include('template.enseignant.options_cours.create')
 @endsection
 
 
@@ -438,9 +441,7 @@
          
          $(document).ready(function(){
            $('#myTable').DataTable();
-         })
-
-       
+         })  
     </script>
 @endsection
 

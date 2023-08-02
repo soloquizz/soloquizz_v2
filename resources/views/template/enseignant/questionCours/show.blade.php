@@ -17,7 +17,7 @@
                     </div>
                 </div>
                 {!! $question->contenu !!}
-               <!-- <h6>
+               <h6>
                     Options de réponse &nbsp;
                     <a href="#" data-toggle="modal" data-target="#addOption">
                         <i class="fa fa-plus-circle text-primary mr-1" onclick="changeIdquestion({{$question->id}})" title="Ajouter une option de réponse"></i>
@@ -42,7 +42,7 @@
                         @endif
                     </div>
                 @endforeach---}}
-                -->
+                
             </li>
         @endforeach
     </ul>

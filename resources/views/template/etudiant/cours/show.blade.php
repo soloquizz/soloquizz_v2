@@ -151,8 +151,41 @@
                                 @endforeach
                             </div>
                         </div>
+                       <!--ESPACE DES TD--> 
                         <div class="tab-pane" id="td">
-                            Espace des TD
+                            <div class="row">
+                                @foreach($cours->exercices as $exo)
+                                    <div class="col-sm-6">
+                                        <div class="card card-path js-overlay stack stack--1 " data-toggle="popover" data-trigger="click">
+                                            <div class="card-body">
+                                                <div class="d-flex align-items-center">
+                                                    <div class="flex">
+                                                        <div class="d-flex align-items-center">
+                                                            <div class="rounded mr-16pt z-0 o-hidden">
+                                                                <div class="overlay">
+                                                                    <span class="overlay__content overlay__content-transparent">
+                                                                    <span class="overlay__action d-flex flex-column text-center lh-1">
+                                                                        <small class="h6 small text-white mb-0" style="font-weight: 500;">80%</small>
+                                                                    </span>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="flex">
+                                                                <div class="card-title text-body mb-0">{{$exo->titre}}</div>
+                                                                <div class="text-muted d-flex lh-1">
+                                                                    {{$exo->questionExercices->count()}} questions pour {{$exo->duree}} min - {{$exo->note_max}} point(s)
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <a href="{{route('etudiant.cours.show.td.question',$cours)}}" class="ml-4pt btn btn-link text-secondary">Voir</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                                @endforeach
+                            </div>
                         </div>
                         <div class="tab-pane" id="evaluations">
                             Espace des Évaluations

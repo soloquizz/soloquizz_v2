@@ -27,17 +27,21 @@ class QuestionExerciceController extends Controller
         ]);*/
         $input=$request->all();
        
-       for($question_cours_id=0; $question_cours_id <= count($request->question_cours_id);$question_cours_id++){
-            $exo = QuestionExercice::create([
-                'question_cours_id' => $request->question_cours_id[$question_cours_id], 
-                'exercice_id'=>$request->exercice_id[$question_cours_id],
-                'point'=>$request->point[$question_cours_id],
-                'duree'=>$request->duree[$question_cours_id]
-            ]);
+       foreach($request->input('question_cours_id') as $key =>$value){
+            $exo = new  QuestionExercice;
+            $exo->question_cours_id = $request->question_cours_id[$key]; 
+            $exo->exercice_id=$request->exercice_id;
+            $exo->point=$request->point[$key];
+            $exo->duree=$request->duree[$key];
+            
+            $exo->save();
+        }
            
         Alert::success('Succés','Questions ajoutées avec succés');
         return redirect(route('template.enseignant.question_exercices.show',$exo->exercice_id));
     }
+
+    
 
    
 }

@@ -56,19 +56,19 @@
                         <div class="fa-pull-right mb-3">
 
                             <a href="#" class="btnTab btn btn-outline-primary" id="btnDomaine"
-                               style="margin-left: 225%!important; width: 170px!important;" data-toggle="modal"
+                               data-toggle="modal"
                                data-target="#addDomaine">Nouveau domaine</a>
                             <a href="#" class="btnTab btn btn-outline-primary mb-3" id="btnParcours"
-                               style="margin-left: 215%!important; width: 180px!important;" data-toggle="modal"
+                               data-toggle="modal"
                                data-target="#addParcour">Nouveau parcours</a>
                             <a href="#" class="btnTab btn btn-outline-primary mb-3" id="btnNiveau"
-                               style="margin-left: 215%!important; width: 180px!important;" data-toggle="modal"
+                               data-toggle="modal"
                                data-target="#addNiveau">Nouveau niveau</a>
                             <a href="#" class="btnTab btn btn-outline-primary mb-3" id="btnAnnee"
-                               style="margin-left: 215%!important; width: 180px!important;" data-toggle="modal"
+                               data-toggle="modal"
                                data-target="#addAnneeScolaire" id="btnAnnee">Nouvelle Année</a>
                             <a href="#" class="btnTab btn btn-outline-primary mb-3" id="btnSemestre"
-                               style="margin-left: 215%!important; width: 180px!important;" data-toggle="modal"
+                               data-toggle="modal"
                                data-target="#addSemestre">Nouveau semestre</a>
 
 
