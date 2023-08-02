@@ -15,7 +15,6 @@ class QuestionExerciceController extends Controller
 
         $input = $request->all();
 
-
         if ($input['questions_id'][0] == "0,0,0"){
             Alert::error("Error","Le choix d'une question est obligatoire");
             return redirect()->back();
@@ -38,4 +37,5 @@ class QuestionExerciceController extends Controller
         return redirect(route('enseignant.question_exercices.show', $exo->exercice_id));
 
     }
+
 }

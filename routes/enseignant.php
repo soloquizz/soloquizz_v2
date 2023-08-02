@@ -35,8 +35,16 @@ Route::name('enseignant.')->prefix('enseignant')->middleware(['auth','check.acti
     Route::post('/td-store',[App\Http\Controllers\Enseignant\ExerciceController::class,'store'])->name('exercice.store');
     Route::get('/cours-show/TD/{td_id}',[App\Http\Controllers\Enseignant\ExerciceController::class,'index'])->name('cours.show.td');
     Route::get('/td/{td_id}',[App\Http\Controllers\Enseignant\ExerciceController::class,'show'])->name('cours.show.td.question');
+
     //Question Exercice
     Route::post('/ques-store',[App\Http\Controllers\Enseignant\QuestionExerciceController::class,'store'])->name('question.exercice.store');
+
+    //Option Cours
+    Route::post('/option-cours-store',[App\Http\Controllers\Enseignant\OptionCoursController::class,'store'])->name('option.cours.store');
+    Route::get('options-edit-custom', [App\Http\Controllers\Enseignant\OptionCoursController::class,'editCustom'])->name('options.cours.edit.custom');
+    Route::post('options-edit-custom/{id}', [App\Http\Controllers\Enseignant\OptionCoursController::class,'update'])->name('options.cours.update');
+
+
 });
 
 Route::name('enseignant.')->prefix('enseignant')->middleware(['auth','check.actif.compte','check.enseignant'])->group(function () {

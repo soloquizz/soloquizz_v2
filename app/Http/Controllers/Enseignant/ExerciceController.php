@@ -7,6 +7,7 @@ use App\Models\Administration\Cours;
 use Illuminate\Http\Request;
 use App\Models\Enseignant\Exercice;
 use App\Models\Enseignant\QuestionCours;
+use App\Models\Enseignant\QuestionExercice;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class ExerciceController extends Controller
@@ -51,7 +52,11 @@ class ExerciceController extends Controller
     
     public function show($id){
         $exo=Exercice::find($id);
-        return view('template.enseignant.question_exercices.show',compact('exo'));
+        $questionExercice=QuestionExercice::where('exercice_id',$id)->paginate(3);
+        //$questionCours=$questionExercice->firstItem()->question_cours_id;
+        
+        $rank=$questionExercice->firstItem();
+        return view('template.enseignant.question_exercices.show',compact('exo','questionExercice','rank'));
     }
     
 }

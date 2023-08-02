@@ -89,7 +89,7 @@ class QuestionCours extends Model
      **/
     public function optionCours()
     {
-        return $this->hasMany(\App\Models\Enseignant\OptionCour::class, 'question_cours_id');
+        return $this->hasMany(\App\Models\Enseignant\OptionCours::class, 'question_cours_id');
     }
 
     /**
