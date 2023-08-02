@@ -43,13 +43,13 @@
                 <div class="container card bg-white page__container page-section">
                     <ul class="nav nav-tabs nav-tabs-card">
                         <li class="nav-item">
-                            <a class="nav-link active" href="#seances" onclick="switchTabSeance()" data-toggle="tab">Séances</a>
+                            <a class="nav-link {{isset($_GET['page']) ? '' : 'active'}}" href="#seances" onclick="switchTabSeance()" data-toggle="tab">Séances</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#ressources" onclick="switchTabRessources()" data-toggle="tab">Ressources</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#questions" onclick="switchTabQuestions()" data-toggle="tab">Questions</a>
+                            <a class="nav-link {{isset($_GET['page']) ? 'active' : ''}}" href="#questions" onclick="switchTabQuestions()" data-toggle="tab">Questions</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#td" onclick="switchTabExercices()"
@@ -74,7 +74,7 @@
                     </ul>
                     <div class="card-body tab-content">
                         <!--ESPACE SEANCES-->
-                        <div class="tab-pane active" id="seances">
+                        <div class="tab-pane {{isset($_GET['page']) ? '' : 'active'}}" id="seances">
                             <div class="row">
                                 @foreach($cours->seances as $seance)
                                     <div class="col-sm-6">
@@ -186,7 +186,7 @@
                             </div>
                         </div>
                         <!--ESPACE QUESTION-->
-                        <div class="tab-pane" id="questions">
+                        <div class="tab-pane {{isset($_GET['page']) ? 'active' : ''}}" id="questions">
                             <div class="card-body">
                                 <ul style="list-style-type: none;">
                                     @foreach($questions as $question)
@@ -199,43 +199,48 @@
                                                             <i class="fa fa-edit text-warning mr-1"
                                                                title="Mofification de la question"></i>
                                                         </a>
+                                                        <input type="hidden" name="page" value="true" id="page">
                                                     @else
                                                         <a href="{{route('enseignant.questionCours.edit.custom', ['question_id'=>$question->id,'page'=>1])}}">
                                                             <i class="fa fa-edit text-warning mr-1"
                                                                title="Mofification de la question"></i>
                                                         </a>
+                                                        <input type="hidden" name="page" value="false" id="page">
                                                     @endif
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 {!! $question->contenu !!}
                                             </div>
-                                            <!-- <h6>
-                                                Options de réponse &nbsp;
-                                                <a href="#" data-toggle="modal" data-target="#addOption">
-                                                    <i class="fa fa-plus-circle text-primary mr-1" onclick="changeIdquestion({{$question->id}})" title="Ajouter une option de réponse"></i>
-                                                </a>
-                                            </h6>
-                                            {{--@foreach($question->options as $option)
-                                                <div class="row">
-                                                    @if($option->correcte)
-                                                        <i class="fa fa-check text-success mr-1" title="Mofification de la question"></i>
-                                                    @else
-                                                        <i class="fa fa-times text-danger mr-1" title="Mofification de la question"></i>
-                                                    @endif
-                                                    {!! $option->contenu !!}
-                                                    @if(isset($_GET['page']))
-                                                        <a href="{{route('admin.options.edit.custom', ['otion_id'=>$option->id,'page'=>$_GET['page']])}}">
-                                                            <i class="fa fa-edit text-warning mr-1" title="Mofification de l'option"></i>
-                                                        </a>
-                                                    @else
-                                                        <a href="{{route('admin.options.edit.custom', ['otion_id'=>$option->id,'page'=>1])}}">
-                                                            <i class="fa fa-edit text-warning mr-1" title="Mofification de l'option"></i>
-                                                        </a>
-                                                    @endif
-                                                </div>
-                                            @endforeach---}}
-                                            -->
+                                            @if($question->qcm)
+                                                <h6>
+                                                    Options de réponse &nbsp;
+                                                    <a href="#" data-toggle="modal" data-target="#addOption">
+                                                        <i class="fa fa-plus-circle text-primary mr-1" onclick="changeIdquestion({{$question->id}})" title="Ajouter une option de réponse"></i>
+                                                    </a>
+                                                </h6>
+                                                @foreach($question->optionCours as $option)
+                                                    <div class="row">
+                                                        @if($option->correcte)
+                                                            <i class="fa fa-check text-success mr-1" title="Mofification de la question"></i>
+                                                        @else
+                                                            <i class="fa fa-times text-danger mr-1" title="Mofification de la question"></i>
+                                                        @endif
+                                                        {!! $option->contenu !!}
+                                                        @if(isset($_GET['page']))
+                                                            <a href="{{route('admin.options.edit.custom', ['otion_id'=>$option->id,'page'=>$_GET['page']])}}">
+                                                                <i class="fa fa-edit text-warning mr-1" title="Mofification de l'option"></i>
+                                                            </a>
+                                                        @else
+                                                            <a href="{{route('admin.options.edit.custom', ['otion_id'=>$option->id,'page'=>1])}}">
+                                                                <i class="fa fa-edit text-warning mr-1" title="Mofification de l'option"></i>
+                                                            </a>
+                                                        @endif
+                                                    </div>
+                                                @endforeach
+                                            @else
+                                                <h6>Question à réponse ouverte</h6>
+                                            @endif
                                         </li>
                                     @endforeach
                                 </ul>
@@ -359,8 +364,15 @@
         //switch selon les boutons appuyés
         $('document').ready(function () {
             $('.btnTab').hide();
-            switchTabSeance();
-        })
+            var testPage = $('#page').val();
+            if(testPage === "true"){
+                switchTabQuestions();
+            }
+            else {
+                switchTabSeance();
+            }
+
+        });
 
         function switchTabSeance() {
             $('.btnTab').hide();
@@ -381,6 +393,7 @@
             $('.btnTab').hide();
             $('#btnExercice').show();
         }
+
         function switchTabEtudiants() {
             $('.btnTab').hide();
         }
@@ -422,7 +435,6 @@
             }
         });
 
-
         $("#storeQuestionForm").on("submit", function () {
             $("#hiddenAreaQuestion").val($("#editorQuestion").html());
         });
@@ -435,12 +447,6 @@
             $("#idQuestion").val(idQuestion);
         }
 
-         
-         $(document).ready(function(){
-           $('#myTable').DataTable();
-         })
-
-       
     </script>
 @endsection
 
