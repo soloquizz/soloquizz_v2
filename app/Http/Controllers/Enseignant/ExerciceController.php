@@ -14,8 +14,9 @@ class ExerciceController extends Controller
 {
     public function index($id){
         $exo=Exercice::find($id);
-        $questions=QuestionCours::all();
-        return view('template.enseignant.question_exercices.create',compact('exo','questions'));
+        $questions=QuestionCours::paginate(5);
+        $rank = $questions->firstItem();
+        return view('template.enseignant.question_exercices.create',compact('exo','questions','rank'));
     }
     public function store(Request $request)
     {

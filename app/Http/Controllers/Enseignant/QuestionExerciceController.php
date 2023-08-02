@@ -12,36 +12,30 @@ class QuestionExerciceController extends Controller
 {
     public function store(Request $request)
     {
-        /*$request->validate([
-            'question_cours_id' => 'integer',
-            'exercice_id' => 'integer',
-            'point' => 'integer',
-            'duree' => 'integer'
-        ], [
-            'point.required' => 'Le note maximale est obligatoire.',
-            'point.integer' => 'Le note maximale doit être un entier.',
-            'duree.required' => 'Le champ Durée est obligatoire.',
-            'duree.integer' => 'Le champ Durée doit être un entier.',
-            'exercice_id.required' => 'Vous devez choisir au minimum un exercice.',
 
-        ]);*/
-        $input=$request->all();
-       
-       foreach($request->input('question_cours_id') as $key =>$value){
-            $exo = new  QuestionExercice;
-            $exo->question_cours_id = $request->question_cours_id[$key]; 
-            $exo->exercice_id=$request->exercice_id;
-            $exo->point=$request->point[$key];
-            $exo->duree=$request->duree[$key];
-            
-            $exo->save();
+        $input = $request->all();
+
+        if ($input['questions_id'][0] == "0,0,0"){
+            Alert::error("Error","Le choix d'une question est obligatoire");
+            return redirect()->back();
         }
-           
-        Alert::success('Succés','Questions ajoutées avec succés');
-        return redirect(route('template.enseignant.question_exercices.show',$exo->exercice_id));
+
+        $question_ids = explode(',',$input["questions_id"][0]);
+
+        foreach ($question_ids as $key => $question_id){
+            if ($question_id != 0){
+                $exo = QuestionExercice::create([
+                    'question_cours_id' => $question_id,
+                    'exercice_id' => $input['exercice_id'],
+                    'point' => $input["points"][$key],
+                    'duree' => $input["durees"][$key]
+                ]);
+            }
+        }
+
+        Alert::success('Succés', 'Questions ajoutées avec succés');
+        return redirect(route('enseignant.question_exercices.show', $exo->exercice_id));
+
     }
 
-    
-
-   
 }
