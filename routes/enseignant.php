@@ -30,7 +30,7 @@ Route::name('enseignant.')->prefix('enseignant')->middleware(['auth','check.acti
     Route::post('/questions-store',[App\Http\Controllers\Enseignant\QuestionCoursController::class,'store'])->name('questionCours.store');
     Route::get('/questionCours-edit-custom', [App\Http\Controllers\Enseignant\QuestionCoursController::class,'editCustom'])->name('questionCours.edit.custom');
     Route::post('/question-update/{id}',[App\Http\Controllers\Enseignant\QuestionCoursController::class,'update'])->name('questionCours.update');
-    
+
     //Exercices
     Route::post('/td-store',[App\Http\Controllers\Enseignant\ExerciceController::class,'store'])->name('exercice.store');
     Route::get('/cours-show/TD/{td_id}',[App\Http\Controllers\Enseignant\ExerciceController::class,'index'])->name('cours.show.td');

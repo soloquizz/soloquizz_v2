@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Enseignant;
 use App\Http\Controllers\Controller;
 use App\Mail\NotificationCours;
 use App\Models\Administration\Cours;
+use App\Models\Administration\Question;
 use App\Models\Administration\Support;
 use App\Models\Enseignant\QuestionCours;
 use Illuminate\Http\Request;
@@ -100,6 +101,7 @@ class CoursController extends Controller
         return redirect(route('enseignant.cours.show',$input['cours_id']));
 
     }
+
 
     
 }

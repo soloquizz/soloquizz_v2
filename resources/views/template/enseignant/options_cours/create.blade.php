@@ -22,11 +22,10 @@
                                         <option value="0">NON</option>
                                     </select>
                                     <textarea name="contenu" style="display:none" id="hiddenAreaOption"></textarea>
-                                    <input type="hidden" id="idQuestion" name="question_id">
+                                    <input type="hidden" id="idQuestion" name="question_cours_id">
                                     @if(isset($_GET['page']))
                                         <input type="hidden" name="page" value="{{$_GET['page']}}">
                                     @endif
-                                    <input type="hidden" name="question_cours_id" value="{{$question->id}}">
                                 </div>
                             </div>
                             <div class="form-row">
