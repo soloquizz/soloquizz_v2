@@ -26,11 +26,10 @@ class OptionCoursController extends Controller
         if (isset($input['page'])){
             $page = $input['page'];
         }
-        
-        $questioncours=$option->questionCours;
-        $exoquestion=$questioncours->questionExercices->first()->exercice_id;
-    
-        return redirect(route('enseignant.cours.show', ['page' => $page,'search' => '','td_id'=>$exoquestion]));
+
+        $question = $option->questionCours;
+        $cours = $option->questionCours->cours->first()->id;
+        return redirect(route('enseignant.cours.show', ['page' => $page,'search' => '','cours_id'=>$cours]));
 
     }
 
