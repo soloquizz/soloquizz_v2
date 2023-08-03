@@ -21,16 +21,20 @@ class QuestionExerciceController extends Controller
         }
 
         $question_ids = explode(',',$input["questions_id"][0]);
-
+       
+        
         foreach ($question_ids as $key => $question_id){
             if ($question_id != 0){
+              
+          
                 $exo = QuestionExercice::create([
                     'question_cours_id' => $question_id,
                     'exercice_id' => $input['exercice_id'],
                     'point' => $input["points"][$key],
                     'duree' => $input["durees"][$key]
                 ]);
-            }
+            
+        }
         }
 
         Alert::success('Succés', 'Questions ajoutées avec succés');

@@ -40,34 +40,6 @@
                     <div class="card-header ml-2">
                         <h3>{{$exo->titre}}</h3>
                     </div>
-                    <div class="card-body ml-5">
-                        @foreach($exo->questionExercices as $key => $question)
-                            <div class="row ml-3">
-                                <div class="col-2">
-                                    <div class="d-flex align-items-center page-num-container mb-16pt">
-                                        <div class="page-num">{{$key+1}}</div>
-                                        <label class="form-label ml-3">Question
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="col-10">
-                                    <div class="d-flex justify-content-around">
-                                        <div class="p-2 bd-highlight">
-                                            <label class="form-label">{{$question->point}} points</label>
-                                        </div>
-                                        <div class="p-2 bd-highlight">
-                                            <label class="form-label">{{$question->duree}} min</label>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row ml-4 mb-5">
-                                {!! $question->questionCours->contenu !!}
-                            </div>
-                        @endforeach
-
-                    </div>
-
                     <div class="card-body">
                         <ul style="list-style-type: none;">
                             @foreach($questionExercice as $question)
@@ -82,15 +54,9 @@
                                         <div class="col-2">
                                             @if(isset($_GET['page']))
                                                 <a href="{{route('admin.questions.edit.custom', ['question_id'=>$question->id,'page'=>$_GET['page']])}}">
-                                                    <i class="fa fa-edit text-warning mr-1" title="Mofification de la question"></i>
-                                                </a>
-                                                <a href="{{route('admin.questions.edit.custom', ['question_id'=>$question->id,'page'=>$_GET['page']])}}">
                                                     <i class="fa fa-trash text-danger mr-1" title="Suppression de la question"></i>
                                                 </a>
                                             @else
-                                                <a href="{{route('admin.questions.edit.custom', ['question_id'=>$question->id,'page'=>1])}}">
-                                                    <i class="fa fa-edit text-warning mr-1" title="Mofification de la question"></i>
-                                                </a>
                                                 <a href="{{route('admin.questions.edit.custom', ['question_id'=>$question->id,'page'=>1])}}">
                                                     <i class="fa fa-trash text-danger mr-1" title="Suppression de la question"></i>
                                                 </a>
@@ -101,14 +67,10 @@
                                         {!! $question->questionCours->contenu !!}
 
                                     </div>
-                                    {{--@if($question->questionCours->qcm)--}}
+                                    @if($question->questionCours->qcm)
                                         
                                             <h6>Options de réponse &nbsp;</h6> 
-                                            {{--<h6>
-                                            <a href="#" data-toggle="modal" data-target="#addOption">
-                                                <i class="fa fa-plus-circle text-primary mr-1" onclick="changeIdquestion({{$question->id}})" title="Ajouter une option de réponse"></i>
-                                            </a>
-                                        </h6>--}}
+                                           
                                         @foreach($question->questionCours->optionCours as $option)
                                              <div class="row">
                                                 @if($option->correcte)
@@ -117,18 +79,11 @@
                                                     <i class="fa fa-times text-danger mr-1" title="Mofification de la question"></i>
                                                 @endif
                                                 {!! $option->contenu !!}
-                                                {{--@if(isset($_GET['page']))
-                                                    <a href="{{route('admin.options.edit.custom', ['otion_id'=>$option->id,'page'=>$_GET['page']])}}">
-                                                        <i class="fa fa-edit text-warning mr-1" title="Mofification de l'option"></i>
-                                                    </a>
-                                                @else
-                                                    <a href="{{route('admin.options.edit.custom', ['otion_id'=>$option->id,'page'=>1])}}">
-                                                        <i class="fa fa-edit text-warning mr-1" title="Mofification de l'option"></i>
-                                                    </a>
-                                                @endif--}}
                                             </div>
                                         @endforeach
-                                    {{--@endif--}}
+                                        @else
+                                        <h6>Question à réponse ouverte</h6>
+                                    @endif
                                 </li>
                             @endforeach
                         </ul>

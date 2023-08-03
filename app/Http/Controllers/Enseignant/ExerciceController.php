@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Administration\Cours;
 use Illuminate\Http\Request;
 use App\Models\Enseignant\Exercice;
+use App\Models\Enseignant\OptionCours;
 use App\Models\Enseignant\QuestionCours;
 use App\Models\Enseignant\QuestionExercice;
 use RealRashid\SweetAlert\Facades\Alert;

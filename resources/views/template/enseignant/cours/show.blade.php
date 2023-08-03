@@ -287,7 +287,7 @@
                                             <div class="row">
                                                 <div class="col-12">
                                                     <a class="text-primary"
-                                                       href="{{route('enseignant.cours.show.td',$cours)}}">
+                                                       href="{{route('enseignant.cours.show.td',$exo->id)}}">
                                                         Ajouter des questions
                                                     </a>
                                                 </div>
