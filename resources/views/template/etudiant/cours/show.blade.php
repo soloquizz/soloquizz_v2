@@ -178,7 +178,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <a href="{{route('etudiant.cours.show.td.question',$cours)}}" class="ml-4pt btn btn-link text-secondary">Voir</a>
+                                                    <a href="{{route('etudiant.cours.show.td.question',$exo->id)}}" class="ml-4pt btn btn-link text-secondary">Voir</a>
                                                 </div>
                                             </div>
                                         </div>

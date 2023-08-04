@@ -28,6 +28,13 @@
 
         <div class="container page__container">
             <div class="page-section">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a href="{{route('enseignant.cours.show',$exo->cours_id)}}"><button class="btn btn-primary"><i class="fa fa-arrow-circle-left" aria-hidden="true">&nbsp;Retour</i></button></a>
+                        </li>
+                    </ol>
+                </nav>
                 <div class="page-heading">
                     <span class="mr-16pt">
                         <img src="{{$exo->cours->image()}}" width="40" alt="Angular Fundamentals" class="rounded">

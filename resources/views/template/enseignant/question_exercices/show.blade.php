@@ -25,10 +25,20 @@
         <div class="row mt-3 justify-content-center">
             @include('adminlte-templates::common.errors')
         </div>
+        <div class="row mt-3 justify-content-left">
+        
+        </div>
 
         <div class="container page__container">
             <div class="page-section">
                 <div class="page-heading">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item">
+                                <a href="{{route('enseignant.cours.show',$exo->cours_id)}}"><button class="btn btn-primary"><i class="fa fa-arrow-circle-left" aria-hidden="true">&nbsp;Retour</i></button></a>
+                            </li>
+                        </ol>
+                    </nav>
                     <span class="mr-16pt">
                         <img src="{{$exo->cours->image()}}" width="40" alt="{{$exo->cours->nom}}" class="rounded">
                     </span>

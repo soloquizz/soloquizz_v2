@@ -70,6 +70,8 @@
                                data-toggle="modal" data-target="#addQuestionCours">Nouvelle question</a>
                             <a href="#" class="btnTab btn btn-outline-primary mb-3 ml-5" id="btnExercice"
                                data-toggle="modal" data-target="#addExercice">Nouvel exercice</a>
+                            <a href="#" class="btnTab btn btn-outline-primary mb-3 ml-5" id="btnEvaluation"
+                               data-toggle="modal" data-target="#addEvaluation">Nouvelle évaluation</a>
                         </div>
                     </ul>
                     <div class="card-body tab-content">
@@ -295,7 +297,7 @@
                                             <div class="row">
                                                 <div class="col-12">
                                                     <a class="text-primary"
-                                                       href="{{route('enseignant.cours.show.td.question',$cours)}}">
+                                                       href="{{route('enseignant.cours.show.td.question',$exo->id)}}">
                                                         <span class="h6">Consulter</span>
                                                     </a>
                                                 </div>
@@ -307,7 +309,124 @@
                         </div>
                         <!--ESPACE ÉVALUATIONS-->
                         <div class="tab-pane" id="evaluations">
-                            Espace des Évaluations
+                            <ul class="nav nav-tabs nav-tabs-card">
+                                <li class="nav-item">
+                                    <a class="nav-link {{isset($_GET['page']) ? '' : 'active'}}" href="#devoirs" onclick="switchTabDevoirs()" data-toggle="tab">Devoir</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#examens" onclick="switchTabExamens()" data-toggle="tab">Examens</a>
+                                </li>
+                            </ul>
+                            <div class="tab-content">
+                                <div class="tab-pane" id="devoirs">
+                                    <div class="row">
+                                        @foreach($cours->evaluations as $evaluation)
+                                        @if($evaluation->type=='Devoir')
+                                            <div class="col-sm-6">
+                                                <div class="card card-path js-overlay stack stack--1 " data-toggle="popover" data-trigger="click">
+                                                    <div class="card-body">
+                                                        <div class="d-flex align-items-center">
+                                                            <div class="flex">
+                                                                <div class="d-flex align-items-center">
+                                                                    <div class="rounded mr-16pt z-0 o-hidden">
+                                                                        <div class="overlay">
+                                                                            <span class="overlay__content overlay__content-transparent">
+                                                                            <span class="overlay__action d-flex flex-column text-center lh-1">
+                                                                                <small class="h6 small text-white mb-0" style="font-weight: 500;">80%</small>
+                                                                            </span>
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="flex">
+                                                                        <div class="card-title text-body mb-0">{{$evaluation->titre}}</div>
+                                                                        <div class="text-muted d-flex lh-1">
+                                                                            {{--{{$exo->questionExercices->count()}}--}} questions pour {{$evaluation->duree}} min - {{$evaluation->note_max}} point(s)
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <a href="#" class="ml-4pt btn btn-link text-secondary">Voir plus</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="popoverContainer d-none">
+                                                    <div class="row">
+                                                        <div class="col-12">
+                                                            <a class="text-primary"
+                                                               href="{{route('enseignant.cours.show.evaluation.add.question',$evaluation->id)}}">
+                                                                Ajouter des questions
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-12">
+                                                            <a class="text-primary"
+                                                               href="{{--{{route('enseignant.cours.show.evaluation.view.question',$evaluation->id)}}--}}">
+                                                                <span class="h6">Consulter</span>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            @endif
+                                        @endforeach
+                                    </div>
+                                </div>
+                                <div class="tab-pane" id="examens">
+                                    <div class="row">
+                                        @foreach($cours->evaluations as $evaluation)
+                                        @if($evaluation->type=='Examen')
+                                            <div class="col-sm-6">
+                                                <div class="card card-path js-overlay stack stack--1 " data-toggle="popover" data-trigger="click">
+                                                    <div class="card-body">
+                                                        <div class="d-flex align-items-center">
+                                                            <div class="flex">
+                                                                <div class="d-flex align-items-center">
+                                                                    <div class="rounded mr-16pt z-0 o-hidden">
+                                                                        <div class="overlay">
+                                                                            <span class="overlay__content overlay__content-transparent">
+                                                                            <span class="overlay__action d-flex flex-column text-center lh-1">
+                                                                                <small class="h6 small text-white mb-0" style="font-weight: 500;">80%</small>
+                                                                            </span>
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="flex">
+                                                                        <div class="card-title text-body mb-0">{{$evaluation->titre}}</div>
+                                                                        <div class="text-muted d-flex lh-1">
+                                                                            {{--{{$exo->questionExercices->count()}}--}} questions pour {{$evaluation->duree}} min - {{$evaluation->note_max}} point(s)
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <a href="#" class="ml-4pt btn btn-link text-secondary">Voir plus</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="popoverContainer d-none">
+                                                    <div class="row">
+                                                        <div class="col-12">
+                                                            <a class="text-primary"
+                                                               href="{{route('enseignant.cours.show.evaluation.add.question',$evaluation->id)}}">
+                                                                Ajouter des questions
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-12">
+                                                            <a class="text-primary"
+                                                               href="{{--{{route('enseignant.cours.show.evaluation.view.question',$evaluation->id)}}--}}">
+                                                                <span class="h6">Consulter</span>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            @endif
+                                        @endforeach
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <!--ESPACE ETUDIANTS-->
                         <div class="tab-pane" id="etudiants">
@@ -352,6 +471,7 @@
     @include('template.enseignant.questionCours.create')
     @include('template.enseignant.exercices.create')
     @include('template.enseignant.options_cours.create')
+    @include('template.enseignant.evaluations.create')
 @endsection
 
 
@@ -393,6 +513,25 @@
         function switchTabExercices() {
             $('.btnTab').hide();
             $('#btnExercice').show();
+        }
+
+        function switchTabEvaluations() {
+            $('.btnTab').hide();
+            $('#btnEvaluation').show();
+            $('#devoirs').show();
+        }
+        function switchTabExamens() {
+            $('.btnTab').hide();
+            $('#devoirs').hide();
+            $('#btnEvaluation').show();
+
+        }
+
+        function switchTabDevoirs() {
+            $('.btnTab').hide();
+            $('#devoirs').show();
+            $('#btnEvaluation').show();
+
         }
 
         function switchTabEtudiants() {
