@@ -26,6 +26,33 @@ Route::name('enseignant.')->prefix('enseignant')->middleware(['auth','check.acti
     //Séances
     Route::post('/seances-store',[App\Http\Controllers\Enseignant\SeanceController::class,'store'])->name('seances.store');
 
+    //QuestionsCours
+    Route::post('/questions-store',[App\Http\Controllers\Enseignant\QuestionCoursController::class,'store'])->name('questionCours.store');
+    Route::get('/questionCours-edit-custom', [App\Http\Controllers\Enseignant\QuestionCoursController::class,'editCustom'])->name('questionCours.edit.custom');
+    Route::post('/question-update/{id}',[App\Http\Controllers\Enseignant\QuestionCoursController::class,'update'])->name('questionCours.update');
+
+    //Exercices
+    Route::post('/td-store',[App\Http\Controllers\Enseignant\ExerciceController::class,'store'])->name('exercice.store');
+    Route::get('/cours-show/td-create/{td_id}',[App\Http\Controllers\Enseignant\ExerciceController::class,'index'])->name('cours.show.td');
+    Route::get('/td/{td_id}',[App\Http\Controllers\Enseignant\ExerciceController::class,'show'])->name('cours.show.td.question');
+    Route::post('/update-statut/{id}',[App\Http\Controllers\Enseignant\ExerciceController::class,'update'])->name('exercice.update.statut');
+
+    //Question Exercice
+    Route::post('/ques-store',[App\Http\Controllers\Enseignant\QuestionExerciceController::class,'store'])->name('question.exercice.store');
+
+    //Option Cours
+    Route::post('/option-cours-store',[App\Http\Controllers\Enseignant\OptionCoursController::class,'store'])->name('option.cours.store');
+    Route::get('options-edit-custom', [App\Http\Controllers\Enseignant\OptionCoursController::class,'editCustom'])->name('options.cours.edit.custom');
+    Route::post('options-edit-custom/{id}', [App\Http\Controllers\Enseignant\OptionCoursController::class,'update'])->name('options.cours.update');
+
+    //Evaluations
+    Route::post('/evaluation-store',[App\Http\Controllers\Enseignant\EvaluationController::class,'store'])->name('evaluation.store');
+    Route::get('/cours-show/evaluation-question-create/{td_id}',[App\Http\Controllers\Enseignant\EvaluationController::class,'index'])->name('cours.show.evaluation.add.question');
+    Route::get('/cours-show/evaluation-question-view/{td_id}',[App\Http\Controllers\Enseignant\EvaluationController::class,'show'])->name('cours.show.evaluation.view.question');
+
+
+
+
 });
 
 Route::name('enseignant.')->prefix('enseignant')->middleware(['auth','check.actif.compte','check.enseignant'])->group(function () {

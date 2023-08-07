@@ -34,6 +34,7 @@ Route::name('admin.')->prefix('admin')->middleware(['auth','check.actif.compte',
     Route::resource('semestres', App\Http\Controllers\Administration\SemestreController::class);
 
     Route::resource('cours', App\Http\Controllers\Administration\CoursController::class);
+    Route::get('parametres',[App\Http\Controllers\Administration\ParametreController::class,'index'])->name('parametre');
 
     Route::post('cours-enseignant-store',[App\Http\Controllers\Administration\CoursController::class,'enseignant_store'])->name('cours.enseignant_store');
 

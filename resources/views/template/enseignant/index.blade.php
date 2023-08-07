@@ -6,27 +6,27 @@
 
 @section('content_page')
 
-<div class="mdk-header-layout__content page-content">
+    <div class="mdk-header-layout__content page-content">
 
-    <!-- Header Layout -->
+        <!-- Header Layout -->
 
-    @include('layouts.template.enseignant.header')
+        @include('layouts.template.enseignant.header')
 
-    <!-- END Layout -->
+        <!-- END Layout -->
 
-    <!-- Menu Layout -->
-    @include('layouts.template.enseignant.menu')
-    <!-- END Menu Layout -->
+        <!-- Menu Layout -->
+        @include('layouts.template.enseignant.menu')
+        <!-- END Menu Layout -->
 
-    <!-- Section Pages Layout -->
+        <!-- Section Pages Layout -->
 
-    <!-- Section Dashboard Layout -->
-    <!-- END Section Dashboard Layout -->
+        <!-- Section Dashboard Layout -->
+        <!-- END Section Dashboard Layout -->
 
-    <!-- END Section Pages Layout -->
+        <!-- END Section Pages Layout -->
 
-    @include('layouts.template.footer')
-</div>
+        @include('layouts.template.footer')
+    </div>
 
 @endsection
 
