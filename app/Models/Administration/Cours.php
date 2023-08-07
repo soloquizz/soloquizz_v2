@@ -108,7 +108,7 @@ class Cours extends Model
      **/
     public function evaluations()
     {
-        return $this->hasMany(\App\Models\Administration\Evaluation::class, 'cours_id');
+        return $this->hasMany(\App\Models\Enseignant\Evaluations::class, 'cours_id');
     }
 
     /**

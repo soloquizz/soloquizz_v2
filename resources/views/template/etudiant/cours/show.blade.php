@@ -154,37 +154,54 @@
                        <!--ESPACE DES TD--> 
                         <div class="tab-pane" id="td">
                             <div class="row">
-                                @foreach($cours->exercices as $exo)
-                                    <div class="col-sm-6">
-                                        <div class="card card-path js-overlay stack stack--1 " data-toggle="popover" data-trigger="click">
-                                            <div class="card-body">
-                                                <div class="d-flex align-items-center">
-                                                    <div class="flex">
-                                                        <div class="d-flex align-items-center">
-                                                            <div class="rounded mr-16pt z-0 o-hidden">
-                                                                <div class="overlay">
-                                                                    <span class="overlay__content overlay__content-transparent">
-                                                                    <span class="overlay__action d-flex flex-column text-center lh-1">
-                                                                        <small class="h6 small text-white mb-0" style="font-weight: 500;">80%</small>
-                                                                    </span>
-                                                                    </span>
-                                                                </div>
-                                                            </div>
-                                                            <div class="flex">
-                                                                <div class="card-title text-body mb-0">{{$exo->titre}}</div>
-                                                                <div class="text-muted d-flex lh-1">
-                                                                    {{$exo->questionExercices->count()}} questions pour {{$exo->duree}} min - {{$exo->note_max}} point(s)
-                                                                </div>
-                                                            </div>
+                                @if($cours->exercices->count()==0)
+                                <h6>Aucun exercice publié pour le moment</h6>
+                                @else
+                                
+                                <div class="table-responsive" data-toggle="lists" data-lists-values='["name"]'>
+
+                                    <!-- Table -->
+                                    <table id="myTable" class="table">
+                                        <thead>
+                                        <tr>
+                                            <th>Titre</th>
+                                            <th>Nombre de questions</th>
+                                            <th>Points</th>
+                                            <th>Durée</th>
+                                            <th>Action</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody class="list">
+                                        @foreach($cours->exercices as $exo)
+                                        @if($exo->statut==1)
+                                            <tr>
+                                                <td class="name">{{$exo->titre}}</td>
+                                                <td class="name">{{$exo->questionExercices->count()}}</td>
+                                                <td class="name">{{$exo->note_max}}</td>
+                                                <td class="name">{{$exo->duree}}</td>
+                                                <td class="name">
+                                                    <div class="row">
+                                                        <div class="col-2">
+                                                            <form method="POST" id="showForm"
+                                                                  action="{{ route('admin.certifications.questions.search') }}">
+                                                                @csrf
+                                                                <input type="hidden" name="certification_id" value="{{$exo->id}}">
+                                                                <a href="{{route('etudiant.cours.show.td.question',$exo->id)}}">
+                                                                    <i class="fa fa-eye text-info mr-1" title="Mofification"></i>
+                                                                </a>
+                                                            </form>
                                                         </div>
+                                                        
                                                     </div>
-                                                    <a href="{{route('etudiant.cours.show.td.question',$cours)}}" class="ml-4pt btn btn-link text-secondary">Voir</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        
-                                    </div>
-                                @endforeach
+                                                </td>
+                                            </tr>
+                                            @endif
+                                        @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                                @endif
+                               
                             </div>
                         </div>
                         <div class="tab-pane" id="evaluations">
