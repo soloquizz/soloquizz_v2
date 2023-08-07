@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Enseignant;
 
 use App\Http\Controllers\Controller;
 use App\Models\Enseignant\Evaluations;
+use App\Models\Enseignant\Exercice;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -45,5 +46,14 @@ class EvaluationController extends Controller
         Alert::success('Succés','Evaluation ajoutée avec succés');
 
         return redirect(route('enseignant.cours.show',$evaluation->cours_id));
+    }
+
+    public function show($id){
+        $evaluation=Evaluations::find($id);
+        //$questionExercice=Exercice::where('exercice_id',$id)->paginate(3);
+        //$questionCours=$questionExercice->firstItem()->question_cours_id;
+        
+        //$rank=$questionExercice->firstItem();
+        return view('template.enseignant.evaluation_exercices.show',compact('evaluation'));
     }
 }

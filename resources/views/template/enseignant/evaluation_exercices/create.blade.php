@@ -25,7 +25,6 @@
         <div class="row mt-3 justify-content-center">
             @include('adminlte-templates::common.errors')
         </div>
-
         <div class="container page__container">
             <div class="page-section">
                 <nav aria-label="breadcrumb">

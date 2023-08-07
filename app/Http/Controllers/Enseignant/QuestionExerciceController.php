@@ -38,8 +38,7 @@ class QuestionExerciceController extends Controller
         }
 
         Alert::success('Succés', 'Questions ajoutées avec succés');
-        return redirect(route('enseignant.question_exercices.show', $exo->exercice_id));
-
+        return redirect()->back();
     }
 
 }

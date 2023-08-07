@@ -71,17 +71,13 @@
                                     @if($question->questionCours->qcm)
                                         
                                             <h6>Options de réponse &nbsp;</h6> 
-                                           
-                                        @foreach($question->questionCours->optionCours as $option)
-                                             <div class="row">
-                                                @if($option->correcte)
-                                                    <i class="fa fa-check text-success mr-1" title="Mofification de la question"></i>
-                                                @else
-                                                    <i class="fa fa-times text-danger mr-1" title="Mofification de la question"></i>
-                                                @endif
-                                                {!! $option->contenu !!}
-                                            </div>
-                                        @endforeach
+                                                <ol type="a">
+                                                    @foreach($question->questionCours->optionCours as $option)
+                                                    <li>
+                                                        {!! $option->contenu !!}
+                                                    </li>
+                                                    @endforeach
+                                                </ol>
                                         @else
                                         <h6>Question à réponse ouverte</h6>
                                     @endif

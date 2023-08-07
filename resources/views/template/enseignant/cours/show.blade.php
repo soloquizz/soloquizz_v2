@@ -256,7 +256,64 @@
                         </div>
                         <!--ESPACE EXERCICE-->
                         <div class="tab-pane" id="td">
-                            <div class="row">
+                            <div class="table-responsive" data-toggle="lists" data-lists-values='["name"]'>
+
+                                <!-- Table -->
+                                <table id="myTable1" class="table">
+                                    <thead>
+                                    <tr>
+                                        <th>Titre</th>
+                                        <th>Nombre de questions</th>
+                                        <th>Points</th>
+                                        <th>Durée</th>
+                                        <th>Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody class="list">
+                                    @foreach($cours->exercices as $exo)
+                                    
+                                        <tr>
+                                            <td class="name"><input type="hidden" name="titre" value="{{$exo->titre}}">{{$exo->titre}}</td>
+                                            <td class="name"><input type="hidden" name="cours_id" value="{{$cours->id}}">{{$exo->questionExercices->count()}}</td>
+                                            <td class="name"><input type="hidden" name="note_max" value="{{$exo->note_max}}">{{$exo->note_max}}</td>
+                                            <td class="name"><input type="hidden" name="duree" value="{{$exo->duree}}">{{$exo->duree}}</td>
+                                            <td class="name">
+                                                <div class="row">
+                                                    <div class="col-2">
+                                                        <form method="POST" id="showForm"
+                                                              action="{{ route('admin.certifications.questions.search') }}">
+                                                            @csrf
+                                                            <input type="hidden" name="exo_id" value="{{$exo->id}}">
+                                                            <a href="{{route('enseignant.cours.show.td.question',$exo->id)}}">
+                                                                <i class="fa fa-eye text-info mr-1" title="Mofification"></i>
+                                                            </a>
+                                                        </form>
+                                                    </div>
+                                                    <div class="col-2">
+                                                        <a href="{{route('enseignant.cours.show.td',$exo->id)}}">
+                                                            <i class="fa fa-edit text-warning mr-1" title="Mofification"></i>
+                                                        </a>
+                                                    </div>
+                                                    <div class="col-2">
+                                                        @if ($exo->statut==1)
+                                                        <button class="btn btn-danger mr-1">Déjà Publié</button>
+                                                        @else
+                                                        <form method="POST" action="{{route('enseignant.exercice.update.statut',$exo->id)}}">
+                                                            @csrf
+                                                            <button type="submit" class="btn btn-dark mr-1">Publier</button>
+                                                        </form>
+                                                        @endif
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    
+                                    @endforeach
+                                
+                                    </tbody>
+                                </table>
+                            </div>
+                            {{--<div class="row">
                                 @foreach($cours->exercices as $exo)
                                     <div class="col-sm-6">
                                         <div class="card card-path js-overlay stack stack--1 " data-toggle="popover" data-trigger="click">
@@ -305,7 +362,7 @@
                                         </div>
                                     </div>
                                 @endforeach
-                            </div>
+                            </div>--}}
                         </div>
                         <!--ESPACE ÉVALUATIONS-->
                         <div class="tab-pane" id="evaluations">
@@ -319,7 +376,66 @@
                             </ul>
                             <div class="tab-content">
                                 <div class="tab-pane" id="devoirs">
-                                    <div class="row">
+                                    <div class="table-responsive" data-toggle="lists" data-lists-values='["name"]'>
+
+                                        <!-- Table -->
+                                        <table id="myTable2" class="table">
+                                            <thead>
+                                            <tr>
+                                                <th>Titre</th>
+                                                <th>Nombre de questions</th>
+                                                <th>Points</th>
+                                                <th>Durée</th>
+                                                <th>Action</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody class="list">
+                                                @foreach($cours->evaluations as $evaluation)
+                                                @if($evaluation->type=='Devoir')
+                                            
+                                                <tr>
+                                                    <td class="name">{{$evaluation->titre}}</td>
+                                                    <td class="name">{{$exo->questionExercices->count()}}</td>
+                                                    <td class="name">{{$evaluation->note_max}}</td>
+                                                    <td class="name">{{$evaluation->duree}}</td>
+                                                    <td class="name">
+                                                        <div class="row">
+                                                            <div class="col-2">
+                                                                <form method="POST" id="showForm"
+                                                                      action="{{ route('admin.certifications.questions.search') }}">
+                                                                    @csrf
+                                                                    <input type="hidden" name="exo_id" value="{{$exo->id}}">
+                                                                    <a href="{{route('enseignant.cours.show.evaluation.view.question',$evaluation->id)}}">
+                                                                        <i class="fa fa-eye text-info mr-1" title="Mofification"></i>
+                                                                    </a>
+                                                                </form>
+                                                            </div>
+                                                            <div class="col-2">
+                                                                <a href="{{route('enseignant.cours.show.td',$exo->id)}}">
+                                                                    <i class="fa fa-edit text-warning mr-1" title="Mofification"></i>
+                                                                </a>
+                                                            </div>
+                                                            <div class="col-2">
+                                                                @if ($exo->statut==1)
+                                                                <button class="btn btn-danger mr-1">Déjà Publié</button>
+                                                                @else
+                                                                <form method="POST" action="{{route('enseignant.exercice.update.statut',$exo->id)}}">
+                                                                    @csrf
+                                                                    <button type="submit" class="btn btn-dark mr-1">Publier</button>
+                                                                </form>
+                                                                @endif
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                
+                                            @endif
+                                            @endforeach
+                                        
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    {{--<div class="row">
                                         @foreach($cours->evaluations as $evaluation)
                                         @if($evaluation->type=='Devoir')
                                             <div class="col-sm-6">
@@ -340,7 +456,7 @@
                                                                     <div class="flex">
                                                                         <div class="card-title text-body mb-0">{{$evaluation->titre}}</div>
                                                                         <div class="text-muted d-flex lh-1">
-                                                                            {{--{{$exo->questionExercices->count()}}--}} questions pour {{$evaluation->duree}} min - {{$evaluation->note_max}} point(s)
+                                                                            {{--{{$exo->questionExercices->count()}} questions pour {{$evaluation->duree}} min - {{$evaluation->note_max}} point(s)
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -361,7 +477,7 @@
                                                     <div class="row">
                                                         <div class="col-12">
                                                             <a class="text-primary"
-                                                               href="{{--{{route('enseignant.cours.show.evaluation.view.question',$evaluation->id)}}--}}">
+                                                               href="{{route('enseignant.cours.show.evaluation.view.question',$evaluation->id)}}">
                                                                 <span class="h6">Consulter</span>
                                                             </a>
                                                         </div>
@@ -370,10 +486,60 @@
                                             </div>
                                             @endif
                                         @endforeach
-                                    </div>
+                                    </div>--}}
                                 </div>
                                 <div class="tab-pane" id="examens">
-                                    <div class="row">
+                                    <table id="myTable3" class="table">
+                                        <thead>
+                                        <tr>
+                                            <th>Titre</th>
+                                            <th>Nombre de questions</th>
+                                            <th>Points</th>
+                                            <th>Durée</th>
+                                            <th>Action</th>
+                                        </tr>
+                                        </thead>
+                                     @foreach($cours->evaluations as $evaluation)
+                                     @if($evaluation->type=='Examen')
+                                     <tr>
+                                        <td class="name">{{$evaluation->titre}}</td>
+                                        <td class="name">{{$exo->questionExercices->count()}}</td>
+                                        <td class="name">{{$evaluation->note_max}}</td>
+                                        <td class="name">{{$evaluation->duree}}</td>
+                                        <td class="name">
+                                            <div class="row">
+                                                <div class="col-2">
+                                                    <form method="POST" id="showForm"
+                                                          action="{{ route('admin.certifications.questions.search') }}">
+                                                        @csrf
+                                                        <input type="hidden" name="exo_id" value="{{$exo->id}}">
+                                                        <a href="{{route('enseignant.cours.show.evaluation.view.question',$evaluation->id)}}">
+                                                            <i class="fa fa-eye text-info mr-1" title="Mofification"></i>
+                                                        </a>
+                                                    </form>
+                                                </div>
+                                                <div class="col-2">
+                                                    <a href="{{route('enseignant.cours.show.td',$exo->id)}}">
+                                                        <i class="fa fa-edit text-warning mr-1" title="Mofification"></i>
+                                                    </a>
+                                                </div>
+                                                <div class="col-2">
+                                                    @if ($exo->statut==1)
+                                                    <button class="btn btn-danger mr-1">Déjà Publié</button>
+                                                    @else
+                                                    <form method="POST" action="{{route('enseignant.exercice.update.statut',$exo->id)}}">
+                                                        @csrf
+                                                        <button type="submit" class="btn btn-dark mr-1">Publier</button>
+                                                    </form>
+                                                    @endif
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    @endif
+                                    @endforeach
+                                    </table>
+                                    {{--<div class="row">
                                         @foreach($cours->evaluations as $evaluation)
                                         @if($evaluation->type=='Examen')
                                             <div class="col-sm-6">
@@ -394,7 +560,7 @@
                                                                     <div class="flex">
                                                                         <div class="card-title text-body mb-0">{{$evaluation->titre}}</div>
                                                                         <div class="text-muted d-flex lh-1">
-                                                                            {{--{{$exo->questionExercices->count()}}--}} questions pour {{$evaluation->duree}} min - {{$evaluation->note_max}} point(s)
+                                                                            {{$exo->questionExercices->count()}}questions pour {{$evaluation->duree}} min - {{$evaluation->note_max}} point(s)
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -415,7 +581,7 @@
                                                     <div class="row">
                                                         <div class="col-12">
                                                             <a class="text-primary"
-                                                               href="{{--{{route('enseignant.cours.show.evaluation.view.question',$evaluation->id)}}--}}">
+                                                               href="{{route('enseignant.cours.show.evaluation.view.question',$evaluation->id)}}">
                                                                 <span class="h6">Consulter</span>
                                                             </a>
                                                         </div>
@@ -424,13 +590,13 @@
                                             </div>
                                             @endif
                                         @endforeach
-                                    </div>
+                                    </div>--}}
                                 </div>
                             </div>
                         </div>
                         <!--ESPACE ETUDIANTS-->
                         <div class="tab-pane" id="etudiants">
-                            <table id="myTable">
+                            <table id="myTable4">
                                 <thead>
                                     <tr>
                                         <th>Numéro carte</th>
@@ -588,7 +754,10 @@
         }
  
          $(document).ready(function(){
-           $('#myTable').DataTable();
+           $('#myTable1').DataTable();
+           $('#myTable2').DataTable();
+           $('#myTable3').DataTable();
+           $('#myTable4').DataTable();
          })  
     </script>
 @endsection

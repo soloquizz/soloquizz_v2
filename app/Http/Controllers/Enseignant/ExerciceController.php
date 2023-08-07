@@ -19,6 +19,7 @@ class ExerciceController extends Controller
         $rank = $questions->firstItem();
         return view('template.enseignant.question_exercices.create',compact('exo','questions','rank'));
     }
+
     public function store(Request $request)
     {
         $request->validate([
@@ -60,4 +61,10 @@ class ExerciceController extends Controller
         return view('template.enseignant.question_exercices.show',compact('exo','questionExercice','rank'));
     }
     
+    public function update($id){
+        $exo=Exercice::find($id);
+        $exo->statut=1;
+        $exo->update();
+         return redirect()->back();
+    }
 }

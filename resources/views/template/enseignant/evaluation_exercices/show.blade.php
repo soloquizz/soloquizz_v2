@@ -35,28 +35,28 @@
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item">
-                                <a href="{{route('enseignant.cours.show',$exo->cours_id)}}"><button class="btn btn-primary"><i class="fa fa-arrow-circle-left" aria-hidden="true">&nbsp;Retour</i></button></a>
+                                <a href="{{route('enseignant.cours.show',$evaluation->cours_id)}}"><button class="btn btn-primary"><i class="fa fa-arrow-circle-left" aria-hidden="true">&nbsp;Retour</i></button></a>
                             </li>
                         </ol>
                     </nav>
                     <span class="mr-16pt">
-                        <img src="{{$exo->cours->image()}}" width="40" alt="{{$exo->cours->nom}}" class="rounded">
+                        <img src="{{$evaluation->cours->image()}}" width="40" alt="{{$evaluation->cours->nom}}" class="rounded">
                     </span>
-                    <h4>{{$exo->cours->nom}}</h4>
+                    <h4>{{$evaluation->cours->nom}}</h4>
                 </div>
 
 
                 <div class="card">
                     <div class="card-header ml-2">
-                        <h3>{{$exo->titre}}</h3>
+                        <h3>{{$evaluation->titre}}</h3>
 
                         <a class="text-primary"
-                            href="{{route('enseignant.cours.show.td',$exo->id)}}">
+                            href="{{route('enseignant.cours.show.td',$evaluation->id)}}">
                                 <button class="btn btn-outline-primary">Ajouter des questions</button> 
                         </a>
                     </div>
                     <div class="card-body">
-                        <ul style="list-style-type: none;">
+                       {{-- <ul style="list-style-type: none;">
                             @foreach($questionExercice as $question)
                             @if($question->count()==0)
                             <h6>Pas de questions</h6>
@@ -105,11 +105,11 @@
                                 </li>
                             @endif
                             @endforeach
-                        </ul>
+                        </ul>--}}
                     </div>
                     <div class="card-footer">
                         <nav aria-label="Page navigation example">
-                        {{$questionExercice->links()}}
+                        {{--{{$questionExercice->links()}}--}}
                         </nav>
                     </div>
                 </div> 

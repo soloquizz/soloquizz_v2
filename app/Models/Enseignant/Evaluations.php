@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  * @package App\Models\Enseignant
  * @version August 4, 2023, 9:46 am UTC
  *
- * @property \App\Models\Enseignant\Cours $cours
+ * @property \App\Models\Administration\Cours $cours
  * @property \Illuminate\Database\Eloquent\Collection $etudiantEvaluations
  * @property \Illuminate\Database\Eloquent\Collection $evaluationExercices
  * @property \Illuminate\Database\Eloquent\Collection $questionEvaluations
@@ -92,7 +92,7 @@ class Evaluations extends Model
      **/
     public function cours()
     {
-        return $this->belongsTo(\App\Models\Enseignant\Cours::class, 'cours_id');
+        return $this->belongsTo(\App\Models\Administration\Cours::class, 'cours_id');
     }
 
     /**
