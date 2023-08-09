@@ -109,6 +109,7 @@
 
     <!-- Chart.js Samples -->
     <script src="{{asset('assets/js/page.student-dashboard.js')}}"></script>
+    
 
     @yield('script')
 

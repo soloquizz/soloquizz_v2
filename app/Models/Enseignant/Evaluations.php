@@ -108,7 +108,7 @@ class Evaluations extends Model
      **/
     public function evaluationExercices()
     {
-        return $this->hasMany(\App\Models\Enseignant\EvaluationExercice::class, 'evaluation_id');
+        return $this->hasMany(\App\Models\Enseignant\EvaluationExercices::class, 'evaluation_id');
     }
 
     /**

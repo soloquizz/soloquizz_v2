@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\Enseignant;
 
 use App\Http\Controllers\Controller;
+use App\Models\Enseignant\EvaluationExercices;
 use App\Models\Enseignant\Evaluations;
 use App\Models\Enseignant\Exercice;
+use App\Models\Enseignant\OptionCours;
+use App\Models\Enseignant\QuestionExercice;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -12,9 +15,8 @@ class EvaluationController extends Controller
 {
     public function index($id){
         $evaluation=Evaluations::find($id);
-        //$questions=QuestionCours::paginate(5);
-        //$rank = $questions->firstItem();
-        return view('template.enseignant.evaluation_exercices.create',compact('evaluation'));
+        $exercices=Exercice::all();
+        return view('template.enseignant.evaluation_exercices.create',compact('evaluation','exercices'));
   
     }
     public function store(Request $request)
@@ -50,10 +52,11 @@ class EvaluationController extends Controller
 
     public function show($id){
         $evaluation=Evaluations::find($id);
-        //$questionExercice=Exercice::where('exercice_id',$id)->paginate(3);
-        //$questionCours=$questionExercice->firstItem()->question_cours_id;
+        $evaluationExercice=EvaluationExercices::paginate(2);
+        $questionExercice=QuestionExercice::all();
+        $options=OptionCours::all();
         
-        //$rank=$questionExercice->firstItem();
-        return view('template.enseignant.evaluation_exercices.show',compact('evaluation'));
+        $rank=$evaluationExercice->firstItem();
+        return view('template.enseignant.evaluation_exercices.show',compact('evaluation','evaluationExercice','questionExercice','options','rank'));
     }
 }

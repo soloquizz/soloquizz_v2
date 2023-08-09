@@ -49,6 +49,9 @@ Route::name('enseignant.')->prefix('enseignant')->middleware(['auth','check.acti
     Route::post('/evaluation-store',[App\Http\Controllers\Enseignant\EvaluationController::class,'store'])->name('evaluation.store');
     Route::get('/cours-show/evaluation-question-create/{td_id}',[App\Http\Controllers\Enseignant\EvaluationController::class,'index'])->name('cours.show.evaluation.add.question');
     Route::get('/cours-show/evaluation-question-view/{td_id}',[App\Http\Controllers\Enseignant\EvaluationController::class,'show'])->name('cours.show.evaluation.view.question');
+    
+    //Evalution Exercice
+    Route::post('/evaluation-exercice-store',[App\Http\Controllers\Enseignant\ExerciceEvaluationController::class,'store'])->name('evaluation.exercice.store');
 
 
 

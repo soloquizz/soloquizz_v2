@@ -84,7 +84,7 @@ class CoursController extends Controller
 
         $support->addMediaFromRequest('support')->toMediaCollection('supports');
 
-        //Mailing
+        /*Mailing
         $cours=Cours::find($input['cours_id']);
         $classe=$cours->classe;
         $inscrits=$classe->inscriptions->filter(function($inscription){
@@ -95,7 +95,7 @@ class CoursController extends Controller
         $coursData['nom_cours']=$cours['nom'];
         $coursData['classe']=$classe['nom'];
         Mail::to($user)->send(new NotificationCours($coursData));
-
+        */
         Alert::success('Succés','Ressource ajoutée avec succés');
         
         return redirect(route('enseignant.cours.show',$input['cours_id']));
