@@ -12,7 +12,7 @@ class IndexController extends Controller
 {
     public function index()
     {
-        return view('template.index');
+        return view('template.index2');
     }
 
     public function testSmtp()

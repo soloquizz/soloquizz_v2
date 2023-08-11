@@ -9,10 +9,12 @@
                 <div class="flex mb-32pt mb-md-0">
                     <h1 class="text-white mb-0">Connexion</h1>
                 </div>
-                <a href="{{route('auth.register')}}" class="btn btn-outline-white flex-column">
+                {{--
+                    <a href="{{route('auth.register')}}" class="btn btn-outline-white flex-column">
                     Vous n'avez pas encore de compte
                     <span class="btn__secondary-text">Créez-en maintenant!</span>
-                </a>
+                    </a>
+                 --}}
             </div>
         </div>
         <div class="bg-white pt-32pt pt-sm-64pt pb-32pt">
@@ -22,18 +24,25 @@
             <div class="container page__container">
                 <form action="{{ route('auth.login') }}" method="post" class="col-md-5 p-0 mx-auto">
                     @csrf
-                    <div class="form-group">
-                        <label for="email">Email:</label>
-                        <input id="email" type="text" class="form-control" name="email" required placeholder="Votre adresse email institutionnel...">
-                    </div>
-                    <div class="form-group">
-                        <label for="password">Mot de passe:</label>
-                        <input id="password" type="password" class="form-control" name="password" required placeholder="Votre mot de passe ...">
-                        <p class="text-right"><a href="#" class="small">Mot de passe oublié ?</a></p>
-                    </div>
-                    <div class="text-center">
-                        <button class="btn btn-lg btn-outline-primary">Connexion</button>
-                    </div>
+                    
+                        <div class="modal-body">
+                          <div class="form-group">
+                            <label for="email1">Email address</label>
+                            <input type="email" class="form-control" id="email1" name="email" aria-describedby="emailHelp" required placeholder="Votre adresse email institutionnel...">
+                            <small id="emailHelp" class="form-text text-muted">Your information is safe with us.</small>
+                          </div>
+                          <div class="form-group">
+                            <label for="password1">Mot de passe</label>
+                            <input type="password" class="form-control" id="password1" name="password" placeholder="Votre mot de passe ...">
+                            <p class="text-right"><a href="{{route('auth.forgot.password.email')}}" class="small">Mot de passe oublié ?</a></p>
+
+                          </div>
+                         
+                        </div>
+                        <div class="modal-footer border-top-0 d-flex justify-content-center">
+                            <button class="btn btn-lg btn-outline-primary">Connexion</button>
+                        </div>
+                    
                 </form>
             </div>
         </div>

@@ -40,7 +40,6 @@
 <div id="wrap" class="app-content container center-layout mt-2">
     <div class="content-wrapper">
         <div class="content-body">
-            @include('sweetalert::alert')
             <section class="flexbox-container mt-5">
                 <div class="col-12 d-flex align-items-center justify-content-center">
                     <div class="col-md-8 col-12 box-shadow-2 p-0">
@@ -52,11 +51,15 @@
                                     </div>
                                 </div>
                                 <div class="card-body">
-                                    <span>Informations Compte Soloquizz</span>
+                                    <p>Cher/chère {{$compte_data['prenom']}} {{$compte_data['nom']}}</p>
+                                    <p>Nous sommes ravis de vous accueillir sur SoloQuizz, ci-dessous, nous vous fournissons vos informations de connexion pour accéder à votre compte SoloQuizz:</p>
                                     <ul>
-                                        <li><strong>Email :</strong> : {{$compte_data['email']}}</li>
-                                        <li><strong>Mot de passe:</strong> : {{$compte_data['password']}}</li>
+                                        <li><strong>Lien :</strong> <a href="{{env('APP_URL')}}">{{env('APP_URL')}}</a>  </li>
+                                        <li><strong>Profile :</strong> {{$compte_data['profile']}}</li>
+                                        <li><strong>Email :</strong> {{$compte_data['email']}}</li>
+                                        <li><strong>Mot de passe :</strong> {{$compte_data['password']}}</li>
                                     </ul>
+                                    <p>Cordialement,<br>L'équipe SoloQuizz</p>
                                 </div>
                             </div>
                         </div>

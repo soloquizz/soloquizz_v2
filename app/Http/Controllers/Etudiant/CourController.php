@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Etudiant;
 use App\Http\Controllers\Controller;
 use App\Models\Administration\Cours;
 use App\Models\Administration\Editeur;
+use App\Models\Enseignant\Exercice;
+use App\Models\Enseignant\QuestionExercice;
 use Illuminate\Http\Request;
 
 class CourController extends Controller
@@ -24,5 +26,12 @@ class CourController extends Controller
         return view('template.etudiant.cours.show',compact('cours'));
     }
 
+
+    public function showTD($id){
+        $exo=Exercice::find($id);
+        $questionExercice=QuestionExercice::where('exercice_id',$id)->paginate(3);
+        $rank=$questionExercice->firstItem();
+        return view('template.etudiant.question_exercices.show',compact('exo','questionExercice','rank'));
+    }
 
 }

@@ -31,7 +31,7 @@ class CompteInfos extends Mailable
      */
     public function build()
     {
-        return $this->subject('Information de connexion sur la plateforme Soloquizz')->view('template.emails.compte')
+        return $this->subject('Bienvenue sur SoloQuizz - Vos informations de connexion')->view('template.emails.compte')
             ->with('compte_data', $this->compte_data);
     }
 }

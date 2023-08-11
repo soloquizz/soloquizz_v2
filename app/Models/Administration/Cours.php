@@ -108,7 +108,7 @@ class Cours extends Model
      **/
     public function evaluations()
     {
-        return $this->hasMany(\App\Models\Administration\Evaluation::class, 'cours_id');
+        return $this->hasMany(\App\Models\Enseignant\Evaluations::class, 'cours_id');
     }
 
     /**
@@ -116,7 +116,7 @@ class Cours extends Model
      **/
     public function exercices()
     {
-        return $this->hasMany(\App\Models\Administration\Exercice::class, 'cours_id');
+        return $this->hasMany(\App\Models\Enseignant\Exercice::class, 'cours_id');
     }
 
     /**
@@ -124,7 +124,7 @@ class Cours extends Model
      **/
     public function questionCours()
     {
-        return $this->hasMany(\App\Models\Administration\QuestionCour::class, 'cours_id');
+        return $this->hasMany(\App\Models\Enseignant\QuestionCours::class, 'cours_id');
     }
 
     /**
