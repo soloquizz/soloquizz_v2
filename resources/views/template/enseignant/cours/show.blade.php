@@ -7,6 +7,21 @@
     <!-- Quill Theme -->
     <link type="text/css" href="{{asset('assets/css/quill.css')}}" rel="stylesheet">
     <link type="text/css" href="{{asset('assets/css/quill.rtl.css')}}" rel="stylesheet">
+    <style>
+        .pub{
+            background-color: green;
+            color: white;
+        }
+        .pub2{
+            background-color: rgb(246, 4, 16);
+            color: white;
+            width: max-content;
+            padding: 1px;
+            padding-left: 2px;
+            padding-right: 2px;
+            display: flex;
+        }
+    </style>
 @endsection
 
 @section('content_page')
@@ -266,6 +281,7 @@
                                         <th>Nombre de questions</th>
                                         <th>Points</th>
                                         <th>Durée</th>
+                                        <th>Séance</th>
                                         <th>Action</th>
                                     </tr>
                                     </thead>
@@ -273,10 +289,11 @@
                                     @foreach($cours->exercices as $exo)
                                     
                                         <tr>
-                                            <td class="name"><input type="hidden" name="titre" value="{{$exo->titre}}">{{$exo->titre}}</td>
-                                            <td class="name"><input type="hidden" name="cours_id" value="{{$cours->id}}">{{$exo->questionExercices->count()}}</td>
-                                            <td class="name"><input type="hidden" name="note_max" value="{{$exo->note_max}}">{{$exo->note_max}}</td>
-                                            <td class="name"><input type="hidden" name="duree" value="{{$exo->duree}}">{{$exo->duree}}</td>
+                                            <td class="name">{{$exo->titre}}</td>
+                                            <td class="name">{{$exo->questionExercices->count()}}</td>
+                                            <td class="name">{{$exo->note_max}}</td>
+                                            <td class="name">{{$exo->duree}}</td>
+                                            <td class="name">{{$exo->seance?->titre}}</td>
                                             <td class="name">
                                                 <div class="row">
                                                     <div class="col-2">
@@ -290,24 +307,32 @@
                                                         </form>
                                                     </div>
                                                     <div class="col-2">
-                                                        <a href="{{route('enseignant.cours.show.td',$exo->id)}}">
+                                                        <a href="#edit{{$exo->id}}" data-toggle="modal">                         
                                                             <i class="fa fa-edit text-warning mr-1" title="Mofification"></i>
                                                         </a>
+                                                        
+                                                        
                                                     </div>
+                                                    
                                                     <div class="col-2">
                                                         @if ($exo->statut==1)
-                                                        <button class="btn btn-danger mr-1">Déjà Publié</button>
+                                                        <span class="pub2 rounded-pill border border-4 mr-1">Déjà Publié</span>
                                                         @else
                                                         <form method="POST" action="{{route('enseignant.exercice.update.statut',$exo->id)}}">
                                                             @csrf
-                                                            <button type="submit" class="btn btn-dark mr-1">Publier</button>
+                                                            <input type="submit" class="pub rounded-pill border border-4 mr-1" value="Publier le">
                                                         </form>
                                                         @endif
                                                     </div>
                                                 </div>
+                                                
+                                                
+                                                @include('template.enseignant.exercices.edit')
+
                                             </td>
                                         </tr>
-                                    
+                                    <!---Modal--->
+                                 
                                     @endforeach
                                 
                                     </tbody>
@@ -417,11 +442,11 @@
                                                             </div>
                                                             <div class="col-2">
                                                                 @if ($exo->statut==1)
-                                                                <button class="btn btn-danger mr-1">Déjà Publié</button>
+                                                                <span class="pub2 rounded-pill border border-4 mr-1">Déjà Publié</span>
                                                                 @else
                                                                 <form method="POST" action="{{route('enseignant.exercice.update.statut',$exo->id)}}">
                                                                     @csrf
-                                                                    <button type="submit" class="btn btn-dark mr-1">Publier</button>
+                                                                    <input type="submit" class="pub rounded-pill border border-4 mr-1" value="Publier le">
                                                                 </form>
                                                                 @endif
                                                             </div>
@@ -519,20 +544,21 @@
                                                     </form>
                                                 </div>
                                                 <div class="col-2">
-                                                    <a href="{{route('enseignant.cours.show.td',$exo->id)}}">
+                                                    <a href="{{route('enseignant.cours.show.td',$evaluation->id)}}">
                                                         <i class="fa fa-edit text-warning mr-1" title="Mofification"></i>
                                                     </a>
                                                 </div>
                                                 <div class="col-2">
                                                     @if ($exo->statut==1)
-                                                    <button class="btn btn-danger mr-1">Déjà Publié</button>
+                                                    <span class="pub2 rounded-pill border border-4 mr-1">Déjà Publié</span>
                                                     @else
-                                                    <form method="POST" action="{{route('enseignant.exercice.update.statut',$exo->id)}}">
+                                                    <form method="POST" action="{{route('enseignant.exercice.update.statut',$evaluation->id)}}">
                                                         @csrf
-                                                        <button type="submit" class="btn btn-dark mr-1">Publier</button>
+                                                        <input type="submit" class="pub rounded-pill border border-4 mr-1" value="Publier le">
                                                     </form>
                                                     @endif
                                                 </div>
+                                                
                                             </div>
                                         </td>
                                     </tr>
@@ -624,6 +650,11 @@
                 </div>
             </div>
         </div>
+        
+
+
+
+
         <!-- END Section Pages Layout -->
 
         @include('layouts.template.footer')
@@ -644,6 +675,8 @@
 @section('script')
     <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
     <script src="//cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <script src="{{asset('assets/vendor/quill.min.js')}}"></script>
     <script src="{{asset('assets/vendor/image-resize.min.js')}}"></script>
     <script src="{{asset('assets/js/quill.js')}}"></script>
@@ -658,7 +691,7 @@
             else {
                 switchTabSeance();
             }
-
+         
         });
 
         function switchTabSeance() {
@@ -679,6 +712,7 @@
         function switchTabExercices() {
             $('.btnTab').hide();
             $('#btnExercice').show();
+            $('.modal-backdrop').remove();
         }
 
         function switchTabEvaluations() {
@@ -703,7 +737,7 @@
         function switchTabEtudiants() {
             $('.btnTab').hide();
         }
-
+       
         //Quill 
         var quillQuestion = new Quill('#editorQuestion', {
             theme: 'snow',
@@ -754,10 +788,12 @@
         }
  
          $(document).ready(function(){
-           $('#myTable1').DataTable();
            $('#myTable2').DataTable();
-           $('#myTable3').DataTable();
+           $('#myTable3 ').DataTable();
+           $('#myTable1').DataTable();
            $('#myTable4').DataTable();
+
+           
          })  
     </script>
 @endsection

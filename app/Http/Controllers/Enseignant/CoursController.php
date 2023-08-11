@@ -4,7 +4,10 @@ namespace App\Http\Controllers\Enseignant;
 
 use App\Http\Controllers\Controller;
 use App\Mail\NotificationCours;
+use App\Models\Administration\Classe;
 use App\Models\Administration\Cours;
+use App\Models\Administration\Etudiant;
+use App\Models\Administration\Inscription;
 use App\Models\Administration\Question;
 use App\Models\Administration\Support;
 use App\Models\Enseignant\QuestionCours;
@@ -85,20 +88,27 @@ class CoursController extends Controller
         $support->addMediaFromRequest('support')->toMediaCollection('supports');
 
         //Mailing
-        $cours=Cours::find($input['cours_id']);
+        $cours = Cours::find($input['cours_id']);
+        $support = $cours->supports->first();
         $classe=$cours->classe;
         $inscrits=$classe->inscriptions->filter(function($inscription){
-            return $inscription->etat==0;
+            return $inscription->etat=='En cours';
         });
-        $etudiants=$inscrits->etudiant;
-        $user=$etudiants->user;
-        $coursData['nom_cours']=$cours['nom'];
-        $coursData['classe']=$classe['nom'];
-        Mail::to($user)->send(new NotificationCours($coursData));
 
+        foreach($inscrits as $inscrit){
+            $user=$inscrit->etudiant->user();
+            //dd($user);
+            $coursData['nom_cours']=$cours['nom'];
+            $coursData['classe']=$classe['nom'];
+           
+            Mail::to($user)->send(new NotificationCours($coursData));
+           
+        }
+         
         Alert::success('Succés','Ressource ajoutée avec succés');
-        
+            
         return redirect(route('enseignant.cours.show',$input['cours_id']));
+        
 
     }
 

@@ -1,5 +1,9 @@
 @extends('layouts.template.administration.master')
-
+@section('css')
+    <!--Datatables-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="//cdn.datatables.net/1.13.5/css/jquery.dataTables.min.css">
+@endsection
 @section('content_page')
     <div class="mdk-header-layout__content page-content">
         <!-- Header Layout -->
@@ -35,21 +39,22 @@
                 </ul>
                 <div class="card-body tab-content">
                     <div class="tab-pane active" id="cours">
-                        <a href="#" class="btn btn-outline-primary" style="margin-left: 85%!important;"
+                        <a href="#" class="btn btn-outline-primary" style="margin-left: 80%!important; margin-bottom:3%"
                            data-toggle="modal" data-target="#addCours">Nouveau cours</a>
                         <div class="row">
                             <!-- Wrapper -->
                             <div class="table-responsive" data-toggle="lists" data-lists-values='["name"]'>
 
-                                <!-- Search -->
+                                <!-- Search
                                 <div class="search-form search-form--light mb-3 col-sm-4">
                                     <input type="text" class="form-control search" placeholder="Rechercher">
                                     <button class="btn" type="button" role="button"><i class="material-icons">search</i>
                                     </button>
                                 </div>
+                                 -->
 
                                 <!-- Table -->
-                                <table class="table">
+                                <table class="table" id="myTable1">
                                     <thead>
                                     <tr>
                                         <th>Image</th>
@@ -101,7 +106,39 @@
                         </div>
                     </div>
                     <div class="tab-pane" id="etudiants">
-                        Étudiants
+                        <table class="table" id="myTable2">
+                            <thead>
+                            <tr>
+                                <th>Numéro Carte</th>
+                                <th>Prénom</th>
+                                <th>Nom</th>
+                                <th>Téléphone</th>
+                                <th>Email</th>
+                                <th>Action</th>
+                            </tr>
+                            </thead>
+                            <tbody class="list">
+                                
+                                    @foreach($inscrits as $etudiant)
+                                    <tr>
+                                        <td>{{$etudiant->etudiant->numero_carte}}</td>
+                                        <td>{{$etudiant->etudiant->nom}}</td>
+                                        <td>{{$etudiant->etudiant->prenom}}</td>
+                                        <td>{{$etudiant->etudiant->telephone}}</td>
+                                        <td>{{$etudiant->etudiant->email_personnel}}</td>
+                                        <td class="name">
+                                            <a href="{{route('admin.etudiants.show', $etudiant->etudiant->id)}}">
+                                                <i class="fa fa-eye text-info mr-1" title="Détail Administrateur"></i>
+                                            </a>
+                                            <a href="{{route('admin.etudiants.edit', $etudiant->etudiant->id)}}">
+                                                <i class="fa fa-edit text-warning mr-1" title="Mofification"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -116,5 +153,15 @@
     <!-- Modal -->
     @include('template.administration.cours.create')
     <!-- Modal -->
+@endsection
+@section('script')
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+    <script src="//cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready(function(){
+           $('#myTable2').DataTable();
+           $('#myTable1').DataTable();           
+        })  
+    </script>
 @endsection
 
