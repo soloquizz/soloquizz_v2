@@ -26,8 +26,6 @@
 
             <!-- Main Navigation -->
 
-
-
             <nav class="nav navbar-nav ml-auto flex-nowrap">
                 <div class="nav-item dropdown d-none d-sm-flex ml-16pt">
                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">

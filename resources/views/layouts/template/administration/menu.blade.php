@@ -25,15 +25,17 @@
                             <a class="dropdown-item {{ Request::is(['admin/certifications*']) ? 'active' : '' }}" href="{{route('admin.certifications.index')}}">Certifications</a>
                         </div>
                     </li>
-                    <li class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle {{ Request::is(['admin/parcours*','admin/niveaux*','admin/domaines*','admin/anneeScolaires*','admin/semestres*']) ? 'active' : '' }}" data-toggle="dropdown">Paramétres</a>
+                    <li class="nav-item">
+                        <a href="{{route('admin.parametre')}}" class="nav-link">Paramétres</a>
+
+                        {{--<a href="#" class="nav-link dropdown-toggle {{ Request::is(['admin/parcours*','admin/niveaux*','admin/domaines*','admin/anneeScolaires*','admin/semestres*']) ? 'active' : '' }}" data-toggle="dropdown">Paramétres</a>
                         <div class="dropdown-menu">
                             <a class="dropdown-item {{ Request::is(['admin/domaines*']) ? 'active' : '' }}" href="{{route('admin.domaines.index')}}">Domaines</a>
                             <a class="dropdown-item {{ Request::is(['admin/parcours*']) ? 'active' : '' }}" href="{{route('admin.parcours.index')}}">Parcours</a>
                             <a class="dropdown-item {{ Request::is(['admin/niveaux*']) ? 'active' : '' }}" href="{{route('admin.niveaux.index')}}">Niveaux</a>
                             <a class="dropdown-item {{ Request::is(['admin/semestres*']) ? 'active' : '' }}" href="{{route('admin.semestres.index')}}">Semestres</a>
                             <a class="dropdown-item {{ Request::is(['admin/anneeScolaires*']) ? 'active' : '' }}" href="{{route('admin.anneeScolaires.index')}}">Année Scolaires</a>
-                        </div>
+                        </div>--}}
                     </li>
 
                     <li class="nav-item">

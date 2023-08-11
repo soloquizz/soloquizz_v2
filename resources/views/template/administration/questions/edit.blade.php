@@ -40,15 +40,17 @@
                                 <label class="form-label">Point
                                     <span class="text-danger">*</span>
                                 </label>
-                                <input type="number" name="point" value="{{$question->point}}" class="form-control" placeholder="3" required="">
+                                <input type="number" name="point" value="{{$question->point}}" class="form-control"
+                                       placeholder="3" required="">
                             </div>
                             <div class="col-12 col-md-6 mb-3">
                                 <label class="form-label">Durée
                                     <span class="text-danger">*</span>
                                 </label>
-                                <input type="number" name="duree" value="{{$question->duree}}" class="form-control" placeholder="2" required="">
+                                <input type="number" name="duree" value="{{$question->duree}}" class="form-control"
+                                       placeholder="2" required="">
                                 <input type="hidden" name="certification_id" value="{{$certification->id}}">
-                                <input type="hidden"  name="page" value="{{$page}}">
+                                <input type="hidden" name="page" value="{{$page}}">
                                 <textarea name="contenu" style="display:none" id="hiddenArea"></textarea>
                             </div>
                         </div>
@@ -90,10 +92,10 @@
                     displaySize: true
                 },
                 toolbar: [
-                    [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+                    [{'header': [1, 2, 3, 4, 5, 6, false]}],
                     ['bold', 'italic', 'underline', 'strike'],
-                    [{ 'color': [] }, { 'background': [] }],
-                    [{ 'align': [] }],
+                    [{'color': []}, {'background': []}],
+                    [{'align': []}],
                     ['link', 'image'],
                     [{"list": "ordered"}, {"list": "bullet"}],
                     ['clean']
@@ -101,7 +103,7 @@
             }
         });
 
-        $("#storeQuestionForm").on("submit",function() {
+        $("#storeQuestionForm").on("submit", function () {
             $("#hiddenArea").val($("#editor").html());
         });
 
