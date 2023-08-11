@@ -41,4 +41,11 @@ class QuestionExerciceController extends Controller
         return redirect()->back();
     }
 
+    public function destroy($id)
+    {
+        QuestionExercice::find($id)->delete();
+  
+        return redirect()->back();
+    }
+
 }

@@ -39,6 +39,7 @@ Route::name('enseignant.')->prefix('enseignant')->middleware(['auth','check.acti
 
     //Question Exercice
     Route::post('/ques-store',[App\Http\Controllers\Enseignant\QuestionExerciceController::class,'store'])->name('question.exercice.store');
+    Route::delete('ques-delete/{id}', [App\Http\Controllers\Enseignant\QuestionExerciceController::class, 'destroy'])->name('question.exercice.destroy');
 
     //Option Cours
     Route::post('/option-cours-store',[App\Http\Controllers\Enseignant\OptionCoursController::class,'store'])->name('option.cours.store');
