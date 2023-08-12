@@ -39,7 +39,16 @@
                 </div>
                 <div class="card">
                     <div class="card-header ml-2">
-                        <h3>{{$exo->titre}}</h3>
+                        <div class="row">
+                            <div class="col-8">
+                                <h3>{{$exo->titre}}</h3>
+                            </div>
+                            <div class="col-3">
+                                <a href="{{route('etudiant.cours.show.td.question.treatement',$exo->id)}}"><button class="btn btn-primary"><i class="fa fa-pencil" aria-hidden="true">Traiter</i></button></a>
+                            </div>
+
+                        </div>
+                        
                     </div>
                     <div class="card-body">
                         <ul style="list-style-type: none;">
@@ -52,17 +61,6 @@
                                         <div class="col-2">{{$question->point}}point(s)</div>
                                         <div class="col-2">{{$question->durée}}min</div>
                                         
-                                        <div class="col-2">
-                                            @if(isset($_GET['page']))
-                                                <a href="{{route('admin.questions.edit.custom', ['question_id'=>$question->id,'page'=>$_GET['page']])}}">
-                                                    <i class="fa fa-trash text-danger mr-1" title="Suppression de la question"></i>
-                                                </a>
-                                            @else
-                                                <a href="{{route('admin.questions.edit.custom', ['question_id'=>$question->id,'page'=>1])}}">
-                                                    <i class="fa fa-trash text-danger mr-1" title="Suppression de la question"></i>
-                                                </a>
-                                            @endif
-                                        </div>
                                     </div>
                                     <div class="row">
                                         {!! $question->questionCours->contenu !!}

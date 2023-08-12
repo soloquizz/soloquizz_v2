@@ -71,13 +71,18 @@
                                         
                                         <div class="col-2">
                                             @if(isset($_GET['page']))
-                                                <a href="{{route('admin.questions.edit.custom', ['question_id'=>$question->id,'page'=>$_GET['page']])}}">
-                                                    <i class="fa fa-trash text-danger mr-1" title="Suppression de la question"></i>
-                                                </a>
+                                            <form method="POST" action="{{ route('enseignant.question.exercice.destroy', ['id'=>$question->id,'page'=>$_GET['page']]) }}">
+                                                @csrf
+                                                <input name="_method" type="hidden" value="DELETE">
+                                                   <button type="submit" class="btn btn-danger"><i class="fa fa-trash text-danger mr-1" title="Suppression de la question"></i></button> 
+                                            </form>
                                             @else
-                                                <a href="{{route('admin.questions.edit.custom', ['question_id'=>$question->id,'page'=>1])}}">
-                                                    <i class="fa fa-trash text-danger mr-1" title="Suppression de la question"></i>
-                                                </a>
+                                            <form method="POST" action="{{ route('enseignant.question.exercice.destroy', ['id'=>$question->id,'page'=>1]) }}">
+                                                <input name="_method" type="hidden" value="DELETE">
+
+                                                @csrf
+                                                    <button type="submit" class="btn btn-danger"><i class="fa fa-trash text-white mr-1" title="Suppression de la question"></i></button>
+                                            </form>
                                             @endif
                                         </div>
                                     </div>

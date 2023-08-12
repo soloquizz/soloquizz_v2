@@ -14,7 +14,7 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <!--recup id cours-->
-                            <div class="form-row">
+                            < class="form-row">
                                 <div class="col-12 col-md-6 mb-3">
                                     <label class="form-label">QCM
                                         <span class="text-danger">*</span>
@@ -30,7 +30,7 @@
                                     <input type="hidden" name="cours_id" value="{{$cours->id}}">
                                     <textarea name="contenu" style="display:none" id="hiddenAreaQuestion"></textarea>
                                 </div>
-                            </div>
+                            </ div>
                             <div class="form-row">
                                 <div class="col-12 col-md-12 mb-3">
                                     <label class="form-label">Contenu

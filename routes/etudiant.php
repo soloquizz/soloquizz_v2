@@ -21,7 +21,11 @@ Route::name('etudiant.')->prefix('etudiant')->middleware(['auth','check.actif.co
     Route::get('/cours',[App\Http\Controllers\Etudiant\CourController::class,'index'])->name('cours');
     Route::get('/cours-show/{cours_id}',[App\Http\Controllers\Etudiant\CourController::class,'show'])->name('cours.show');
     Route::get('/td/{td_id}',[App\Http\Controllers\Etudiant\CourController::class,'showTD'])->name('cours.show.td.question');
+    Route::get('/td/treate/{td_id}',[App\Http\Controllers\Etudiant\CourController::class,'treatementTD'])->name('cours.show.td.question.treatement');
 
+    //Exercices
+
+    Route::post('/exrecice',[App\Http\Controllers\Etudiant\EtudiantQuestionCoursController::class,'store'])->name('question.cours.store');
 
     //Certification
     Route::get('/certifications',[App\Http\Controllers\Etudiant\CertificationController::class,'index'])->name('certifications');

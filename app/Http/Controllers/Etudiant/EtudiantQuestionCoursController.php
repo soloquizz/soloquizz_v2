@@ -1,20 +1,24 @@
 <?php
 
-namespace App\Http\Controllers\Enseignant;
+namespace App\Http\Controllers\Etudiant;
 
 use App\Http\Controllers\Controller;
-use App\Models\Enseignant\Exercice;
+use App\Models\Administration\Cours;
+use App\Models\Etudiant\EtudiantQuestionCours;
 use Illuminate\Http\Request;
-use App\Models\Enseignant\QuestionExercice;
 use RealRashid\SweetAlert\Facades\Alert;
 
-class QuestionExerciceController extends Controller
+class EtudiantQuestionCoursController extends Controller
 {
+    
     public function store(Request $request)
-    {
-
+    {  
+        
         $input = $request->all();
 
+        $input['contenu'] = str_replace('true','false',$input['contenu']);
+
+        $input['contenu'] = str_replace('input type="text"','input type="hidden"',$input['contenu']);
         if ($input['questions_id'][0] == "0,0,0"){
             Alert::error("Error","Le choix d'une question est obligatoire");
             return redirect()->back();
@@ -26,12 +30,11 @@ class QuestionExerciceController extends Controller
         foreach ($question_ids as $key => $question_id){
             if ($question_id != 0){
               
-          
-                $exo = QuestionExercice::create([
+                $exo = EtudiantQuestionCours::create([
                     'question_cours_id' => $question_id,
-                    'exercice_id' => $input['exercice_id'],
-                    'point' => $input["points"][$key],
-                    'duree' => $input["durees"][$key]
+                    'user_id' => $input['user_id'],
+                    'etudiant_id' => auth()->user()->etudiant()->id,
+                    'contenu' => $input["contenu"][$key],
                 ]);
             
         }
@@ -41,11 +44,6 @@ class QuestionExerciceController extends Controller
         return redirect()->back();
     }
 
-    public function destroy($id)
-    {
-        QuestionExercice::find($id)->delete();
-  
-        return redirect()->back();
+
     }
 
-}
