@@ -4,7 +4,21 @@
  <!--Datatables-->
  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
  <link rel="stylesheet" href="//cdn.datatables.net/1.13.5/css/jquery.dataTables.min.css">
-
+ <style>
+    .pub{
+        background-color: green;
+        color: white;
+    }
+    .pub2{
+        background-color: rgb(246, 4, 16);
+        color: white;
+        width: max-content;
+        padding: 1px;
+        padding-left: 2px;
+        padding-right: 2px;
+        display: flex;
+    }
+</style>
 @endsection
 
 @section('content_page')
@@ -88,6 +102,16 @@
                                         <a href="{{route('admin.certifications.edit', $certification->id)}}">
                                             <i class="fa fa-edit text-warning mr-1" title="Mofification"></i>
                                         </a>
+                                    </div>
+                                    <div class="col-2">
+                                        @if ($certification->statut==1)
+                                        <span class="pub2 rounded-pill border border-4 mr-1">Déjà Publié</span>
+                                        @else
+                                        <form method="POST" action="{{route('admin.certifications.update.statut', $certification->id)}}">
+                                            @csrf
+                                            <input type="submit" class="pub rounded-pill border border-4 mr-1" value="Publier le">
+                                        </form>
+                                        @endif
                                     </div>
                                 </div>
                             </td>

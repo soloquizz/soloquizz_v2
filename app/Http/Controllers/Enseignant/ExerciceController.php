@@ -61,10 +61,12 @@ class ExerciceController extends Controller
         return view('template.enseignant.question_exercices.show',compact('exo','questionExercice','rank'));
     }
     
-    public function update($id){
+    public function updateS($id){
         $exo=Exercice::find($id);
         $exo->statut=1;
         $exo->update();
+        Alert::success('Succés','Exercice publié');
+
          return redirect()->back();
     }
 }

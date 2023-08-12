@@ -6,6 +6,7 @@ use App\Http\Requests\Administration\CreateCertificationRequest;
 use App\Http\Requests\Administration\UpdateCertificationRequest;
 use App\Repositories\Administration\CertificationRepository;
 use App\Http\Controllers\AppBaseController;
+use App\Models\Administration\Certification;
 use App\Repositories\Administration\EditeurRepository;
 use App\Repositories\Administration\NiveauRepository;
 use App\Repositories\Administration\QuestionRepository;
@@ -236,5 +237,12 @@ class CertificationController extends AppBaseController
         return redirect(route('admin.certifications.questions.display', ['search' => '','certification_id'=>$input['certification_id']]));
     }
 
+    public function updateS($id){
+        $certification=Certification::find($id);
+        $certification->statut=1;
+        $certification->update();
+        Alert::success('Succés','Certification publiée');
 
+         return redirect()->back();
+    }
 }

@@ -436,15 +436,15 @@
                                                                 </form>
                                                             </div>
                                                             <div class="col-2">
-                                                                <a href="{{route('enseignant.cours.show.td',$exo->id)}}">
+                                                                <a href="{{route('enseignant.cours.show.td',$evaluation->id)}}">
                                                                     <i class="fa fa-edit text-warning mr-1" title="Mofification"></i>
                                                                 </a>
                                                             </div>
                                                             <div class="col-2">
-                                                                @if ($exo->statut==1)
+                                                                @if ($evaluation->statut==1)
                                                                 <span class="pub2 rounded-pill border border-4 mr-1">Déjà Publié</span>
                                                                 @else
-                                                                <form method="POST" action="{{route('enseignant.exercice.update.statut',$exo->id)}}">
+                                                                <form method="POST" action="{{route('enseignant.evaluation.update.statut',$evaluation->id)}}">
                                                                     @csrf
                                                                     <input type="submit" class="pub rounded-pill border border-4 mr-1" value="Publier le">
                                                                 </form>
