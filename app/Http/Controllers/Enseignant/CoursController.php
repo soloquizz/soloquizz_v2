@@ -72,7 +72,7 @@ class CoursController extends Controller
     {
         $request->validate([
             'support' => 'required|file|max:12937|mimetypes:mimetypes:application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.ms-excel,application/pdf,video/*',
-            'file_name' => 'required|unique:supports'
+            'file_name' => 'required'
         ], [
             'support.required' => 'Le champ du fichier de support est obligatoire.',
             'support.file' => 'Le fichier de support doit être un fichier.',
