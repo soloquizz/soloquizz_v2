@@ -59,4 +59,13 @@ class EvaluationController extends Controller
         $rank=$evaluationExercice->firstItem();
         return view('template.enseignant.evaluation_exercices.show',compact('evaluation','evaluationExercice','questionExercice','options','rank'));
     }
+    
+    public function updateS($id){
+        $evaluation=Evaluations::find($id);
+        $evaluation->statut=1;
+        $evaluation->update();
+        Alert::success('Succés','Evaluation publié');
+
+         return redirect()->back();
+    }
 }
