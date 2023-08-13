@@ -95,10 +95,13 @@ class CoursController extends Controller
         });
 
         foreach($inscrits as $inscrit){
-            $user=$inscrit->etudiant->user();
-            //dd($user);
+            $user=$inscrit->etudiant?->user();
             $coursData['nom_cours']=$cours['nom'];
             $coursData['classe']=$classe['nom'];
+
+            if (empty($user)){
+                continue;
+            }
            
             Mail::to($user)->send(new NotificationCours($coursData));
            
