@@ -94,7 +94,7 @@ class CoursController extends Controller
             return $inscription->etat=='En cours';
         });
 
-        foreach($inscrits as $inscrit){
+        /*foreach($inscrits as $inscrit){
             $user=$inscrit->etudiant?->user();
             $coursData['nom_cours']=$cours['nom'];
             $coursData['classe']=$classe['nom'];
@@ -105,7 +105,7 @@ class CoursController extends Controller
            
             Mail::to($user)->send(new NotificationCours($coursData));
            
-        }
+        }*/
          
         Alert::success('Succés','Ressource ajoutée avec succés');
             
