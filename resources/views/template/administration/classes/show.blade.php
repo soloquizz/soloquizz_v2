@@ -127,12 +127,14 @@
                                         <td>{{$inscrit->etudiant?->telephone}}</td>
                                         <td>{{$inscrit->etudiant?->email_personnel}}</td>
                                         <td class="name">
-                                            <a href="{{route('admin.etudiants.show', $inscrit->etudiant?->id)}}">
-                                                <i class="fa fa-eye text-info mr-1" title="Détail Administrateur"></i>
-                                            </a>
-                                            <a href="{{route('admin.etudiants.edit', $inscrit->etudiant?->id)}}">
-                                                <i class="fa fa-edit text-warning mr-1" title="Mofification"></i>
-                                            </a>
+                                            @if(isset($inscrit->etudiant))
+                                                <a href="{{route('admin.etudiants.show', $inscrit->etudiant?->id)}}">
+                                                    <i class="fa fa-eye text-info mr-1" title="Détail Administrateur"></i>
+                                                </a>
+                                                <a href="{{route('admin.etudiants.edit', $inscrit->etudiant?->id)}}">
+                                                    <i class="fa fa-edit text-warning mr-1" title="Mofification"></i>
+                                                </a>
+                                            @endif
                                         </td>
                                     </tr>
                                     @endforeach
