@@ -22,6 +22,7 @@
 
         <div class="container page__container page-section">
             @foreach($editeurs as $editeur)
+           
                 <a href="#" class="mb-heading d-flex align-items-center text-body">
                     <span class="mr-16pt">
                         <img src="{{$editeur->image()}}" width="40" alt="Angular Fundamentals" class="rounded">
@@ -34,6 +35,7 @@
                 <div class="card stack">
                     <div class="list-group list-group-flush">
                         @foreach($editeur->certifications as $certification)
+                        @if($certification->statut==1)
                             <div class="list-group-item d-flex align-items-center px-16pt">
                                 <div class="flex d-flex flex-column">
                                     <a class="text-body"
@@ -44,9 +46,13 @@
                                     <span class="lead lh-1">{{$certification->questions->count()}}</span>
                                     <small class="text-muted text-uppercase">Questions</small>
                                 </div>
-                                <a href="{{route('etudiant.dumps',$certification->id)}}" class="text-muted ml-8pt"><i
-                                            class="material-icons">chevron_right</i></a>
+                                <a href="{{route('etudiant.dumps',$certification->id)}}" class="text-muted ml-8pt">
+                                    <i class="material-icons">chevron_right</i></a>
                             </div>
+                            @else
+                            <h5>Non disponible</h5>
+                        @endif
+                       
                         @endforeach
                     </div>
                 </div>
