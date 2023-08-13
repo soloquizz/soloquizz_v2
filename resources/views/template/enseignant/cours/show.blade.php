@@ -633,13 +633,13 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($inscrits as $etudiant)
+                                    @foreach($inscrits as $inscrit)
                                     <tr>
-                                        <td>{{$etudiant->etudiant->numero_carte}}</td>
-                                        <td>{{$etudiant->etudiant->nom}}</td>
-                                        <td>{{$etudiant->etudiant->prenom}}</td>
-                                        <td>{{$etudiant->etudiant->telephone}}</td>
-                                        <td>{{$etudiant->etudiant->email_personnel}}</td>
+                                        <td>{{$inscrit->etudiant->numero_carte}}</td>
+                                        <td>{{$inscrit->etudiant->nom}}</td>
+                                        <td>{{$inscrit->etudiant->prenom}}</td>
+                                        <td>{{$inscrit->etudiant->telephone}}</td>
+                                        <td>{{$inscrit->etudiant->email_personnel}}</td>
                                     </tr>
                                     @endforeach
                                 </tbody>

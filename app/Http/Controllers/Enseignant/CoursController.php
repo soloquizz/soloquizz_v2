@@ -52,9 +52,8 @@ class CoursController extends Controller
         $cours = Cours::find($cours_id);
         $support = $cours->supports->first();
         $classe=$cours->classe;
-        $inscrits=$classe->inscriptions->filter();
-        //dd($support->getMedia('supports'));
-        
+        $inscrits=$classe->inscriptions;
+
         $textSearch = $request->search;
 
         if(isset($textSearch)){
