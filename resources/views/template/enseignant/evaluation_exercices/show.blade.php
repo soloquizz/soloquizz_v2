@@ -45,32 +45,30 @@
                     <h4>{{$evaluation->cours->nom}}</h4>
                 </div>
 
-
                 <div class="card">
                     <div class="card-header ml-2">
-                        <h3>{{$evaluation->titre}}</h3>
-
-                        <a class="text-primary"
-                            href="{{route('enseignant.cours.show.td',$evaluation->id)}}">
-                                <button class="btn btn-outline-primary">Ajouter des questions</button> 
-                        </a>
+                        <div class="row">
+                            <div class="col-5"><h3>{{$evaluation->titre}}</h3></div>
+                            <div class="col-7"><a class="text-primary"
+                                href="{{route('enseignant.cours.show.evaluation.add.question',$evaluation->id)}}">
+                                    <button class="btn btn-outline-primary"><i class="fa fa-plus-circle" aria-hidden="true"></i>&nbsp;Questions</button> 
+                                </a>
+                            </div>
+                        </div>
                     </div>
                     <div class="card-body">
-                       {{-- <ul style="list-style-type: none;">
-                            @foreach($questionExercice as $question)
-                            @if($question->count()==0)
-                            <h6>Pas de questions</h6>
-                            @else
+                       <ul style="list-style-type: none;">
+                            @foreach($evaluationExercice as $exo)
+                            @if($evaluation->id==$exo->evaluation_id)
                                 <li class="mb-5">
                                     <div class="row">
-                                        <div class="col-2">
-                                            <h6>Question {{ $rank++ }}</h6>
+                                        <div class="col-10">
+                                            <h3>{{$exo->exercice->titre}}</h3>
                                         </div>
-                                        <div class="col-2">{{$question->point}}point(s)</div>
-                                        <div class="col-2">{{$question->durée}}min</div>
+                                        <div class="col-2">{{$exo->exercice->note_max}}point(s)</div>
                                         
                                         <div class="col-2">
-                                            @if(isset($_GET['page']))
+                                           {{-- @if(isset($_GET['page']))
                                                 <a href="{{route('admin.questions.edit.custom', ['question_id'=>$question->id,'page'=>$_GET['page']])}}">
                                                     <i class="fa fa-trash text-danger mr-1" title="Suppression de la question"></i>
                                                 </a>
@@ -79,17 +77,24 @@
                                                     <i class="fa fa-trash text-danger mr-1" title="Suppression de la question"></i>
                                                 </a>
                                             @endif
+                                            --}}
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        {!! $question->questionCours->contenu !!}
+                                    @foreach($questionExercice as $question)
+                                    @if($exo->exercice_id==$question->exercice_id)
+                                   
 
+                                    <div class="row">
+                                    
+                                        {!! $question->questionCours->contenu !!}
+                                       
                                     </div>
                                     @if($question->questionCours->qcm)
                                         
                                             <h6>Options de réponse &nbsp;</h6> 
                                            
-                                        @foreach($question->questionCours->optionCours as $option)
+                                        @foreach($options as $option)
+                                        @if($option->question_cours_id==$question->questionCours->id && $exo->exercice_id==$question->exercice_id)
                                              <div class="row">
                                                 @if($option->correcte)
                                                     <i class="fa fa-check text-success mr-1" title="Mofification de la question"></i>
@@ -98,18 +103,21 @@
                                                 @endif
                                                 {!! $option->contenu !!}
                                             </div>
+                                        @endif
                                         @endforeach
                                         @else
                                         <h6>Question à réponse ouverte</h6>
                                     @endif
+                                    @endif
+                                    @endforeach
                                 </li>
                             @endif
                             @endforeach
-                        </ul>--}}
+                        </ul>
                     </div>
                     <div class="card-footer">
                         <nav aria-label="Page navigation example">
-                        {{--{{$questionExercice->links()}}--}}
+                       {{--{{$evaluationExercice->links()}}--}} 
                         </nav>
                     </div>
                 </div> 
@@ -121,9 +129,9 @@
 
 <script>
     var i = 1;
-$('#question').each(function() {
+/*$('#question').each(function() {
     $(this).text(i++);
-});
+});*/
 </script>
 @endsection
 

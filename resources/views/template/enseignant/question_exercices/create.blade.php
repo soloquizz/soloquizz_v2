@@ -54,11 +54,11 @@
                             @foreach($questions as $question)
                             @if($question->qcm)
                             @if($question->optionCours->count()>0)
-                                <div class="row ml-3">
+                                <div class="ligne row ml-3">
                                     <div class="col-2">
                                         <div class="d-flex align-items-center page-num-container mb-16pt">
                                             <div class="page-num">{{$rank++}}</div>
-                                            <input type="checkbox" class="form-check ml-1" name="question_ids[]" value="{{$question->id}}">
+                                            <input type="checkbox" class="question form-check ml-1" name="question_ids[]" value="{{$question->id}}">
                                             <label class="form-label ml-3">Question
                                             </label>
                                         </div>
@@ -96,11 +96,11 @@
                                 @endforeach
                                 @endif
                                 @else
-                                <div class="row ml-3">
+                                <div class="ligne row ml-3">
                                     <div class="col-2">
                                         <div class="d-flex align-items-center page-num-container mb-16pt">
                                             <div class="page-num">{{$rank++}}</div>
-                                            <input type="checkbox" class="form-check ml-1" name="question_ids[]" value="{{$question->id}}">
+                                            <input type="checkbox" class="question form-check ml-1" name="question_ids[]" value="{{$question->id}}">
                                             <label class="form-label ml-3">Question
                                             </label>
                                         </div>
@@ -120,9 +120,11 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row ml-4 mb-5">
+                                <div class="row ml-4 mb-1">
                                     {!! $question->contenu !!}
-
+                                    
+                                </div>
+                                <div class="row ml-4 mb-4"> 
                                     <h6>Question à reponse ouverte</h6>
                                 </div>
                                 @endif
@@ -130,7 +132,7 @@
                             @endforeach
                             
                             <div class="row mt-5 mb-3 mr-5 fa-pull-right">
-                                <button type="submit" class="btn btn-outline-primary">Enregistrer</button>
+                                <button type="submit" class="btn btn-outline-primary" id="button">Enregistrer</button>
                             </div>
                             
                         </form>
@@ -149,49 +151,40 @@
 
 @section('script')
     <script>
-        $(document).ready(function() {
-            // Attacher l'événement submit sur l'élément du formulaire
-            $('form').submit(function(event) {
-                // Empêcher la soumission du formulaire immédiatement
-                event.preventDefault();
+            $(document).ready(function() {
+                // Attacher l'événement submit sur l'élément du formulaire
+                $('form').submit(function(event) {
+                    // Empêcher la soumission du formulaire immédiatement
+                    event.preventDefault();
 
-                var question_ids = [];
+                    var question_ids = [];
 
-                // Get all checkbox inputs
-                const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+                    // Get all checkbox inputs
+                    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
 
-                // Get the number of checkboxes
-                const numberOfCheckboxes = checkboxes.length;
+                    // Get the number of checkboxes
+                    const numberOfCheckboxes = checkboxes.length;
 
-                for (var i=0; i<numberOfCheckboxes; i++)  {
-                    let valeur ;
-                    if(checkboxes[i].checked){
-                        valeur = checkboxes[i].value;
-                    }
-                    else{
-                        valeur = 0;
-                    }
-
-                    question_ids[i] = valeur;
-                }
-
-                document.getElementById('allquestions').value = question_ids;
+                    for (var i=0; i<numberOfCheckboxes; i++)  {
+                        let valeur ;
+                        if(checkboxes[i].checked){
+                            valeur = checkboxes[i].value;
                 
-                this.submit();
+                        }
+                        else{
+                            valeur = 0;
+                        }
+
+                        question_ids[i] = valeur;
+                    }
+
+                    document.getElementById('allquestions').value = question_ids;
+                    
+                    this.submit();
+                });
             });
-        });
 
-        /*$("#enregistrer").on('click',function(){
-            var exoPt=$("#exoPt").val();
-            var totalPt=0
-            var point=$("#point").val();
-            if(point !== null){
-              totalPt +=parseInt(point);
-            }
+      
 
-            if(exoPt != totalPt){
-                alert('le nombre total de point doit-etre égal');
-            }
-        })*/
     </script>
 @endsection

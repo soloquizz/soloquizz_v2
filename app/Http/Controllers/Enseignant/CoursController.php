@@ -4,7 +4,10 @@ namespace App\Http\Controllers\Enseignant;
 
 use App\Http\Controllers\Controller;
 use App\Mail\NotificationCours;
+use App\Models\Administration\Classe;
 use App\Models\Administration\Cours;
+use App\Models\Administration\Etudiant;
+use App\Models\Administration\Inscription;
 use App\Models\Administration\Question;
 use App\Models\Administration\Support;
 use App\Models\Enseignant\QuestionCours;
@@ -49,9 +52,8 @@ class CoursController extends Controller
         $cours = Cours::find($cours_id);
         $support = $cours->supports->first();
         $classe=$cours->classe;
-        $inscrits=$classe->inscriptions->filter();
-        //dd($support->getMedia('supports'));
-        
+        $inscrits=$classe->inscriptions;
+
         $textSearch = $request->search;
 
         if(isset($textSearch)){
@@ -70,7 +72,7 @@ class CoursController extends Controller
     {
         $request->validate([
             'support' => 'required|file|max:12937|mimetypes:mimetypes:application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.ms-excel,application/pdf,video/*',
-            'file_name' => 'required|unique:supports'
+            'file_name' => 'required'
         ], [
             'support.required' => 'Le champ du fichier de support est obligatoire.',
             'support.file' => 'Le fichier de support doit être un fichier.',
@@ -85,20 +87,30 @@ class CoursController extends Controller
         $support->addMediaFromRequest('support')->toMediaCollection('supports');
 
         //Mailing
-        $cours=Cours::find($input['cours_id']);
+        $cours = Cours::find($input['cours_id']);
+        $support = $cours->supports->first();
         $classe=$cours->classe;
         $inscrits=$classe->inscriptions->filter(function($inscription){
-            return $inscription->etat==0;
+            return $inscription->etat=='En cours';
         });
-        $etudiants=$inscrits->etudiant;
-        $user=$etudiants->user;
-        $coursData['nom_cours']=$cours['nom'];
-        $coursData['classe']=$classe['nom'];
-        Mail::to($user)->send(new NotificationCours($coursData));
 
+        foreach($inscrits as $inscrit){
+            $user=$inscrit->etudiant?->user();
+            $coursData['nom_cours']=$cours['nom'];
+            $coursData['classe']=$classe['nom'];
+
+            if (empty($user)){
+                continue;
+            }
+           
+            Mail::to($user)->send(new NotificationCours($coursData));
+           
+        }
+         
         Alert::success('Succés','Ressource ajoutée avec succés');
-        
+            
         return redirect(route('enseignant.cours.show',$input['cours_id']));
+        
 
     }
 

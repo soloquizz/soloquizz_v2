@@ -93,7 +93,7 @@ class ClasseController extends AppBaseController
     public function show($id)
     {
         $classe = $this->classeRepository->find($id);
-
+        $inscrits=$classe->inscriptions->filter();
         if (empty($classe)) {
             Alert::error('Succés','Classe not found');
 
@@ -102,7 +102,7 @@ class ClasseController extends AppBaseController
 
         $semestres = $this->semestrerepository->all();
 
-        return view('template.administration.classes.show',compact('semestres','classe'));
+        return view('template.administration.classes.show',compact('semestres','classe','inscrits'));
     }
 
     /**

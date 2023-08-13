@@ -26,12 +26,22 @@ class CourController extends Controller
         return view('template.etudiant.cours.show',compact('cours'));
     }
 
-
+  //TD without treatement option
     public function showTD($id){
         $exo=Exercice::find($id);
         $questionExercice=QuestionExercice::where('exercice_id',$id)->paginate(3);
         $rank=$questionExercice->firstItem();
         return view('template.etudiant.question_exercices.show',compact('exo','questionExercice','rank'));
+    }
+
+
+    //TD without treatement option
+    public function treatementTD($id){
+        $exo=Exercice::find($id);
+        $user=auth()->user();
+        $questionExercice=QuestionExercice::where('exercice_id',$id)->paginate(3);
+        $rank=$questionExercice->firstItem();
+        return view('template.etudiant.etudiant_questions.create',compact('exo','questionExercice','rank','user'));
     }
 
 }
