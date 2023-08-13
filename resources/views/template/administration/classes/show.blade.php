@@ -119,18 +119,18 @@
                             </thead>
                             <tbody class="list">
                                 
-                                    @foreach($inscrits as $etudiant)
+                                    @foreach($inscrits as $inscrit)
                                     <tr>
-                                        <td>{{$etudiant->etudiant->numero_carte}}</td>
-                                        <td>{{$etudiant->etudiant->nom}}</td>
-                                        <td>{{$etudiant->etudiant->prenom}}</td>
-                                        <td>{{$etudiant->etudiant->telephone}}</td>
-                                        <td>{{$etudiant->etudiant->email_personnel}}</td>
+                                        <td>{{$inscrit->etudiant?->numero_carte}}</td>
+                                        <td>{{$inscrit->etudiant?->nom}}</td>
+                                        <td>{{$inscrit->etudiant?->prenom}}</td>
+                                        <td>{{$inscrit->etudiant?->telephone}}</td>
+                                        <td>{{$inscrit->etudiant?->email_personnel}}</td>
                                         <td class="name">
-                                            <a href="{{route('admin.etudiants.show', $etudiant->etudiant->id)}}">
+                                            <a href="{{route('admin.etudiants.show', $inscrit->etudiant?->id)}}">
                                                 <i class="fa fa-eye text-info mr-1" title="Détail Administrateur"></i>
                                             </a>
-                                            <a href="{{route('admin.etudiants.edit', $etudiant->etudiant->id)}}">
+                                            <a href="{{route('admin.etudiants.edit', $inscrit->etudiant?->id)}}">
                                                 <i class="fa fa-edit text-warning mr-1" title="Mofification"></i>
                                             </a>
                                         </td>
