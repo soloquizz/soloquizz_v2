@@ -58,6 +58,8 @@
                         </thead>
                         <tbody>
                             @foreach($exercices as $exo)
+                            @if(!($evaluation->evaluationExercices->contains('exercice_id',$exo->id)))
+
                             <tr>
                                 <input type="hidden" name="evaluation_id" value="{{$evaluation->id}}">
                                 <input type="hidden" id="allexercices" name="exercice_ids[]" value="">
@@ -66,6 +68,7 @@
                                 <td>{{$exo->seance?->titre}}</td>
                                
                             </tr>
+                            @endif
                             @endforeach
                         </tbody>
                     </table>

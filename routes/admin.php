@@ -53,6 +53,8 @@ Route::name('admin.')->prefix('admin')->middleware(['auth','check.actif.compte',
     Route::post('certifications-questions-search', [App\Http\Controllers\Administration\CertificationController::class,'searchQuestions'])->name('certifications.questions.search');
     Route::post('certifications-define-nbqa', [App\Http\Controllers\Administration\CertificationController::class,'defineNbreQa'])->name('certifications.define_nbreqa');
     Route::post('certifications-update-statut/{id}', [App\Http\Controllers\Administration\CertificationController::class,'updateS'])->name('certifications.update.statut');
+    Route::post('certifications-depublier-statut/{id}', [App\Http\Controllers\Administration\CertificationController::class,'depublier'])->name('certifications.depublier.statut');
+
 
     Route::resource('questions', App\Http\Controllers\Administration\QuestionController::class);
     Route::get('questions-edit-custom', [App\Http\Controllers\Administration\QuestionController::class,'editCustom'])->name('questions.edit.custom');

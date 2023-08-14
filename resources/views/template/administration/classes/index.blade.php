@@ -101,7 +101,11 @@
 <script src="//cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
     <script>
          $(document).ready(function(){
-           $('#myTable').DataTable();
+            var table = new DataTable('#myTable', {
+            language: {
+                 url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/fr-FR.json',
+            },           
+         });
          });
         function submitShow() {
             $('#showForm').submit();

@@ -1,23 +1,14 @@
-@extends('layouts.template.enseignant.master')
 
-@section('content_page')
-
-    <div class="mdk-header-layout__content page-content">
-
-        <!-- Header Layout -->
-
-        @include('layouts.template.enseignant.header')
-
-        <!-- END Layout -->
-
-        <!-- Menu Layout -->
-        @include('layouts.template.enseignant.menu')
-        <!-- END Menu Layout -->
-
-        <!-- Section Pages Layout -->
-
-        <div class="container page__container">
-            <form method="POST" action="{{ route('enseignant.evaluation.store') }}" enctype="multipart/form-data">
+<div class="modal fade" id="editEv{{$evaluation->id}}" tabindex="-1" role="dialog" aria-labelledby="editExerciceLabel" aria-hidden="true" backdrop="false">
+    <div class="modal-dialog modal-lg mt-5" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title ml-10" id="addExerciceLabel">Modifier une évaluation</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form method="POST" id="storeTdForm" action="{{ route('enseignant.evaluation.update',$evaluation->id) }}">
                 @csrf
                 <div class="modal-body">
                     <div class="row">
@@ -28,19 +19,21 @@
                                         <label class="form-label">Titre
                                             <span class="text-danger">*</span>
                                         </label>
-                                        <input type="text" name="titre" class="form-control" value="{{$evaluation->titre}}" required>
-                                        <input type="hidden" name="cours_id" value="{{$evaluation->cours_id}}">
+                                        <input type="text" name="titre" class="form-control" value="{{$evaluation->id}}" required>
+                                        <input type="hidden" name="cours_id" value="{{$cours->id}}">
                                         </div>
                                     <div class="col-12 col-md-6 mb-3">
                                         <label class="form-label">Type
                                             <span class="text-danger">*</span>
                                         </label>
                                         <select class="form-control" name="type">
-                                            {{--@foreach($evaluation->type as $type)
-                                            <option value="{{$evaluation->type}}" selected>value="{{$evaluation->type}}"</option>
-                                            <option value="Devoir">Devoir</option>
-                                            <option value="Examen">Examen</option>
-                                            @endforeach--}}
+                                            @if($evaluation->type == "Devoir")
+                                                <option value="Devoir" selected>Devoir</option>
+                                                <option value="Examen">Examen</option>
+                                           @else
+                                                <option value="Devoir">Devoir</option>
+                                                <option value="Examen" selected>Examen</option>
+                                          @endif
                                         </select>                                    
                                     </div>
                                 </div>
@@ -55,7 +48,7 @@
                                         <label class="form-label">Date
                                             <span class="text-danger">*</span>
                                         </label>
-                                        <input type="text" name="date" required class="form-control" value="{{$evaluation->date}}">
+                                        <input type="text" name="date" required class="form-control" value="{{$evaluation->date->format('d-m-Y')}}">
                                     </div>
                                 </div>
                                 <div class="form-row">
@@ -63,7 +56,10 @@
                                         <label class="form-label">Heure
                                             <span class="text-danger">*</span>
                                         </label>
-                                        <input type="text" name="heure" required class="form-control" placeholder="12:00" value="{{$evaluation->getTime(heure)}}">
+                                      
+                                            <input type="text" name="heure" required class="form-control" value="{{date('H:i', strtotime($evaluation->heure))}}">
+                                        
+                                     
                                     </div>
                                     <div class="col-12 col-md-6 mb-3">
                                         <label class="form-label">Durée (heure)
@@ -83,5 +79,6 @@
             </form>
         </div>
     </div>
-@endsection    
-        
+</div>
+
+

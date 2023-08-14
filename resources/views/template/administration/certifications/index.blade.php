@@ -9,6 +9,10 @@
         background-color: green;
         color: white;
     }
+    .pub3{
+        background-color: rgb(137, 14, 137);
+        color: white;
+    }
     .pub2{
         background-color: rgb(246, 4, 16);
         color: white;
@@ -105,7 +109,11 @@
                                     </div>
                                     <div class="col-2">
                                         @if ($certification->statut==1)
-                                        <span class="pub2 rounded-pill border border-4 mr-1">Déjà Publié</span>
+                                        <!--<span class="pub2 rounded-pill border border-4 mr-1">Déjà Publié</span>-->
+                                        <form method="POST" action="{{route('admin.certifications.depublier.statut', $certification->id)}}">
+                                            @csrf
+                                            <input type="submit" class="pub3 rounded-pill border border-4 mr-1" value="Publier le">
+                                        </form>
                                         @else
                                         <form method="POST" action="{{route('admin.certifications.update.statut', $certification->id)}}">
                                             @csrf
@@ -139,7 +147,11 @@
 <script src="//cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
     <script>
          $(document).ready(function(){
-           $('#myTable').DataTable();
+            var table = new DataTable('#myTable', {
+            language: {
+                 url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/fr-FR.json',
+            },           
+         });
          });
         function submitShow() {
             $('#showForm').submit();

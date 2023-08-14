@@ -33,9 +33,12 @@ Route::name('enseignant.')->prefix('enseignant')->middleware(['auth','check.acti
 
     //Exercices
     Route::post('/td-store',[App\Http\Controllers\Enseignant\ExerciceController::class,'store'])->name('exercice.store');
+    Route::post('/td-update/{id}',[App\Http\Controllers\Enseignant\ExerciceController::class,'update'])->name('exercice.update');
     Route::get('/cours-show/td-create/{td_id}',[App\Http\Controllers\Enseignant\ExerciceController::class,'index'])->name('cours.show.td');
     Route::get('/td/{td_id}',[App\Http\Controllers\Enseignant\ExerciceController::class,'show'])->name('cours.show.td.question');
     Route::post('/update-statut/{id}',[App\Http\Controllers\Enseignant\ExerciceController::class,'updateS'])->name('exercice.update.statut');
+    Route::post('/depublier/{id}',[App\Http\Controllers\Enseignant\ExerciceController::class,'depublier'])->name('exercice.depublier.statut');
+
 
     //Question Exercice
     Route::post('/ques-store',[App\Http\Controllers\Enseignant\QuestionExerciceController::class,'store'])->name('question.exercice.store');
@@ -48,9 +51,11 @@ Route::name('enseignant.')->prefix('enseignant')->middleware(['auth','check.acti
 
     //Evaluations
     Route::post('/evaluation-store',[App\Http\Controllers\Enseignant\EvaluationController::class,'store'])->name('evaluation.store');
+    Route::post('/evaluation-update/{id}',[App\Http\Controllers\Enseignant\EvaluationController::class,'update'])->name('evaluation.update');
     Route::get('/cours-show/evaluation-question-create/{td_id}',[App\Http\Controllers\Enseignant\EvaluationController::class,'index'])->name('cours.show.evaluation.add.question');
     Route::get('/cours-show/evaluation-question-view/{td_id}',[App\Http\Controllers\Enseignant\EvaluationController::class,'show'])->name('cours.show.evaluation.view.question');
     Route::post('evaluation/update-statut/{id}',[App\Http\Controllers\Enseignant\EvaluationController::class,'updateS'])->name('evaluation.update.statut');
+    Route::post('evaluation/depublier/{id}',[App\Http\Controllers\Enseignant\EvaluationController::class,'depublier'])->name('evaluation.depublier.statut');
     Route::get('/cours-show/evaluation-edit/{id}',[App\Http\Controllers\Enseignant\EvaluationController::class,'edit'])->name('cours.show.evaluation.edit');
 
 

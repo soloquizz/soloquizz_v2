@@ -52,6 +52,7 @@
                             <input type="hidden" name="exercice_id" value="{{$exo->id}}">
                             <input type="hidden" id="allquestions" name="questions_id[]" value="">
                             @foreach($questions as $question)
+                            @if(!($exo->questionExercices->contains('question_cours_id',$question->id)))
                             @if($question->qcm)
                             @if($question->optionCours->count()>0)
                                 <div class="ligne row ml-3">
@@ -128,7 +129,7 @@
                                     <h6>Question à reponse ouverte</h6>
                                 </div>
                                 @endif
-                           
+                              @endif
                             @endforeach
                             
                             <div class="row mt-5 mb-3 mr-5 fa-pull-right">

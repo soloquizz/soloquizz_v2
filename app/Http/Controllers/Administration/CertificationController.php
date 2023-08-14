@@ -245,4 +245,13 @@ class CertificationController extends AppBaseController
 
          return redirect()->back();
     }
+
+    public function depublier($id){
+        $certification=Certification::find($id);
+        $certification->statut=0;
+        $certification->update();
+        Alert::success('Succés','Certification dépubliée');
+
+         return redirect()->back();
+    }
 }
