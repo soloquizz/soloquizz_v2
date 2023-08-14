@@ -59,7 +59,7 @@ class EvaluationController extends Controller
         $rank=$evaluationExercice->firstItem();
         return view('template.enseignant.evaluation_exercices.show',compact('evaluation','evaluationExercice','questionExercice','options','rank'));
     }
-    
+
     public function updateS($id){
         $evaluation=Evaluations::find($id);
         $evaluation->statut=1;
@@ -67,5 +67,11 @@ class EvaluationController extends Controller
         Alert::success('Succés','Evaluation publié');
 
          return redirect()->back();
+    }
+
+    public function edit($id){
+        $evaluation=Evaluations::find($id);
+        $evaluation->heure=date('H:i:s');
+         return view('template.enseignant.evaluations.edit',compact('evaluation'));
     }
 }

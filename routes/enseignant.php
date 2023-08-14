@@ -51,6 +51,7 @@ Route::name('enseignant.')->prefix('enseignant')->middleware(['auth','check.acti
     Route::get('/cours-show/evaluation-question-create/{td_id}',[App\Http\Controllers\Enseignant\EvaluationController::class,'index'])->name('cours.show.evaluation.add.question');
     Route::get('/cours-show/evaluation-question-view/{td_id}',[App\Http\Controllers\Enseignant\EvaluationController::class,'show'])->name('cours.show.evaluation.view.question');
     Route::post('evaluation/update-statut/{id}',[App\Http\Controllers\Enseignant\EvaluationController::class,'updateS'])->name('evaluation.update.statut');
+    Route::get('/cours-show/evaluation-edit/{id}',[App\Http\Controllers\Enseignant\EvaluationController::class,'edit'])->name('cours.show.evaluation.edit');
 
 
     //Evalution Exercice

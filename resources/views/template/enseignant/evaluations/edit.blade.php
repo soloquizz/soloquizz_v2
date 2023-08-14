@@ -1,12 +1,22 @@
-<div class="modal fade" id="addEvaluation" tabindex="-1" role="dialog" aria-labelledby="addEvaluationLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="addEvaluationLabel">Ajouter une séance</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
+@extends('layouts.template.enseignant.master')
+
+@section('content_page')
+
+    <div class="mdk-header-layout__content page-content">
+
+        <!-- Header Layout -->
+
+        @include('layouts.template.enseignant.header')
+
+        <!-- END Layout -->
+
+        <!-- Menu Layout -->
+        @include('layouts.template.enseignant.menu')
+        <!-- END Menu Layout -->
+
+        <!-- Section Pages Layout -->
+
+        <div class="container page__container">
             <form method="POST" action="{{ route('enseignant.evaluation.store') }}" enctype="multipart/form-data">
                 @csrf
                 <div class="modal-body">
@@ -18,18 +28,19 @@
                                         <label class="form-label">Titre
                                             <span class="text-danger">*</span>
                                         </label>
-                                        <input type="text" name="titre" class="form-control" placeholder="Devoir sur les protocoles cryptographiques" required>
-                                        <input type="hidden" name="cours_id" value="{{$cours->id}}">
+                                        <input type="text" name="titre" class="form-control" value="{{$evaluation->titre}}" required>
+                                        <input type="hidden" name="cours_id" value="{{$evaluation->cours_id}}">
                                         </div>
                                     <div class="col-12 col-md-6 mb-3">
                                         <label class="form-label">Type
                                             <span class="text-danger">*</span>
                                         </label>
                                         <select class="form-control" name="type">
-                                            <option value="">Choisir le type</option>
+                                            {{--@foreach($evaluation->type as $type)
+                                            <option value="{{$evaluation->type}}" selected>value="{{$evaluation->type}}"</option>
                                             <option value="Devoir">Devoir</option>
                                             <option value="Examen">Examen</option>
-
+                                            @endforeach--}}
                                         </select>                                    
                                     </div>
                                 </div>
@@ -38,13 +49,13 @@
                                         <label class="form-label">Note
                                             <span class="text-danger">*</span>
                                         </label>
-                                        <input type="number" name="note_max" required class="form-control">
+                                        <input type="number" name="note_max" required class="form-control" value="{{$evaluation->note_max}}">
                                     </div>
                                     <div class="col-12 col-md-6 mb-3">
                                         <label class="form-label">Date
                                             <span class="text-danger">*</span>
                                         </label>
-                                        <input type="date" name="date" required class="form-control">
+                                        <input type="text" name="date" required class="form-control" value="{{$evaluation->date}}">
                                     </div>
                                 </div>
                                 <div class="form-row">
@@ -52,13 +63,13 @@
                                         <label class="form-label">Heure
                                             <span class="text-danger">*</span>
                                         </label>
-                                        <input type="text" name="heure" required class="form-control" placeholder="12:00">
+                                        <input type="text" name="heure" required class="form-control" placeholder="12:00" value="{{$evaluation->getTime(heure)}}">
                                     </div>
                                     <div class="col-12 col-md-6 mb-3">
                                         <label class="form-label">Durée (heure)
                                             <span class="text-danger">*</span>
                                         </label>
-                                        <input type="number" name="duree" required class="form-control">
+                                        <input type="number" name="duree" required class="form-control" value="{{$evaluation->duree}}">
                                     </div>
                                 </div>
                             </div>
@@ -72,4 +83,5 @@
             </form>
         </div>
     </div>
-</div>
+@endsection    
+        

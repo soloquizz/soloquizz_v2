@@ -436,7 +436,7 @@
                                                                 </form>
                                                             </div>
                                                             <div class="col-2">
-                                                                <a href="{{route('enseignant.cours.show.td',$evaluation->id)}}">
+                                                                <a href="{{route('enseignant.cours.show.evaluation.edit',$evaluation->id)}}">
                                                                     <i class="fa fa-edit text-warning mr-1" title="Mofification"></i>
                                                                 </a>
                                                             </div>
@@ -544,7 +544,7 @@
                                                     </form>
                                                 </div>
                                                 <div class="col-2">
-                                                    <a href="{{route('enseignant.cours.show.td',$evaluation->id)}}">
+                                                    <a href="{{route('enseignant.cours.show.evaluation.edit',$evaluation->id)}}">
                                                         <i class="fa fa-edit text-warning mr-1" title="Mofification"></i>
                                                     </a>
                                                 </div>
