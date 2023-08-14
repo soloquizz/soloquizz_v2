@@ -92,9 +92,8 @@
                                         <form method="POST" id="showForm"
                                               action="{{ route('admin.certifications.questions.search') }}">
                                             @csrf
-                                            <input type="hidden" name="certification_id" value="{{$certification->id}}">
-                                            <a href="#" onclick="submitShow()">
-                                                <i class="fa fa-eye text-info mr-1" title="Mofification"></i>
+                                            <a href="#" onclick="submitShow({{$certification->id}})">
+                                                <i class="fa fa-eye text-info mr-1" title="Voir détail"></i>
                                             </a>
                                         </form>
                                     </div>
@@ -141,7 +140,8 @@
          $(document).ready(function(){
            $('#myTable').DataTable();
          });
-        function submitShow() {
+        function submitShow(certification_id) {
+            $('#showForm').append("<input type='hidden' value='"+certification_id+"' name='certification_id'>");
             $('#showForm').submit();
         }
     </script>
