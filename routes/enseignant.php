@@ -35,10 +35,11 @@ Route::name('enseignant.')->prefix('enseignant')->middleware(['auth','check.acti
     Route::post('/td-store',[App\Http\Controllers\Enseignant\ExerciceController::class,'store'])->name('exercice.store');
     Route::get('/cours-show/td-create/{td_id}',[App\Http\Controllers\Enseignant\ExerciceController::class,'index'])->name('cours.show.td');
     Route::get('/td/{td_id}',[App\Http\Controllers\Enseignant\ExerciceController::class,'show'])->name('cours.show.td.question');
-    Route::post('/update-statut/{id}',[App\Http\Controllers\Enseignant\ExerciceController::class,'update'])->name('exercice.update.statut');
+    Route::post('/update-statut/{id}',[App\Http\Controllers\Enseignant\ExerciceController::class,'updateS'])->name('exercice.update.statut');
 
     //Question Exercice
     Route::post('/ques-store',[App\Http\Controllers\Enseignant\QuestionExerciceController::class,'store'])->name('question.exercice.store');
+    Route::delete('ques-delete/{id}', [App\Http\Controllers\Enseignant\QuestionExerciceController::class, 'destroy'])->name('question.exercice.destroy');
 
     //Option Cours
     Route::post('/option-cours-store',[App\Http\Controllers\Enseignant\OptionCoursController::class,'store'])->name('option.cours.store');
@@ -49,6 +50,11 @@ Route::name('enseignant.')->prefix('enseignant')->middleware(['auth','check.acti
     Route::post('/evaluation-store',[App\Http\Controllers\Enseignant\EvaluationController::class,'store'])->name('evaluation.store');
     Route::get('/cours-show/evaluation-question-create/{td_id}',[App\Http\Controllers\Enseignant\EvaluationController::class,'index'])->name('cours.show.evaluation.add.question');
     Route::get('/cours-show/evaluation-question-view/{td_id}',[App\Http\Controllers\Enseignant\EvaluationController::class,'show'])->name('cours.show.evaluation.view.question');
+    Route::post('evaluation/update-statut/{id}',[App\Http\Controllers\Enseignant\EvaluationController::class,'updateS'])->name('evaluation.update.statut');
+
+
+    //Evalution Exercice
+    Route::post('/evaluation-exercice-store',[App\Http\Controllers\Enseignant\ExerciceEvaluationController::class,'store'])->name('evaluation.exercice.store');
 
 
 

@@ -13,7 +13,7 @@ class SeanceController extends Controller
     {
         $request->validate([
             'titre' => 'required|string',
-            'date' => 'required|after:today',
+            'date' => 'required',
             'heure_debut' => 'required|date_format:H:i',
             'heure_fin' => 'required|date_format:H:i|after:heure_debut',
             'duree' => 'required|integer',

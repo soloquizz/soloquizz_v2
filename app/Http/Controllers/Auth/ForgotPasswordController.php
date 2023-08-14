@@ -86,11 +86,15 @@ class ForgotPasswordController extends Controller
           ])->first();
        
           if(!$updatePassword){
-            return redirect()->to(route("auth.reset.password"))->with("error","invalid");
+            Alert::error('Erreur','Invalide veuillez réessayer');
+
+            return redirect()->to(route("auth.reset.password"));
           }
           User::where(["email"=>$updatePassword->email])->update(['password' => Hash::make($request->password)]);
           AdministrationForgotPassword::where(["email"=>$updatePassword->email, 'token'=>$updatePassword->token])->update(['statut'=>1]);
-          return redirect()->to(route("auth.index"))->with("Succés","Mot de passe réinitialisé avec succés");
+          Alert::success("Succés","Mot de passe réinitialisé avec succés");
+
+          return redirect()->to(route("auth.index"));
         }
 
 }
