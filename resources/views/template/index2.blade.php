@@ -49,8 +49,8 @@
       <nav id="navbar" class="navbar">
         <ul>
           <!--<li><a class="nav-link scrollto" href="#contact">Contact</a></li>-->
-          <li>
-            <a class="getstarted scrollto" href="{{url('/login')}}">Se connecter</a></li>
+          <li><a class="getstarted scrollto" href="{{url('/login')}}">Se connecter</a></li>
+          <li><a class="getstarted scrollto" href="{{route('auth.register')}}">S'inscrire</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
