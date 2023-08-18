@@ -239,6 +239,11 @@ class CertificationController extends AppBaseController
 
     public function updateS($id){
         $certification=Certification::find($id);
+        if ($certification->nbre_qa < 1)
+        {
+            Alert::error('Error','Le nombre maximum de question par dump doit être supérieure à 0 avant de publier la certification');
+            return redirect()->back();
+        }
         $certification->statut=1;
         $certification->update();
         Alert::success('Succés','Certification publiée');
