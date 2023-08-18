@@ -104,12 +104,12 @@
                                     </div>
                                     <div class="col-2">
                                         @if ($certification->statut==1)
-                                        <span class="pub2 rounded-pill border border-4 mr-1">Déjà Publié</span>
+                                            <span class="pub2 rounded-pill border border-4 mr-1">Déjà Publié</span>
                                         @else
-                                        <form method="POST" action="{{route('admin.certifications.update.statut', $certification->id)}}">
-                                            @csrf
-                                            <input type="submit" class="pub rounded-pill border border-4 mr-1" value="Publier le">
-                                        </form>
+                                            <form method="POST" action="{{route('admin.certifications.update.statut', $certification->id)}}">
+                                                @csrf
+                                                <input type="submit" class="pub rounded-pill border border-4 mr-1" value="Publier">
+                                            </form>
                                         @endif
                                     </div>
                                 </div>

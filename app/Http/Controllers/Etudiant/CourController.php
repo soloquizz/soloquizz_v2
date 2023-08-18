@@ -16,7 +16,9 @@ class CourController extends Controller
     {
         $etudiant = auth()->user()->etudiant();
         $classe = $etudiant->classe();
-        $cours = $classe->cours;
+        $cours = $classe->cours->filter(function ($cour){
+            return $cour->etat;
+        });
         return view('template.etudiant.cours.index',compact('cours','classe','etudiant'));
     }
 
