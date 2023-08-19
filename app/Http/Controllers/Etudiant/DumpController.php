@@ -25,6 +25,10 @@ class DumpController extends Controller
             return redirect()->back();
         }
         $dumpUsers = $certification->dumpUsers;
+        $percent = intval(($dumpUsers->sum('score')/$certification->questions->sum('point'))*100);
+        if ($percent>80){
+            Alert::success('Succés','Test réussi avec succès');
+        }
         return view('template.etudiant.dumps.index',compact('certification','dumpUsers'));
     }
 
@@ -97,6 +101,10 @@ class DumpController extends Controller
         $dump = $dump_user->dump;
         $certification = $dump->certification;
         $dumpUsers = $certification->dumpUsers;
+        $percent = intval(($dumpUsers->sum('score')/$certification->questions->sum('point'))*100);
+        if ($percent>80){
+            Alert::success('Succés','Test réussi avec succès');
+        }
         return view('template.etudiant.dumps.dump_resultat',compact('dump_user','dump','certification','dumpUsers'));
     }
 
