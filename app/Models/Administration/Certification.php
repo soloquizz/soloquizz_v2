@@ -39,7 +39,8 @@ class Certification extends Model
         'titre',
         'editeur_id',
         'niveau_id',
-        'nbre_qa'
+        'nbre_qa',
+        'nbre_max',
     ];
 
     /**
@@ -53,7 +54,8 @@ class Certification extends Model
         'titre' => 'string',
         'editeur_id' => 'integer',
         'niveau_id' => 'integer',
-        'nbre_qa' => 'integer'
+        'nbre_qa' => 'integer',
+        'nbre_max'=>'integer',
     ];
 
     /**

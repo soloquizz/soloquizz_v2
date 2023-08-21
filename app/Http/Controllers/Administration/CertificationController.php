@@ -237,6 +237,20 @@ class CertificationController extends AppBaseController
         return redirect(route('admin.certifications.questions.display', ['search' => '','certification_id'=>$input['certification_id']]));
     }
 
+    public function defineNbreMax(Request $request)
+    {
+        $input = $request->all();
+
+        $certification = $this->certificationRepository->find($input['certification_id']);
+
+
+        $this->certificationRepository->update($input, $input['certification_id']);
+
+        Alert::success('Succés','Nombre d\'entrainement définie avec succés');
+
+        return redirect(route('admin.certifications.questions.display', ['search' => '','certification_id'=>$input['certification_id']]));
+    }
+
     public function updateS($id){
         $certification=Certification::find($id);
         if ($certification->nbre_qa < 1)

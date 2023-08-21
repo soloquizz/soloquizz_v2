@@ -31,17 +31,25 @@
         <div class="container card bg-white page__container page-section mt-5">
             <div class="card-header">
                 <div class="row mb-5">
-                    <div class="col-sm-6">
+                    <div class="col-sm-4">
                         <h4 class="content-header-title">
-                            Nombre de questions total
+                            Questions totales
                             <div class="badge badge-glow badge-pill badge-info">{{$certification->questions->count()}}</div>
                         </h4>
                     </div>
-                    <div class="col-sm-6">
+                    <div class="col-sm-4">
                         <h4 class="content-header-title">
-                            Nombre maximal de questions par dump
+                            Questions par dump
                             <a href="#" class="text-70" data-toggle="modal" data-target="#addNbQa">
                                 <div class="badge badge-glow badge-pill badge-info">{{$certification->nbre_qa}}</div>
+                            </a>
+                        </h4>
+                    </div>
+                    <div class="col-sm-4">
+                        <h4 class="content-header-title">
+                            Entrainement
+                            <a href="#" class="text-70" data-toggle="modal" data-target="#addNbeMax">
+                                <div class="badge badge-glow badge-pill badge-info">{{$certification->nbre_max}}</div>
                             </a>
                         </h4>
                     </div>
@@ -145,6 +153,8 @@
     @include('template.administration.questions.create')
     @include('template.administration.options.create')
     @include('template.administration.certifications.nb_qa_create')
+    @include('template.administration.certifications.nbe_max_create')
+
 @endsection
 
 @section('script')

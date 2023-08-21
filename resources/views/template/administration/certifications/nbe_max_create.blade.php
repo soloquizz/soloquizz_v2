@@ -1,4 +1,4 @@
-<div class="modal fade" id="addNbQa" tabindex="-1" role="dialog" aria-labelledby="addNbQaLabel" aria-hidden="true">
+<div class="modal fade" id="addNbeMax" tabindex="-1" role="dialog" aria-labelledby="addNbQaLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -7,7 +7,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form method="POST" action="{{ route('admin.certifications.define_nbreqa') }}">
+            <form method="POST" action="{{ route('admin.certifications.define_nbremax') }}">
                 @csrf
                 <div class="modal-body">
                     <div class="row">
@@ -15,11 +15,12 @@
                             <div class="">
                                 <div class="form-row">
                                     <div class="col-12 col-md-6 mb-3">
-                                        <label class="form-label">Nombre maximum de question aléatoire
+                                        <label class="form-label">Nombre maximal d'entrainement
                                             <span class="text-danger">*</span>
                                         </label>
-                                        <input type="number" name="nbre_qa" class="form-control" placeholder="25" required value="{{$certification->nbre_qa}}">
+                                        <input type="number" name="nbre_max" class="form-control" placeholder="5" required value="{{$certification->nbre_max}}">
                                         <input type="hidden" name="certification_id" value="{{$certification->id}}">
+
                                     </div>
                                 </div>
                             </div>
