@@ -18,6 +18,9 @@
                             <a class="dropdown-item {{ Request::is(['admin/enseignants*']) ? 'active' : '' }}" href="{{route('admin.enseignants.index')}}">Enseignants</a>
                         </div>
                     </li>
+                    <li class="nav-item">
+                        <a href="{{route('admin.role&permission')}}" class="nav-link">Roles & Permissions</a>
+                    </li>
                     <li class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle {{ Request::is(['admin/editeurs*','admin/certifications*','admin/questions*','admin/options*']) ? 'active' : '' }}" data-toggle="dropdown">Certifications</a>
                         <div class="dropdown-menu">

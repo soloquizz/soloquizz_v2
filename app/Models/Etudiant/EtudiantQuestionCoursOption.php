@@ -7,26 +7,27 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
- * Class EtudiantQuestionCours
+ * Class EtudiantQuestionCoursOption
  * @package App\Models\Etudiant
- * @version August 8, 2023, 1:23 pm UTC
+ * @version August 16, 2023, 12:14 pm UTC
  *
- * @property \App\Models\Administration\Etudiant $etudiant
- * @property \App\Models\Enseignant\QuestionCours $questionCours
- * @property \App\Models\Administration\User $user
- * @property \Illuminate\Database\Eloquent\Collection $etudiantQuestionCoursOptions
+ * @property \App\Models\Etudiant\Etudiant $etudiant
+ * @property \App\Models\Etudiant\EtudiantQuestionCours $etudQuestCours
+ * @property \App\Models\Etudiant\Option $option
+ * @property \App\Models\Etudiant\User $user
  * @property integer $etudiant_id
  * @property integer $user_id
- * @property integer $question_cours_id
+ * @property integer $etud_quest_cours_id
+ * @property integer $option_id
  * @property boolean $trouve
  */
-class EtudiantQuestionCours extends Model
+class EtudiantQuestionCoursOption extends Model
 {
     use SoftDeletes;
 
     use HasFactory;
 
-    public $table = 'etudiant_question_cours';
+    public $table = 'etudiant_question_cours_options';
     
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
@@ -39,9 +40,9 @@ class EtudiantQuestionCours extends Model
     public $fillable = [
         'etudiant_id',
         'user_id',
-        'question_cours_id',
-        'trouve',
-        'contenu'
+        'etud_quest_cours_id',
+        'option_id',
+        'trouve'
     ];
 
     /**
@@ -53,9 +54,9 @@ class EtudiantQuestionCours extends Model
         'id' => 'integer',
         'etudiant_id' => 'integer',
         'user_id' => 'integer',
-        'question_cours_id' => 'integer',
-        'trouve' => 'boolean',
-        'contenu'=>'string'
+        'etud_quest_cours_id' => 'integer',
+        'option_id' => 'integer',
+        'trouve' => 'boolean'
     ];
 
     /**
@@ -66,12 +67,12 @@ class EtudiantQuestionCours extends Model
     public static $rules = [
         'etudiant_id' => 'nullable',
         'user_id' => 'required',
-        'question_cours_id' => 'required',
+        'etud_quest_cours_id' => 'required',
+        'option_id' => 'required',
         'trouve' => 'required|boolean',
         'created_at' => 'nullable',
         'updated_at' => 'nullable',
-        'deleted_at' => 'nullable',
-        'contenu'=>'string|required'
+        'deleted_at' => 'nullable'
     ];
 
     /**
@@ -79,15 +80,23 @@ class EtudiantQuestionCours extends Model
      **/
     public function etudiant()
     {
-        return $this->belongsTo(\App\Models\Administration\Etudiant::class, 'etudiant_id');
+        return $this->belongsTo(\App\Models\Etudiant\Etudiant::class, 'etudiant_id');
     }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      **/
-    public function questionCours()
+    public function etudQuestCours()
     {
-        return $this->belongsTo(\App\Models\Enseignant\QuestionCours::class, 'question_cours_id');
+        return $this->belongsTo(\App\Models\Etudiant\EtudiantQuestionCours::class, 'etud_quest_cours_id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     **/
+    public function option()
+    {
+        return $this->belongsTo(\App\Models\Enseignant\OptionCours::class, 'option_id');
     }
 
     /**
@@ -96,13 +105,5 @@ class EtudiantQuestionCours extends Model
     public function user()
     {
         return $this->belongsTo(\App\Models\Administration\User::class, 'user_id');
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     **/
-    public function etudiantQuestionCoursOptions()
-    {
-        return $this->hasMany(\App\Models\Etudiant\EtudiantQuestionCoursOption::class, 'etud_quest_cours_id');
     }
 }

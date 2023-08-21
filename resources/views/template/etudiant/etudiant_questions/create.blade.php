@@ -58,16 +58,17 @@
                         <ul style="list-style-type: none;">
                             <form method="POST" id="storeQuestionForm" action="{{route('etudiant.question.cours.store')}}">
                                 @csrf
-                                <input type="hidden" id="allquestions" name="questions_id[]" value="">
+                                <!--<input type="hidden" id="allquestions" name="questions_id[]" value="">-->
                             @foreach($questionExercice as $question)
                                 <li class="mb-5">
                                     <div class="row">
                                         <div class="col-2">
-                                            <input type="hidden" name="questions_id[]" value="{{$question->id}}">
-                                            <input type="hidden" name="user_id" value="{{$user->id}}">
-                                            <input type="hidden" name="etudiant_id" value="{{$user->etudiant()->etudiant_id}}">
+                                            <input type="hidden" name="user_id[]" value="{{$user->id}}">
+                                            <input type="hidden" name="etudiant_id[]" value="{{$user->etudiant()->id}}">
+                                            <input type="hidden" class="question form-check ml-1" name="question_cours_id[]" value="{{$question->question_cours_id}}">
 
                                             <h6>Question {{ $rank++ }}</h6>
+
                                         </div>
                                         <div class="col-2">{{$question->point}}point(s)</div>
                                         <div class="col-2">{{$question->durée}}min</div>
@@ -80,17 +81,18 @@
                                                 <ol type="a">
                                                     @foreach($question->questionCours->optionCours as $option)
                                                     <li class="d-flex">
-                                                        <input type="checkbox">{!! $option->contenu !!}
+                                                        <input type="hidden" name="option_id[]" value="">
+                                                        <input type="checkbox" name="option_id[]" value="{{$option->id}}">{!! $option->contenu !!}
                                                     </li>
                                                     @endforeach
                                                 </ol>
                                         @else
                                         <div class="col-12 col-md-6 mb-3">
-                                            <textarea name="contenu[]" style="display:none" id="hiddenAreaQuestion"></textarea>
+                                            <textarea name="contenu[]" style="display:none" id="hiddenAreaQuestion" class="textarea"></textarea>
                                         </div>
-                                        <div class="form-row">
+                                        <div class="form-row quill" >
                                             <div class="col-12 col-md-12 mb-3">
-                                                <label class="form-label">Contenu
+                                                <label class="form-label">Réponse
                                                     <span class="text-danger">*</span>
                                                 </label>
                                                 <div id="editorQuestion" style="height: 500px; overflow-y:auto;margin-top:3em">
@@ -149,6 +151,8 @@
         $("#storeQuestionForm").on("submit", function () {
             $("#hiddenAreaQuestion").val($("#editorQuestion").html());
         });
+
+        /*
         $(document).ready(function() {
             // Attacher l'événement submit sur l'élément du formulaire
             $('form').submit(function(event) {
@@ -176,6 +180,7 @@
                 this.submit();
             });
         });
+        */
         
 </script>
 @endsection

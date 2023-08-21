@@ -32,10 +32,12 @@ Route::name('admin.')->prefix('admin')->middleware(['auth','check.actif.compte',
     Route::resource('classes', App\Http\Controllers\Administration\ClasseController::class);
 
     Route::resource('semestres', App\Http\Controllers\Administration\SemestreController::class);
-
+    
+    Route::resource('roles',App\Http\Controllers\Administration\RoleController::class);
+    Route::post('addRole',[App\Http\Controllers\Administration\RoleController::class,'addRole'])->name('assignRole');
     Route::resource('cours', App\Http\Controllers\Administration\CoursController::class);
     Route::get('parametres',[App\Http\Controllers\Administration\ParametreController::class,'index'])->name('parametre');
-
+    Route::get('roleetpermission',[App\Http\Controllers\Administration\RoleAndPermissionController::class,'index'])->name('role&permission');
     Route::post('cours-enseignant-store',[App\Http\Controllers\Administration\CoursController::class,'enseignant_store'])->name('cours.enseignant_store');
 
     Route::resource('enseignants', App\Http\Controllers\Administration\EnseignantController::class);

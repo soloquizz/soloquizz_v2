@@ -1,4 +1,27 @@
 @extends('layouts.template.administration.master')
+@section('css')
+<style>
+    .pub{
+        background-color: green;
+        color: white;
+        width: max-content;
+        padding: 1px;
+        padding-left: 2px;
+        padding-right: 2px;
+        display: flex;
+    }
+
+    .pub2{
+            background-color: rgb(246, 4, 16);
+            color: white;
+            width: max-content;
+            padding: 1px;
+            padding-left: 2px;
+            padding-right: 2px;
+            display: flex;
+        }
+</style>
+@endsection
 
 @section('title')
     Détail d'un enseignant
@@ -157,7 +180,44 @@
                         Historiques
                     </div>
                     <div class="tab-pane" id="roles">
-                        Rôles
+                        <div class="table-responsive" data-toggle="lists" data-lists-values='["name"]'>
+                            <!-- Table -->
+                            <table id="myTable" class="table">
+                                <thead>
+                                <tr>
+                                    <th>Role</th>
+                                    <th>Etat</th>
+                                    <th>Action</th>
+                                </tr>
+                                </thead>
+                                <tbody class="list">
+                                @foreach($roles as $role)
+                                    <tr>
+            
+                                        <td class="name">{{$role->name}}</td>
+                                        <td class="name">
+                                            @if($enseignant->user()->hasRole($role->name))
+                                                <span class="pub rounded-pill border border-4 mr-1">Assigné</span>
+                                            @else
+                                                <span class="pub2 rounded-pill border border-4 mr-1">Non Assigné</span>
+                                            @endif
+
+                                        </td>
+                                        <td>
+                                            <form method="POST" action="{{route('admin.assignRole')}}">
+                                                @csrf
+                                                <input type="hidden" value="{{$enseignant->user()->id}}" name="model_id">
+                                                <input type="hidden" value="{{$role->id}}" name="role_id">
+                                                <button type="submit" class="btn">
+                                                    <i class="fa fa-user-plus text-info" aria-hidden="true" title="Ajout-user"></i>
+                                                </button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                     <div class="tab-pane" id="permissions">
                         Permissions
