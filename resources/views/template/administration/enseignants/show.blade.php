@@ -136,48 +136,39 @@
                                                     <input type="text" name="email" class="form-control"
                                                            placeholder="pre" value="{{$enseignant->user()->email}}"
                                                            required="">
+                                                           <input type="hidden" name="user_id"
+                                                           value="{{$enseignant->user()->id}}">
                                                 </div>
-                                                <div class="col-12 col-md-6 mb-3">
+                                                <!--<div class="col-12 col-md-6 mb-3">
                                                     <label class="form-label">Password
                                                     </label>
                                                     <input type="password" name="password" class="form-control"
                                                            placeholder="Password">
-                                                </div>
+                                                </div>-->
                                             </div>
                                             <div class="form-row">
-                                                <div class="col-12 col-md-6 mb-3">
+                                                {{--<div class="col-12 col-md-6 mb-3">
                                                     <label class="form-label">Password Confirmation
                                                     </label>
                                                     <input type="password" name="password_confirmed"
                                                            class="form-control" placeholder="Password">
                                                     <input type="hidden" name="user_id"
                                                            value="{{$enseignant->user()->id}}">
-                                                </div>
+                                                </div>--}}
                                                 <div class="col-12 col-md-6 mb-3">
                                                     <div class="flex">
-                                                        <form method="POST" action="{{route()}}">
+                                                       
                                                         <label class="form-label" for="subscribe">Activation
                                                             compte</label><br>
-                                                        @if($enseignant->user()->etat)
-                                                        <div class="custom-control custom-checkbox-toggle custom-control-inline mr-1">
-                                                           
-                                                            <input checked="" type="checkbox" id="subscribe"
-                                                                   class="custom-control-input" value="{{$enseignant->user()->etat}}">
-                                                            <label class="custom-control-label"
-                                                                   for="subscribe">Actif</label>
-                                                        </div>
                                                         
-                                                        <label class="form-label mb-0" for="subscribe">Actif</label>
-                                                        @else
-                                                        <div class="custom-control custom-checkbox-toggle custom-control-inline mr-1">
-                                                           
-                                                            <input type="checkbox" id="subscribe"
-                                                                   class="custom-control-input" value="{{$enseignant->user()->etat}}">
-                                                            <label class="custom-control-label"
-                                                                   for="subscribe">Inactif</label>
+                                                        <div class="mr-1">
+                                                            <label>Activé</label>
+                                                            <input type="radio" name="etat" value="1" {{ $enseignant->user()->etat == 1 ? 'checked' : '' }}>
+                                                            <label>Désactivé</label>
+                                                            <input type="radio" name="etat" value="0" {{ $enseignant->user()->etat == 0 ? 'checked' : '' }}>
                                                         </div>
-                                                        @endif
-                                                    </form>
+                                                       
+                                                    
                                                     </div>
                                                 </div>
                                             </div>

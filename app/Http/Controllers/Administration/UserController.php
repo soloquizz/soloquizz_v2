@@ -37,11 +37,12 @@ class UserController extends AppBaseController
         if (empty($user)){
             Alert::error('Utilisateur non trouvé');
             return redirect()->back();
-        }
-
+        }   
+        
+       
         $user->update($input);
 
-        Alert::succes('Mise à jour utilisateur effectué avec succés');
+        Alert::success('Mise à jour utilisateur effectué avec succés');
         return redirect()->back();
 
     }
