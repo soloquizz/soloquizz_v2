@@ -247,6 +247,8 @@
                     $("#temps").val(resttime);
                     document.getElementById("dumpForm").submit();
                 }
+                
+                $window
             }
         /* END Envoyer les donner aprés quitter le plein écran*/
 

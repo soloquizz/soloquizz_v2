@@ -179,4 +179,21 @@ class EnseignantController extends AppBaseController
 
         return redirect(route('administration.enseignants.index'));*/
     }
+
+    public function updateS($id, UpdateEnseignantRequest $request)
+    {
+        $enseignant = $this->enseignantRepository->find($id);
+
+        if (empty($enseignant)) {
+            Alert::error('Error','Enseignant not found');
+
+            return redirect(route('administration.enseignants.index'));
+        }
+
+        $enseignant = $this->enseignantRepository->update($request->etat, $id);
+
+        Alert::success('Succés','Enseignant updated successfully.');
+
+        return redirect(route('admin.enseignants.index'));
+    }
 }

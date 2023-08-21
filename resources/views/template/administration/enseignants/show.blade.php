@@ -155,15 +155,29 @@
                                                 </div>
                                                 <div class="col-12 col-md-6 mb-3">
                                                     <div class="flex">
+                                                        <form method="POST" action="{{route()}}">
                                                         <label class="form-label" for="subscribe">Activation
                                                             compte</label><br>
+                                                        @if($enseignant->user()->etat)
                                                         <div class="custom-control custom-checkbox-toggle custom-control-inline mr-1">
+                                                           
                                                             <input checked="" type="checkbox" id="subscribe"
-                                                                   class="custom-control-input">
+                                                                   class="custom-control-input" value="{{$enseignant->user()->etat}}">
                                                             <label class="custom-control-label"
                                                                    for="subscribe">Actif</label>
                                                         </div>
+                                                        
                                                         <label class="form-label mb-0" for="subscribe">Actif</label>
+                                                        @else
+                                                        <div class="custom-control custom-checkbox-toggle custom-control-inline mr-1">
+                                                           
+                                                            <input type="checkbox" id="subscribe"
+                                                                   class="custom-control-input" value="{{$enseignant->user()->etat}}">
+                                                            <label class="custom-control-label"
+                                                                   for="subscribe">Inactif</label>
+                                                        </div>
+                                                        @endif
+                                                    </form>
                                                     </div>
                                                 </div>
                                             </div>
