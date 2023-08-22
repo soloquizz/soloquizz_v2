@@ -37,3 +37,8 @@ Route::group(['prefix' => 'administration'], function () {
 Route::group(['prefix' => 'administration'], function () {
     Route::resource('hasRoles', App\Http\Controllers\Administration\HasRoleController::class, ["as" => 'administration']);
 });
+
+
+Route::group(['prefix' => 'administration'], function () {
+    Route::resource('permissions', App\Http\Controllers\Administration\PermissionController::class, ["as" => 'administration']);
+});

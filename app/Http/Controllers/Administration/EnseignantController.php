@@ -7,6 +7,7 @@ use App\Http\Requests\Administration\UpdateEnseignantRequest;
 use App\Mail\CompteInfos;
 use App\Repositories\Administration\EnseignantRepository;
 use App\Http\Controllers\AppBaseController;
+use App\Models\Administration\Permission;
 use App\Models\Administration\Role;
 use App\Repositories\Administration\UserRepository;
 use Illuminate\Http\Request;
@@ -99,6 +100,7 @@ class EnseignantController extends AppBaseController
     {
         $enseignant = $this->enseignantRepository->find($id);
         $roles=Role::all();
+        $permissions=Permission::all();
 
         if (empty($enseignant)) {
             Alert::error('Succés','Enseignant not found');
@@ -106,7 +108,7 @@ class EnseignantController extends AppBaseController
             return redirect(route('administration.enseignants.index'));
         }
 
-        return view('template.administration.enseignants.show',compact('enseignant','roles'));
+        return view('template.administration.enseignants.show',compact('enseignant','roles','permissions'));
     }
 
     /**

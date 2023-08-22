@@ -6,6 +6,7 @@ use App\Http\Requests\Administration\CreateRoleRequest;
 use App\Http\Requests\Administration\UpdateRoleRequest;
 use App\Repositories\Administration\RoleRepository;
 use App\Http\Controllers\AppBaseController;
+use App\Models\Administration\Permission;
 use App\Models\Administration\Role;
 use App\Models\Administration\User;
 use Illuminate\Http\Request;
@@ -67,7 +68,7 @@ class RoleController extends AppBaseController
 
         Alert::success('Role saved successfully.');
 
-        return redirect(route('template.administration.roles.index'));
+        return redirect(route('admin.role&permission'));
     }
 
     /**
@@ -100,6 +101,7 @@ class RoleController extends AppBaseController
     public function edit($id)
     {
         $role = $this->roleRepository->find($id);
+        $permissions=Permission::all();
 
         if (empty($role)) {
             Alert::error('Role not found');
@@ -107,7 +109,7 @@ class RoleController extends AppBaseController
             return redirect(route('admin.roles.index'));
         }
 
-        return view('template.administration.roles.edit')->with('role', $role);
+        return view('template.administration.roles.edit',compact('role','permissions'));
     }
 
     /**
@@ -127,8 +129,14 @@ class RoleController extends AppBaseController
 
             return redirect(route('admin.roles.index'));
         }
+        $input = $request->except(['permissions']);
+        $permissions = $request['permissions'];
+        $role = $this->roleRepository->update($input, $id);
 
-        $role = $this->roleRepository->update($request->all(), $id);
+        foreach ($permissions as $permission) {
+            $p = Permission::where('id', '=', $permission)->firstOrFail(); //Get corresponding form //permission in db
+            $role->givePermissionTo($p);  //Assign permission to role
+        }
 
         Alert::success('Role updated successfully.');
 
@@ -170,5 +178,55 @@ class RoleController extends AppBaseController
 
         return redirect()->back();
         
+    }
+    
+    public function givePermissionToRole($id,Request $request)
+    {
+       
+        $role = $this->roleRepository->find($id);
+    
+        if (empty($role)) {
+            Alert::error('Role not found');
+
+            return redirect(route('admin.roles.index'));
+        }
+        //$input = $request->except(['permissions']);
+        $permissions = $request['permissions'];
+        //$role = $this->roleRepository->update($input, $id);
+
+        foreach ($permissions as $permission) {
+            $p = Permission::where('id', '=', $permission)->firstOrFail();
+             //Get corresponding form //permission in db
+            $role->givePermissionTo($p);  //revoke permission to role
+        }
+
+        Alert::success('Permissions ajoutées avec succés.');
+
+        return redirect(route('admin.role&permission'));
+    }
+    
+    public function revokePermissionToRole($id,Request $request)
+    {
+       
+        $role = $this->roleRepository->find($id);
+    
+        if (empty($role)) {
+            Alert::error('Role not found');
+
+            return redirect(route('admin.roles.index'));
+        }
+        //$input = $request->except(['permissions']);
+        $permissions = $request['permissions'];
+        //$role = $this->roleRepository->update($input, $id);
+
+        foreach ($permissions as $permission) {
+            $p = Permission::where('id', '=', $permission)->firstOrFail();
+             //Get corresponding form //permission in db
+            $role->revokePermissionTo($p);  //revoke permission to role
+        }
+
+        Alert::success('Permissions retirées avec succés.');
+
+        return redirect(route('admin.role&permission'));
     }
 }

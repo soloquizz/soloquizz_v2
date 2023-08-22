@@ -168,7 +168,6 @@
                                                             <input type="radio" name="etat" value="0" {{ $enseignant->user()->etat == 0 ? 'checked' : '' }}>
                                                         </div>
                                                        
-                                                    
                                                     </div>
                                                 </div>
                                             </div>
@@ -225,7 +224,57 @@
                         </div>
                     </div>
                     <div class="tab-pane" id="permissions">
-                        Permissions
+                        <div class="table-responsive" data-toggle="lists" data-lists-values='["name"]'>
+                            <!-- Table -->
+                            <table id="myTable" class="table">
+                                <thead>
+                                <tr>
+                                    <th>Permission</th>
+                                    <th>Etat</th>
+                                    <th>Action</th>
+                                </tr>
+                                </thead>
+                                <tbody class="list">
+                                @foreach($permissions as $permission)
+                                    <tr>
+            
+                                        <td class="name">{{$permission->name}}</td>
+                                        <td class="name">
+                                            @if($enseignant->user()->hasPermissionTo($permission->name))
+                                                <span class="pub rounded-pill border border-4 mr-1">Assigné</span>
+                                            @else
+                                                <span class="pub2 rounded-pill border border-4 mr-1">Non Assigné</span>
+                                            @endif
+
+                                        </td>
+                                        <td>
+                                            @if($enseignant->user()->hasPermissionTo($permission->name))
+                                            <form method="POST" action="{{route('admin.revokePermissionToUser')}}">
+                                                @csrf
+                                                <input type="hidden" value="{{$enseignant->user()->id}}" name="model_id">
+                                                <input type="hidden" value="{{$permission->id}}" name="permission_id">
+                                                <button type="submit" class="btn">
+                                                    <i class="fa fa-user-times text-danger" aria-hidden="true" title="Ajout-user"></i>
+                                                </button>
+                                            </form>
+                                            
+                                            @else
+                                            <form method="POST" action="{{route('admin.addPermissionToUser')}}">
+                                                @csrf
+                                                <input type="hidden" value="{{$enseignant->user()->id}}" name="model_id">
+                                                <input type="hidden" value="{{$permission->id}}" name="permission_id">
+                                                <button type="submit" class="btn">
+                                                    <i class="fa fa-user-plus text-info" aria-hidden="true" title="Ajout-user"></i>
+                                                </button>
+                                            </form>
+                                            @endif
+                                            
+                                        </td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>

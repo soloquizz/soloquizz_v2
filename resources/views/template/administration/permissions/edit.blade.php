@@ -21,7 +21,7 @@
         <!-- END Section Dashboard Layout -->
 
         <div class="container card bg-white page__container page-section mt-5">
-            {!! Form::model($role, ['route' => ['admin.roles.update', $role->id], 'method' => 'patch']) !!}
+            {!! Form::model($permission, ['route' => ['admin.permissions.update', $permission->id], 'method' => 'patch']) !!}
             <div class="modal-body">
                 <div class="row">
                     <div class="col-lg-12">
@@ -31,18 +31,9 @@
                                     <label class="form-label">Nom Role
                                         <span class="text-danger">*</span>
                                     </label>
-                                    <input type="text" name="name" class="form-control" value="{{$role->name}}"
-                                           placeholder="Administrateur" required="">
+                                    <input type="text" name="name" class="form-control" value="{{$permission->name}}"
+                                           placeholder="create user" required="">
                                 </div>
-                            </div>
-                            <h5>Ajout de permissions</h5>
-
-                            <div class='form-group'>
-                                @foreach ($permissions as $permission)
-                                    {{ Form::checkbox('permissions[]',  $permission->id ) }}
-                                    {{ Form::label($permission->name, ucfirst($permission->name)) }}<br>
-
-                                @endforeach
                             </div>
                         </div>
                     </div>

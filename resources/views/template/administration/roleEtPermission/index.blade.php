@@ -61,6 +61,7 @@
                                     <thead>
                                         <tr>
                                             <th>Role</th>
+                                            <th>Permission</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -68,6 +69,15 @@
                                             @foreach($roles as $role)
                                                 <tr>
                                                     <td class="name">{{$role->name}}</td>
+                                                    
+                                                    <td> 
+                                                        <a href="#addPermission{{$role->id}}" data-toggle="modal" data-backdrop="false">
+                                                            <i class="fa fa-plus text-info mr-1" title="Ajout-permission"></i>
+                                                        </a>
+                                                        <a href="#revokePermission{{$role->id}}" data-toggle="modal" data-backdrop="false">
+                                                            <i class="fa fa-trash text-danger mr-1" title="retirer-permission"></i>
+                                                        </a>
+                                                        {{ str_replace(array('[',']','"'),' ', $role->permissions()?->pluck('name')) }}</td>
                                                     <td class="name">
                                                         <a href="{{route('admin.roles.edit', $role->id)}}">
                                                             <i class="fa fa-edit text-warning mr-1" title="Mofification"></i>
@@ -82,7 +92,7 @@
                             </div>
                         </div>
                         <!--Parcours space-->
-                        <div class="tab-pane" id="parcours">
+                        <div class="tab-pane" id="permissions">
                             <div class="row">
                                 <table class="table" id="myTable2">
                                     <thead>
@@ -92,16 +102,16 @@
                                     </tr>
                                     </thead>
                                     <tbody class="list">
-                                    {{--@foreach($parcours as $parcour)
+                                    @foreach($permissions as $permission)
                                         <tr>
-                                            <td class="name">{{$parcour->nom}}</td>
+                                            <td class="name">{{$permission->name}}</td>
                                             <td class="name">
-                                                <a href="{{route('admin.parcours.edit', $parcour->id)}}">
+                                                <a href="{{route('admin.permissions.edit', $permission->id)}}">
                                                     <i class="fa fa-edit text-warning mr-1" title="Mofification"></i>
                                                 </a>
                                             </td>
                                         </tr>
-                                    @endforeach--}}
+                                    @endforeach
                                     </tbody>
                                 </table>
                             </div>
@@ -122,6 +132,9 @@
 
 @section('modal')
     @include('template.administration.roles.create')
+    @include('template.administration.permissions.create')
+    @include('template.administration.permissions.givepermission-role')
+    @include('template.administration.permissions.revokepermission-role')
    
 @endsection
 
@@ -164,7 +177,6 @@
          })
          
 
-       
     </script>
 @endsection
 

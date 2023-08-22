@@ -33,8 +33,15 @@ Route::name('admin.')->prefix('admin')->middleware(['auth','check.actif.compte',
 
     Route::resource('semestres', App\Http\Controllers\Administration\SemestreController::class);
     
+    Route::resource('permissions',App\Http\Controllers\Administration\PermissionController::class);
+    Route::post('addPermissionUser',[App\Http\Controllers\Administration\PermissionController::class,'addPermissionToUser'])->name('addPermissionToUser');
+    Route::post('revokePermissionUser',[App\Http\Controllers\Administration\PermissionController::class,'revokePermissionToUser'])->name('revokePermissionToUser');
+
     Route::resource('roles',App\Http\Controllers\Administration\RoleController::class);
     Route::post('addRole',[App\Http\Controllers\Administration\RoleController::class,'addRole'])->name('assignRole');
+    Route::post('role/give-permission/{id}',[App\Http\Controllers\Administration\RoleController::class,'givePermissionToRole'])->name('givePermissionToRole');
+    Route::post('role/revoke-permission/{id}',[App\Http\Controllers\Administration\RoleController::class,'revokePermissionToRole'])->name('revokePermissionToRole');
+
     Route::resource('cours', App\Http\Controllers\Administration\CoursController::class);
     Route::get('parametres',[App\Http\Controllers\Administration\ParametreController::class,'index'])->name('parametre');
     Route::get('roleetpermission',[App\Http\Controllers\Administration\RoleAndPermissionController::class,'index'])->name('role&permission');
