@@ -41,6 +41,12 @@ Route::name('etudiant.')->prefix('etudiant')->middleware(['auth','check.actif.co
     //Discussions
     Route::get('/discussions',[App\Http\Controllers\Etudiant\EtudiantController::class,'discussions'])->name('discussions');
 
+    //Evaluations
+    Route::get('/evaluations/{id}',[App\Http\Controllers\Etudiant\EvaluationController::class,'index'])->name('evaluations');
+    Route::get('/cours-show/evaluation-question-view/{td_id}',[App\Http\Controllers\Etudiant\EvaluationController::class,'show'])->name('cours.show.evaluation.view.question');
+    Route::get('/examen/treate/{examen_id}',[App\Http\Controllers\Etudiant\EvaluationController::class,'treatementTD'])->name('cours.show.examen.question.treatement');
+    
+
 });
 
 

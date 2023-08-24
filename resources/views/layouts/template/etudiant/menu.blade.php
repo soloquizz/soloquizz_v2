@@ -16,8 +16,8 @@
                     <li class="nav-item {{ Request::is('etudiant/cours*') ? 'active' : '' }}">
                         <a href="{{route('etudiant.cours')}}" class="nav-link">Cours</a>
                     </li>
-                    <li class="nav-item {{ Request::is('etudiant/devoir*') ? 'active' : '' }}">
-                        <a href="#" class="nav-link">Evaluations</a>
+                    <li class="nav-item {{ Request::is('etudiant/evaluations*') ? 'active' : '' }}">
+                        <a href="{{route('etudiant.evaluations',auth()->user()->etudiant()->inscriptions()->get()->last()->classe->id)}}" class="nav-link">Evaluations</a>
                     </li>
                     <li class="nav-item {{ Request::is('etudiant/certifications*') ? 'active' : '' }}">
                         <a href="{{route('etudiant.certifications')}}" class="nav-link">Certifications</a>
