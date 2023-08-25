@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Enseignant;
 
 use App\Http\Controllers\Controller;
+use App\Models\Administration\Cours;
 use App\Models\Enseignant\EvaluationExercices;
 use App\Models\Enseignant\Evaluations;
 use App\Models\Enseignant\Exercice;
@@ -123,5 +124,23 @@ class EvaluationController extends Controller
         $evaluation=Evaluations::find($id);
         $evaluation->heure=date('H:i:s');
          return view('template.enseignant.evaluations.edit',compact('evaluation'));
+    }
+
+    public function index2()
+    {
+        $enseignant =  auth()->user()->enseignant();
+
+        //$cours = $enseignant->cours;
+        
+        $courss=Cours::where('enseignant_id',$enseignant->id)->paginate(2);
+        
+
+        $classes = $enseignant->classes();
+
+        $date=Carbon::now();
+
+        
+
+        return view('template.enseignant.evaluations.index',compact('courss','enseignant','classes','date'));
     }
 }

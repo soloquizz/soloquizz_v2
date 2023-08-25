@@ -16,8 +16,8 @@
                     <li class="nav-item {{ Request::is('enseignant/cours*') ? 'active' : '' }}">
                         <a href="{{route('enseignant.cours')}}" class="nav-link">Cours</a>
                     </li>
-                    <li class="nav-item {{ Request::is('enseignant/devoir*') ? 'active' : '' }}">
-                        <a href="#" class="nav-link">Evaluations</a>
+                    <li class="nav-item {{ Request::is('enseignant/evaluations*') ? 'active' : '' }}">
+                        <a href="{{route('enseignant.evaluations',auth()->user()->enseignant()->cours()->get()->last()->classe->id)}}" class="nav-link">Evaluations</a>
                     </li>
                     <li class="nav-item {{ Request::is('enseignant/certifications*') ? 'active' : '' }}">
                         <a href="#" class="nav-link">Certifications</a>

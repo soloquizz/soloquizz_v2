@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Etudiant;
 
 use App\Http\Controllers\Controller;
 use App\Models\Administration\Classe;
+use App\Models\Administration\Cours;
 use App\Models\Enseignant\EvaluationExercices;
 use App\Models\Enseignant\Evaluations;
 use App\Models\Enseignant\OptionCours;
@@ -17,18 +18,20 @@ class EvaluationController extends Controller
         $classe=Classe::find($id);
         $date = Carbon::now();
         $tabDates=[];
+        $courss=Cours::where('classe_id',$classe->id)->paginate(2);
+
         $data_difference=0;
-        foreach($classe->cours as $crs){
+        /*foreach($classe->cours as $crs){
             foreach($crs->evaluations as $ev){
                 $data_difference = $date->diffInDays($ev->date, false);
                 array_push($tabDates,$data_difference);
             }
 
-        }
+        }*/
 
         //dd($data_difference);
        
-        return view('template.etudiant.evaluations.index',compact('classe','date','data_difference'));
+        return view('template.etudiant.evaluations.index',compact('classe','date','data_difference','courss'));
     }
 
     public function show($id){

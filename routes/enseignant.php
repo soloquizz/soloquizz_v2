@@ -50,6 +50,7 @@ Route::name('enseignant.')->prefix('enseignant')->middleware(['auth','check.acti
     Route::post('options-edit-custom/{id}', [App\Http\Controllers\Enseignant\OptionCoursController::class,'update'])->name('options.cours.update');
 
     //Evaluations
+    Route::get('/evaluations/{id}',[App\Http\Controllers\Enseignant\EvaluationController::class,'index2'])->name('evaluations');
     Route::post('/evaluation-store',[App\Http\Controllers\Enseignant\EvaluationController::class,'store'])->name('evaluation.store');
     Route::post('/evaluation-update/{id}',[App\Http\Controllers\Enseignant\EvaluationController::class,'update'])->name('evaluation.update');
     Route::get('/cours-show/evaluation-question-create/{td_id}',[App\Http\Controllers\Enseignant\EvaluationController::class,'index'])->name('cours.show.evaluation.add.question');
