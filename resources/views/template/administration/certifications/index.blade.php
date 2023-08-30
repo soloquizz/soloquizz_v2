@@ -81,6 +81,7 @@
                         <th>Éditeur</th>
                         <th>Niveau</th>
                         <th>Action</th>
+                        <th>Etudiants</th>
                     </tr>
                     </thead>
                     <tbody class="list">
@@ -122,6 +123,11 @@
                                         @endif
                                     </div>
                                 </div>
+                            </td>
+                            <td class="name">
+                                <a href="{{route('admin.certifications.list.etudiants', $certification->id)}}">
+                                    <i class="fa fa-users text-success" title="Mofification"></i>
+                                </a>
                             </td>
                         </tr>
                     @endforeach

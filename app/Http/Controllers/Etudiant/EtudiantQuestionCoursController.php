@@ -34,8 +34,9 @@ class EtudiantQuestionCoursController extends Controller
                 ]);
             
         }*/
-      //dd($request->question_cours_id);
-        for($i=0; $i <= count($request->question_cours_id);$i++){
+      dd(count($request->question_cours_id));
+      
+        for($i=0; $i < count($request->question_cours_id);$i++){
             
                 $exo = EtudiantQuestionCours::create([
                   

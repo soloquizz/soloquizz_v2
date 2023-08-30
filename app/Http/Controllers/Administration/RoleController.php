@@ -197,7 +197,7 @@ class RoleController extends AppBaseController
         foreach ($permissions as $permission) {
             $p = Permission::where('id', '=', $permission)->firstOrFail();
              //Get corresponding form //permission in db
-            $role->givePermissionTo($p);  //revoke permission to role
+            $role->givePermissionTo($p);  //give permission to role
         }
 
         Alert::success('Permissions ajoutées avec succés.');
