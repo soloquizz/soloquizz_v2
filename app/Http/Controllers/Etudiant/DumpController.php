@@ -24,7 +24,8 @@ class DumpController extends Controller
             Alert::error('Error','Certification not Found');
             return redirect()->back();
         }
-        $dumpUsers = $certification->dumpUsers;
+        $user = auth()->user();
+        $dumpUsers = $certification->dumpUsers->where('user_id',$user->id);
         $percent = intval(($dumpUsers->sum('score')/$certification->questions->sum('point'))*100);
         if ($percent>80){
             Alert::success('Succés','Test réussi avec succès');
@@ -100,7 +101,7 @@ class DumpController extends Controller
         $dump_user = DumpUser::find($dump_user_id);
         $dump = $dump_user->dump;
         $certification = $dump->certification;
-        $dumpUsers = $certification->dumpUsers;
+        $dumpUsers = $certification->dumpUsers->where('user_id',$user->id);
         $percent = intval(($dumpUsers->sum('score')/$certification->questions->sum('point'))*100);
         if ($percent>80){
             Alert::success('Succés','Test réussi avec succès');
