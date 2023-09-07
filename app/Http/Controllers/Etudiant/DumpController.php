@@ -101,6 +101,7 @@ class DumpController extends Controller
         $dump_user = DumpUser::find($dump_user_id);
         $dump = $dump_user->dump;
         $certification = $dump->certification;
+        $user = auth()->user();
         $dumpUsers = $certification->dumpUsers->where('user_id',$user->id);
         $percent = intval(($dumpUsers->sum('score')/$certification->questions->sum('point'))*100);
         if ($percent>80){
