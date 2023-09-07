@@ -79,7 +79,7 @@
                             <td class="name">{{$enseignant->prenom}}</td>
                             <td class="name">{{$enseignant->nom}}</td>
                             <td class="name">{{$enseignant->telephone}}</td>
-                            <td class="name">{{$enseignant->user()->email}}</td>
+                            <td class="name">{{$enseignant->user()?->email}}</td>
                             <td class="name">
                                 <a href="{{route('admin.enseignants.show', $enseignant->id)}}">
                                     <i class="fa fa-eye text-info mr-1" title="Détail Administrateur"></i>
