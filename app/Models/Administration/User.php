@@ -62,6 +62,10 @@ class User extends Authenticatable
         }
 
     }
+    public function administrateur()
+    {
+        return Administrateur::find($this->personne_id);
+    }
 
     public function etudiant()
     {

@@ -270,4 +270,7 @@ class CertificationController extends AppBaseController
         return view('template.administration.certifications.list-etudiants',compact('dumpUser','certification'));
 
     }
+
+    //resultats
+    
 }

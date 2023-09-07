@@ -77,7 +77,7 @@
                         <th>Nom Complet</th>
                         <th>Nombre total de Dump</th>
                         <th>Score Total </th>
-                        
+                        <th>Détail</th>
                     </tr>
                     </thead>
                     <tbody class="list">
