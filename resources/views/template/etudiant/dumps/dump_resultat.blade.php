@@ -31,7 +31,10 @@
                 <div class="py-64pt text-center text-sm-left">
                     <div class="container d-flex flex-column justify-content-center align-items-center">
                         <p class="lead text-white-50 measure-lead-max mb-0">Fait le {{date('d-m-Y à H:i:s', strtotime($dump_user->created_at)) }}</p>
-                        <h1 class="text-white mb-24pt">Votre Score: {{$dump_user->score}}/{{$dump->score}}</h1>
+                        <h3 class="text-white mb-24pt">Votre Score: {{$dump_user->score}}/{{$dump->score}}</h3>
+                        <h3 class="text-white mb-24pt">Pourcentage de réussite: <?php $per=$dump_user->score *100/$dump->score; 
+                                                                        echo number_format((float)$per, 2, '.', '').'%';
+                                                                        ?></h3>
                         @if($dumpUsers->sum('score') < $certification->questions->sum('point'))
                             <a href="{{route('etudiant.dumps.take',$certification->id)}}" class="btn btn-outline-white">Nouveau entrainement</a>
                         @else

@@ -239,8 +239,13 @@ class CertificationController extends AppBaseController
         return redirect(route('admin.certifications.questions.display', ['search' => '','certification_id'=>$input['certification_id']]));
     }
 
+    //Publié une certification
     public function updateS($id){
         $certification=Certification::find($id);
+        if($certification->questions->count()==0){
+            Alert::error('Error',$certification->titre.' ne peut pas etre publiée car elle ne contient pas de question');
+            return redirect()->back();
+        }
         $certification->statut=1;
         $certification->update();
         Alert::success('Succés','Certification publiée');

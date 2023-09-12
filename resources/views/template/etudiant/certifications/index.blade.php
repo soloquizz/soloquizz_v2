@@ -34,6 +34,7 @@
                 </a>
                 <div class="card stack">
                     <div class="list-group list-group-flush">
+                        
                         @foreach($editeur->certifications as $certification)
                         @if($certification->statut==1)
                             <div class="list-group-item d-flex align-items-center px-16pt">
@@ -49,9 +50,20 @@
                                 <a href="{{route('etudiant.dumps',$certification->id)}}" class="text-muted ml-8pt">
                                     <i class="material-icons">chevron_right</i></a>
                             </div>
-                            @else
-                            <h5>Non disponible</h5>
+                        @else
+                        <div class="list-group-item d-flex align-items-center px-16pt">
+                            <div class="flex d-flex flex-column">
+                                <a class="text-body"
+                                   href="{{route('etudiant.dumps',$certification->id)}}">{{$certification->titre}}</a>
+                                <small class="text-muted text-danger">10% de réussite</small>
+                            </div>
+                            <div class="d-flex flex-column align-items-center">
+                                <span class="lead lh-1 text-danger">Non disponilble</span>
+                            </div>
+                        </div>
+                            
                         @endif
+                        
                        
                         @endforeach
                     </div>

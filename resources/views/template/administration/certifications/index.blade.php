@@ -113,7 +113,7 @@
                                         <!--<span class="pub2 rounded-pill border border-4 mr-1">Déjà Publié</span>-->
                                         <form method="POST" action="{{route('admin.certifications.depublier.statut', $certification->id)}}">
                                             @csrf
-                                            <input type="submit" class="pub3 rounded-pill border border-4 mr-1" value="Publier le">
+                                            <input type="submit" class="pub3 rounded-pill border border-4 mr-1" value="Dépublier le">
                                         </form>
                                         @else
                                         <form method="POST" action="{{route('admin.certifications.update.statut', $certification->id)}}">
