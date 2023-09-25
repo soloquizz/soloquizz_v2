@@ -19,7 +19,12 @@
                         </div>
                     </li>
                     <li class="nav-item">
-                        <a href="{{route('admin.role&permission')}}" class="nav-link">Roles & Permissions</a>
+                        {{--<a href="{{route('admin.role&permission')}}" class="nav-link">Roles & Permissions</a>--}}
+                        <a href="#" class="nav-link dropdown-toggle {{ Request::is(['admin/roles*','admin/permissions*']) ? 'active' : '' }}" data-toggle="dropdown">Roles & Permissions</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item {{ Request::is(['admin/roles*']) ? 'active' : '' }}" href="{{route('admin.roles.index')}}">Roles</a>
+                            <a class="dropdown-item {{ Request::is(['admin/permissions*']) ? 'active' : '' }}" href="{{route('admin.permissions.index')}}">Permissions</a>
+                        </div>
                     </li>
                     <li class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle {{ Request::is(['admin/editeurs*','admin/certifications*','admin/questions*','admin/options*']) ? 'active' : '' }}" data-toggle="dropdown">Certifications</a>
