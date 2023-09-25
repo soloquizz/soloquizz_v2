@@ -68,7 +68,7 @@ class RoleController extends AppBaseController
 
         Alert::success('Role saved successfully.');
 
-        return redirect(route('admin.role&permission'));
+        return redirect(route('admin.roles.index'));
     }
 
     /**
@@ -81,6 +81,7 @@ class RoleController extends AppBaseController
     public function show($id)
     {
         $role = $this->roleRepository->find($id);
+        $permissions=Permission::all();
 
         if (empty($role)) {
             Alert::error('Role not found');
@@ -88,7 +89,7 @@ class RoleController extends AppBaseController
             return redirect(route('template.administration.roles.index'));
         }
 
-        return view('template.administration.roles.show')->with('role', $role);
+        return view('template.administration.roles.show',compact('role','permissions'));
     }
 
     /**
@@ -191,7 +192,7 @@ class RoleController extends AppBaseController
             return redirect(route('admin.roles.index'));
         }
         //$input = $request->except(['permissions']);
-        $permissions = $request['permissions'];
+        $permissions = explode(',',$request["permissions"][0]);
         //$role = $this->roleRepository->update($input, $id);
 
         foreach ($permissions as $permission) {
@@ -202,7 +203,7 @@ class RoleController extends AppBaseController
 
         Alert::success('Permissions ajoutées avec succés.');
 
-        return redirect(route('admin.role&permission'));
+        return redirect(route('admin.roles.show',$role->id));
     }
     
     public function revokePermissionToRole($id,Request $request)
@@ -216,7 +217,7 @@ class RoleController extends AppBaseController
             return redirect(route('admin.roles.index'));
         }
         //$input = $request->except(['permissions']);
-        $permissions = $request['permissions'];
+        $permissions = explode(',',$request["permissions"][0]);
         //$role = $this->roleRepository->update($input, $id);
 
         foreach ($permissions as $permission) {
@@ -227,6 +228,6 @@ class RoleController extends AppBaseController
 
         Alert::success('Permissions retirées avec succés.');
 
-        return redirect(route('admin.role&permission'));
+        return redirect(route('admin.roles.show',$role->id));
     }
 }
