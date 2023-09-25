@@ -34,7 +34,8 @@ class Permission extends PermissionSpatie
 
     public $fillable = [
         'name',
-        'guard_name'
+        'guard_name',
+        'espace',
     ];
 
     /**
@@ -45,7 +46,8 @@ class Permission extends PermissionSpatie
     protected $casts = [
         'id' => 'integer',
         'name' => 'string',
-        'guard_name' => 'string'
+        'guard_name' => 'string',
+        'espace'=>'string',
     ];
 
     /**
