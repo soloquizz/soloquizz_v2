@@ -19,6 +19,14 @@
                                             <span class="text-danger">*</span>
                                         </label>
                                         <input type="text" name="name" class="form-control" placeholder="create user" required="">
+
+                                        <label class="form-label">Espace
+                                            <span class="text-danger">*</span>
+                                        </label>
+                                        <select name="espace" id="" class="form-control">
+                                            <option value="Administrateur">Administrateur</option>
+                                            <option value="Enseignant">Enseignant</option>    
+                                        </select>                                   
                                     </div>
                                 </div>
                             </div>

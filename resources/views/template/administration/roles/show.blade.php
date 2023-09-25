@@ -221,7 +221,3 @@ btn3.onclick = checkAll;
 </script>
 
 @endsection
-
-
-
-
