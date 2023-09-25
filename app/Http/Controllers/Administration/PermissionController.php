@@ -60,13 +60,14 @@ class PermissionController extends AppBaseController
 
         $permission = $this->permissionRepository->create(
            [ 'name'=>$input['name'],
-            'guard_name'=>'web'
+            'guard_name'=>'web',
+            'espace'=>$input['espace']
             ]
         );
 
         Alert::success('Permission saved successfully.');
 
-        return redirect(route('admin.role&permission'));
+        return redirect()->back();
     }
 
     /**
@@ -131,7 +132,7 @@ class PermissionController extends AppBaseController
 
         Alert::success('Permission updated successfully.');
 
-        return redirect(route('admin.role&permission'));
+        return redirect()->back();
     }
 
     /**
