@@ -58,8 +58,12 @@
                                         <div class="col-2">
                                             <h6>Question {{ $rank++ }}</h6>
                                         </div>
+                                        @if($question->point)
                                         <div class="col-2">{{$question->point}}point(s)</div>
+                                        @endif
+                                        @if($question->durée)
                                         <div class="col-2">{{$question->durée}}min</div>
+                                        @endif
                                         
                                     </div>
                                     <div class="row">

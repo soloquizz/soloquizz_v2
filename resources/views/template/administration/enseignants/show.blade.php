@@ -1,4 +1,27 @@
 @extends('layouts.template.administration.master')
+@section('css')
+<style>
+    .pub{
+        background-color: green;
+        color: white;
+        width: max-content;
+        padding: 1px;
+        padding-left: 2px;
+        padding-right: 2px;
+        display: flex;
+    }
+
+    .pub2{
+            background-color: rgb(246, 4, 16);
+            color: white;
+            width: max-content;
+            padding: 1px;
+            padding-left: 2px;
+            padding-right: 2px;
+            display: flex;
+        }
+</style>
+@endsection
 
 @section('title')
     Détail d'un enseignant
@@ -113,34 +136,38 @@
                                                     <input type="text" name="email" class="form-control"
                                                            placeholder="pre" value="{{$enseignant->user()->email}}"
                                                            required="">
+                                                           <input type="hidden" name="user_id"
+                                                           value="{{$enseignant->user()->id}}">
                                                 </div>
-                                                <div class="col-12 col-md-6 mb-3">
+                                                <!--<div class="col-12 col-md-6 mb-3">
                                                     <label class="form-label">Password
                                                     </label>
                                                     <input type="password" name="password" class="form-control"
                                                            placeholder="Password">
-                                                </div>
+                                                </div>-->
                                             </div>
                                             <div class="form-row">
-                                                <div class="col-12 col-md-6 mb-3">
+                                                {{--<div class="col-12 col-md-6 mb-3">
                                                     <label class="form-label">Password Confirmation
                                                     </label>
                                                     <input type="password" name="password_confirmed"
                                                            class="form-control" placeholder="Password">
                                                     <input type="hidden" name="user_id"
                                                            value="{{$enseignant->user()->id}}">
-                                                </div>
+                                                </div>--}}
                                                 <div class="col-12 col-md-6 mb-3">
                                                     <div class="flex">
+                                                       
                                                         <label class="form-label" for="subscribe">Activation
                                                             compte</label><br>
-                                                        <div class="custom-control custom-checkbox-toggle custom-control-inline mr-1">
-                                                            <input checked="" type="checkbox" id="subscribe"
-                                                                   class="custom-control-input">
-                                                            <label class="custom-control-label"
-                                                                   for="subscribe">Actif</label>
+                                                        
+                                                        <div class="mr-1">
+                                                            <label>Activé</label>
+                                                            <input type="radio" name="etat" value="1" {{ $enseignant->user()->etat == 1 ? 'checked' : '' }}>
+                                                            <label>Désactivé</label>
+                                                            <input type="radio" name="etat" value="0" {{ $enseignant->user()->etat == 0 ? 'checked' : '' }}>
                                                         </div>
-                                                        <label class="form-label mb-0" for="subscribe">Actif</label>
+                                                       
                                                     </div>
                                                 </div>
                                             </div>
@@ -157,10 +184,97 @@
                         Historiques
                     </div>
                     <div class="tab-pane" id="roles">
-                        Rôles
+                        <div class="table-responsive" data-toggle="lists" data-lists-values='["name"]'>
+                            <!-- Table -->
+                            <table id="myTable" class="table">
+                                <thead>
+                                <tr>
+                                    <th>Role</th>
+                                    <th>Etat</th>
+                                    <th>Action</th>
+                                </tr>
+                                </thead>
+                                <tbody class="list">
+                                @foreach($roles as $role)
+                                    <tr>
+            
+                                        <td class="name">{{$role->name}}</td>
+                                        <td class="name">
+                                            @if($enseignant->user()->hasRole($role->name))
+                                                <span class="pub rounded-pill border border-4 mr-1">Assigné</span>
+                                            @else
+                                                <span class="pub2 rounded-pill border border-4 mr-1">Non Assigné</span>
+                                            @endif
+
+                                        </td>
+                                        <td>
+                                            <form method="POST" action="{{route('admin.assignRole')}}">
+                                                @csrf
+                                                <input type="hidden" value="{{$enseignant->user()->id}}" name="model_id">
+                                                <input type="hidden" value="{{$role->id}}" name="role_id">
+                                                <button type="submit" class="btn">
+                                                    <i class="fa fa-user-plus text-info" aria-hidden="true" title="Ajout-user"></i>
+                                                </button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                     <div class="tab-pane" id="permissions">
-                        Permissions
+                        <div class="table-responsive" data-toggle="lists" data-lists-values='["name"]'>
+                            <!-- Table -->
+                            <table id="myTable" class="table">
+                                <thead>
+                                <tr>
+                                    <th>Permission</th>
+                                    <th>Etat</th>
+                                    <th>Action</th>
+                                </tr>
+                                </thead>
+                                <tbody class="list">
+                                @foreach($permissions as $permission)
+                                    <tr>
+            
+                                        <td class="name">{{$permission->name}}</td>
+                                        <td class="name">
+                                            @if($enseignant->user()->hasPermissionTo($permission->name))
+                                                <span class="pub rounded-pill border border-4 mr-1">Assigné</span>
+                                            @else
+                                                <span class="pub2 rounded-pill border border-4 mr-1">Non Assigné</span>
+                                            @endif
+
+                                        </td>
+                                        <td>
+                                            @if($enseignant->user()->hasPermissionTo($permission->name))
+                                            <form method="POST" action="{{route('admin.revokePermissionToUser')}}">
+                                                @csrf
+                                                <input type="hidden" value="{{$enseignant->user()->id}}" name="model_id">
+                                                <input type="hidden" value="{{$permission->id}}" name="permission_id">
+                                                <button type="submit" class="btn">
+                                                    <i class="fa fa-user-times text-danger" aria-hidden="true" title="Ajout-user"></i>
+                                                </button>
+                                            </form>
+                                            
+                                            @else
+                                            <form method="POST" action="{{route('admin.addPermissionToUser')}}">
+                                                @csrf
+                                                <input type="hidden" value="{{$enseignant->user()->id}}" name="model_id">
+                                                <input type="hidden" value="{{$permission->id}}" name="permission_id">
+                                                <button type="submit" class="btn">
+                                                    <i class="fa fa-user-plus text-info" aria-hidden="true" title="Ajout-user"></i>
+                                                </button>
+                                            </form>
+                                            @endif
+                                            
+                                        </td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>

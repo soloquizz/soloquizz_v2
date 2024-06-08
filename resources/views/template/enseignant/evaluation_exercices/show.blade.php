@@ -48,8 +48,8 @@
                 <div class="card">
                     <div class="card-header ml-2">
                         <div class="row">
-                            <div class="col-5"><h3>{{$evaluation->titre}}</h3></div>
-                            <div class="col-7"><a class="text-primary"
+                            <div class="col-10"><h3>{{$evaluation->titre}}</h3></div>
+                            <div class="col-2"><a class="text-primary"
                                 href="{{route('enseignant.cours.show.evaluation.add.question',$evaluation->id)}}">
                                     <button class="btn btn-outline-primary"><i class="fa fa-plus-circle" aria-hidden="true"></i>&nbsp;Questions</button> 
                                 </a>
@@ -58,14 +58,17 @@
                     </div>
                     <div class="card-body">
                        <ul style="list-style-type: none;">
-                            @foreach($evaluationExercice as $exo)
-                            @if($evaluation->id==$exo->evaluation_id)
+                        @if($evaluation->evaluationExercices->count()==0)
+                        <h3>Pas de questions</h3>
+                        @else
+                            @foreach($evaluation->evaluationExercices as $exo)
+                           
                                 <li class="mb-5">
                                     <div class="row">
                                         <div class="col-10">
-                                            <h3>{{$exo->exercice->titre}}</h3>
+                                            <h3>{{$exo->exercice?->titre}}</h3>
                                         </div>
-                                        <div class="col-2">{{$exo->exercice->note_max}}point(s)</div>
+                                        <div class="col-2">{{$exo->exercice?->note_max}}point(s)</div>
                                         
                                         <div class="col-2">
                                            {{-- @if(isset($_GET['page']))
@@ -86,15 +89,15 @@
 
                                     <div class="row">
                                     
-                                        {!! $question->questionCours->contenu !!}
+                                        {!! $question->questionCours?->contenu !!}
                                        
                                     </div>
-                                    @if($question->questionCours->qcm)
+                                    @if($question->questionCours?->qcm)
                                         
                                             <h6>Options de réponse &nbsp;</h6> 
                                            
                                         @foreach($options as $option)
-                                        @if($option->question_cours_id==$question->questionCours->id && $exo->exercice_id==$question->exercice_id)
+                                        @if($option->question_cours_id==$question->questionCours?->id && $exo->exercice_id==$question->exercice_id)
                                              <div class="row">
                                                 @if($option->correcte)
                                                     <i class="fa fa-check text-success mr-1" title="Mofification de la question"></i>
@@ -111,8 +114,9 @@
                                     @endif
                                     @endforeach
                                 </li>
-                            @endif
+                           
                             @endforeach
+                            @endif
                         </ul>
                     </div>
                     <div class="card-footer">
@@ -127,11 +131,5 @@
     </div>
 </div>
 
-<script>
-    var i = 1;
-/*$('#question').each(function() {
-    $(this).text(i++);
-});*/
-</script>
 @endsection
 

@@ -6,7 +6,7 @@
 
             <!-- Navbar Brand -->
             <a href="{{ url('/') }}" class="navbar-brand">
-                <img class="navbar-brand-icon mr-0 mr-md-8pt" src="{{asset('welcome_assets/img/logoSoloquizz2.png')}}" width="200" alt="Soloquiz">
+                <img class="navbar-brand-icon mr-0 mr-md-8pt" src="{{asset('/assets/images/logo/Soloquizz.png')}}" width="150" alt="Tutorio">
                 <span class="d-none d-md-block"></span>
             </a>
             <!-- Main Navigation -->

@@ -39,11 +39,11 @@
 <body>
 
   <!-- ======= Header ======= -->
-  <header id="header" class="header fixed-top">
+  <header id="header" class="header fixed-top bg-dark">
     <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
 
       <a href="index.html" class="logo d-flex align-items-center">
-        <img src="welcome_assets/img/logoSoloquizz2.png" alt="">
+        <img class="navbar-brand-icon mr-0 mr-md-8pt" src="{{asset('/assets/images/logo/Soloquizz.png')}}" width="150" alt="Tutorio">
       </a>
 
       <nav id="navbar" class="navbar">

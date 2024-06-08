@@ -50,7 +50,7 @@
                                     </select>
                                 </div>
                                 <div class="col-12 col-md-6 mb-3">
-                                    <input type="hidden" name="cours_id" value="{{$questionCours->cours->id}}">
+                                    <input type="hidden" name="cours_id" value="{{$questionCours->cours?->id}}">
                                     <textarea name="contenu" style="display:none" id="hiddenAreaQuestion"></textarea>
                                 </div>
                             </div>
@@ -69,7 +69,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Annuler</button>
+                    <a href="{{route('enseignant.cours.show', ['cours_id'=>$questionCours->cours->id,'page'=>$_GET['page']])}}"><button type="button" class="btn btn-outline-danger" data-dismiss="modal">Annuler</button></a>
                     <button type="submit" class="btn btn-outline-primary">Enregistrer</button>
                 </div>
             </form>

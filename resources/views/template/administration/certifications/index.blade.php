@@ -9,6 +9,10 @@
         background-color: green;
         color: white;
     }
+    .pub3{
+        background-color: rgb(137, 14, 137);
+        color: white;
+    }
     .pub2{
         background-color: rgb(246, 4, 16);
         color: white;
@@ -77,6 +81,7 @@
                         <th>Éditeur</th>
                         <th>Niveau</th>
                         <th>Action</th>
+                        <th>Etudiants</th>
                     </tr>
                     </thead>
                     <tbody class="list">
@@ -105,6 +110,11 @@
                                     <div class="col-2">
                                         @if ($certification->statut==1)
                                             <span class="pub2 rounded-pill border border-4 mr-1">Déjà Publié</span>
+                                        <!--<span class="pub2 rounded-pill border border-4 mr-1">Déjà Publié</span>-->
+                                        <form method="POST" action="{{route('admin.certifications.depublier.statut', $certification->id)}}">
+                                            @csrf
+                                            <input type="submit" class="pub3 rounded-pill border border-4 mr-1" value="Publier le">
+                                        </form>
                                         @else
                                             <form method="POST" action="{{route('admin.certifications.update.statut', $certification->id)}}">
                                                 @csrf
@@ -113,6 +123,11 @@
                                         @endif
                                     </div>
                                 </div>
+                            </td>
+                            <td class="name">
+                                <a href="{{route('admin.certifications.list.etudiants', $certification->id)}}">
+                                    <i class="fa fa-users text-success" title="Mofification"></i>
+                                </a>
                             </td>
                         </tr>
                     @endforeach
@@ -138,7 +153,11 @@
 <script src="//cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
     <script>
          $(document).ready(function(){
-           $('#myTable').DataTable();
+            var table = new DataTable('#myTable', {
+            language: {
+                 url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/fr-FR.json',
+            },           
+         });
          });
         function submitShow(certification_id) {
             $('#showForm').append("<input type='hidden' value='"+certification_id+"' name='certification_id'>");

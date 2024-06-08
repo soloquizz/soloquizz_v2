@@ -1,14 +1,14 @@
 
 <div class="modal fade" id="edit{{$exo->id}}" tabindex="-1" role="dialog" aria-labelledby="editExerciceLabel" aria-hidden="true" backdrop="false">
-    <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-dialog modal-lg mt-5" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="addExerciceLabel">Modifier un TD</h5>
+                <h3 class="modal-title ml-10" id="addExerciceLabel">Modifier un TD</h3>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form method="POST" id="storeTdForm" action="{{ route('enseignant.exercice.store') }}">
+            <form method="POST" id="storeTdForm" action="{{ route('enseignant.exercice.update',$exo->id) }}">
                 @csrf
                 <div class="modal-body">
                     <div class="row">

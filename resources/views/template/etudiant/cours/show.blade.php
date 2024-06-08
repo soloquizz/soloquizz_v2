@@ -205,7 +205,54 @@
                             </div>
                         </div>
                         <div class="tab-pane" id="evaluations">
-                            Espace des Évaluations
+                            <div class="row">
+                                @if($cours->exercices->count()==0)
+                                <h6>Aucun exercice publié pour le moment</h6>
+                                @else
+                                
+                                <div class="table-responsive" data-toggle="lists" data-lists-values='["name"]'>
+
+                                    <!-- Table -->
+                                    <table id="myTable" class="table">
+                                        <thead>
+                                        <tr>
+                                            <th>Titre</th>
+                                            <th>Points</th>
+                                            <th>Type</th>
+                                            <th>Action</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody class="list">
+                                        @foreach($cours->evaluations as $evaluation)
+                                        @if($evaluation->statut==1)
+                                            <tr>
+                                                <td class="name">{{$evaluation->titre}}</td>
+                                                <td class="name">{{$evaluation->note_max}}</td>
+                                                <td class="name">{{$evaluation->type}}</td>
+                                                <td class="name">
+                                                    <div class="row">
+                                                        <div class="col-2">
+                                                            <form method="POST" id="showForm"
+                                                                  action="{{ route('admin.certifications.questions.search') }}">
+                                                                @csrf
+                                                                <input type="hidden" name="certification_id" value="{{$evaluation->id}}">
+                                                                <a href="{{route('etudiant.cours.show.evaluation.view.question',$evaluation->id)}}">
+                                                                    <i class="fa fa-eye text-info mr-1" title="Mofification"></i>
+                                                                </a>
+                                                            </form>
+                                                        </div>
+                                                        
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            @endif
+                                        @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                                @endif
+                               
+                            </div>
                         </div>
                     </div>
                 </div>

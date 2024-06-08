@@ -21,6 +21,10 @@
             padding-right: 2px;
             display: flex;
         }
+        .pub3{
+            background-color: rgb(137, 14, 137);
+            color: white;
+        }
     </style>
 @endsection
 
@@ -287,7 +291,6 @@
                                     </thead>
                                     <tbody class="list">
                                     @foreach($cours->exercices as $exo)
-                                    
                                         <tr>
                                             <td class="name">{{$exo->titre}}</td>
                                             <td class="name">{{$exo->questionExercices->count()}}</td>
@@ -302,21 +305,23 @@
                                                             @csrf
                                                             <input type="hidden" name="exo_id" value="{{$exo->id}}">
                                                             <a href="{{route('enseignant.cours.show.td.question',$exo->id)}}">
-                                                                <i class="fa fa-eye text-info mr-1" title="Mofification"></i>
+                                                                <i class="fa fa-eye text-info mr-1" title="consulter"></i>
                                                             </a>
                                                         </form>
                                                     </div>
                                                     <div class="col-2">
-                                                        <a href="#edit{{$exo->id}}" data-toggle="modal">                         
+                                                        <a href="#edit{{$exo->id}}" data-toggle="modal" data-backdrop="false">                         
                                                             <i class="fa fa-edit text-warning mr-1" title="Mofification"></i>
-                                                        </a>
-                                                        
-                                                        
+                                                        </a>                                                        
                                                     </div>
                                                     
                                                     <div class="col-2">
                                                         @if ($exo->statut==1)
-                                                        <span class="pub2 rounded-pill border border-4 mr-1">Déjà Publié</span>
+                                                        <!--<span class="pub2 rounded-pill border border-4 mr-1">Déjà Publié</span>-->
+                                                        <form method="POST" action="{{route('enseignant.exercice.depublier.statut',$exo->id)}}">
+                                                            @csrf
+                                                            <input type="submit" class="pub3 rounded-pill border border-4 mr-1" value="Dépublier le">
+                                                        </form>
                                                         @else
                                                         <form method="POST" action="{{route('enseignant.exercice.update.statut',$exo->id)}}">
                                                             @csrf
@@ -325,16 +330,11 @@
                                                         @endif
                                                     </div>
                                                 </div>
-                                                
-                                                
                                                 @include('template.enseignant.exercices.edit')
-
                                             </td>
                                         </tr>
                                     <!---Modal--->
-                                 
                                     @endforeach
-                                
                                     </tbody>
                                 </table>
                             </div>
@@ -400,7 +400,7 @@
                                 </li>
                             </ul>
                             <div class="tab-content">
-                                <div class="tab-pane" id="devoirs">
+                                <div class="tab-pane active" id="devoirs">
                                     <div class="table-responsive" data-toggle="lists" data-lists-values='["name"]'>
 
                                         <!-- Table -->
@@ -436,13 +436,17 @@
                                                                 </form>
                                                             </div>
                                                             <div class="col-2">
-                                                                <a href="{{route('enseignant.cours.show.td',$evaluation->id)}}">
+                                                                <a href="#editEv{{$evaluation->id}}" data-toggle="modal" data-backdrop="false">
                                                                     <i class="fa fa-edit text-warning mr-1" title="Mofification"></i>
                                                                 </a>
                                                             </div>
                                                             <div class="col-2">
                                                                 @if ($evaluation->statut==1)
-                                                                <span class="pub2 rounded-pill border border-4 mr-1">Déjà Publié</span>
+                                                                <!--<span class="pub2 rounded-pill border border-4 mr-1">Déjà Publié</span>-->
+                                                                <form method="POST" action="{{route('enseignant.evaluation.depublier.statut',$evaluation->id)}}">
+                                                                    @csrf
+                                                                    <input type="submit" class="pub3 rounded-pill border border-4 mr-1" value="Dépublier le">
+                                                                </form>
                                                                 @else
                                                                 <form method="POST" action="{{route('enseignant.evaluation.update.statut',$evaluation->id)}}">
                                                                     @csrf
@@ -450,6 +454,8 @@
                                                                 </form>
                                                                 @endif
                                                             </div>
+                                                            @include('template.enseignant.evaluations.edit')
+
                                                         </div>
                                                     </td>
                                                 </tr>
@@ -539,26 +545,30 @@
                                                         @csrf
                                                         <input type="hidden" name="exo_id" value="{{$exo->id}}">
                                                         <a href="{{route('enseignant.cours.show.evaluation.view.question',$evaluation->id)}}">
-                                                            <i class="fa fa-eye text-info mr-1" title="Mofification"></i>
+                                                            <i class="fa fa-eye text-info mr-1" title="Consulter"></i>
                                                         </a>
                                                     </form>
                                                 </div>
                                                 <div class="col-2">
-                                                    <a href="{{route('enseignant.cours.show.td',$evaluation->id)}}">
+                                                    <a href="#editEv{{$evaluation->id}}" data-toggle="modal" data-backdrop="false">
                                                         <i class="fa fa-edit text-warning mr-1" title="Mofification"></i>
                                                     </a>
                                                 </div>
                                                 <div class="col-2">
-                                                    @if ($exo->statut==1)
-                                                    <span class="pub2 rounded-pill border border-4 mr-1">Déjà Publié</span>
+                                                    @if ($evaluation->statut==1)
+                                                    <!--<span class="pub2 rounded-pill border border-4 mr-1">Déjà Publié</span>-->
+                                                    <form method="POST" action="{{route('enseignant.evaluation.depublier.statut',$evaluation->id)}}">
+                                                        @csrf
+                                                        <input type="submit" class="pub3 rounded-pill border border-4 mr-1" value="Dépublier le">
+                                                    </form>
                                                     @else
-                                                    <form method="POST" action="{{route('enseignant.exercice.update.statut',$evaluation->id)}}">
+                                                    <form method="POST" action="{{route('enseignant.evaluation.update.statut',$evaluation->id)}}">
                                                         @csrf
                                                         <input type="submit" class="pub rounded-pill border border-4 mr-1" value="Publier le">
                                                     </form>
                                                     @endif
                                                 </div>
-                                                
+                                                @include('template.enseignant.evaluations.edit')
                                             </div>
                                         </td>
                                     </tr>
@@ -634,13 +644,13 @@
                                 </thead>
                                 <tbody>
                                     @foreach($inscrits as $inscrit)
-                                    <tr>
-                                        <td>{{$inscrit->etudiant?->numero_carte}}</td>
-                                        <td>{{$inscrit->etudiant?->nom}}</td>
-                                        <td>{{$inscrit->etudiant?->prenom}}</td>
-                                        <td>{{$inscrit->etudiant?->telephone}}</td>
-                                        <td>{{$inscrit->etudiant?->email_personnel}}</td>
-                                    </tr>
+                                        <tr>
+                                            <td>{{$inscrit->etudiant?->numero_carte}}</td>
+                                            <td>{{$inscrit->etudiant?->nom}}</td>
+                                            <td>{{$inscrit->etudiant?->prenom}}</td>
+                                            <td>{{$inscrit->etudiant?->telephone}}</td>
+                                            <td>{{$inscrit->etudiant?->email_personnel}}</td>
+                                        </tr>
                                     @endforeach
                                 </tbody>
                             </table>
@@ -718,7 +728,7 @@
         function switchTabEvaluations() {
             $('.btnTab').hide();
             $('#btnEvaluation').show();
-            $('#devoirs').show();
+            //$('#devoirs').show();
         }
         function switchTabExamens() {
             $('.btnTab').hide();
@@ -788,11 +798,28 @@
         }
  
          $(document).ready(function(){
-           $('#myTable2').DataTable();
-           $('#myTable3 ').DataTable();
-           $('#myTable1').DataTable();
-           $('#myTable4').DataTable();
+          
+           var table1 = new DataTable('#myTable1', {
+            language: {
+                 url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/fr-FR.json',
+            },           
+         });
 
+         var table2 = new DataTable('#myTable2', {
+            language: {
+                 url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/fr-FR.json',
+            },           
+         });
+         var table3 = new DataTable('#myTable3', {
+            language: {
+                 url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/fr-FR.json',
+            },           
+         });
+         var table4 = new DataTable('#myTable4', {
+            language: {
+                 url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/fr-FR.json',
+            },           
+         });
            
          })  
     </script>

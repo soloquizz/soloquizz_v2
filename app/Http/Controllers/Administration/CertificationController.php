@@ -7,11 +7,13 @@ use App\Http\Requests\Administration\UpdateCertificationRequest;
 use App\Repositories\Administration\CertificationRepository;
 use App\Http\Controllers\AppBaseController;
 use App\Models\Administration\Certification;
+use App\Models\Administration\DumpUser;
 use App\Repositories\Administration\EditeurRepository;
 use App\Repositories\Administration\NiveauRepository;
 use App\Repositories\Administration\QuestionRepository;
 use Illuminate\Http\Request;
 use Flash;
+use Illuminate\Support\Facades\DB;
 use RealRashid\SweetAlert\Facades\Alert;
 use Response;
 
@@ -264,4 +266,30 @@ class CertificationController extends AppBaseController
 
          return redirect()->back();
     }
+
+    public function depublier($id){
+        $certification=Certification::find($id);
+        $certification->statut=0;
+        $certification->update();
+        Alert::success('Succés','Certification dépubliée');
+
+         return redirect()->back();
+    }
+
+    public function listEtudiants($id){
+        $certification=Certification::find($id);
+        //$dumpUser=DumpUser::where('certification_id',$certification->id)->distinct()->get();
+        //dd($dumpUser);
+        $dumpUser=DB::table('dump_users')
+             ->select(DB::raw('count(dump_id) as dump, sum(score) as score_final,etudiants.nom as etudiant_nom,etudiants.prenom as etudiant_prenom,etudiants.id'))
+             ->join('etudiants','dump_users.etudiant_id','=','etudiants.id')
+             ->join('certifications','dump_users.certification_id','=','certifications.id')
+             ->groupBy('etudiant_nom','etudiant_prenom','etudiants.id')
+             ->get();
+        return view('template.administration.certifications.list-etudiants',compact('dumpUser','certification'));
+
+    }
+
+    //resultats
+    
 }

@@ -52,7 +52,7 @@
                                         <label class="form-label">Heure
                                             <span class="text-danger">*</span>
                                         </label>
-                                        <input type="time" name="heure" required class="form-control" placeholder="12:00">
+                                        <input type="text" name="heure" required class="form-control" placeholder="12:00">
                                     </div>
                                     <div class="col-12 col-md-6 mb-3">
                                         <label class="form-label">Durée (heure)

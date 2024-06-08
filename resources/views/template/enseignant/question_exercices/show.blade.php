@@ -48,19 +48,25 @@
 
                 <div class="card">
                     <div class="card-header ml-2">
-                        <h3>{{$exo->titre}}</h3>
+                        <div class="row">
+                            <div class="col-10"><h3>{{$exo->titre}}</h3></div>
 
-                        <a class="text-primary"
-                            href="{{route('enseignant.cours.show.td',$exo->id)}}">
-                                <button class="btn btn-outline-primary">Ajouter des questions</button> 
-                        </a>
+                            <div class="col-2">
+                                <a class="text-primary"
+                                    href="{{route('enseignant.cours.show.td',$exo->id)}}">
+                                    <button class="btn btn-outline-primary"><i class="fa fa-plus-circle" aria-hidden="true"></i>&nbsp;Questions</button> 
+                                </a>
+                            </div>
+                        </div>
+                        
                     </div>
                     <div class="card-body">
                         <ul style="list-style-type: none;">
-                            @foreach($questionExercice as $question)
-                            @if($question->count()==0)
-                            <h6>Pas de questions</h6>
+                            @if($questionExercice->count()==0)
+                            <h3>Pas de questions</h3>
                             @else
+                            @foreach($questionExercice as $question)
+                           
                                 <li class="mb-5">
                                     <div class="row">
                                         <div class="col-2">
@@ -87,14 +93,14 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                        {!! $question->questionCours->contenu !!}
+                                        {!! $question->questionCours?->contenu !!}
 
                                     </div>
-                                    @if($question->questionCours->qcm)
+                                    @if($question->questionCours?->qcm)
                                         
                                             <h6>Options de réponse &nbsp;</h6> 
                                            
-                                        @foreach($question->questionCours->optionCours as $option)
+                                        @foreach($question->questionCours?->optionCours as $option)
                                              <div class="row">
                                                 @if($option->correcte)
                                                     <i class="fa fa-check text-success mr-1" title="Mofification de la question"></i>
@@ -108,8 +114,9 @@
                                         <h6>Question à réponse ouverte</h6>
                                     @endif
                                 </li>
-                            @endif
+                            
                             @endforeach
+                            @endif
                         </ul>
                     </div>
                     <div class="card-footer">

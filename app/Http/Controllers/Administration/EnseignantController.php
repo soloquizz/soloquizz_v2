@@ -7,6 +7,8 @@ use App\Http\Requests\Administration\UpdateEnseignantRequest;
 use App\Mail\CompteInfos;
 use App\Repositories\Administration\EnseignantRepository;
 use App\Http\Controllers\AppBaseController;
+use App\Models\Administration\Permission;
+use App\Models\Administration\Role;
 use App\Repositories\Administration\UserRepository;
 use Illuminate\Http\Request;
 use Flash;
@@ -97,6 +99,8 @@ class EnseignantController extends AppBaseController
     public function show($id)
     {
         $enseignant = $this->enseignantRepository->find($id);
+        $roles=Role::all();
+        $permissions=Permission::all();
 
         if (empty($enseignant)) {
             Alert::error('Succés','Enseignant not found');
@@ -104,7 +108,7 @@ class EnseignantController extends AppBaseController
             return redirect(route('administration.enseignants.index'));
         }
 
-        return view('template.administration.enseignants.show',compact('enseignant'));
+        return view('template.administration.enseignants.show',compact('enseignant','roles','permissions'));
     }
 
     /**
@@ -176,5 +180,22 @@ class EnseignantController extends AppBaseController
         Alert::success('Succés','Enseignant deleted successfully.');
 
         return redirect(route('administration.enseignants.index'));*/
+    }
+
+    public function updateS($id, UpdateEnseignantRequest $request)
+    {
+        $enseignant = $this->enseignantRepository->find($id);
+
+        if (empty($enseignant)) {
+            Alert::error('Error','Enseignant not found');
+
+            return redirect(route('administration.enseignants.index'));
+        }
+
+        $enseignant = $this->enseignantRepository->update($request->etat, $id);
+
+        Alert::success('Succés','Enseignant updated successfully.');
+
+        return redirect(route('admin.enseignants.index'));
     }
 }

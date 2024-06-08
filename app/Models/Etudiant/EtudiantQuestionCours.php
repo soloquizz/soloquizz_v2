@@ -87,7 +87,7 @@ class EtudiantQuestionCours extends Model
      **/
     public function questionCours()
     {
-        return $this->belongsTo(\App\Models\Enseignant\QuestionCour::class, 'question_cours_id');
+        return $this->belongsTo(\App\Models\Enseignant\QuestionCours::class, 'question_cours_id');
     }
 
     /**

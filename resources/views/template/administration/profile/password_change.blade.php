@@ -32,6 +32,51 @@
                             <div class="">
                                 <div class="form-row">
                                     <div class="col-12 col-md-6 mb-3">
+                                        <label class="form-label">Nom
+                                            <span class="text-danger">*</span>
+                                        </label>
+                                        <input type="text" name="nom" class="form-control" required="" value="{{auth()->user()->administrateur()->nom}}" readonly>
+                                    </div>
+                                    <div class="col-12 col-md-6 mb-3">
+                                        <label class="form-label">Prénom
+                                            <span class="text-danger">*</span>
+                                        </label>
+                                        <input type="text" name="prenom" class="form-control" required="" value="{{auth()->user()->administrateur()->prenom}}" readonly>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="">
+                                <div class="form-row">
+                                    <div class="col-12 col-md-6 mb-3">
+                                        <label class="form-label">Email
+                                            <span class="text-danger">*</span>
+                                        </label>
+                                        <input type="text" name="email" class="form-control" required="" value="{{auth()->user()->administrateur()->email_personnel}}" readonly>
+                                    </div>
+
+                                    <div class="col-12 col-md-6 mb-3">
+                                        <label class="form-label">Profil
+                                            <span class="text-danger">*</span>
+                                        </label>
+                                        <input type="text" name="profil" class="form-control" required="" value="Administrateur" readonly>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="">
+                                <div class="form-row">
+                                    <div class="col-12 col-md-6 mb-3">
                                         <label class="form-label">Mot de pass
                                             <span class="text-danger">*</span>
                                         </label>
@@ -47,6 +92,7 @@
                                 </div>
                             </div>
                         </div>
+
                     </div>
                 </div>
                 <div class="modal-footer">

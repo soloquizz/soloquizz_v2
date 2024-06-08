@@ -127,7 +127,7 @@
     <!-- List.js -->
     <script src="{{asset('assets/vendor/list.min.js')}}"></script>
     <script src="{{asset('assets/js/list.js')}}"></script>
-`
+
     @yield('script')
 
 

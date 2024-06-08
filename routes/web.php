@@ -27,3 +27,18 @@ Route::get('/test-smtp', [App\Http\Controllers\IndexController::class,'testSmtp'
 @include('admin.php');
 @include('enseignant.php');
 //init plan aida_dev branch
+
+
+Route::group(['prefix' => 'administration'], function () {
+    Route::resource('roles', App\Http\Controllers\Administration\RoleController::class, ["as" => 'administration']);
+});
+
+
+Route::group(['prefix' => 'administration'], function () {
+    Route::resource('hasRoles', App\Http\Controllers\Administration\HasRoleController::class, ["as" => 'administration']);
+});
+
+
+Route::group(['prefix' => 'administration'], function () {
+    Route::resource('permissions', App\Http\Controllers\Administration\PermissionController::class, ["as" => 'administration']);
+});
