@@ -52,7 +52,7 @@
                         </div>
                     </div>
                 @else
-                    <h3>Aucune certification n'est publiée</h3>
+                    <h3>Aucun test d'entré n'est publié</h3>
                 @endif
                 <br>
             @endforeach

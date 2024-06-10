@@ -19,11 +19,6 @@
                             </div>
                         </div>
                     </div>
-                    <div class="form-row">
-                        <label class="form-label">
-                            <a href="" class="text-primary">Modèle de fichier</a>
-                        </label>
-                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Annuler</button>
