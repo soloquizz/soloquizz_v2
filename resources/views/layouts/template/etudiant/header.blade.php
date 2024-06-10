@@ -3,13 +3,16 @@
         <img src="{{asset('assets/images/illustration/student/128/white.svg')}}" width="104" class="mr-md-32pt mb-32pt mb-md-0" alt="student">
         <div class="flex mb-32pt mb-md-0">
             <h2 class="text-white mb-0">{{auth()->user()->getFullName()}}</h2>
-            <p class="lead text-white-50 d-flex align-items-center">Étudiant
+            <p class="lead text-white-50 d-flex align-items-center">{{auth()->user()->personne_type}}
                 <span class="ml-16pt d-flex align-items-center">
                     <i class="material-icons icon-16pt mr-4pt">opacity</i>&nbsp;
-                    {{auth()->user()->etudiant()->inscriptions()->get()->last()->classe->nom}}
+                    @if(auth()->user()->personne_type == 'Etudiant')
+                        {{auth()->user()->etudiant()?->inscriptions()?->get()?->last()?->classe->nom}}
+                    @endif
                 </span>
             </p>
         </div>
-        <a href="#" class="btn btn-outline-white">Éditer profile</a>
+        {{--
+        <a href="#" class="btn btn-outline-white">Éditer profile</a>--}}
     </div>
 </div>

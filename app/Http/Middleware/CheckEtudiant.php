@@ -18,7 +18,7 @@ class CheckEtudiant
     public function handle(Request $request, Closure $next)
     {
         $user = auth()->user();
-        if ($user->personne_type != 'Etudiant'){
+        if ($user->personne_type != 'Etudiant' and $user->personne_type != 'Candidat'){
             Alert::error('Error',"Vous n'êtes autorisé de faire cette action");
             return redirect()->back();
         }

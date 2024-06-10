@@ -76,6 +76,12 @@ class LoginController extends Controller
                 return redirect(route('enseignant.index'));
             }
 
+            if ($user->personne_type == 'Candidat')
+            {
+                return redirect(route('etudiant.certifications'));
+            }
+
+
         }
         else{
             $this->incrementLoginAttempts($request);

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Etudiant;
 
 use App\Http\Controllers\Controller;
+use App\Models\Administration\Certification;
+use App\Models\Administration\Editeur;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -10,6 +12,9 @@ class EtudiantController extends Controller
 {
     public function index()
     {
+        if (auth()->user()->personne_type=='Candidat'){
+            return redirect(route('etudiant.certifications'));
+        }
         return redirect(route('etudiant.cours'));
         //return view('template.etudiant.index');
     }

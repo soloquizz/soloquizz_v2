@@ -10,7 +10,13 @@ class CertificationController extends Controller
 {
     public function index()
     {
-        $editeurs = Editeur::all();
+
+        if (auth()->user()->personne_type=='Candidat'){
+            $editeurs = Editeur::where('nom','Test_Psychotechnique')->get();
+        }
+        else{
+            $editeurs = Editeur::all();
+        }
         return view('template.etudiant.certifications.index',compact('editeurs'));
     }
 }

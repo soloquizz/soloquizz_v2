@@ -65,6 +65,9 @@ Route::name('admin.')->prefix('admin')->middleware(['auth','check.actif.compte',
 
     Route::post('users-update', [App\Http\Controllers\Administration\UserController::class,'update'])->name('users.update');
 
+    Route::resource('candidats', App\Http\Controllers\Administration\CandidatsController::class);
+    Route::post('candidats-upload', [App\Http\Controllers\Administration\CandidatsController::class,'upload'])->name('candidats.upload');
+
 });
 Route::name('admin.')->prefix('admin')->middleware(['auth','check.actif.compte','check.admin'])->group(function () {
 

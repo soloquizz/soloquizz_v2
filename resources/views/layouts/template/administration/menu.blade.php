@@ -16,6 +16,7 @@
                             <a class="dropdown-item {{ Request::is(['admin/administrateurs*']) ? 'active' : '' }}" href="{{route('admin.administrateurs.index')}}">Administrateurs</a>
                             <a class="dropdown-item {{ Request::is(['admin/etudiants*']) ? 'active' : '' }}" href="{{route('admin.etudiants.index')}}">Étudiants</a>
                             <a class="dropdown-item {{ Request::is(['admin/enseignants*']) ? 'active' : '' }}" href="{{route('admin.enseignants.index')}}">Enseignants</a>
+                            <a class="dropdown-item {{ Request::is(['admin/candidats*']) ? 'active' : '' }}" href="{{route('admin.candidats.index')}}">Candidats</a>
                         </div>
                     </li>
                     <li class="nav-item dropdown">

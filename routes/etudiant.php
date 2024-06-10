@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::name('etudiant.')->prefix('etudiant')->middleware(['auth','check.actif.compte','check.current.dump','check.etudiant','check.change.password'])->group(function () {
+Route::name('etudiant.')->prefix('etudiant')->middleware(['auth','check.actif.compte','check.current.dump','check.etudiant'])->group(function () {
     Route::get('/',[App\Http\Controllers\Etudiant\EtudiantController::class,'index'])->name('index');
 
     //Cours
