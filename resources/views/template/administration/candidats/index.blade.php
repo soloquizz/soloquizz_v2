@@ -59,23 +59,47 @@
                 <table id="myTable" class="table">
                     <thead>
                     <tr>
+                        <th>Socre</th>
                         <th>Prénom</th>
                         <th>Nom</th>
                         <th>Téléphone</th>
                         <th>Email</th>
                         <th>Pays Résidance</th>
                         <th>Niveau d'étude</th>
+                        <th>Actions</th>
                     </tr>
                     </thead>
                     <tbody class="list">
                     @foreach($candidats as $candidat)
                         <tr>
+                            @if(checkCandidatTest($candidat->id))
+                                <td class="name">{{checkCandidatTest($candidat->id)->score}}/{{checkCandidatTest($candidat->id)->dump->score}}</td>
+                            @else
+                                <td class="name">0</td>
+                            @endif
                             <td class="name">{{$candidat->prenom}}</td>
                             <td class="name">{{$candidat->nom}}</td>
                             <td class="name">{{$candidat->telephone}}</td>
                             <td class="name">{{$candidat->user()->email}}</td>
                             <td class="name">{{$candidat->pays_residance}}</td>
                             <td class="name">{{$candidat->niveau_etude}}</td>
+                            <td class="name">
+                                @if(checkCandidatTest($candidat->id))
+                                    <a href="{{route('admin.candidats.show', $candidat->id)}}">
+                                        <i class="fa fa-eye text-info mr-1" title="Détail Candidat"></i>
+                                    </a>
+                                @endif
+                                @if($candidat->user()->etat==0)
+                                    <a href="{{route('admin.candidats.active_compte', $candidat->id)}}">
+                                       <i class="fa fa-plus-circle text-success mr-1" title="Activer le compte"></i>
+                                    </a>
+                                @endif
+                                @if($candidat->user()->etat==1)
+                                    <a href="{{route('admin.candidats.desactive_compte', $candidat->id)}}">
+                                       <i class="fa fa-minus-circle text-danger mr-1" title="Désactiver le compte"></i>
+                                    </a>
+                                @endif
+                            </td>
                         </tr>
                     @endforeach
                     </tbody>

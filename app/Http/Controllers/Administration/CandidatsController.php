@@ -5,9 +5,11 @@ namespace App\Http\Controllers\Administration;
 use App\Http\Requests\Administration\CreateCandidatsRequest;
 use App\Http\Requests\Administration\UpdateCandidatsRequest;
 use App\Imports\CandidatImport;
+use App\Models\Administration\Certification;
 use App\Repositories\Administration\CandidatsRepository;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
+use \App\Models\Administration\User;
 use Flash;
 use Maatwebsite\Excel\Facades\Excel;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -71,19 +73,28 @@ class CandidatsController extends AppBaseController
      *
      * @param int $id
      *
-     * @return Response
+     * @return
      */
     public function show($id)
     {
-        $candidats = $this->candidatsRepository->find($id);
+        $candidat = $this->candidatsRepository->find($id);
 
-        if (empty($candidats)) {
-            Flash::error('Candidats not found');
+        $user = User::where('personne_type','Candidat')->where('personne_id',$candidat->id)->first();
 
-            return redirect(route('administration.candidats.index'));
+        $certification = Certification::where('code','C.2024')->first();
+
+        $dumpUsers = $certification->dumpUsers->where('user_id',$user->id);
+        $dump_user = $certification->dumpUsers->where('user_id',$user->id)->first();
+        if (empty($dump_user)){
+            Alert::warning('Avertissement',"Ce candidat n'a pas encore fait les tests d'entrée");
+            return back();
         }
+        $dump = $dump_user->dump;
 
-        return view('administration.candidats.show')->with('candidats', $candidats);
+        return view('template.administration.candidats.dump_resultat',compact('dump_user','dump','certification','dumpUsers'));
+
+        return view('template.etudiant.dumps.index',compact('certification','dumpUsers'));
+
     }
 
     /**
@@ -164,4 +175,33 @@ class CandidatsController extends AppBaseController
         Alert::success('Succès','Impoirtation effectué avec succès');
         return back();
     }
+
+    public function activeCompte($candidat_id)
+    {
+        $user = User::where('personne_type','Candidat')->where('personne_id',$candidat_id)->first();
+        if (empty($user)){
+            Alert::error('Erreur','Utilisateur non trouvé');
+            return back();
+        }
+        else{
+            $user->update(['etat'=>1]);
+            Alert::success('Succès','Compte activé avec succès');
+            return back();
+        }
+    }
+
+    public function desActiveCompte($candidat_id)
+    {
+        $user = User::where('personne_type','Candidat')->where('personne_id',$candidat_id)->first();
+        if (empty($user)){
+            Alert::error('Erreur','Utilisateur non trouvé');
+            return back();
+        }
+        else{
+            $user->update(['etat'=>0]);
+            Alert::success('Succès','Compte désactivé avec succès');
+            return back();
+        }
+    }
+
 }

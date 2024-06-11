@@ -67,6 +67,8 @@ Route::name('admin.')->prefix('admin')->middleware(['auth','check.actif.compte',
 
     Route::resource('candidats', App\Http\Controllers\Administration\CandidatsController::class);
     Route::post('candidats-upload', [App\Http\Controllers\Administration\CandidatsController::class,'upload'])->name('candidats.upload');
+    Route::get('candidats-active-compte/{candidat_id}', [App\Http\Controllers\Administration\CandidatsController::class,'activeCompte'])->name('candidats.active_compte');
+    Route::get('candidats-desactive-compte/{candidat_id}', [App\Http\Controllers\Administration\CandidatsController::class,'desActiveCompte'])->name('candidats.desactive_compte');
 
 });
 Route::name('admin.')->prefix('admin')->middleware(['auth','check.actif.compte','check.admin'])->group(function () {
