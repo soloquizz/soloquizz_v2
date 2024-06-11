@@ -29,6 +29,9 @@ if (!function_exists('getNbreClasses')) {
 if (!function_exists('getEtudiantCertifications')) {
     function getEtudiantCertifications(Editeur $editeur)
     {
+        if (auth()->user()->personne_type == 'Candidat'){
+            return $editeur->certifications;
+        }
         return $editeur->certifications->filter(function ($certification){
             return $certification->statut and $certification->niveau?->id == auth()->user()?->etudiant()?->classe()?->niveau?->id;
         });
