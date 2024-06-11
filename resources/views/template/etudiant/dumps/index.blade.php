@@ -13,7 +13,9 @@
                         <p class="lead text-white-50 measure-lead-max mb-0">Une fois un entrainement généré vous ne pouvez faire aucune autre activité</p>
                         <h1 class="text-white mb-24pt">{{$certification->titre}}</h1>
                         @if($dumpUsers->sum('score') < $certification->questions->sum('point'))
-                            <a href="{{route('etudiant.dumps.take',$certification->id)}}" class="btn btn-outline-white">Nouveau entrainement</a>
+                            <a href="{{route('etudiant.dumps.take',$certification->id)}}" class="btn btn-outline-white">
+                                {{auth()->user()->personne_type == 'Candidat'?'Démarrer':'Nouveau entrainement'}}
+                            </a>
                         @else
                             <p class="lead text-white-50 measure-lead-max mb-0">Vous avez achevé les entrainements de cette certification</p>
                         @endif
@@ -136,7 +138,7 @@
                     </li>
                 </ul>
             @else
-                <h4 class="text-cente mt-5">Vous n'avez pas encore d'entrainements</h4>
+                <h4 class="text-cente mt-5">{{auth()->user()->personne_type == 'Candidat'?'':"Vous n'avez pas encore d'entrainements"}}</h4>
             @endif
         </div>
     </div>

@@ -81,7 +81,7 @@ class DumpController extends Controller
             $dumpUser = DumpUser::create([
                 'dump_id' => $dump->id,
                 'user_id' => $user->id,
-                'etudiant_id' => $user->etudiant()->id,
+                'etudiant_id' => $user->etudiant()?->id,
                 'certification_id' => $certification->id,
                 'etat' => 0,
             ]);
@@ -116,7 +116,7 @@ class DumpController extends Controller
 
         $user = auth()->user();
 
-        $etudiantQuestionData['etudiant_id'] = $user->etudiant()->id;
+        $etudiantQuestionData['etudiant_id'] = $user->etudiant()?->id;
         $etudiantQuestionData['user_id'] = $user->id;
         $etudiantQuestionData['certification_id'] = $input['certification_id'];
         $etudiantQuestionData['dump_user_id'] = $input['dump_user_id'];

@@ -7,18 +7,20 @@
             <div class="container page__container">
                 <nav class="nav navbar-nav">
                     <div class="nav-item navbar-list__item">
-                        <a href="{{route('etudiant.dumps',$certification->id)}}" class="nav-link"><i class="material-icons icon--left">keyboard_backspace</i>Retour aux entrainements</a>
+                        @if(auth()->user()->personne_type != 'Candidat')
+                            <a href="{{route('etudiant.dumps',$certification->id)}}" class="nav-link"><i class="material-icons icon--left">keyboard_backspace</i>Retour aux entrainements</a>
+                        @endif
                     </div>
                     <div class="nav-item navbar-list__item">
                         <div class="d-flex align-items-center flex-nowrap">
                             <div class="mr-16pt">
-                                <a href="{{route('etudiant.dumps',$certification->id)}}"><img src="{{$certification->editeur->image()}}" width="40" alt="Angular" class="rounded"></a>
+                                <img src="{{$certification->editeur->image()}}" width="40" alt="Angular" class="rounded">
                             </div>
                             <div class="flex">
-                                <a href="{{route('etudiant.dumps',$certification->id)}}" class="card-title text-body mb-0">{{$certification->titre}}</a>
+                                <span class="card-title text-body mb-0">{{$certification->titre}}</span>
                                 <p class="lh-1 d-flex align-items-center mb-0">
                                     <span class="text-50 small font-weight-bold mr-8pt">{{auth()->user()->getFullName()}}</span>
-                                    <span class="text-50 small">{{auth()->user()->etudiant()->classe()->nom}}</span>
+                                    <span class="text-50 small">{{auth()->user()->etudiant()?->classe()?->nom}}</span>
                                 </p>
                             </div>
                         </div>
@@ -33,7 +35,11 @@
                         <p class="lead text-white-50 measure-lead-max mb-0">Fait le {{date('d-m-Y à H:i:s', strtotime($dump_user->created_at)) }}</p>
                         <h1 class="text-white mb-24pt">Votre Score: {{$dump_user->score}}/{{$dump->score}}</h1>
                         @if($dumpUsers->sum('score') < $certification->questions->sum('point'))
-                            <a href="{{route('etudiant.dumps.take',$certification->id)}}" class="btn btn-outline-white">Nouveau entrainement</a>
+                            @if(auth()->user()->personne_type != 'Candidat')
+                                <a href="{{route('etudiant.dumps.take',$certification->id)}}" class="btn btn-outline-white">
+                                    Nouveau entrainement
+                                </a>
+                            @endif
                         @else
                             <p class="lead text-white-50 measure-lead-max mb-0">Vous avez achevé les entrainements de cette certification</p>
                         @endif
